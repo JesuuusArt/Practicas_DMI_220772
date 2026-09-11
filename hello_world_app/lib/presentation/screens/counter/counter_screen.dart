@@ -1,14 +1,67 @@
 import 'package:flutter/material.dart';
 
-class CounterScreen extends StatelessWidget {
-  const CounterScreen({super.key});
+class CounterFunctionsScreen extends StatefulWidget {
+  const CounterFunctionsScreen({super.key});
+
+  @override
+  State<CounterFunctionsScreen> createState() => _CounterFunctionsScreenState();
+}
+
+class _CounterFunctionsScreenState extends State<CounterFunctionsScreen> {
+
+  int clickCounter = 0;
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: Center(
-        child: Text('Hola Mundo'),
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Counter Functions'),
+        actions: [
+        IconButton(
+          icon: Icon( Icons.refresh_rounded),
+          onPressed: () {
+            setState(() {
+              clickCounter = 0;
+            });
+          },
+        ),
+        ],
       ),
+      body: Center(
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+            Text('$clickCounter', style: const TextStyle(fontSize: 160, fontWeight: FontWeight.w100),),
+
+            Text("Click${ clickCounter > 1 ? 's' : '' }", style: const TextStyle(fontSize: 25),),
+            ],
+          ),
+        )
+      ),
+      floatingActionButton: Column(
+        mainAxisAlignment: MainAxisAlignment.end,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          FloatingActionButton(
+            onPressed: () {
+              setState(() {
+                clickCounter += 1;
+              });
+            },
+            child: Icon(Icons.plus_one),
+          ),
+          SizedBox(height: 16),
+          FloatingActionButton(
+            onPressed: () {
+              setState(() {
+                clickCounter -= 1;
+              });
+            },
+            child: Icon(Icons.remove),
+          ),
+        ],
+      )
     );
   }
 }
