@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:hello_world_app/presentation/screens/counter/counter_screen.dart';
+import 'package:hello_world_app/presentation/screens/counter/counter_functions_screen.dart';
 
 const Color counterZeroColor = Color.fromARGB(255, 7, 164, 255);
 const Color counterPositiveColor = Colors.green;
