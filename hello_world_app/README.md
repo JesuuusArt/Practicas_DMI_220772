@@ -1,11 +1,35 @@
-# Práctica de Desarrollo Móvil Integral - Contador Funcional
+# ![Logo](img/logoTI.png) Prácticas de Desarrollo Móvil Integral
+
+## Información Académica
+
+**Asignatura:** Desarrollo Móvil Integral (DMI)  
+**Programa:** Ingeniería en Desarrollo y Gestión de Software  
+**Docente:** M.T.I. Marco A. Ramírez Hernández  
+**Período:** Septiembre - Diciembre 2026  
+**Institución:** Universidad Tecnológica de Xicotepec de Juárez
+
+---
+
+## Tabla de Prácticas de la Materia
+
+| No. | Nombre | Descripción | Potenciador | Estatus |
+|:---:|---------|-------------|:-----------:|:-------:|
+| 1 | Metodología de Evaluación de la Materia | Transcribir en libreta y comprender la metodología y fechas de evaluación de la asignatura | 5 | ✅ Concluida |
+| 2 | Mi Primer Aplicación Móvil con Flutter | Codificar la app móvil en el framework de Flutter manejando Stateless y Stateful Widgets | 20 | ✅ Concluida |
+
+---
+
+# Práctica #2: Contador Funcional con Flutter
 
 ## Información del Estudiante
+
 - **Nombre:** Jesus Alejandro Artiaga Morales
-- **Universidad:** Universidad Tecnológica de Xicotepec de Juárez
+- **Matrícula/ID:** 220772
 - **Grado:** 10° A
-- **Materia:** Desarrollo Móvil Integral (DMI)
-- **Fecha:** 2026
+- **Universidad:** Universidad Tecnológica de Xicotepec de Juárez
+- **Carrera:** Ingeniería en Desarrollo y Gestión de Software
+- **Materia:** Desarrollo Móvil Integral
+- **Fecha de Entrega:** 2026-09-14
 
 ---
 
