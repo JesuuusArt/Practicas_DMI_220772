@@ -33,6 +33,45 @@ El objetivo de esta práctica es:
 
 ---
 
+## 📁 Estructura del Proyecto y Diagramas Archify
+
+Para explorar la arquitectura del proyecto, flujos de estado y límites de confianza en formato gráfico e interactivo:
+
+- **[→ Docs/Architecture/hello_world_app_architecture.html](Docs/Architecture/hello_world_app_architecture.html)** — Diagrama HTML interactivo nativo generado por OpenCode Archify.
+- **[→ archify_diagram.html](archify_diagram.html)** — Visualizador Archify multi-diagrama en español (Modo Claro/Oscuro, Zoom/Pan, Trazado de Flujo y Prompts).
+- **[→ index.html](index.html)** — Visualizador principal de arquitectura e infraestructura.
+
+### 🖼️ Vista Previa del Diagrama de Arquitectura (Archify)
+
+#### Modo Oscuro (Dark Mode)
+![Diagrama de Arquitectura Archify - Modo Oscuro](Docs/Architecture/hello_world_app_architecture.visual-check.2048x1320.dark.png)
+
+#### Modo Claro (Light Mode)
+![Diagrama de Arquitectura Archify - Modo Claro](Docs/Architecture/hello_world_app_architecture.visual-check.2048x1320.light.png)
+
+### Resumen Rápido
+
+```
+hello_world_app/
+├── lib/                                    # Código fuente Dart
+│   ├── main.dart                           # Punto de entrada y temas
+│   └── presentation/screens/counter/       # Pantallas de contador (StatefulWidget)
+│       └── counter_functions_screen.dart   # Vista principal con botones flotantes
+├── Docs/Architecture/                      # Diagramas interactivos HTML e imágenes de Archify
+├── android/, ios/, web/, windows/          # Plataformas nativas
+├── pubspec.yaml                            # Dependencias (google_fonts)
+└── README.md                               # Documentación principal
+```
+
+### 📊 Diagramas Archify Disponibles
+
+1. **🏗️ Arquitectura General del Proyecto**: Componentes, directorios y límites de confianza (*Mobile device*, *Application*, *Local dev*).
+2. **🔄 Flujo de Estado del Contador**: Secuencia interactiva de pulsación ➔ `CustomButton` ➔ `setState()` ➔ Evaluación de Color ➔ Rebuild.
+3. **🌐 Infraestructura y Plataformas**: Compilación y ejecutables nativos para Android, Web y Escritorio.
+4. **☀️🌙 Modo Claro y Oscuro**: Alternador dinámico de tema visual blueprint.
+
+---
+
 ## Principales Comandos de Flutter
 
 ### Comandos Básicos
@@ -361,6 +400,24 @@ dependencies:
   google_fonts: ^6.2.1  # Fuentes personalizadas (Rock Salt)
   cupertino_icons: ^1.0.2
 ```
+
+---
+
+## 📊 Diagramas de Arquitectura Interactivos (Archify)
+
+Abre **[archify_diagram.html](archify_diagram.html)** o **[index.html](index.html)** en cualquier navegador web para explorar los diagramas interactivos en formato **Archify**:
+
+- 🏗️ **Arquitectura General**: Mapeo completo de `Practicas_DMI_220772` y `hello_world_app`.
+- 🔄 **Ciclo de Estado del Contador**: Secuencia interactiva de pulsación `+1`, `-1`, `Reset`, `setState()` y colores dinámicos.
+- 🌐 **Infraestructura y Ejecutables Nativos**: Relación entre el entorno de desarrollo local, el compilador SDK de Flutter y los ejecutables de Android, Web y Escritorio.
+- 🛡️ **Límites de Confianza (Trust Boundaries)**: Fronteras de seguridad entre dispositivos, app y herramientas de dev.
+
+### 🎬 Funcionalidades del Visualizador Archify
+
+- ☀️🌙 **Soporte para Modo Claro y Modo Oscuro**: Cambia el tema blueprint instantáneamente.
+- 🖱️ **Paneles Modales de Código**: Al hacer clic en cualquier caja del diagrama se despliega la ruta del archivo y fragmentos de código Dart.
+- 📐 **Navegación Pan & Zoom**: Arrastre con el mouse y control de zoom interactivo (`PATH`, `MAP`, `LENS`, `-`, `+`).
+- 📜 **Sección de Prompts Archify**: Prompts oficiales en español listos para copiar y usar en Codex o Claude.
 
 ---
 
