@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="logoTI.jpeg" alt="Logo TI" width="200" />
+  <img src="logoTI.jpeg" alt="Logo TI" width="400" />
 
   # Prácticas de la Asignatura de Desarrollo Móvil Integral
 
@@ -8,6 +8,10 @@
   **Estudiante:** Jesus Alejandro Artiaga Morales (Matrícula: 220772)  
   **Docente:** M.T.I. Marco A. Ramírez Hernández  
   **Periodo:** Septiembre - Diciembre 2026  
+
+  [![Portafolio GitHub Pages](https://img.shields.io/badge/🌐%20Portafolio%20en%20Vivo-GitHub%20Pages-06b6d4?style=for-the-badge&logo=github)](https://jesuuusart.github.io/Practicas_DMI_220772/)
+
+  🔗 **[https://jesuuusart.github.io/Practicas_DMI_220772/](https://jesuuusart.github.io/Practicas_DMI_220772/)**
 </div>
 
 ---
@@ -30,6 +34,7 @@
   <br />
 
   #### 🔗 Enlaces a Diagramas Interactivos:
+  - 🌐 [Sitio Web Portafolio GitHub Pages](https://jesuuusart.github.io/Practicas_DMI_220772/)
   - 🌐 [Diagrama Nativo OpenCode Archify](hello_world_app/Docs/Architecture/hello_world_app_architecture.html)
   - 🏗️ [Visualizador Archify Completo (archify_diagram.html)](archify_diagram.html)
   - 🖥️ [Visualizador Principal (index.html)](index.html)
