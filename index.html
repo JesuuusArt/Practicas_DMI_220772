@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Prácticas DMI — Jesus Alejandro Artiaga Morales (220772)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-main: #0b0f19;
+      --bg-card: rgba(18, 24, 39, 0.85);
+      --bg-card-hover: rgba(30, 41, 59, 0.95);
+      --border-color: rgba(255, 255, 255, 0.1);
+      --text-title: #f8fafc;
+      --text-body: #94a3b8;
+      --text-muted: #64748b;
+      --cyan: #06b6d4;
+      --purple: #a855f7;
+      --green: #10b981;
+      --amber: #f59e0b;
+      --red: #ef4444;
+      --code-bg: #070a12;
+      --shadow: 0 10px 30px rgba(0,0,0,0.5);
+    }
+
+    [data-theme="light"] {
+      --bg-main: #f8fafc;
+      --bg-card: #ffffff;
+      --bg-card-hover: #f1f5f9;
+      --border-color: rgba(0, 0, 0, 0.12);
+      --text-title: #0f172a;
+      --text-body: #334155;
+      --text-muted: #64748b;
+      --code-bg: #1e293b;
+      --shadow: 0 10px 25px rgba(0,0,0,0.08);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--bg-main);
+      color: var(--text-title);
+      line-height: 1.6;
+      transition: background-color 0.3s ease, color 0.3s ease;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Modern Glassmorphic Header Bar */
+    header {
+      background: var(--bg-card);
+      border-bottom: 1px solid var(--border-color);
+      padding: 1rem 2rem;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(14px);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+    }
+
+    .brand-group {
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+    }
+
+    /* Profile Avatar me.jpg with glowing ring */
+    .profile-avatar-wrapper {
+      position: relative;
+      width: 46px;
+      height: 46px;
+    }
+
+    .profile-avatar {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid var(--cyan);
+      box-shadow: 0 0 15px rgba(6, 182, 212, 0.4);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .profile-avatar:hover {
+      transform: scale(1.08);
+      box-shadow: 0 0 22px rgba(6, 182, 212, 0.6);
+    }
+
+    .status-dot {
+      position: absolute;
+      bottom: 2px;
+      right: 2px;
+      width: 11px;
+      height: 11px;
+      background: var(--green);
+      border: 2px solid var(--bg-main);
+      border-radius: 50%;
+    }
+
+    .brand-info h1 {
+      font-size: 1.15rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .brand-info p {
+      font-size: 0.775rem;
+      color: var(--text-body);
+    }
+
+    /* Pretty Pill Theme Switcher */
+    .theme-switch-container {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      background: rgba(125, 125, 125, 0.12);
+      border: 1px solid var(--border-color);
+      padding: 4px;
+      border-radius: 30px;
+      cursor: pointer;
+      user-select: none;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .theme-switch-container:hover {
+      border-color: var(--cyan);
+      box-shadow: 0 0 15px rgba(6, 182, 212, 0.2);
+    }
+
+    .theme-switch-pill {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.35rem 0.85rem;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+
+    .theme-switch-pill.active-dark {
+      background: linear-gradient(135deg, #1e1b4b, #312e81);
+      color: #a5b4fc;
+      box-shadow: 0 2px 10px rgba(99, 102, 241, 0.4);
+    }
+
+    .theme-switch-pill.active-light {
+      background: linear-gradient(135deg, #fef3c7, #fde047);
+      color: #78350f;
+      box-shadow: 0 2px 10px rgba(245, 158, 11, 0.4);
+    }
+
+    /* Main Container */
+    main {
+      max-width: 1280px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 2rem 1.5rem;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 2.5rem;
+    }
+
+    /* Student Bio Card */
+    .bio-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 1.75rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.5rem;
+      box-shadow: var(--shadow);
+    }
+
+    .bio-item {
+      display: flex;
+      flex-direction: column;
+      gap: 0.2rem;
+    }
+
+    .bio-item .label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      color: var(--cyan);
+      letter-spacing: 0.05em;
+    }
+
+    .bio-item .value {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--text-title);
+    }
+
+    /* Section Headers */
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
+
+    .section-title {
+      font-size: 1.3rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    /* Practices Grid Table Cards */
+    .practices-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 1.25rem;
+    }
+
+    .practice-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 14px;
+      padding: 1.5rem;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      position: relative;
+    }
+
+    .practice-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--cyan);
+      box-shadow: 0 12px 35px rgba(6, 182, 212, 0.15);
+      background: var(--bg-card-hover);
+    }
+
+    .practice-card.active {
+      border-color: var(--cyan);
+      box-shadow: 0 0 20px rgba(6, 182, 212, 0.3);
+    }
+
+    .card-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 0.75rem;
+    }
+
+    .badge-no {
+      font-family: 'Fira Code', monospace;
+      font-weight: 700;
+      font-size: 0.8rem;
+      background: rgba(6, 182, 212, 0.15);
+      color: var(--cyan);
+      padding: 0.2rem 0.6rem;
+      border-radius: 6px;
+    }
+
+    .badge-status {
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 0.2rem 0.6rem;
+      border-radius: 6px;
+    }
+
+    .status-done { background: rgba(16, 185, 129, 0.15); color: var(--green); }
+
+    .p-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+
+    .p-desc {
+      font-size: 0.85rem;
+      color: var(--text-body);
+      margin-bottom: 1rem;
+    }
+
+    .p-meta {
+      font-size: 0.775rem;
+      color: var(--text-muted);
+      display: flex;
+      gap: 1rem;
+    }
+
+    /* Tab Explorer View for Selected Practice */
+    .detail-container {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 2rem;
+      box-shadow: var(--shadow);
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    .subnav-tabs {
+      display: flex;
+      gap: 0.5rem;
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 0.75rem;
+      overflow-x: auto;
+    }
+
+    .subtab-btn {
+      background: transparent;
+      border: none;
+      color: var(--text-body);
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      font-size: 0.875rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .subtab-btn.active {
+      background: var(--cyan);
+      color: #0f172a;
+      box-shadow: 0 4px 15px rgba(6, 182, 212, 0.3);
+    }
+
+    .subtab-content { display: none; }
+    .subtab-content.active { display: block; animation: fadeIn 0.3s ease; }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Architecture Iframe & Screenshots Grid */
+    .arch-iframe-wrapper {
+      width: 100%;
+      height: 650px;
+      border-radius: 12px;
+      border: 1px solid var(--border-color);
+      overflow: hidden;
+      box-shadow: inset 0 0 20px rgba(0,0,0,0.5);
+    }
+
+    iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    .evidence-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .evidence-card {
+      background: var(--code-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .evidence-card img {
+      width: 100%;
+      border-radius: 8px;
+      border: 1px solid var(--border-color);
+      object-fit: cover;
+    }
+
+    .evidence-card h4 {
+      font-size: 0.9rem;
+      color: var(--cyan);
+    }
+
+    .evidence-card p {
+      font-size: 0.8rem;
+      color: var(--text-body);
+    }
+
+    /* Repository File Explorer */
+    .file-explorer {
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      gap: 1.5rem;
+      min-height: 450px;
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .file-tree {
+      background: var(--code-bg);
+      border-right: 1px solid var(--border-color);
+      padding: 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+      font-family: 'Fira Code', monospace;
+      font-size: 0.8rem;
+    }
+
+    .file-tree-item {
+      padding: 0.4rem 0.75rem;
+      border-radius: 6px;
+      cursor: pointer;
+      color: var(--text-body);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: all 0.15s ease;
+    }
+
+    .file-tree-item:hover, .file-tree-item.active {
+      background: rgba(6, 182, 212, 0.15);
+      color: var(--cyan);
+    }
+
+    .code-viewer {
+      background: #060911;
+      padding: 1.25rem;
+      font-family: 'Fira Code', monospace;
+      font-size: 0.785rem;
+      color: #e2e8f0;
+      overflow: auto;
+      white-space: pre;
+    }
+
+    footer {
+      border-top: 1px solid var(--border-color);
+      padding: 1.5rem 2rem;
+      text-align: center;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      background: var(--bg-card);
+      margin-top: auto;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <div class="brand-group">
+      <div class="profile-avatar-wrapper">
+        <img src="me.jpg" alt="Foto Jesus Artiaga" class="profile-avatar">
+        <div class="status-dot"></div>
+      </div>
+      <div class="brand-info">
+        <h1>Desarrollo Móvil Integral (DMI) — Portafolio</h1>
+        <p>Ingeniería en Desarrollo y Gestión de Software | UTXJ</p>
+      </div>
+    </div>
+
+    <!-- Pretty Theme Switcher Button -->
+    <div class="theme-switch-container" id="themeSwitcher" onclick="toggleTheme()">
+      <div class="theme-switch-pill active-dark" id="darkPill">🌙 Oscuro</div>
+      <div class="theme-switch-pill" id="lightPill">☀️ Claro</div>
+    </div>
+  </header>
+
+  <main>
+    
+    <!-- Student Information Summary Card -->
+    <section class="bio-card">
+      <div class="bio-item">
+        <span class="label">Estudiante</span>
+        <span class="value">Jesus Alejandro Artiaga Morales</span>
+      </div>
+      <div class="bio-item">
+        <span class="label">Matrícula</span>
+        <span class="value">220772 (10° A)</span>
+      </div>
+      <div class="bio-item">
+        <span class="label">Docente</span>
+        <span class="value">M.T.I. Marco A. Ramírez Hernández</span>
+      </div>
+      <div class="bio-item">
+        <span class="label">Periodo Lectivo</span>
+        <span class="value">Septiembre - Diciembre 2026</span>
+      </div>
+    </section>
+
+    <!-- Practices List Section -->
+    <section>
+      <div class="section-header">
+        <h2 class="section-title">📋 Prácticas de la Asignatura</h2>
+      </div>
+
+      <div class="practices-grid">
+        
+        <!-- Práctica 1 -->
+        <div class="practice-card" onclick="selectPractice(1)">
+          <div class="card-top">
+            <span class="badge-no">Práctica 01</span>
+            <span class="badge-status status-done">🟢 Concluida</span>
+          </div>
+          <div class="p-title">Metodología de Evaluación de la Materia</div>
+          <div class="p-desc">Comprensión de criterios de evaluación, fechas de entrega y reglas de la asignatura.</div>
+          <div class="p-meta">
+            <span>⚡ Potenciador: 5%</span>
+            <span>📍 Teórica</span>
+          </div>
+        </div>
+
+        <!-- Práctica 2 -->
+        <div class="practice-card active" id="card-p2" onclick="selectPractice(2)">
+          <div class="card-top">
+            <span class="badge-no">Práctica 02</span>
+            <span class="badge-status status-done">🟢 Concluida</span>
+          </div>
+          <div class="p-title">Mi Primer Aplicación Móvil con Flutter</div>
+          <div class="p-desc">Contador funcional interactivo con Stateless/Stateful Widgets, botones flotantes y colores dinámicos.</div>
+          <div class="p-meta">
+            <span>⚡ Potenciador: 25%</span>
+            <span>📱 Flutter App</span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Interactive Explorer Container for Práctica 02 -->
+    <section class="detail-container" id="practice-detail">
+      
+      <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 1rem;">
+        <div>
+          <span style="font-family: 'Fira Code', monospace; color: var(--cyan); font-weight:600; font-size: 0.85rem;">PRÁCTICA 02 — DETALLES Y EVIDENCIA</span>
+          <h2 style="font-size: 1.4rem; font-weight: 700; margin-top: 0.25rem;">Mi Primer Aplicación Móvil con Flutter (Contador Funcional)</h2>
+        </div>
+        <div>
+          <a href="hello_world_app/README.md" style="color: var(--cyan); text-decoration: none; font-weight: 600; font-size: 0.85rem;">📄 Ver README del Proyecto ➔</a>
+        </div>
+      </div>
+
+      <!-- Navigation Tabs for Practice Details -->
+      <div class="subnav-tabs">
+        <button class="subtab-btn active" onclick="switchSubtab('archify')">🏗️ Diagramas Archify</button>
+        <button class="subtab-btn" onclick="switchSubtab('evidence')">🖼️ Evidencia y Capturas</button>
+        <button class="subtab-btn" onclick="switchSubtab('files')">📁 Visor de Código de Archivos</button>
+        <button class="subtab-btn" onclick="switchSubtab('objectives')">🎯 Objetivos y Conclusiones</button>
+      </div>
+
+      <!-- TAB 1: ARCHIFY DIAGRAMS INTERACTIVE IFRAME -->
+      <div class="subtab-content active" id="tab-archify">
+        <p style="font-size: 0.875rem; color: var(--text-body); margin-bottom: 1rem;">
+          A continuación se presenta el diagramador interactivo en tiempo real en formato **Archify** generado para la arquitectura del módulo <code>hello_world_app</code>.
+        </p>
+        <div class="arch-iframe-wrapper">
+          <iframe src="hello_world_app/Docs/Architecture/hello_world_app_architecture.html" title="Diagrama Archify"></iframe>
+        </div>
+      </div>
+
+      <!-- TAB 2: EVIDENCE SCREENSHOTS -->
+      <div class="subtab-content" id="tab-evidence">
+        <div class="evidence-grid">
+          
+          <div class="evidence-card">
+            <h4>1. Estado Cero / Neutral (0)</h4>
+            <img src="hello_world_app/img/neutral(0).png" alt="Contador Neutral">
+            <p>El valor del contador inicia en 0 y se renderiza con el color azul dinámico <code>counterZeroColor</code>.</p>
+          </div>
+
+          <div class="evidence-card">
+            <h4>2. Estado Positivo (>0)</h4>
+            <img src="hello_world_app/img/positiva.png" alt="Contador Positivo">
+            <p>Al presionar el botón <code>+1</code>, el contador aumenta y cambia automáticamente a verde <code>counterPositiveColor</code>.</p>
+          </div>
+
+          <div class="evidence-card">
+            <h4>3. Estado Negativo (<0)</h4>
+            <img src="hello_world_app/img/negativa.png" alt="Contador Negativo">
+            <p>Al presionar el botón <code>-1</code>, el valor es menor a 0 y cambia a rojo <code>counterNegativeColor</code>.</p>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- TAB 3: FILE CODE EXPLORER -->
+      <div class="subtab-content" id="tab-files">
+        <p style="font-size: 0.85rem; color: var(--text-body); margin-bottom: 1rem;">
+          Haz clic en cualquier archivo del proyecto para inspeccionar su código fuente directo:
+        </p>
+        
+        <div class="file-explorer">
+          <div class="file-tree">
+            <div class="file-tree-item active" onclick="showFileCode('main')">📄 lib/main.dart</div>
+            <div class="file-tree-item" onclick="showFileCode('counter')">📱 counter_functions_screen.dart</div>
+            <div class="file-tree-item" onclick="showFileCode('pubspec')">⚙️ pubspec.yaml</div>
+            <div class="file-tree-item" onclick="showFileCode('readme')">📜 README.md</div>
+          </div>
+          <div class="code-viewer" id="codeDisplay">Selecciona un archivo...</div>
+        </div>
+      </div>
+
+      <!-- TAB 4: OBJECTIVES & LESSONS -->
+      <div class="subtab-content" id="tab-objectives">
+        <h3 style="font-size: 1.1rem; color: var(--cyan); margin-bottom: 0.5rem;">Objetivo Alcanzado:</h3>
+        <p style="font-size: 0.9rem; color: var(--text-body); margin-bottom: 1.5rem;">
+          Aprender la estructura de proyectos móviles en Flutter, implementación de widgets Stateless/Stateful, control de flujo con <code>setState()</code> y evaluación funcional de temas de color.
+        </p>
+
+        <h3 style="font-size: 1.1rem; color: var(--purple); margin-bottom: 0.5rem;">Conceptos Clave Aprendidos:</h3>
+        <ul style="font-size: 0.9rem; color: var(--text-body); padding-left: 1.25rem; display: flex; flex-direction: column; gap: 0.4rem;">
+          <li><b>StatefulWidget:</b> Permite modificar el estado interno y re-renderizar componentes dinámicos.</li>
+          <li><b>CustomButton:</b> Extracción y encapsulamiento de componentes reusables de UI.</li>
+          <li><b>GoogleFonts:</b> Integración de recursos tipográficos externos en Flutter.</li>
+          <li><b>Hot Reload & Compilation:</b> Flujo de desarrollo ágil en Flutter SDK.</li>
+        </ul>
+      </div>
+
+    </section>
+
+  </main>
+
+  <footer>
+    Desarrollo Móvil Integral (DMI) — Universidad Tecnológica de Xicotepec de Juárez © 2026
+  </footer>
+
+  <script>
+    // Pretty Theme Toggle Logic
+    const htmlEl = document.documentElement;
+    const darkPill = document.getElementById('darkPill');
+    const lightPill = document.getElementById('lightPill');
+
+    function toggleTheme() {
+      const current = htmlEl.getAttribute('data-theme');
+      if (current === 'dark') {
+        htmlEl.setAttribute('data-theme', 'light');
+        darkPill.className = 'theme-switch-pill';
+        lightPill.className = 'theme-switch-pill active-light';
+      } else {
+        htmlEl.setAttribute('data-theme', 'dark');
+        darkPill.className = 'theme-switch-pill active-dark';
+        lightPill.className = 'theme-switch-pill';
+      }
+    }
+
+    // Subtab Switcher
+    function switchSubtab(tabName) {
+      document.querySelectorAll('.subtab-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.subtab-content').forEach(c => c.classList.remove('active'));
+
+      event.target.classList.add('active');
+      document.getElementById(`tab-${tabName}`).classList.add('active');
+    }
+
+    // Code Database Snippets for File Viewer
+    const codeFiles = {
+      main: `import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:hello_world_app/presentation/screens/counter/counter_functions_screen.dart';
+
+const Color counterZeroColor = Color.fromARGB(255, 7, 164, 255);
+const Color counterPositiveColor = Colors.green;
+const Color counterNegativeColor = Colors.red;
+
+void main() {
+  runApp(MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        colorSchemeSeed: const Color.fromARGB(255, 208, 33, 243),
+      ),
+      home: const CounterFunctionsScreen(),
+    );
+  }
+}`,
+      counter: `class CounterFunctionsScreen extends StatefulWidget {
+  const CounterFunctionsScreen({super.key});
+
+  @override
+  State<CounterFunctionsScreen> createState() => _CounterFunctionsScreenState();
+}
+
+class _CounterFunctionsScreenState extends State<CounterFunctionsScreen> {
+  int clickCounter = 0;
+
+  Color _getCounterColor(int value) {
+    if (value == 0) return counterZeroColor;
+    if (value > 0) return counterPositiveColor;
+    return counterNegativeColor;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text('Counter Functions')),
+      body: Center(
+        child: Text('$clickCounter', style: GoogleFonts.rockSalt(color: _getCounterColor(clickCounter))),
+      ),
+      floatingActionButton: Column(
+        children: [
+          CustomButton(icon: Icons.plus_one, onPressed: () => setState(() => clickCounter++)),
+          CustomButton(icon: Icons.remove, onPressed: () => setState(() => clickCounter--)),
+          CustomButton(icon: Icons.refresh_outlined, onPressed: () => setState(() => clickCounter = 0)),
+        ],
+      )
+    );
+  }
+}`,
+      pubspec: `name: hello_world_app
+description: "A new Flutter project."
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.13.2
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.8
+  google_fonts: ^7.0.0`,
+      readme: `# Práctica de Desarrollo Móvil Integral - Contador Funcional
+- **Nombre:** Jesus Alejandro Artiaga Morales
+- **Matrícula:** 220772
+- **Materia:** Desarrollo Móvil Integral (DMI)`
+    };
+
+    function showFileCode(fileKey) {
+      document.querySelectorAll('.file-tree-item').forEach(i => i.classList.remove('active'));
+      event.target.classList.add('active');
+      document.getElementById('codeDisplay').innerText = codeFiles[fileKey] || '// Archivo no cargado';
+    }
+
+    // Initialize first code view
+    showFileCode('main');
+  </script>
+</body>
+</html>
