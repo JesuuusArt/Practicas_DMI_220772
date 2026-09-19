@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:yes_no_app/presentation/widgets/chat/her_message_bubble.dart';
 import 'package:yes_no_app/presentation/widgets/chat/my_message_bubble.dart';
+import 'package:yes_no_app/presentation/widgets/shared/message_field_box.dart';
 
 class ChatScreen extends StatelessWidget {
   const ChatScreen({super.key});
@@ -11,9 +13,11 @@ class ChatScreen extends StatelessWidget {
         leading: Padding(
           padding: const EdgeInsets.all(4.0),
           child: CircleAvatar(
-            backgroundImage: NetworkImage(
-              'https://i.pinimg.com/736x/1b/fd/1b/1bfd1b0b2100067d4de9b3efe373c2e1.jpg',
+            child: Icon(
+              Icons.person,
+              color: Theme.of(context).colorScheme.onPrimary,
             ),
+            backgroundColor: Theme.of(context).colorScheme.primary,
           ),
         ),
         title: const Text('Hola soy un chat'),
@@ -32,11 +36,22 @@ class _ChatView extends StatelessWidget {
     return SafeArea(
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 10),
-        child: ListView.builder(
-          itemCount: 5,
-          itemBuilder: (context, index) {
-            return const MyMessageBubble();
-          },
+        child: Column(
+          children: [
+            Expanded(
+              child: ListView.builder(
+                itemCount: 5,
+                itemBuilder: (context, index) {
+                  return index % 2 == 0
+                      ? const MyMessageBubble()
+                      : const HerMessageBubble();
+                },
+              ),
+            ),
+
+            // Caja de texto de mensajes
+            const MessageFieldBox(),
+          ],
         ),
       ),
     );
