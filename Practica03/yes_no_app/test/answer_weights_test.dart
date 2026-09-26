@@ -1,4 +1,4 @@
-import 'dart:convert';
+﻿import 'dart:convert';
 import 'dart:typed_data';
 
 import 'package:dio/dio.dart';
@@ -6,13 +6,10 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:yes_no_app/config/helpers/get_yes_no_answer.dart';
 
 /// Reproduce el comportamiento real de https://yesno.wtf/api:
-/// NO conoce el parametro `?force=` y solo responde `yes` o `no` al azar.
+/// honra el parametro `?force=` (yes | no | maybe) y devuelve esa respuesta
+/// con su imagen correspondiente.
 class _FakeYesNoApi implements HttpClientAdapter {
-  _FakeYesNoApi({this.answers = const ['no', 'yes']});
-
-  final List<String> answers;
   final List<Uri> requests = [];
-  int _calls = 0;
 
   @override
   void close({bool force = false}) {}
@@ -24,12 +21,12 @@ class _FakeYesNoApi implements HttpClientAdapter {
     Future<void>? cancelFuture,
   ) async {
     requests.add(options.uri);
-    final answer = answers[_calls++ % answers.length];
+    final answer = options.uri.queryParameters['force'] ?? 'no';
 
     return ResponseBody.fromString(
       jsonEncode({
         'answer': answer,
-        'forced': false,
+        'forced': true,
         'image': 'https://yesno.wtf/assets/$answer/x.gif',
       }),
       200,
@@ -82,8 +79,8 @@ void main() {
     });
   });
 
-  group('consumo de la API', () {
-    test('"maybe" se responde en local y no consulta la API', () async {
+  group('integracion con la API (parametro ?force=)', () {
+    test('"maybe" SI se pide a la API y trae imagen', () async {
       final api = _FakeYesNoApi();
       final helper = GetYesNoAnswer(
         dio: _dioWith(api),
@@ -92,44 +89,51 @@ void main() {
 
       final message = await helper.getAnswer();
 
-      expect(api.requests, isEmpty, reason: 'la API no sabe responder "maybe"');
+      expect(api.requests.length, 1, reason: 'maybe tambien consulta la API');
+      expect(api.requests.single.queryParameters['force'], 'maybe');
       expect(message.text, 'Tal vez');
-      expect(message.imageUrl, isNull);
+      expect(message.imageUrl, 'https://yesno.wtf/assets/maybe/x.gif');
     });
 
-    test('insiste hasta que la API entregue la respuesta sorteada', () async {
-      // La API devuelve siempre "no" al principio: hay que reintentar.
-      final api = _FakeYesNoApi(answers: const ['no', 'no', 'no', 'yes']);
+    test('fuerza "yes" y devuelve su imagen', () async {
+      final api = _FakeYesNoApi();
       final helper = GetYesNoAnswer(
         dio: _dioWith(api),
         weights: const AnswerWeights(yes: 1, no: 0, maybe: 0),
-        maxAttempts: 5,
       );
 
       final message = await helper.getAnswer();
 
-      expect(api.requests.length, 4, reason: 'tuvo que pedirla 4 veces');
+      expect(api.requests.single.queryParameters['force'], 'yes');
       expect(message.text, 'Sí');
       expect(message.imageUrl, 'https://yesno.wtf/assets/yes/x.gif');
     });
 
-    test('se rinde tras maxAttempts y devuelve la ultima respuesta', () async {
-      // La API nunca entrega "yes" cuando se le pide.
-      final api = _FakeYesNoApi(answers: const ['no']);
+    test('fuerza "no" y devuelve su imagen', () async {
+      final api = _FakeYesNoApi();
       final helper = GetYesNoAnswer(
         dio: _dioWith(api),
-        weights: const AnswerWeights(yes: 1, no: 0, maybe: 0),
-        maxAttempts: 3,
+        weights: const AnswerWeights(yes: 0, no: 1, maybe: 0),
       );
 
       final message = await helper.getAnswer();
 
-      expect(api.requests.length, 3);
-      expect(message.text, 'No', reason: 'no hay una cuarta oportunidad');
+      expect(api.requests.single.queryParameters['force'], 'no');
+      expect(message.text, 'No');
+      expect(message.imageUrl, 'https://yesno.wtf/assets/no/x.gif');
+    });
+
+    test('usa una sola llamada por respuesta (sin reintentos)', () async {
+      final api = _FakeYesNoApi();
+      final helper = GetYesNoAnswer(dio: _dioWith(api));
+
+      await helper.getAnswer();
+
+      expect(api.requests.length, 1);
     });
 
     test('de punta a punta la app entrega 40/40/20', () async {
-      final api = _FakeYesNoApi(answers: const ['no', 'yes']);
+      final api = _FakeYesNoApi();
       final helper = GetYesNoAnswer(dio: _dioWith(api));
 
       final counts = {'Sí': 0, 'No': 0, 'Tal vez': 0};
@@ -143,6 +147,7 @@ void main() {
       expect(counts['Sí']! / total, closeTo(0.40, 0.03));
       expect(counts['No']! / total, closeTo(0.40, 0.03));
       expect(counts['Tal vez']! / total, closeTo(0.20, 0.03));
+      expect(api.requests.length, total, reason: 'nadie se queda sin gif');
     });
   });
 
