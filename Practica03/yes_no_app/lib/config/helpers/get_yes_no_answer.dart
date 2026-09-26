@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:dio/dio.dart';
 import 'package:yes_no_app/domain/entities/message.dart';
 import 'package:yes_no_app/infrastructure/models/yes_no_model.dart';
@@ -11,8 +13,31 @@ class YesNoException implements Exception {
   String toString() => message;
 }
 
+/// Probabilidad de cada respuesta. Los valores son relativos entre si:
+/// no hace falta que sumen 1 (40/40/20 == 2/2/1).
+class AnswerWeights {
+  const AnswerWeights({
+    this.yes = 40,
+    this.no = 40,
+    this.maybe = 20,
+  });
+
+  final int yes;
+  final int no;
+  final int maybe;
+
+  int get total => yes + no + maybe;
+}
+
 class GetYesNoAnswer {
-  GetYesNoAnswer({Dio? dio}) : _dio = dio ?? Dio() {
+  GetYesNoAnswer({
+    Dio? dio,
+    Random? random,
+    this.weights = const AnswerWeights(),
+    this.maxAttempts = 5,
+  })  : assert(maxAttempts > 0, 'maxAttempts debe ser mayor que 0'),
+        _dio = dio ?? Dio(),
+        _random = random ?? Random() {
     _dio.options
       ..baseUrl = 'https://yesno.wtf'
       ..connectTimeout = const Duration(seconds: 10)
@@ -21,21 +46,42 @@ class GetYesNoAnswer {
   }
 
   final Dio _dio;
+  final Random _random;
+  final AnswerWeights weights;
+  final int maxAttempts;
 
-  /// Consulta la API y devuelve la respuesta tal cual, con su imagen.
+  /// Sortea la respuesta respetando los porcentajes de [weights].
+  String pickAnswer() {
+    final roll = _random.nextInt(weights.total);
+
+    if (roll < weights.yes) return 'yes';
+    if (roll < weights.yes + weights.no) return 'no';
+    return 'maybe';
+  }
+
+  /// La API decide el resultado, asi que hay que insistir hasta que coincida
+  /// con la respuesta sorteada.
+  ///
+  /// `Tal vez` se responde en local porque la API no lo entrega.
   ///
   /// Lanza [YesNoException] ante cualquier fallo de red o de formato,
   /// para que la capa de presentación nunca reciba una excepción cruda.
   Future<Message> getAnswer() async {
-    try {
-      final response = await _dio.get<Map<String, dynamic>>('/api');
-      final data = response.data;
+    final wanted = pickAnswer();
 
-      if (data == null) {
-        throw const YesNoException('Bb farias no recibió respuesta.');
+    if (wanted == 'maybe') {
+      return const Message(text: 'Tal vez', fromWho: FromWho.hers);
+    }
+
+    try {
+      YesNoModel? last;
+
+      for (var attempt = 0; attempt < maxAttempts; attempt++) {
+        last = YesNoModel.fromJsonMap(await _fetchJson());
+        if (last.answer == wanted) break;
       }
 
-      return YesNoModel.fromJsonMap(data).toMessageEntity();
+      return last!.toMessageEntity();
     } on YesNoException {
       rethrow;
     } on DioException catch (e) {
@@ -45,6 +91,17 @@ class GetYesNoAnswer {
     } catch (e) {
       throw YesNoException('Ocurrió un error inesperado al responder: $e');
     }
+  }
+
+  Future<Map<String, dynamic>> _fetchJson() async {
+    final response = await _dio.get<Map<String, dynamic>>('/api');
+    final data = response.data;
+
+    if (data == null) {
+      throw const YesNoException('Bb farias no recibió respuesta.');
+    }
+
+    return data;
   }
 
   String _describeDioError(DioException e) => switch (e.type) {
