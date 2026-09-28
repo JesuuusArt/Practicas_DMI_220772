@@ -21,8 +21,8 @@
 | No. | Nombre | Descripción | Potenciador | Estatus |
 |:---:|:---|:---|:---:|:---:|
 | 1. | Metodología de Evaluación de la Materia | Transcribir en libreta y comprender la metodología y fechas de evaluación de la asignatura | 5 | 🟢 Concluida |
-| 2. | Mi Primer Aplicación Móvil con Flutter | Codificar la app móvil en el framework de Flutter manejando Stateless y Stateful Widgets | 25 | 🟢 Concluida |
-| 3. | Yes No Maybe App | App de chat en Flutter que consulta la API yesno.wtf con arquitectura por capas, inyección de dependencias, 38 pruebas y 4 diagramas Archify | 30 | 🟢 Concluida |
+| 2. | [Mi Primer Aplicación Móvil con Flutter](/Practica02/hello_world_app) | Codificar la app móvil en el framework de Flutter manejando Stateless y Stateful Widgets | 25 | 🟢 Concluida |
+| 3. | [Yes No Maybe App](/Practica03/yes_no_app) | App de chat en Flutter que consulta la API yesno.wtf con arquitectura por capas, inyección de dependencias, 38 pruebas y 4 diagramas Archify | 30 | 🟢 Concluida |
 
 ---
 
