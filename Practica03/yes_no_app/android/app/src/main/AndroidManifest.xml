@@ -1,6 +1,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Necesario para llamar a https://yesno.wtf/api.
+         Flutter solo lo agrega en debug y profile, asi que en release
+         la app se quedaria sin conexion si no se declara aqui. -->
+    <uses-permission android:name="android.permission.INTERNET"/>
     <application
-        android:label="yes_no_app"
+        android:label="Bb farias"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <meta-data
