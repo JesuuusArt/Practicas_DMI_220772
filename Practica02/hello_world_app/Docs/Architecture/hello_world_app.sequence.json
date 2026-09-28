@@ -1,0 +1,178 @@
+{
+  "schema_version": 1,
+  "diagram_type": "sequence",
+  "meta": {
+    "title": "Secuencia de un toque · hello_world_app",
+    "output": "hello_world_app_sequence.html",
+    "quality_profile": "showcase",
+    "animation": "trace",
+    "column_fit": "spread",
+    "viewBox": [1080, 720],
+    "views": [
+      {
+        "id": "toque-y-setstate",
+        "label": "Toque y setState",
+        "focus": ["user", "fab", "state"],
+        "note": "Del toque del usuario a la marca que fuerza el rebuild del widget."
+      },
+      {
+        "id": "color-y-tipografia",
+        "label": "Color y tipografia",
+        "focus": ["build", "color", "palette", "fonts"],
+        "note": "Como el valor del contador decide el color y la fuente del texto."
+      },
+      {
+        "id": "frame-final",
+        "label": "Frame final",
+        "focus": ["build", "screen", "user"],
+        "note": "El Scaffold completo se vuelve a pintar con el numero actualizado."
+      }
+    ]
+  },
+  "participants": [
+    { "id": "user", "type": "external", "label": "Usuario", "sublabel": "pulsa +1" },
+    { "id": "fab", "type": "frontend", "label": "CustomButton", "sublabel": "envuelve un FAB" },
+    { "id": "state", "type": "backend", "label": "State", "sublabel": "clickCounter" },
+    { "id": "build", "type": "backend", "label": "build()", "sublabel": "Scaffold entero" },
+    { "id": "color", "type": "backend", "label": "Color", "sublabel": "_getCounterColor" },
+    { "id": "palette", "type": "database", "label": "3 constantes", "sublabel": "en main.dart" },
+    { "id": "fonts", "type": "external", "label": "google_fonts", "sublabel": "Rock Salt" },
+    { "id": "screen", "type": "frontend", "label": "Frame", "sublabel": "nuevo texto" }
+  ],
+  "segments": [
+    { "from": 150, "to": 292, "label": "Toque" },
+    { "from": 300, "to": 462, "label": "Decision de color" },
+    { "from": 470, "to": 600, "label": "Pintado" }
+  ],
+  "messages": [
+    {
+      "id": "tap",
+      "from": "user",
+      "to": "fab",
+      "y": 180,
+      "label": "toca el icono plus_one",
+      "variant": "emphasis"
+    },
+    {
+      "id": "onpressed",
+      "from": "fab",
+      "to": "state",
+      "y": 222,
+      "label": "onPressed()",
+      "variant": "emphasis"
+    },
+    {
+      "id": "setstate",
+      "from": "state",
+      "to": "build",
+      "y": 264,
+      "label": "setState(): clickCounter += 1",
+      "variant": "emphasis",
+      "note": "Marca el State como sucio y agenda el siguiente frame."
+    },
+    {
+      "id": "ask-color",
+      "from": "build",
+      "to": "color",
+      "y": 326,
+      "label": "_getCounterColor(1)",
+      "variant": "default"
+    },
+    {
+      "id": "pick-const",
+      "from": "color",
+      "to": "palette",
+      "y": 368,
+      "label": "1 > 0: elijo la positiva",
+      "variant": "default"
+    },
+    {
+      "id": "return-green",
+      "from": "palette",
+      "to": "color",
+      "y": 410,
+      "label": "counterPositiveColor",
+      "variant": "return"
+    },
+    {
+      "id": "ask-font",
+      "from": "build",
+      "to": "fonts",
+      "y": 472,
+      "label": "rockSalt(160, w100, color)",
+      "variant": "dashed"
+    },
+    {
+      "id": "return-style",
+      "from": "fonts",
+      "to": "build",
+      "y": 514,
+      "label": "TextStyle listo",
+      "variant": "return"
+    },
+    {
+      "id": "compose-text",
+      "from": "build",
+      "to": "screen",
+      "y": 556,
+      "label": "Text('$clickCounter') con Click",
+      "variant": "emphasis"
+    },
+    {
+      "id": "paint",
+      "from": "screen",
+      "to": "user",
+      "y": 598,
+      "label": "1 en verde sobre la app",
+      "variant": "return"
+    }
+  ],
+  "activations": [
+    { "participant": "user", "from": 170, "to": 608, "type": "external" },
+    { "participant": "fab", "from": 176, "to": 232, "type": "frontend" },
+    { "participant": "state", "from": 212, "to": 288, "type": "backend" },
+    { "participant": "build", "from": 254, "to": 570, "type": "backend" },
+    { "participant": "color", "from": 320, "to": 420, "type": "backend" },
+    { "participant": "palette", "from": 362, "to": 420, "type": "database" },
+    { "participant": "fonts", "from": 466, "to": 524, "type": "external" },
+    { "participant": "screen", "from": 546, "to": 608, "type": "frontend" }
+  ],
+  "cards": [
+    {
+      "dot": "cyan",
+      "title": "Toque y setState",
+      "items": [
+        "CustomButton solo envuelve un FloatingActionButton",
+        "onPressed recibe un VoidCallback y no guarda nada",
+        "No hay provider ni estado global en esta app"
+      ]
+    },
+    {
+      "dot": "amber",
+      "title": "Decision de color",
+      "items": [
+        "_getCounterColor decide con dos if y un return",
+        "0 es azul, mayor que 0 verde, menor que 0 rojo",
+        "Las constantes se importan desde main.dart"
+      ]
+    },
+    {
+      "dot": "violet",
+      "title": "Tipografia",
+      "items": [
+        "Rock Salt a 160 pt con peso w100",
+        "El tema ya define displayLarge con la misma fuente",
+        "La pantalla vuelve a aplicar el estilo al numero"
+      ]
+    },
+    {
+      "dot": "emerald",
+      "title": "Plural del Click",
+      "items": [
+        "Click se pluraliza solo con valor mayor que 1",
+        "Con 0 y con 1 se lee exactamente Click",
+        "Es una interpolacion dentro del propio Text"
+      ]
+    }
+  ]
+}

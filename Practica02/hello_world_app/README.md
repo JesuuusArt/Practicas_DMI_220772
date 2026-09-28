@@ -1,4 +1,4 @@
-# ![Logo](img/logoTI.png) Prácticas de Desarrollo Móvil Integral
+# ![Logo](../../logoTI.jpeg) Prácticas de Desarrollo Móvil Integral (DMI)
 
 ## Información Académica
 
@@ -10,12 +10,12 @@
 
 ---
 
-## Tabla de Prácticas de la Materia
+<div align="center">
 
-| No. | Nombre | Descripción | Potenciador | Estatus |
-|:---:|---------|-------------|:-----------:|:-------:|
-| 1 | Metodología de Evaluación de la Materia | Transcribir en libreta y comprender la metodología y fechas de evaluación de la asignatura | 5 | ✅ Concluida |
-| 2 | Mi Primer Aplicación Móvil con Flutter | Codificar la app móvil en el framework de Flutter manejando Stateless y Stateful Widgets | 20 | ✅ Concluida |
+[![Portafolio GitHub Pages](https://img.shields.io/badge/🌐%20Portafolio%20en%20Vivo-GitHub%20Pages-06b6d4?style=for-the-badge&logo=github)](https://jesuuusart.github.io/Practicas_DMI_220772/)
+
+  🔗 **[https://jesuuusart.github.io/Practicas_DMI_220772/](https://jesuuusart.github.io/Practicas_DMI_220772/)**
+</div>
 
 ---
 
@@ -57,42 +57,156 @@ El objetivo de esta práctica es:
 
 ---
 
-## 📁 Estructura del Proyecto y Diagramas Archify
+## 🏗️ Arquitectura del Proyecto
 
-Para explorar la arquitectura del proyecto, flujos de estado y límites de confianza en formato gráfico e interactivo:
+La arquitectura de `hello_world_app` está modelada en `Docs/Architecture/` con **OpenCode Archify**: diagramas HTML autónomos (SVG en línea, sin dependencias externas, modo claro/oscuro, zoom/pan y animación de trazado). Cada nodo del diagrama apunta al **archivo y línea reales del código**, por lo que la documentación no se desincroniza del proyecto.
 
-- **[→ Docs/Architecture/hello_world_app_architecture.html](Docs/Architecture/hello_world_app_architecture.html)** — Diagrama HTML interactivo nativo generado por OpenCode Archify.
-- **[→ archify_diagram.html](archify_diagram.html)** — Visualizador Archify multi-diagrama en español (Modo Claro/Oscuro, Zoom/Pan, Trazado de Flujo y Prompts).
-- **[→ index.html](index.html)** — Visualizador principal de arquitectura e infraestructura.
+### 📄 Artefactos Disponibles
 
-### 🖼️ Vista Previa del Diagrama de Arquitectura (Archify)
+| Artefacto | Descripción |
+|---|---|
+| **[hello_world_app_architecture.html](Docs/Architecture/hello_world_app_architecture.html)** | Diagrama de arquitectura: componentes, flujo de arranque, límites de confianza y vistas |
+| **[hello_world_app_sequence.html](Docs/Architecture/hello_world_app_sequence.html)** | Diagrama de secuencia: qué ocurre exactamente en un toque al botón `+1` |
+| [hello_world_app.architecture.json](Docs/Architecture/hello_world_app.architecture.json) | Fuente de datos del diagrama de arquitectura |
+| [hello_world_app.sequence.json](Docs/Architecture/hello_world_app.sequence.json) | Fuente de datos del diagrama de secuencia |
+| `*.visual-check.*.png` | Capturas de verificación visual (1440×900 y 2048×1320, claro y oscuro) |
+| `*.visual-check.json` | Reporte de verificación: sin overflow, leyenda, dock de navegación y legibilidad de nodos ✅ |
 
-#### Modo Oscuro (Dark Mode)
-![Diagrama de Arquitectura Archify - Modo Oscuro](Docs/Architecture/hello_world_app_architecture.visual-check.2048x1320.dark.png)
+### 🔀 Flujo de Componentes
+
+```
+                  ┌──────────────────────┐
+                  │      Flutter SDK     │  Dart ^3.13.2
+                  │   (pubspec.yaml:22)  │
+                  └───────────┬──────────┘
+                              │ runApp(MyApp)
+                  ┌───────────▼──────────┐
+      ┌───────────│      lib/main.dart   │───────────┐
+      │           │   main() + MyApp     │           │ ThemeData
+      │           │  (main.dart:9,13)    │           │ colorSchemeSeed magenta
+      │           └───────────┬──────────┘           │
+      │                       │ home:                │
+      │                       │ CounterFunctionsScreen
+      │           ┌───────────▼──────────────────┐    │
+      │           │ CounterFunctionsScreen      │    │
+      │           │ (counter_functions_screen   │    │
+      │           │          .dart:5)            │    │
+      │           └───────────┬──────────────────┘    │
+      │                       │ createState()        │
+      │           ┌───────────▼──────────┐           │
+      │           │        State         │           │
+      │           │ clickCounter + setState│─────────┼──┐
+      │           │ (…screen.dart:12,14)  │           │  │
+      │           └───────────┬──────────┘           │  │
+      │                       │ setState() → build() │  │
+      │           ┌───────────▼──────────┐           │  │
+      │           │       build()        │           │  │
+      │           │ Scaffold+AppBar+FAB  │           │  │
+      │           │ (…screen.dart:27)    │           │  │
+      │           └───────────┬──────────┘           │  │
+      │                       │ 3 FAB en Column      │  │
+      │           ┌───────────▼──────────┐   ┌───────▼──┐
+      │           │    CustomButton      │   │ 3 consts │
+      │           │ StatelessWidget →FAB │   │ zero/pos/ │
+      │           │ (…screen.dart:99)    │   │ negative │
+      │           └──────────────────────┘   │(main:5)  │
+      │                                      └──────────┘
+      │
+      │  ┌──────────────────────┐
+      └──┤   test/widget_test            │   smoke test: testWidgets + pumpWidget(MyApp)  (widget_test.dart:14,16)
+         └──────────────────────┘
+
+   dashed ──► main.dart ──► ThemeData ──► GoogleFonts.rockSalt (google_fonts ^7.0.0)
+   solid   ──► flujo principal de arranque y renderizado
+```
+
+### 🧩 Componentes Mapeados
+
+| Componente | Tipo | Responsabilidad | Ubicación |
+|---|---|---|---|
+| `Flutter SDK` | externo | Toolchain, `sdk: ^3.13.2` | `pubspec.yaml:22` |
+| `lib/main.dart` | frontend | `main()` + `MyApp` (punto de entrada) | `lib/main.dart:9`, `lib/main.dart:13` |
+| `CounterFunctionsScreen` | frontend | `StatefulWidget` activo de la app | `lib/presentation/screens/counter/counter_functions_screen.dart:5` |
+| `State` | backend | `clickCounter` + `setState()` | `…/counter_functions_screen.dart:12`, `:14` |
+| `build()` | frontend | `Scaffold` + `AppBar` + `floatingActionButton` | `…/counter_functions_screen.dart:27` |
+| `ThemeData` | backend | `colorSchemeSeed` magenta `ARGB(255,208,33,243)` | `lib/main.dart:20` |
+| `google_fonts` | externo | `GoogleFonts.rockSalt` (`^7.0.0`) | `pubspec.yaml:37` |
+| `widget_test.dart` | seguridad | Smoke test: `testWidgets` + `pumpWidget(const MyApp())` | `test/widget_test.dart:14`, `:16` |
+| `3 constantes` | datos | `counterZeroColor` / `Positive` / `Negative` | `lib/main.dart:5` |
+| `CustomButton` | frontend | `StatelessWidget` que envuelve un FAB | `…/counter_functions_screen.dart:99` |
+
+### 👁️ Vistas del Diagrama
+
+El diagrama de arquitectura ofrece tres vistas filtradas que se seleccionan desde el dock inferior:
+
+1. **Camino principal** — `flutterSdk → entrypoint → screen → state → uiBuild`: del arranque de Flutter al último rebuild que dispara un `setState()`.
+2. **Tema y tipografía** — `entrypoint → theme → googleFonts`: `ThemeData` con `colorSchemeSeed` y la fuente Rock Salt.
+3. **Estado, colores y pruebas** — `tests, entrypoint, screen, state, palette, customButton`: cómo el estado local alimenta el texto, los tres colores y los tres botones.
+
+### 🔄 Secuencia de un Toque (`hello_world_app_sequence.html`)
+
+| # | Participante | Mensaje | Notas |
+|---|---|---|---|
+| 1 | `Usuario` | toca el icono `plus_one` | punto de entrada externo |
+| 2 | `CustomButton` | `onPressed()` | solo envuelve un FAB, recibe un `VoidCallback` y no guarda nada |
+| 3 | `State` | `setState(): clickCounter += 1` | marca el `State` como sucio y agenda el siguiente frame |
+| 4 | `build()` | `_getCounterColor(1)` | el `Scaffold` completo se reconstruye |
+| 5 | `Color` | `1 > 0: elijo la positiva` | decisión con dos `if` y un `return` |
+| 6 | `3 constantes` | `counterPositiveColor` | las constantes se importan desde `main.dart` |
+| 7 | `google_fonts` | `rockSalt(160, w100, color)` | devuelve el `TextStyle` listo |
+| 8 | `Frame` | `Text('$clickCounter')` con `Click` | pluralización solo si el valor supera 1 |
+| 9 | `Usuario` | `1` en verde sobre la app | frame final pintado |
+
+**Tarjetas de análisis del diagrama de secuencia:** *Toque y setState* (no hay `provider` ni estado global), *Decisión de color* (0 azul, >0 verde, <0 rojo), *Tipografía* (Rock Salt 160 pt `w100`), *Plural del Click* (con 0 y 1 se lee exactamente `Click`).
+
+### 🔍 Hallazgos del Análisis
+
+- `counter_screen.dart` nunca se importa desde ningún punto de entrada: es **código muerto** de la iteración anterior.
+- `cupertino_icons` está declarado en `pubspec.yaml` pero no se usa en el código.
+- El smoke test pulsa `Icons.add`, mientras la app usa `Icons.plus_one`.
+
+---
+
+## 📁 Estructura del Proyecto
+
+```
+hello_world_app/
+├── lib/                                             # Código fuente Dart
+│   ├── main.dart                                    # main(), MyApp, tema y 3 colores
+│   └── presentation/
+│       └── screens/
+│           └── counter/
+│               ├── counter_functions_screen.dart    # Pantalla activa (StatefulWidget + CustomButton)
+│               └── counter_screen.dart               # Pantalla anterior, sin importar (código muerto)
+├── test/
+│   └── widget_test.dart                             # Smoke test
+├── Docs/Architecture/                               # Diagramas Archify (HTML + JSON + PNG de verificación)
+├── android/ ios/ web/ windows/ macos/ linux/         # Plataformas nativas
+├── pubspec.yaml                                     # Dependencias (google_fonts ^7.0.0)
+└── README.md                                        # Documentación principal
+```
+
+### Consistencia de la documentación
+
+| Dato | Código real | README |
+|---|---|---|
+| Pantalla activa | `counter_functions_screen.dart` | ✅ documentada |
+| `sdk` | `^3.13.2` | ✅ documentado |
+| `google_fonts` | `^7.0.0` | ✅ documentado |
+| `cupertino_icons` | `^1.0.8` | ✅ documentado |
+
+---
+
+## 🖼️ Vista Previa del Diagrama de Arquitectura (Archify)
 
 #### Modo Claro (Light Mode)
 ![Diagrama de Arquitectura Archify - Modo Claro](Docs/Architecture/hello_world_app_architecture.visual-check.2048x1320.light.png)
 
-### Resumen Rápido
+#### Modo Oscuro (Dark Mode)
+![Diagrama de Arquitectura Archify - Modo Oscuro](Docs/Architecture/hello_world_app_architecture.visual-check.2048x1320.dark.png)
 
-```
-hello_world_app/
-├── lib/                                    # Código fuente Dart
-│   ├── main.dart                           # Punto de entrada y temas
-│   └── presentation/screens/counter/       # Pantallas de contador (StatefulWidget)
-│       └── counter_functions_screen.dart   # Vista principal con botones flotantes
-├── Docs/Architecture/                      # Diagramas interactivos HTML e imágenes de Archify
-├── android/, ios/, web/, windows/          # Plataformas nativas
-├── pubspec.yaml                            # Dependencias (google_fonts)
-└── README.md                               # Documentación principal
-```
-
-### 📊 Diagramas Archify Disponibles
-
-1. **🏗️ Arquitectura General del Proyecto**: Componentes, directorios y límites de confianza (*Mobile device*, *Application*, *Local dev*).
-2. **🔄 Flujo de Estado del Contador**: Secuencia interactiva de pulsación ➔ `CustomButton` ➔ `setState()` ➔ Evaluación de Color ➔ Rebuild.
-3. **🌐 Infraestructura y Plataformas**: Compilación y ejecutables nativos para Android, Web y Escritorio.
-4. **☀️🌙 Modo Claro y Oscuro**: Alternador dinámico de tema visual blueprint.
+#### Resolución de escritorio compacto (1440×900)
+![Diagrama de Arquitectura Archify - 1440x900 claro](Docs/Architecture/hello_world_app_architecture.visual-check.1440x900.light.png)
 
 ---
 
@@ -268,9 +382,9 @@ class CustomButton extends StatelessWidget {
 La aplicación utiliza un sistema de colores dinámicos que cambian según el valor del contador:
 
 ```dart
-const Color counterZeroColor = Color.fromARGB(255, 110, 124, 207);    // Azul (cuando contador = 0)
-const Color counterPositiveColor = Color.fromARGB(255, 49, 202, 100);  // Verde (cuando contador > 0)
-const Color counterNegativeColor = Color.fromARGB(255, 219, 62, 62);   // Rojo (cuando contador < 0)
+const Color counterZeroColor     = Color.fromARGB(255, 7, 164, 255);  // Azul (cuando contador = 0)
+const Color counterPositiveColor = Colors.green;                     // Verde (cuando contador > 0)
+const Color counterNegativeColor = Colors.red;                       // Rojo (cuando contador < 0)
 ```
 
 ### Implementación de Colores Dinámicos
@@ -306,22 +420,6 @@ Text(
 - 🔵 **Azul (0)** - Neutral, el contador está en cero
 - 🟢 **Verde (>0)** - Positivo, se ha incrementado
 - 🔴 **Rojo (<0)** - Negativo, se ha decrementado
-
----
-
-## Estructura del Proyecto
-
-```
-hello_world_app/
-├── lib/
-│   ├── main.dart                              # Punto de entrada + colores
-│   └── presentation/
-│       └── screens/
-│           └── counter/
-│               └── counter_screen.dart        # Pantalla principal + CustomButton
-├── pubspec.yaml                               # Dependencias
-└── android/, ios/, web/, windows/, macos/     # Plataformas específicas
-```
 
 ---
 
@@ -418,30 +516,38 @@ Esta práctica permitió aprender:
 ## Dependencias Utilizadas
 
 ```yaml
+environment:
+  sdk: ^3.13.2
+
 dependencies:
   flutter:
     sdk: flutter
-  google_fonts: ^6.2.1  # Fuentes personalizadas (Rock Salt)
-  cupertino_icons: ^1.0.2
+  google_fonts: ^7.0.0    # Fuentes personalizadas (Rock Salt) — usada por MyApp y por la pantalla
+  cupertino_icons: ^1.0.8 # Declarada pero no referenciada en el código
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
 ```
 
 ---
 
 ## 📊 Diagramas de Arquitectura Interactivos (Archify)
 
-Abre **[archify_diagram.html](archify_diagram.html)** o **[index.html](index.html)** en cualquier navegador web para explorar los diagramas interactivos en formato **Archify**:
+Abre los diagramas en cualquier navegador web. Son archivos HTML autónomos con SVG en línea, así que funcionan sin servidor y sin conexión:
 
-- 🏗️ **Arquitectura General**: Mapeo completo de `Practicas_DMI_220772` y `hello_world_app`.
-- 🔄 **Ciclo de Estado del Contador**: Secuencia interactiva de pulsación `+1`, `-1`, `Reset`, `setState()` y colores dinámicos.
-- 🌐 **Infraestructura y Ejecutables Nativos**: Relación entre el entorno de desarrollo local, el compilador SDK de Flutter y los ejecutables de Android, Web y Escritorio.
-- 🛡️ **Límites de Confianza (Trust Boundaries)**: Fronteras de seguridad entre dispositivos, app y herramientas de dev.
+- 🏗️ **[hello_world_app_architecture.html](Docs/Architecture/hello_world_app_architecture.html)** — Arquitectura: `flutterSdk → main.dart → CounterFunctionsScreen → State → build()`, más `ThemeData`, `google_fonts`, las 3 constantes de color, `CustomButton` y el smoke test.
+- 🔄 **[hello_world_app_sequence.html](Docs/Architecture/hello_world_app_sequence.html)** — Secuencia de un toque: `+1` ➔ `onPressed()` ➔ `setState()` ➔ `_getCounterColor()` ➔ `GoogleFonts.rockSalt` ➔ frame pintado en verde.
 
-### 🎬 Funcionalidades del Visualizador Archify
+### 🎬 Funcionalidades del Visualizador
 
-- ☀️🌙 **Soporte para Modo Claro y Modo Oscuro**: Cambia el tema blueprint instantáneamente.
-- 🖱️ **Paneles Modales de Código**: Al hacer clic en cualquier caja del diagrama se despliega la ruta del archivo y fragmentos de código Dart.
-- 📐 **Navegación Pan & Zoom**: Arrastre con el mouse y control de zoom interactivo (`PATH`, `MAP`, `LENS`, `-`, `+`).
-- 📜 **Sección de Prompts Archify**: Prompts oficiales en español listos para copiar y usar en Codex o Claude.
+- ☀️🌙 **Modo Claro y Modo Oscuro**: cambia el tema blueprint instantáneamente.
+- 🖱️ **Pan & Zoom**: arrastre con el mouse y control de zoom (`PATH`, `MAP`, `LENS`, `-`, `+`).
+- 🎯 **Vistas filtradas**: dock inferior con *Camino principal*, *Tema y tipografía* y *Estado, colores y pruebas*.
+- 💻 **Paneles de código**: al hacer clic en un nodo se muestra la ruta del archivo, la línea y el fragmento Dart.
+- 🎞️ **Trazado de flujo**: animación opcional que recorre las conexiones del diagrama.
+- ✅ **Verificación visual** documentada en `hello_world_app_architecture.visual-check.json`: `status: pass`, sin desbordamiento horizontal ni vertical y con la leyenda y el dock de navegación siempre visibles.
 
 ---
 
