@@ -503,7 +503,7 @@
       <div class="practices-grid">
         
         <!-- Práctica 1 -->
-        <div class="practice-card" onclick="selectPractice(1)">
+        <div class="practice-card" id="card-p1" onclick="selectPractice(1)">
           <div class="card-top">
             <span class="badge-no">Práctica 01</span>
             <span class="badge-status status-done">🟢 Concluida</span>
@@ -517,7 +517,7 @@
         </div>
 
         <!-- Práctica 2 -->
-        <div class="practice-card active" id="card-p2" onclick="selectPractice(2)">
+        <div class="practice-card" id="card-p2" onclick="selectPractice(2)">
           <div class="card-top">
             <span class="badge-no">Práctica 02</span>
             <span class="badge-status status-done">🟢 Concluida</span>
@@ -530,11 +530,75 @@
           </div>
         </div>
 
+        <!-- Práctica 3 -->
+        <div class="practice-card" id="card-p3" onclick="selectPractice(3)">
+          <div class="card-top">
+            <span class="badge-no">Práctica 03</span>
+            <span class="badge-status status-done">🟢 Concluida</span>
+          </div>
+          <div class="p-title">Yes No Maybe App</div>
+          <div class="p-desc">Chat en Flutter que consulta la API <code>yesno.wtf</code> con arquitectura por capas, inyección de dependencias, 38 pruebas y 4 diagramas Archify.</div>
+          <div class="p-meta">
+            <span>⚡ Potenciador: 0%</span>
+            <span>💬 Flutter + API REST</span>
+          </div>
+        </div>
+
       </div>
     </section>
 
+    <!-- Interactive Explorer Container for Práctica 01 -->
+    <section class="detail-container" id="detail-p1" style="display: none;">
+
+      <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 1rem;">
+        <div>
+          <span style="font-family: 'Fira Code', monospace; color: var(--cyan); font-weight:600; font-size: 0.85rem;">PRÁCTICA 01 — DETALLES Y EVIDENCIA</span>
+          <h2 style="font-size: 1.4rem; font-weight: 700; margin-top: 0.25rem;">Metodología de Evaluación de la Materia</h2>
+        </div>
+      </div>
+
+      <div class="subnav-tabs">
+        <button class="subtab-btn active" data-tab="tab-p1-objectives" onclick="switchSubtab(this)">🎯 Objetivos y Conclusiones</button>
+        <button class="subtab-btn" data-tab="tab-p1-evidence" onclick="switchSubtab(this)">📋 Evidencia</button>
+      </div>
+
+      <!-- TAB 1: OBJECTIVES & LESSONS -->
+      <div class="subtab-content active" id="tab-p1-objectives">
+        <h3 style="font-size: 1.1rem; color: var(--cyan); margin-bottom: 0.5rem;">Objetivo Alcanzado:</h3>
+        <p style="font-size: 0.9rem; color: var(--text-body); margin-bottom: 1.5rem;">
+          Transcribir en libreta la metodología de evaluación de la asignatura y comprender los criterios de
+          calificación, las fechas de entrega y las reglas de participation, para saber qué se entrega y cuándo.
+        </p>
+
+        <h3 style="font-size: 1.1rem; color: var(--purple); margin-bottom: 0.5rem;">Conceptos Clave Aprendidos:</h3>
+        <ul style="font-size: 0.9rem; color: var(--text-body); padding-left: 1.25rem; display: flex; flex-direction: column; gap: 0.4rem;">
+          <li><b>Criterios de evaluación:</b> la nota se compone por unidades y actividades, no por un único parcial.</li>
+          <li><b>Potenciadores:</b> cada práctica declara un porcentaje que suma al promedio de la unidad.</li>
+          <li><b>Fechas límite:</b> cumplir el calendario es parte de la calificación, no solo del contenido.</li>
+          <li><b>Reglas de participación:</b> asistencia, disposición y entregas a tiempo.</li>
+        </ul>
+      </div>
+
+      <!-- TAB 2: EVIDENCE -->
+      <div class="subtab-content" id="tab-p1-evidence">
+        <div class="evidence-grid">
+          <div class="evidence-card">
+            <h4>Evidencia física</h4>
+            <p>La evidencia de esta práctica es la <b>transcripción en libreta</b> de la metodología de evaluación
+            impartida por el docente. Al no ser una entrega digital, no hay archivos versionables en este repositorio.</p>
+          </div>
+          <div class="evidence-card">
+            <h4>Alcance de esta práctica</h4>
+            <p>Es una práctica <b>teórica</b>: no genera código, diagramas Archify ni pruebas automáticas.
+            Su valor es establecer el marco de evaluación bajo el que se entregar las Prácticas 2 y 3.</p>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
     <!-- Interactive Explorer Container for Práctica 02 -->
-    <section class="detail-container" id="practice-detail">
+    <section class="detail-container" id="detail-p2">
       
       <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 1rem;">
         <div>
@@ -542,47 +606,47 @@
           <h2 style="font-size: 1.4rem; font-weight: 700; margin-top: 0.25rem;">Mi Primer Aplicación Móvil con Flutter (Contador Funcional)</h2>
         </div>
         <div>
-          <a href="hello_world_app/README.md" style="color: var(--cyan); text-decoration: none; font-weight: 600; font-size: 0.85rem;">📄 Ver README del Proyecto ➔</a>
+          <a href="Practica02/hello_world_app/README.md" style="color: var(--cyan); text-decoration: none; font-weight: 600; font-size: 0.85rem;">📄 Ver README del Proyecto ➔</a>
         </div>
       </div>
 
       <!-- Navigation Tabs for Practice Details -->
       <div class="subnav-tabs">
-        <button class="subtab-btn active" onclick="switchSubtab('archify')">🏗️ Diagramas Archify</button>
-        <button class="subtab-btn" onclick="switchSubtab('evidence')">🖼️ Evidencia y Capturas</button>
-        <button class="subtab-btn" onclick="switchSubtab('files')">📁 Visor de Código de Archivos</button>
-        <button class="subtab-btn" onclick="switchSubtab('objectives')">🎯 Objetivos y Conclusiones</button>
+        <button class="subtab-btn active" data-tab="tab-p2-archify" onclick="switchSubtab(this)">🏗️ Diagramas Archify</button>
+        <button class="subtab-btn" data-tab="tab-p2-evidence" onclick="switchSubtab(this)">🖼️ Evidencia y Capturas</button>
+        <button class="subtab-btn" data-tab="tab-p2-files" onclick="switchSubtab(this)">📁 Visor de Código de Archivos</button>
+        <button class="subtab-btn" data-tab="tab-p2-objectives" onclick="switchSubtab(this)">🎯 Objetivos y Conclusiones</button>
       </div>
 
       <!-- TAB 1: ARCHIFY DIAGRAMS INTERACTIVE IFRAME -->
-      <div class="subtab-content active" id="tab-archify">
+      <div class="subtab-content active" id="tab-p2-archify">
         <p style="font-size: 0.875rem; color: var(--text-body); margin-bottom: 1rem;">
-          A continuación se presenta el diagramador interactivo en tiempo real en formato **Archify** generado para la arquitectura del módulo <code>hello_world_app</code>.
+          A continuación se presenta el diagramador interactivo en tiempo real en formato <b>Archify</b> generado para la arquitectura del módulo <code>hello_world_app</code>.
         </p>
         <div class="arch-iframe-wrapper">
-          <iframe src="hello_world_app/Docs/Architecture/hello_world_app_architecture.html" title="Diagrama Archify"></iframe>
+          <iframe src="Practica02/hello_world_app/Docs/Architecture/hello_world_app_architecture.html" title="Diagrama Archify"></iframe>
         </div>
       </div>
 
       <!-- TAB 2: EVIDENCE SCREENSHOTS -->
-      <div class="subtab-content" id="tab-evidence">
+      <div class="subtab-content" id="tab-p2-evidence">
         <div class="evidence-grid">
           
           <div class="evidence-card">
             <h4>1. Estado Cero / Neutral (0)</h4>
-            <img src="hello_world_app/img/neutral(0).png" alt="Contador Neutral">
+            <img src="Practica02/hello_world_app/img/neutral(0).png" alt="Contador Neutral">
             <p>El valor del contador inicia en 0 y se renderiza con el color azul dinámico <code>counterZeroColor</code>.</p>
           </div>
 
           <div class="evidence-card">
             <h4>2. Estado Positivo (>0)</h4>
-            <img src="hello_world_app/img/positiva.png" alt="Contador Positivo">
+            <img src="Practica02/hello_world_app/img/positiva.png" alt="Contador Positivo">
             <p>Al presionar el botón <code>+1</code>, el contador aumenta y cambia automáticamente a verde <code>counterPositiveColor</code>.</p>
           </div>
 
           <div class="evidence-card">
             <h4>3. Estado Negativo (<0)</h4>
-            <img src="hello_world_app/img/negativa.png" alt="Contador Negativo">
+            <img src="Practica02/hello_world_app/img/negativa.png" alt="Contador Negativo">
             <p>Al presionar el botón <code>-1</code>, el valor es menor a 0 y cambia a rojo <code>counterNegativeColor</code>.</p>
           </div>
 
@@ -590,24 +654,24 @@
       </div>
 
       <!-- TAB 3: FILE CODE EXPLORER -->
-      <div class="subtab-content" id="tab-files">
+      <div class="subtab-content" id="tab-p2-files">
         <p style="font-size: 0.85rem; color: var(--text-body); margin-bottom: 1rem;">
           Haz clic en cualquier archivo del proyecto para inspeccionar su código fuente directo:
         </p>
         
         <div class="file-explorer">
           <div class="file-tree">
-            <div class="file-tree-item active" onclick="showFileCode('main')">📄 lib/main.dart</div>
-            <div class="file-tree-item" onclick="showFileCode('counter')">📱 counter_functions_screen.dart</div>
-            <div class="file-tree-item" onclick="showFileCode('pubspec')">⚙️ pubspec.yaml</div>
-            <div class="file-tree-item" onclick="showFileCode('readme')">📜 README.md</div>
+            <div class="file-tree-item active" data-file="main" onclick="showFileCode(this)">📄 lib/main.dart</div>
+            <div class="file-tree-item" data-file="counter" onclick="showFileCode(this)">📱 counter_functions_screen.dart</div>
+            <div class="file-tree-item" data-file="pubspec" onclick="showFileCode(this)">⚙️ pubspec.yaml</div>
+            <div class="file-tree-item" data-file="readme" onclick="showFileCode(this)">📜 README.md</div>
           </div>
-          <div class="code-viewer" id="codeDisplay">Selecciona un archivo...</div>
+          <div class="code-viewer">Selecciona un archivo...</div>
         </div>
       </div>
 
       <!-- TAB 4: OBJECTIVES & LESSONS -->
-      <div class="subtab-content" id="tab-objectives">
+      <div class="subtab-content" id="tab-p2-objectives">
         <h3 style="font-size: 1.1rem; color: var(--cyan); margin-bottom: 0.5rem;">Objetivo Alcanzado:</h3>
         <p style="font-size: 0.9rem; color: var(--text-body); margin-bottom: 1.5rem;">
           Aprender la estructura de proyectos móviles en Flutter, implementación de widgets Stateless/Stateful, control de flujo con <code>setState()</code> y evaluación funcional de temas de color.
@@ -619,6 +683,146 @@
           <li><b>CustomButton:</b> Extracción y encapsulamiento de componentes reusables de UI.</li>
           <li><b>GoogleFonts:</b> Integración de recursos tipográficos externos en Flutter.</li>
           <li><b>Hot Reload & Compilation:</b> Flujo de desarrollo ágil en Flutter SDK.</li>
+        </ul>
+      </div>
+
+    </section>
+
+    <!-- Interactive Explorer Container for Práctica 03 -->
+    <section class="detail-container" id="detail-p3" style="display: none;">
+
+      <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 1rem;">
+        <div>
+          <span style="font-family: 'Fira Code', monospace; color: var(--cyan); font-weight:600; font-size: 0.85rem;">PRÁCTICA 03 — DETALLES Y EVIDENCIA</span>
+          <h2 style="font-size: 1.4rem; font-weight: 700; margin-top: 0.25rem;">Yes No Maybe App (Chat con la API yesno.wtf)</h2>
+        </div>
+        <div>
+          <a href="Practica03/yes_no_app/README.md" style="color: var(--cyan); text-decoration: none; font-weight: 600; font-size: 0.85rem;">📄 Ver README del Proyecto ➔</a>
+        </div>
+      </div>
+
+      <div class="subnav-tabs">
+        <button class="subtab-btn active" data-tab="tab-p3-archify" onclick="switchSubtab(this)">🏗️ Diagramas Archify</button>
+        <button class="subtab-btn" data-tab="tab-p3-evidence" onclick="switchSubtab(this)">🧪 Evidencia de Pruebas</button>
+        <button class="subtab-btn" data-tab="tab-p3-files" onclick="switchSubtab(this)">📁 Visor de Código de Archivos</button>
+        <button class="subtab-btn" data-tab="tab-p3-objectives" onclick="switchSubtab(this)">🎯 Objetivos y Conclusiones</button>
+      </div>
+
+      <!-- TAB 1: ARCHIFY DIAGRAMS -->
+      <div class="subtab-content active" id="tab-p3-archify">
+        <p style="font-size: 0.875rem; color: var(--text-body); margin-bottom: 1rem;">
+          Cuatro diagramas <b>Archify</b> generados a partir del código real del proyecto
+          (<code>main.dart</code>, <code>chat_provider.dart</code>, <code>get_yes_no_answer.dart</code>,
+          <code>yes_no_model.dart</code> y las 5 pruebas unitarias). Son interactivos, tienen modo
+          claro/oscuro y se pueden exportar.
+        </p>
+
+        <div class="subnav-tabs" style="border-bottom: 1px solid var(--border-color); margin-bottom: 1rem;">
+          <button class="subtab-btn diagram-btn active" data-frame="frame-arch" onclick="showDiagram(this)">🏛️ Arquitectura</button>
+          <button class="subtab-btn diagram-btn" data-frame="frame-seq" onclick="showDiagram(this)">🔄 Secuencia</button>
+          <button class="subtab-btn diagram-btn" data-frame="frame-life" onclick="showDiagram(this)">🔁 Ciclo de vida</button>
+          <button class="subtab-btn diagram-btn" data-frame="frame-tests" onclick="showDiagram(this)">🧪 Estrategia de pruebas</button>
+        </div>
+
+        <div class="arch-iframe-wrapper" style="height: 700px;">
+          <iframe class="diagram-frame" id="frame-arch" src="Practica03/yes_no_app/Docs/Architecture/yes_no_app_architecture.html" title="Diagrama de arquitectura por capas"></iframe>
+          <iframe class="diagram-frame" id="frame-seq" src="Practica03/yes_no_app/Docs/Architecture/yes_no_app_sequence.html" title="Diagrama de secuencia de una respuesta" style="display: none;"></iframe>
+          <iframe class="diagram-frame" id="frame-life" src="Practica03/yes_no_app/Docs/Architecture/yes_no_app_lifecycle.html" title="Diagrama de ciclo de vida de un mensaje" style="display: none;"></iframe>
+          <iframe class="diagram-frame" id="frame-tests" src="Practica03/yes_no_app/Docs/Architecture/yes_no_app_tests.html" title="Diagrama de estrategia de pruebas" style="display: none;"></iframe>
+        </div>
+
+        <div class="evidence-grid" style="margin-top: 1.5rem;">
+          <div class="evidence-card">
+            <h4>🏛️ Arquitectura por capas</h4>
+            <img src="Practica03/yes_no_app/Docs/Architecture/yes_no_app_architecture.visual-check.2048x1320.dark.png" alt="Diagrama de arquitectura por capas">
+            <p>Dependencias hacia dentro: <code>presentation → infrastructure → domain</code>. 11 componentes y 11 conexiones con 10 referencias de evidencia en el código.</p>
+          </div>
+          <div class="evidence-card">
+            <h4>🔄 Secuencia de una respuesta</h4>
+            <img src="Practica03/yes_no_app/Docs/Architecture/yes_no_app_sequence.visual-check.2048x1320.dark.png" alt="Diagrama de secuencia">
+            <p>7 participantes y 11 mensajes: campo → provider → cola → <code>pickAnswer()</code> → <code>yesno.wtf</code> → modelo → burbuja.</p>
+          </div>
+          <div class="evidence-card">
+            <h4>🔁 Ciclo de vida de un mensaje</h4>
+            <img src="Practica03/yes_no_app/Docs/Architecture/yes_no_app_lifecycle.visual-check.2048x1320.dark.png" alt="Diagrama de ciclo de vida">
+            <p>8 estados (<code>idle</code> → <code>done</code>, <code>failed</code>) con 8 transiciones, incluidas las ramas de error y silencio por ausencia de <code>?</code>.</p>
+          </div>
+          <div class="evidence-card">
+            <h4>🧪 Estrategia de pruebas</h4>
+            <img src="Practica03/yes_no_app/Docs/Architecture/yes_no_app_tests.visual-check.2048x1320.dark.png" alt="Diagrama de estrategia de pruebas">
+            <p>Del <code>flutter analyze</code> a los 38 tests: qué se inyecta (<code>Dio</code>, <code>Random</code>, reloj) y qué queda fuera de <code>flutter test</code>.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB 2: TEST EVIDENCE -->
+      <div class="subtab-content" id="tab-p3-evidence">
+        <div class="evidence-grid">
+
+          <div class="evidence-card">
+            <h4>flutter analyze — sin incidencias</h4>
+            <p>El análisis estático no reporta ni un solo <code>issue</code> en <code>lib/</code> ni en <code>test/</code>.</p>
+          </div>
+
+          <div class="evidence-card">
+            <h4>flutter test — 38 / 38</h4>
+            <p>Las 38 pruebas unitarias y de widgets pasan en el host, sin red y sin esperas reales.</p>
+            <table style="width:100%; font-size:0.8rem; color: var(--text-body); border-collapse: collapse;">
+              <tr style="border-bottom:1px solid var(--border-color);"><td style="padding:0.3rem 0;"><code>yes_no_model_test</code></td><td align="right">10</td></tr>
+              <tr style="border-bottom:1px solid var(--border-color);"><td style="padding:0.3rem 0;"><code>answer_weights_test</code></td><td align="right">9</td></tr>
+              <tr style="border-bottom:1px solid var(--border-color);"><td style="padding:0.3rem 0;"><code>chat_provider_test</code></td><td align="right">9</td></tr>
+              <tr style="border-bottom:1px solid var(--border-color);"><td style="padding:0.3rem 0;"><code>format_time_of_day_test</code></td><td align="right">5</td></tr>
+              <tr><td style="padding:0.3rem 0;"><code>widget_test</code></td><td align="right">5</td></tr>
+            </table>
+          </div>
+
+          <div class="evidence-card">
+            <h4>Fuera de <code>flutter test</code></h4>
+            <p><code>integration_test/chat_flow_test.dart</code> contiene <b>2 pruebas</b> que necesitan un dispositivo o emulador real, por lo que no las cuenta el <code>flutter test</code> del host.</p>
+          </div>
+
+          <div class="evidence-card">
+            <h4>📄 Evidencia completa</h4>
+            <p>La salida íntegra de <code>flutter analyze</code> y <code>flutter test --reporter expanded</code> está en:</p>
+            <a href="Practica03/yes_no_app/Docs/Testing/test_results.txt" style="color: var(--cyan); font-weight:600; font-size:0.85rem;">Docs/Testing/test_results.txt ➔</a>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- TAB 3: FILE CODE EXPLORER -->
+      <div class="subtab-content" id="tab-p3-files">
+        <p style="font-size: 0.85rem; color: var(--text-body); margin-bottom: 1rem;">
+          Haz clic en cualquier archivo para inspeccionar su código fuente:
+        </p>
+
+        <div class="file-explorer">
+          <div class="file-tree">
+            <div class="file-tree-item active" data-file="p3provider" onclick="showFileCode(this)">🧠 chat_provider.dart</div>
+            <div class="file-tree-item" data-file="p3api" onclick="showFileCode(this)">🌐 get_yes_no_answer.dart</div>
+            <div class="file-tree-item" data-file="p3model" onclick="showFileCode(this)">🗄️ yes_no_model.dart</div>
+            <div class="file-tree-item" data-file="p3main" onclick="showFileCode(this)">📄 main.dart</div>
+          </div>
+          <div class="code-viewer">Selecciona un archivo...</div>
+        </div>
+      </div>
+
+      <!-- TAB 4: OBJECTIVES & LESSONS -->
+      <div class="subtab-content" id="tab-p3-objectives">
+        <h3 style="font-size: 1.1rem; color: var(--cyan); margin-bottom: 0.5rem;">Objetivo Alcanzado:</h3>
+        <p style="font-size: 0.9rem; color: var(--text-body); margin-bottom: 1.5rem;">
+          Consumir un servicio web externo en Flutter aplicando arquitectura por capas, inyección de
+          dependencias y manejo de errores tipado, con cobertura de pruebas y documentación visual.
+        </p>
+
+        <h3 style="font-size: 1.1rem; color: var(--purple); margin-bottom: 0.5rem;">Conceptos Clave Aprendidos:</h3>
+        <ul style="font-size: 0.9rem; color: var(--text-body); padding-left: 1.25rem; display: flex; flex-direction: column; gap: 0.4rem;">
+          <li><b>Arquitectura por capas:</b> <code>domain</code> sin dependencias de Flutter, <code>infrastructure</code> con el DTO y <code>presentation</code> con el estado.</li>
+          <li><b>Inyección de dependencias:</b> <code>Dio</code>, <code>Random</code> y el reloj se inyectan; por eso las 38 pruebas corren sin red.</li>
+          <li><b>Errores tipados:</b> todo <code>DioException</code> se traduce a un único <code>YesNoException</code> con mensaje en español.</li>
+          <li><b>ChangeNotifier + provider:</b> el estado del chat vive en <code>ChatProvider</code>, no en la UI.</li>
+          <li><b>Cola de respuestas:</b> un <code>Future</code> encadenado evita que dos respuestas se intercalen.</li>
+          <li><b>Documentación como evidencia:</b> los 4 diagramas Archify se generaron verificando referencias contra el código real.</li>
         </ul>
       </div>
 
@@ -649,13 +853,35 @@
       }
     }
 
-    // Subtab Switcher
-    function switchSubtab(tabName) {
-      document.querySelectorAll('.subtab-btn').forEach(b => b.classList.remove('active'));
-      document.querySelectorAll('.subtab-content').forEach(c => c.classList.remove('active'));
+    // Practice Switcher: cada práctica tiene su propio detail-container
+    const practiceDetail = { 1: 'detail-p1', 2: 'detail-p2', 3: 'detail-p3' };
 
-      event.target.classList.add('active');
-      document.getElementById(`tab-${tabName}`).classList.add('active');
+    function selectPractice(n) {
+      document.querySelectorAll('.practice-card').forEach(c => c.classList.remove('active'));
+      const card = document.getElementById('card-p' + n);
+      if (card) card.classList.add('active');
+
+      document.querySelectorAll('.detail-container').forEach(d => (d.style.display = 'none'));
+      const detail = document.getElementById(practiceDetail[n]);
+      if (detail) detail.style.display = 'flex';
+    }
+
+    // Subtab Switcher (con alcance: solo afecta al detail-container del botón)
+    function switchSubtab(btn) {
+      const scope = btn.closest('.detail-container');
+      scope.querySelectorAll('.subtab-btn').forEach(b => b.classList.remove('active'));
+      scope.querySelectorAll('.subtab-content').forEach(c => c.classList.remove('active'));
+      btn.classList.add('active');
+      scope.querySelector('#' + btn.dataset.tab).classList.add('active');
+    }
+
+    // Archify Diagram Switcher (4 diagramas de la Práctica 03)
+    function showDiagram(btn) {
+      const scope = btn.closest('.detail-container');
+      scope.querySelectorAll('.diagram-btn').forEach(b => b.classList.remove('active'));
+      scope.querySelectorAll('.diagram-frame').forEach(f => (f.style.display = 'none'));
+      btn.classList.add('active');
+      scope.querySelector('#' + btn.dataset.frame).style.display = 'block';
     }
 
     // Code Database Snippets for File Viewer
@@ -735,17 +961,165 @@ dependencies:
       readme: `# Práctica de Desarrollo Móvil Integral - Contador Funcional
 - **Nombre:** Jesus Alejandro Artiaga Morales
 - **Matrícula:** 220772
-- **Materia:** Desarrollo Móvil Integral (DMI)`
-    };
+- **Materia:** Desarrollo Móvil Integral (DMI)`,
 
-    function showFileCode(fileKey) {
-      document.querySelectorAll('.file-tree-item').forEach(i => i.classList.remove('active'));
-      event.target.classList.add('active');
-      document.getElementById('codeDisplay').innerText = codeFiles[fileKey] || '// Archivo no cargado';
+      p3provider: `// lib/presentation/providers/chat_provider.dart
+class ChatProvider extends ChangeNotifier {
+  ChatProvider({
+    GetYesNoAnswer? getYesNoAnswer,
+    DateTime Function()? now,
+  })  : getYesNoAnswer = getYesNoAnswer ?? GetYesNoAnswer(),
+        _now = now ?? DateTime.now;
+
+  final GetYesNoAnswer getYesNoAnswer;
+
+  /// Reloj inyectable para poder fijar la hora de envio en los tests.
+  final DateTime Function() _now;
+
+  /// Las respuestas se encadenan para que nunca se intercalen entre si.
+  Future<void> _replyQueue = Future<void>.value();
+
+  final List<Message> messageList = [
+    Message(text: 'Hola Bb farias!', fromWho: FromWho.me, sentAt: DateTime.now()),
+    Message(text: 'Vamos al gym?', fromWho: FromWho.me, sentAt: DateTime.now()),
+  ];
+
+  Future<void> sendMessage(String text) async {
+    final trimmed = text.trim();
+    if (trimmed.isEmpty) return;
+
+    messageList.add(Message(
+      text: trimmed,
+      fromWho: FromWho.me,
+      sentAt: _now(),
+    ));
+    notifyListeners();
+    await moveScrollToBottom();
+
+    if (trimmed.endsWith('?')) {
+      unawaited(herReply());
+    }
+  }
+
+  Future<void> herReply() {
+    _replyQueue = _replyQueue.then((_) => _fetchAndAppendReply());
+    return _replyQueue;
+  }
+}`,
+
+      p3api: `// lib/config/helpers/get_yes_no_answer.dart
+/// La API no decide el resultado: eso lo hace [pickAnswer].
+/// Solo se usa \`?force=\` para pedir ESA respuesta y traerte su imagen,
+/// de modo que el texto y el gif siempre coinciden.
+Future<Message> getAnswer() async {
+  final wanted = pickAnswer();
+
+  try {
+    final response = await _dio.get<Map<String, dynamic>>(
+      '/api',
+      queryParameters: {'force': wanted},
+    );
+
+    final data = response.data;
+    if (data == null) {
+      throw const YesNoException('Bb farias no recibio respuesta.');
     }
 
-    // Initialize first code view
-    showFileCode('main');
+    return YesNoModel.fromJsonMap(data).toMessageEntity();
+  } on YesNoException {
+    rethrow;
+  } on DioException catch (e) {
+    throw YesNoException(_describeDioError(e));
+  } on FormatException catch (e) {
+    throw YesNoException('La respuesta tiene un formato inesperado.');
+  } catch (e) {
+    throw YesNoException('Ocurrio un error inesperado al responder: $e');
+  }
+}
+
+/// Sortea la respuesta respetando los porcentajes de [weights].
+String pickAnswer() {
+  final roll = _random.nextInt(weights.total);
+
+  if (roll < weights.yes) return 'yes';
+  if (roll < weights.yes + weights.no) return 'no';
+  return 'maybe';
+}`,
+
+      p3model: `// lib/infrastructure/models/yes_no_model.dart
+/// Lanza [FormatException] si el mapa no cumple el contrato de la API.
+factory YesNoModel.fromJsonMap(Map<String, dynamic> json) {
+  final answer = json['answer'];
+  final forced = json['forced'];
+  final image = json['image'];
+
+  if (answer is! String || answer.trim().isEmpty) {
+    throw const FormatException('El campo "answer" debe ser un texto no vacio.');
+  }
+
+  return YesNoModel(
+    answer: answer.trim().toLowerCase(),
+    forced: forced is bool ? forced : false,
+    image: image is String ? image.trim() : '',
+  );
+}
+
+/// Traduce la respuesta de la API al texto que ve el usuario.
+String get displayText => switch (answer) {
+      'yes' => 'Si',
+      'no' => 'No',
+      _ => 'Tal vez',
+    };
+
+/// [sentAt] permite fijar la hora en los tests.
+Message toMessageEntity({DateTime? sentAt}) => Message(
+      text: displayText,
+      fromWho: FromWho.hers,
+      imageUrl: image.isEmpty ? null : image,
+      sentAt: sentAt ?? DateTime.now(),
+    );`,
+
+      p3main: `// lib/main.dart
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import 'package:yes_no_app/config/theme/app_theme.dart';
+import 'package:yes_no_app/presentation/providers/chat_provider.dart';
+import 'package:yes_no_app/presentation/screens/chat/chat_screen.dart';
+
+void main() => runApp(const MyApp());
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => ChatProvider())
+      ],
+      child: MaterialApp(
+        title: 'Yes No App',
+        debugShowCheckedModeBanner: false,
+        theme: AppTheme(selectedColor: 0).theme(),
+        home: const ChatScreen()
+      ),
+    );
+  }
+}`
+    };
+
+    function showFileCode(item) {
+      const scope = item.closest('.file-explorer');
+      scope.querySelectorAll('.file-tree-item').forEach(i => i.classList.remove('active'));
+      scope.querySelectorAll('.code-viewer').forEach(c => (c.innerText = 'Selecciona un archivo...'));
+      item.classList.add('active');
+      scope.querySelector('.code-viewer').innerText = codeFiles[item.dataset.file] || '// Archivo no cargado';
+    }
+
+    // Initialize: Práctica 02 visible y su primer archivo cargado
+    selectPractice(2);
+    document.querySelector('#detail-p2 .file-tree-item').click();
   </script>
 </body>
 </html>

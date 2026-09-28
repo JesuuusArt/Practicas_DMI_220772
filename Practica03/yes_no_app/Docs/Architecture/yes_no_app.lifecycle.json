@@ -1,0 +1,75 @@
+{
+  "schema_version": 1,
+  "diagram_type": "lifecycle",
+  "meta": {
+    "title": "Ciclo de una pregunta · yes_no_app",
+    "output": "yes_no_app_lifecycle.html",
+    "viewBox": [1030, 630],
+    "animation": "trace",
+    "quality_profile": "showcase",
+    "views": [
+      {
+        "id": "camino-feliz",
+        "label": "Camino feliz",
+        "focus": ["idle", "saved", "decision", "fetching", "answer", "done"],
+        "note": "Del campo vacio a la respuesta pintada, sin estados ocultos."
+      },
+      {
+        "id": "sin-respuesta",
+        "label": "Cuando no es pregunta",
+        "focus": ["decision", "silent"],
+        "note": "La rama silenciosa: el mensaje se guarda pero no se pide nada."
+      },
+      {
+        "id": "fallo-controlado",
+        "label": "Fallo controlado",
+        "focus": ["fetching", "failed", "done"],
+        "note": "Un error de red tambien termina en una respuesta visible."
+      }
+    ]
+  },
+  "lanes": [
+    { "id": "main", "label": "Ciclo de una pregunta" },
+    { "id": "waiting", "label": "Rama silenciosa" },
+    { "id": "exceptions", "label": "Fallo controlado" },
+    { "id": "terminal", "label": "Lo que se ve" }
+  ],
+  "states": [
+    { "id": "idle", "type": "start", "label": "Chat en reposo", "sublabel": "campo vacio", "lane": "main", "col": 0, "step": "01", "tag": "espera" },
+    { "id": "saved", "type": "active", "label": "Mensaje en la lista", "sublabel": "Message(me, _now())", "lane": "main", "col": 1, "step": "02", "tag": "estado" },
+    { "id": "decision", "type": "decision", "label": "Termina en '?'", "sublabel": "unica regla", "lane": "main", "col": 2, "step": "03", "tag": "regla" },
+    { "id": "fetching", "type": "active", "label": "Peticion HTTP", "sublabel": "GET /api?force=", "lane": "main", "col": 3, "step": "04", "tag": "red" },
+    { "id": "answer", "type": "active", "label": "Respuesta construida", "sublabel": "toMessageEntity()", "lane": "main", "col": 4, "step": "05", "tag": "modelo" },
+    { "id": "silent", "type": "waiting", "label": "Sin respuesta", "sublabel": "no era pregunta", "lane": "waiting", "col": 0, "tag": "quieto" },
+    { "id": "failed", "type": "failure", "label": "Error controlado", "sublabel": "Dio o FormatException", "lane": "exceptions", "col": 0, "yOffset": 78, "width": 168, "tag": "traducido" },
+    { "id": "done", "type": "success", "label": "Respuesta pintada", "sublabel": "Si / No / Tal vez", "lane": "terminal", "col": 2, "step": "06", "tag": "listo" }
+  ],
+  "transitions": [
+    { "id": "send", "from": "idle", "to": "saved", "variant": "default" },
+    { "id": "ask-rule", "from": "saved", "to": "decision", "variant": "default", "note": "notifyListeners() ya repinto el mensaje." },
+    { "id": "yes-branch", "from": "decision", "to": "fetching", "variant": "emphasis", "label": "si", "labelAt": [520, 206] },
+    { "id": "no-branch", "from": "decision", "to": "silent", "variant": "default", "label": "no", "labelAt": [402, 233], "route": "drop", "note": "Queda guardado, no se pide nada." },
+    { "id": "build", "from": "fetching", "to": "answer", "variant": "emphasis", "note": "pickAnswer() ya decidio 40/40/20 y la cola evita solaparse." },
+    { "id": "http-ok", "from": "answer", "to": "done", "variant": "emphasis", "label": "200 + gif", "labelAt": [710, 330], "route": "straight", "fromSide": "bottom", "toSide": "top" },
+    { "id": "http-fail", "from": "fetching", "to": "failed", "variant": "security", "label": "DioException", "labelAt": [556, 265], "fromSide": "bottom", "toSide": "top", "via": [[556, 188], [556, 346], [402, 346]] },
+    { "id": "error-visible", "from": "failed", "to": "done", "variant": "default", "label": "se ve igual", "labelAt": [526, 479], "fromSide": "bottom", "toSide": "left", "via": [[402, 414], [402, 479]] }
+  ],
+  "cards": [
+    {
+      "dot": "emerald",
+      "title": "Una sola regla",
+      "items": [
+        "Solo el texto que termina en '?' pide respuesta",
+        "trim() se aplica antes de comparar y de guardar"
+      ]
+    },
+    {
+      "dot": "amber",
+      "title": "El error tambien se ve",
+      "items": [
+        "Dio y FormatException se traducen a YesNoException",
+        "El error entra por el mismo camino que la respuesta"
+      ]
+    }
+  ]
+}

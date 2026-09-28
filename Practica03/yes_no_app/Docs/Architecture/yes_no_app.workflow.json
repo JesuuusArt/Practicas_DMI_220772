@@ -1,0 +1,78 @@
+{
+  "schema_version": 2,
+  "diagram_type": "workflow",
+  "meta": {
+    "title": "Estrategia de pruebas · yes_no_app",
+    "output": "yes_no_app_tests.html",
+    "animation": "trace",
+    "visual_preset": "signal-flow",
+    "quality_profile": "showcase",
+    "views": [
+      {
+        "id": "aislamiento",
+        "label": "Aislamiento",
+        "focus": ["analyze", "doubles", "clock", "puros"],
+        "note": "Los dobles y el reloj inyectable son lo que hace testeable al provider."
+      },
+      {
+        "id": "logica-a-pantalla",
+        "label": "De la logica a la pantalla",
+        "focus": ["puros", "widget", "report"],
+        "note": "Los tests de widget reutilizan entidades y formato reales, sin mocks."
+      },
+      {
+        "id": "fuera-de-flutter-test",
+        "label": "Fuera de flutter test",
+        "focus": ["report", "e2e"],
+        "note": "Las pruebas de integracion necesitan un dispositivo real."
+      }
+    ]
+  },
+  "lanes": [
+    { "id": "tooling", "label": "Herramientas" },
+    { "id": "harness", "label": "Aislamiento" },
+    { "id": "suite", "label": "Pruebas" },
+    { "id": "out", "label": "Resultado" }
+  ],
+  "phases": [
+    { "id": "preparar", "label": "Preparar", "fromCol": 0, "toCol": 1 },
+    { "id": "probar", "label": "Ejecutar pruebas", "fromCol": 2, "toCol": 5, "variant": "emphasis" }
+  ],
+  "groups": [
+    { "id": "puntos", "label": "Puntos de inyeccion", "lane": "harness", "fromCol": 1, "toCol": 2, "variant": "emphasis" }
+  ],
+  "mainPath": ["analyze", "doubles", "puros", "widget", "report"],
+  "nodes": [
+    { "id": "analyze", "lane": "tooling", "col": 0, "type": "cloud", "label": "flutter analyze", "sublabel": "sin issues", "tag": "lib/ + test/", "width": 150 },
+    { "id": "doubles", "lane": "harness", "col": 1, "type": "database", "label": "Doubles", "sublabel": "Dio + Random", "tag": "sin red real", "width": 150 },
+    { "id": "clock", "lane": "harness", "col": 2, "type": "database", "label": "Reloj fijo", "sublabel": "now: () => DateTime", "tag": "hora estable", "width": 150 },
+    { "id": "puros", "lane": "suite", "col": 2, "type": "backend", "label": "test/ sin widgets", "sublabel": "33 pruebas", "tag": "model 10 · weights 9", "width": 150 },
+    { "id": "widget", "lane": "suite", "col": 3, "type": "frontend", "label": "testWidgets", "sublabel": "5 pruebas", "tag": "burbujas y hora", "width": 150 },
+    { "id": "report", "lane": "out", "col": 4, "type": "cloud", "label": "flutter test", "sublabel": "38 de 38", "tag": "0 fallos", "width": 150 },
+    { "id": "e2e", "lane": "out", "col": 5, "type": "external", "label": "integration_test/", "sublabel": "2 pruebas", "tag": "dispositivo real", "width": 150 }
+  ],
+  "edges": [
+    { "id": "analyze-doubles", "from": "analyze", "to": "doubles", "label": "todo compila", "variant": "default" },
+    { "id": "doubles-puros", "from": "doubles", "to": "puros", "label": "sin red real", "variant": "emphasis" },
+    { "id": "clock-puros", "from": "clock", "to": "puros", "label": "hora fija", "variant": "default" },
+    { "id": "puros-widget", "from": "puros", "to": "widget", "label": "mismo estado", "variant": "emphasis" },
+    { "id": "widget-report", "from": "widget", "to": "report", "label": "38 de 38", "variant": "emphasis", "role": "return" },
+    { "id": "report-e2e", "from": "report", "to": "e2e", "label": "2 mas, aparte", "variant": "dashed" }
+  ],
+  "cards": [
+    {
+      "dot": "cyan",
+      "title": "Como se ejecuta",
+      "items": [
+        "flutter test corre los 5 archivos de test/"
+      ]
+    },
+    {
+      "dot": "rose",
+      "title": "Que queda fuera",
+      "items": [
+        "integration_test/ necesita un dispositivo real"
+      ]
+    }
+  ]
+}
