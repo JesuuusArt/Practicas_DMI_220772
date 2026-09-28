@@ -65,8 +65,8 @@ La arquitectura de `hello_world_app` está modelada en `Docs/Architecture/` con 
 
 | Artefacto | Descripción |
 |---|---|
-| **[hello_world_app_architecture.html](Docs/Architecture/hello_world_app_architecture.html)** | Diagrama de arquitectura: componentes, flujo de arranque, límites de confianza y vistas |
-| **[hello_world_app_sequence.html](Docs/Architecture/hello_world_app_sequence.html)** | Diagrama de secuencia: qué ocurre exactamente en un toque al botón `+1` |
+| **[hello_world_app_architecture.html](Docs/Architecture/hello_world_app_architecture.visual-check.1440x900.dark.png)** | Diagrama de arquitectura: componentes, flujo de arranque, límites de confianza y vistas |
+| **[hello_world_app_sequence.html](Docs/Architecture/hello_world_app_sequence.visual-check.1440x900.dark.png)** | Diagrama de secuencia: qué ocurre exactamente en un toque al botón `+1` |
 | [hello_world_app.architecture.json](Docs/Architecture/hello_world_app.architecture.json) | Fuente de datos del diagrama de arquitectura |
 | [hello_world_app.sequence.json](Docs/Architecture/hello_world_app.sequence.json) | Fuente de datos del diagrama de secuencia |
 | `*.visual-check.*.png` | Capturas de verificación visual (1440×900 y 2048×1320, claro y oscuro) |
