@@ -65,8 +65,8 @@ La arquitectura de `hello_world_app` está modelada en `Docs/Architecture/` con 
 
 | Artefacto | Descripción |
 |---|---|
-| **[hello_world_app_architecture.html](Docs/Architecture/hello_world_app_architecture.visual-check.1440x900.dark.png)** | Diagrama de arquitectura: componentes, flujo de arranque, límites de confianza y vistas |
-| **[hello_world_app_sequence.html](Docs/Architecture/hello_world_app_sequence.visual-check.1440x900.dark.png)** | Diagrama de secuencia: qué ocurre exactamente en un toque al botón `+1` |
+| **[hello_world_app_architecture.html](Docs/Architecture/hello_world_app_architecture.html)** | Diagrama de arquitectura: componentes, flujo de arranque, límites de confianza y vistas |
+| **[hello_world_app_sequence.html](Docs/Architecture/hello_world_app_sequence.html)** | Diagrama de secuencia: qué ocurre exactamente en un toque al botón `+1` |
 | [hello_world_app.architecture.json](Docs/Architecture/hello_world_app.architecture.json) | Fuente de datos del diagrama de arquitectura |
 | [hello_world_app.sequence.json](Docs/Architecture/hello_world_app.sequence.json) | Fuente de datos del diagrama de secuencia |
 | `*.visual-check.*.png` | Capturas de verificación visual (1440×900 y 2048×1320, claro y oscuro) |
@@ -112,12 +112,13 @@ La arquitectura de `hello_world_app` está modelada en `Docs/Architecture/` con 
       │           └──────────────────────┘   │(main:5)  │
       │                                      └──────────┘
       │
-      │  ┌──────────────────────┐
-      └──┤   test/widget_test            │   smoke test: testWidgets + pumpWidget(MyApp)  (widget_test.dart:14,16)
-         └──────────────────────┘
+      │  ┌──────────────────────────────┐
+      └──┤ test/widget_test.dart        │  smoke test: testWidgets + pumpWidget(MyApp)  (widget_test.dart:14,16)
+         └──────────────────────────────┘
 
-   dashed ──► main.dart ──► ThemeData ──► GoogleFonts.rockSalt (google_fonts ^7.0.0)
+   dashed ──► main.dart ──► ThemeData ──► TextStyle(fontFamily: 'RockSalt')
    solid   ──► flujo principal de arranque y renderizado
+   fuente  ──► assets/fonts/RockSalt-Regular.ttf  (asset local, familia 'RockSalt')
 ```
 
 ### 🧩 Componentes Mapeados
@@ -130,7 +131,7 @@ La arquitectura de `hello_world_app` está modelada en `Docs/Architecture/` con 
 | `State` | backend | `clickCounter` + `setState()` | `…/counter_functions_screen.dart:12`, `:14` |
 | `build()` | frontend | `Scaffold` + `AppBar` + `floatingActionButton` | `…/counter_functions_screen.dart:27` |
 | `ThemeData` | backend | `colorSchemeSeed` magenta `ARGB(255,208,33,243)` | `lib/main.dart:20` |
-| `google_fonts` | externo | `GoogleFonts.rockSalt` (`^7.0.0`) | `pubspec.yaml:37` |
+| `assets/fonts/RockSalt-Regular.ttf` | asset | Fuente local empaquetada, familia `RockSalt` | `assets/fonts/RockSalt-Regular.ttf`, declarada en `pubspec.yaml` |
 | `widget_test.dart` | seguridad | Smoke test: `testWidgets` + `pumpWidget(const MyApp())` | `test/widget_test.dart:14`, `:16` |
 | `3 constantes` | datos | `counterZeroColor` / `Positive` / `Negative` | `lib/main.dart:5` |
 | `CustomButton` | frontend | `StatelessWidget` que envuelve un FAB | `…/counter_functions_screen.dart:99` |
@@ -140,7 +141,7 @@ La arquitectura de `hello_world_app` está modelada en `Docs/Architecture/` con 
 El diagrama de arquitectura ofrece tres vistas filtradas que se seleccionan desde el dock inferior:
 
 1. **Camino principal** — `flutterSdk → entrypoint → screen → state → uiBuild`: del arranque de Flutter al último rebuild que dispara un `setState()`.
-2. **Tema y tipografía** — `entrypoint → theme → googleFonts`: `ThemeData` con `colorSchemeSeed` y la fuente Rock Salt.
+2. **Tema y tipografía** — `entrypoint → theme → fontAsset`: `ThemeData` con `colorSchemeSeed` y la fuente local `RockSalt`.
 3. **Estado, colores y pruebas** — `tests, entrypoint, screen, state, palette, customButton`: cómo el estado local alimenta el texto, los tres colores y los tres botones.
 
 ### 🔄 Secuencia de un Toque (`hello_world_app_sequence.html`)
@@ -153,7 +154,7 @@ El diagrama de arquitectura ofrece tres vistas filtradas que se seleccionan desd
 | 4 | `build()` | `_getCounterColor(1)` | el `Scaffold` completo se reconstruye |
 | 5 | `Color` | `1 > 0: elijo la positiva` | decisión con dos `if` y un `return` |
 | 6 | `3 constantes` | `counterPositiveColor` | las constantes se importan desde `main.dart` |
-| 7 | `google_fonts` | `rockSalt(160, w100, color)` | devuelve el `TextStyle` listo |
+| 7 | `RockSalt (asset)` | `TextStyle(fontFamily: 'RockSalt', 160, w100, color)` | el motor resuelve la fuente desde `assets/fonts/RockSalt-Regular.ttf` |
 | 8 | `Frame` | `Text('$clickCounter')` con `Click` | pluralización solo si el valor supera 1 |
 | 9 | `Usuario` | `1` en verde sobre la app | frame final pintado |
 
@@ -163,7 +164,75 @@ El diagrama de arquitectura ofrece tres vistas filtradas que se seleccionan desd
 
 - `counter_screen.dart` nunca se importa desde ningún punto de entrada: es **código muerto** de la iteración anterior.
 - `cupertino_icons` está declarado en `pubspec.yaml` pero no se usa en el código.
-- El smoke test pulsa `Icons.add`, mientras la app usa `Icons.plus_one`.
+- El smoke test pulsaba `Icons.add`, mientras la app usa `Icons.plus_one`; se corrigió a `Icons.plus_one` para que `flutter test` pase.
+
+---
+
+## 🔤 Tipografía: Rock Salt como Asset Local
+
+La fuente **Rock Salt** se empaqueta dentro de la app en `assets/fonts/`, en lugar de descargarse en tiempo de ejecución con el paquete `google_fonts`. Así la aplicación funciona **sin conexión a internet** y el renderizado no depende de una petición de red.
+
+### Archivo de fuente
+
+```
+assets/fonts/
+├── RockSalt-Regular.ttf   # TrueType, 119 328 bytes, familia "RockSalt"
+└── README.md              # Procedencia y licencia (Apache 2.0)
+```
+
+### Declaración en `pubspec.yaml`
+
+```yaml
+flutter:
+  uses-material-design: true
+
+  fonts:
+    - family: RockSalt
+      fonts:
+        - asset: assets/fonts/RockSalt-Regular.ttf
+```
+
+### Uso en el código
+
+`lib/main.dart` — la fuente se aplica al `displayLarge` del tema:
+
+```dart
+theme: ThemeData(
+  colorSchemeSeed: const Color.fromARGB(255, 208, 33, 243),
+  textTheme: TextTheme(
+    displayLarge: TextStyle(
+      fontFamily: 'RockSalt',
+      fontSize: 160,
+      fontWeight: FontWeight.w100,
+    ),
+  ),
+),
+```
+
+`lib/presentation/screens/counter/counter_functions_screen.dart` — el número del contador vuelve a declarar el estilo para poder aplicarle el color dinámico:
+
+```dart
+Text(
+  '$clickCounter',
+  style: TextStyle(
+    fontFamily: 'RockSalt',
+    fontSize: 160,
+    fontWeight: FontWeight.w100,
+    color: _getCounterColor(clickCounter),
+  ),
+)
+```
+
+### Verificación
+
+`FontManifest.json` generado por `flutter build bundle` confirma que la fuente viaja en el bundle:
+
+```json
+[{"family":"MaterialIcons","fonts":[{"asset":"fonts/MaterialIcons-Regular.otf"}]},
+ {"family":"RockSalt","fonts":[{"asset":"assets/fonts/RockSalt-Regular.ttf"}]}]
+```
+
+> ℹ️ Solo el número del contador y el `displayLarge` usan Rock Salt. El `AppBar` y el texto "Click / Clicks" conservan la tipografía por defecto (Roboto) del tema Material.
 
 ---
 
@@ -180,9 +249,13 @@ hello_world_app/
 │               └── counter_screen.dart               # Pantalla anterior, sin importar (código muerto)
 ├── test/
 │   └── widget_test.dart                             # Smoke test
+├── assets/
+│   └── fonts/
+│       ├── RockSalt-Regular.ttf                     # Fuente local Rock Salt (TrueType)
+│       └── README.md                                # Procedencia y licencia (Apache 2.0)
 ├── Docs/Architecture/                               # Diagramas Archify (HTML + JSON + PNG de verificación)
 ├── android/ ios/ web/ windows/ macos/ linux/         # Plataformas nativas
-├── pubspec.yaml                                     # Dependencias (google_fonts ^7.0.0)
+├── pubspec.yaml                                     # Dependencias + declaración de la fuente 'RockSalt'
 └── README.md                                        # Documentación principal
 ```
 
@@ -192,8 +265,9 @@ hello_world_app/
 |---|---|---|
 | Pantalla activa | `counter_functions_screen.dart` | ✅ documentada |
 | `sdk` | `^3.13.2` | ✅ documentado |
-| `google_fonts` | `^7.0.0` | ✅ documentado |
+| Fuente | `assets/fonts/RockSalt-Regular.ttf` (local) | ✅ documentada |
 | `cupertino_icons` | `^1.0.8` | ✅ documentado |
+| `google_fonts` | **eliminado** (ya no es dependencia) | ✅ documentado |
 
 ---
 
@@ -315,7 +389,8 @@ Widget para mostrar texto en la pantalla.
 ```dart
 Text(
   '$clickCounter',
-  style: GoogleFonts.rockSalt(
+  style: TextStyle(
+    fontFamily: 'RockSalt',  // fuente local empaquetada en assets/fonts
     fontSize: 160,
     fontWeight: FontWeight.w100,
     color: _getCounterColor(clickCounter),
@@ -408,7 +483,8 @@ Este método se aplica al widget Text que muestra el número:
 ```dart
 Text(
   '$clickCounter',
-  style: GoogleFonts.rockSalt(
+  style: TextStyle(
+    fontFamily: 'RockSalt',  // fuente local empaquetada en assets/fonts
     fontSize: 160,
     fontWeight: FontWeight.w100,
     color: _getCounterColor(clickCounter),  // Color dinámico
@@ -522,14 +598,22 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  google_fonts: ^7.0.0    # Fuentes personalizadas (Rock Salt) — usada por MyApp y por la pantalla
   cupertino_icons: ^1.0.8 # Declarada pero no referenciada en el código
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^6.0.0
+
+flutter:
+  uses-material-design: true
+  fonts:                    # Rock Salt se empaqueta como asset local
+    - family: RockSalt
+      fonts:
+        - asset: assets/fonts/RockSalt-Regular.ttf
 ```
+
+> ✅ `google_fonts` fue **eliminada**: la fuente Rock Salt ahora es un asset local en `assets/fonts/RockSalt-Regular.ttf`, por lo que la app no necesita internet para pintar el contador.
 
 ---
 
@@ -537,8 +621,8 @@ dev_dependencies:
 
 Abre los diagramas en cualquier navegador web. Son archivos HTML autónomos con SVG en línea, así que funcionan sin servidor y sin conexión:
 
-- 🏗️ **[hello_world_app_architecture.html](Docs/Architecture/hello_world_app_architecture.html)** — Arquitectura: `flutterSdk → main.dart → CounterFunctionsScreen → State → build()`, más `ThemeData`, `google_fonts`, las 3 constantes de color, `CustomButton` y el smoke test.
-- 🔄 **[hello_world_app_sequence.html](Docs/Architecture/hello_world_app_sequence.html)** — Secuencia de un toque: `+1` ➔ `onPressed()` ➔ `setState()` ➔ `_getCounterColor()` ➔ `GoogleFonts.rockSalt` ➔ frame pintado en verde.
+- 🏗️ **[hello_world_app_architecture.html](Docs/Architecture/hello_world_app_architecture.html)** — Arquitectura: `flutterSdk → main.dart → CounterFunctionsScreen → State → build()`, más `ThemeData`, el asset de fuente `RockSalt`, las 3 constantes de color, `CustomButton` y el smoke test.
+- 🔄 **[hello_world_app_sequence.html](Docs/Architecture/hello_world_app_sequence.html)** — Secuencia de un toque: `+1` ➔ `onPressed()` ➔ `setState()` ➔ `_getCounterColor()` ➔ `TextStyle(fontFamily: 'RockSalt')` ➔ frame pintado en verde.
 
 ### 🎬 Funcionalidades del Visualizador
 
@@ -581,7 +665,7 @@ Cuando el contador tiene un valor menor a 0, el texto se muestra en **rojo**.
 ## Notas Importantes
 
 - La aplicación funciona en **Android**, **iOS**, **Web**, **Windows** y **macOS**
-- Se utiliza el paquete `google_fonts` para la fuente personalizada "Rock Salt"
+- Se utiliza la fuente local "Rock Salt" (`assets/fonts/RockSalt-Regular.ttf`) para el número del contador; el resto de textos usa la tipografía por defecto del tema
 - El contador puede ser positivo, negativo o cero
 - Los botones se organizan verticalmente con espaciado usando `SizedBox`
 - El AppBar contiene un botón de reset adicional

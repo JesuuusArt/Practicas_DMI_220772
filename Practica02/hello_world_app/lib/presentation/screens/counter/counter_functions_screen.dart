@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:hello_world_app/main.dart';
 
 class CounterFunctionsScreen extends StatefulWidget {
@@ -46,7 +45,8 @@ class _CounterFunctionsScreenState extends State<CounterFunctionsScreen> {
             children: [
             Text(
               '$clickCounter',
-              style: GoogleFonts.rockSalt(
+              style: TextStyle(
+                fontFamily: 'RockSalt',
                 fontSize: 160,
                 fontWeight: FontWeight.w100,
                 color: _getCounterColor(clickCounter),
