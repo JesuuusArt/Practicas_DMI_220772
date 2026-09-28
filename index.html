@@ -439,6 +439,193 @@
       white-space: pre;
     }
 
+    /* Generic sub-block used inside subtab contents */
+    code {
+      font-family: 'Fira Code', monospace;
+      font-size: 0.88em;
+      background: rgba(6, 182, 212, 0.1);
+      color: var(--cyan);
+      padding: 0.1rem 0.35rem;
+      border-radius: 4px;
+    }
+
+    .block {
+      margin-bottom: 1.75rem;
+    }
+    .block:last-child { margin-bottom: 0; }
+
+    .block-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .block-title.cyan { color: var(--cyan); }
+    .block-title.purple { color: var(--purple); }
+    .block-title.green { color: var(--green); }
+    .block-title.amber { color: var(--amber); }
+
+    .block-text {
+      font-size: 0.9rem;
+      color: var(--text-body);
+    }
+
+    .block-list {
+      font-size: 0.9rem;
+      color: var(--text-body);
+      padding-left: 1.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    .block-list b { color: var(--text-title); }
+
+    /* Technology cards */
+    .tech-group + .tech-group { margin-top: 1.75rem; }
+
+    .tech-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1rem;
+    }
+
+    .tech-card {
+      background: var(--code-bg);
+      border: 1px solid var(--border-color);
+      border-left: 3px solid var(--cyan);
+      border-radius: 10px;
+      padding: 0.9rem 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+      transition: all 0.2s ease;
+    }
+    .tech-card:hover {
+      border-color: var(--cyan);
+      border-left-color: var(--cyan);
+      transform: translateX(3px);
+    }
+    .tech-card.purple { border-left-color: var(--purple); }
+    .tech-card.green  { border-left-color: var(--green); }
+    .tech-card.amber  { border-left-color: var(--amber); }
+
+    .tech-top {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 0.5rem;
+    }
+    .tech-name {
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: var(--text-title);
+    }
+    .tech-ver {
+      font-family: 'Fira Code', monospace;
+      font-size: 0.7rem;
+      color: var(--cyan);
+      background: rgba(6, 182, 212, 0.12);
+      padding: 0.1rem 0.45rem;
+      border-radius: 5px;
+      white-space: nowrap;
+    }
+    .tech-desc {
+      font-size: 0.8rem;
+      color: var(--text-body);
+    }
+
+    /* Learning list with numbered badges */
+    .learn-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+    .learn-item {
+      display: flex;
+      gap: 0.75rem;
+      align-items: flex-start;
+      background: var(--bg-card-hover);
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      padding: 0.75rem 0.9rem;
+      font-size: 0.85rem;
+      color: var(--text-body);
+    }
+    .learn-num {
+      flex: 0 0 24px;
+      height: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      background: rgba(168, 85, 247, 0.18);
+      color: var(--purple);
+      font-family: 'Fira Code', monospace;
+      font-size: 0.72rem;
+      font-weight: 700;
+    }
+    .learn-item b { color: var(--text-title); }
+
+    /* Tech chips for the practice card */
+    .chip-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-top: 0.85rem;
+    }
+    .chip {
+      font-family: 'Fira Code', monospace;
+      font-size: 0.7rem;
+      font-weight: 600;
+      padding: 0.2rem 0.55rem;
+      border-radius: 6px;
+      background: rgba(6, 182, 212, 0.12);
+      color: var(--cyan);
+      border: 1px solid rgba(6, 182, 212, 0.25);
+    }
+    .chip.purple {
+      background: rgba(168, 85, 247, 0.12);
+      color: var(--purple);
+      border-color: rgba(168, 85, 247, 0.25);
+    }
+    .chip.green {
+      background: rgba(16, 185, 129, 0.12);
+      color: var(--green);
+      border-color: rgba(16, 185, 129, 0.25);
+    }
+    .chip.amber {
+      background: rgba(245, 158, 11, 0.12);
+      color: var(--amber);
+      border-color: rgba(245, 158, 11, 0.25);
+    }
+
+    /* Small definition table */
+    .mini-table {
+      width: 100%;
+      font-size: 0.82rem;
+      color: var(--text-body);
+      border-collapse: collapse;
+      margin-top: 0.5rem;
+    }
+    .mini-table th {
+      text-align: left;
+      color: var(--text-muted);
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 0.35rem 0.5rem 0.35rem 0;
+      border-bottom: 1px solid var(--border-color);
+    }
+    .mini-table td {
+      padding: 0.4rem 0.5rem 0.4rem 0;
+      border-bottom: 1px solid var(--border-color);
+      vertical-align: top;
+    }
+    .mini-table tr:last-child td { border-bottom: none; }
+    .mini-table td:first-child { color: var(--text-title); font-weight: 600; white-space: nowrap; }
+
     footer {
       border-top: 1px solid var(--border-color);
       padding: 1.5rem 2rem;
@@ -538,6 +725,14 @@
           </div>
           <div class="p-title">Yes No Maybe App</div>
           <div class="p-desc">Chat en Flutter que consulta la API <code>yesno.wtf</code> con arquitectura por capas, inyección de dependencias, 38 pruebas y 4 diagramas Archify.</div>
+          <div class="chip-row">
+            <span class="chip">Flutter 3.47.2</span>
+            <span class="chip">Dart 3.13.2</span>
+            <span class="chip purple">provider ^6.1.5+1</span>
+            <span class="chip purple">dio ^5.11.1</span>
+            <span class="chip green">38 pruebas</span>
+            <span class="chip amber">Material 3</span>
+          </div>
           <div class="p-meta">
             <span>⚡ Potenciador: 0%</span>
             <span>💬 Flutter + API REST</span>
@@ -703,6 +898,7 @@
 
       <div class="subnav-tabs">
         <button class="subtab-btn active" data-tab="tab-p3-archify" onclick="switchSubtab(this)">🏗️ Diagramas Archify</button>
+        <button class="subtab-btn" data-tab="tab-p3-tech" onclick="switchSubtab(this)">🧰 Tecnologías</button>
         <button class="subtab-btn" data-tab="tab-p3-evidence" onclick="switchSubtab(this)">🧪 Evidencia de Pruebas</button>
         <button class="subtab-btn" data-tab="tab-p3-files" onclick="switchSubtab(this)">📁 Visor de Código de Archivos</button>
         <button class="subtab-btn" data-tab="tab-p3-objectives" onclick="switchSubtab(this)">🎯 Objetivos y Conclusiones</button>
@@ -755,7 +951,142 @@
         </div>
       </div>
 
-      <!-- TAB 2: TEST EVIDENCE -->
+      <!-- TAB 2: TECHNOLOGIES -->
+      <div class="subtab-content" id="tab-p3-tech">
+        <p style="font-size: 0.875rem; color: var(--text-body); margin-bottom: 1.5rem;">
+          Stack completo empleado en <code>yes_no_app</code>, tomado de <code>pubspec.yaml</code>
+          y de la cadena de herramientas del entorno de desarrollo.
+        </p>
+
+        <div class="tech-group">
+          <h3 class="block-title cyan">🧱 Lenguajes y frameworks</h3>
+          <div class="tech-grid">
+            <div class="tech-card">
+              <div class="tech-top">
+                <span class="tech-name">Flutter</span>
+                <span class="tech-ver">3.47.2 stable</span>
+              </div>
+              <p class="tech-desc">Framework de interfaz multiplataforma y base del tema <b>Material 3</b> con <code>colorSchemeSeed</code>.</p>
+            </div>
+            <div class="tech-card">
+              <div class="tech-top">
+                <span class="tech-name">Dart</span>
+                <span class="tech-ver">3.13.2</span>
+              </div>
+              <p class="tech-desc">Lenguaje de la app con <b>null safety</b>, expresiones <code>switch</code>, <code>enum</code> y <code>copyWith</code>.</p>
+            </div>
+            <div class="tech-card">
+              <div class="tech-top">
+                <span class="tech-name">yesno.wtf</span>
+                <span class="tech-ver">API REST</span>
+              </div>
+              <p class="tech-desc">Servicio público consultado en <code>GET /api?force=yes|no|maybe</code>; devuelve el texto y el GIF.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="tech-group">
+          <h3 class="block-title purple">📦 Paquetes de <code>pubspec.yaml</code></h3>
+          <div class="tech-grid">
+            <div class="tech-card purple">
+              <div class="tech-top">
+                <span class="tech-name">provider</span>
+                <span class="tech-ver">^6.1.5+1</span>
+              </div>
+              <p class="tech-desc"><code>ChangeNotifier</code> + <code>ChangeNotifierProvider</code>: el estado del chat vive fuera de los widgets.</p>
+            </div>
+            <div class="tech-card purple">
+              <div class="tech-top">
+                <span class="tech-name">dio</span>
+                <span class="tech-ver">^5.11.1</span>
+              </div>
+              <p class="tech-desc">Cliente HTTP con timeouts de 10 s y <code>DioException</code> tipadas por causa, para poder distinguirlas.</p>
+            </div>
+            <div class="tech-card purple">
+              <div class="tech-top">
+                <span class="tech-name">flutter_lints</span>
+                <span class="tech-ver">^6.0.0</span>
+              </div>
+              <p class="tech-desc">Reglas activadas en <code>analysis_options.yaml</code>; por eso <code>flutter analyze</code> termina sin incidencias.</p>
+            </div>
+            <div class="tech-card purple">
+              <div class="tech-top">
+                <span class="tech-name">flutter_launcher_icons</span>
+                <span class="tech-ver">^0.14.4</span>
+              </div>
+              <p class="tech-desc">Genera el icono de la app en todas las densidades desde <code>assets/images/me.jpg</code>.</p>
+            </div>
+            <div class="tech-card purple">
+              <div class="tech-top">
+                <span class="tech-name">cupertino_icons</span>
+                <span class="tech-ver">^1.0.8</span>
+              </div>
+              <p class="tech-desc">Set de iconos con estilo iOS usado en los componentes de la interfaz.</p>
+            </div>
+            <div class="tech-card purple">
+              <div class="tech-top">
+                <span class="tech-name">integration_test</span>
+                <span class="tech-ver">sdk: flutter</span>
+              </div>
+              <p class="tech-desc">Las 2 pruebas end-to-end que necesitan un emulador o dispositivo real.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="tech-group">
+          <h3 class="block-title green">🛠️ Herramientas</h3>
+          <div class="tech-grid">
+            <div class="tech-card green">
+              <div class="tech-top">
+                <span class="tech-name">Android SDK + Emulador</span>
+                <span class="tech-ver">AVD Pixel_10</span>
+              </div>
+              <p class="tech-desc">Ejecuta la app en un dispositivo virtual de 1080×2424 y sirve para las pruebas de integración.</p>
+            </div>
+            <div class="tech-card green">
+              <div class="tech-top">
+                <span class="tech-name">Archify</span>
+                <span class="tech-ver">4 diagramas</span>
+              </div>
+              <p class="tech-desc">Genera los diagramas de arquitectura, secuencia, ciclo de vida y estrategia de pruebas en HTML exportable.</p>
+            </div>
+            <div class="tech-card green">
+              <div class="tech-top">
+                <span class="tech-name">VS Code / Android Studio</span>
+                <span class="tech-ver">edición y depuración</span>
+              </div>
+              <p class="tech-desc">Entorno de trabajo con hot reload, breakpoints y el inspector de widgets de Flutter.</p>
+            </div>
+            <div class="tech-card green">
+              <div class="tech-top">
+                <span class="tech-name">Git + GitHub Pages</span>
+                <span class="tech-ver">versionado</span>
+              </div>
+              <p class="tech-desc">Control de versiones del código y publicación de este portafolio y de los diagramas interactivos.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="tech-group">
+          <h3 class="block-title amber">🏛️ Conceptos y patrones aplicados</h3>
+          <table class="mini-table">
+            <thead>
+              <tr><th>Concepto</th><th>Dónde se aplica en el código</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Arquitectura por capas</td><td><code>domain</code> → <code>infrastructure</code> → <code>presentation</code> → <code>config</code>, con la dependencia siempre hacia dentro.</td></tr>
+              <tr><td>Inyección de dependencias</td><td>Por constructor entran <code>Dio</code>, <code>Random</code>, <code>AnswerWeights</code> y el reloj en <code>ChatProvider</code>.</td></tr>
+              <tr><td>Gestión de estado declarativa</td><td><code>ChangeNotifier</code> + <code>context.watch&lt;ChatProvider&gt;()</code> redibuja la lista con cada <code>notifyListeners()</code>.</td></tr>
+              <tr><td>Composición sobre herencia</td><td><code>MyApp</code> arma el <code>MultiProvider</code>; las pantallas solo consumen estado, no lo crean.</td></tr>
+              <tr><td>Errores tipados</td><td>Todo <code>DioException</code> y <code>FormatException</code> sale de la capa de datos como <code>YesNoException</code>.</td></tr>
+              <tr><td>Serialización de peticiones</td><td>Cadena de <code>Future</code> en <code>herReply()</code> para que dos respuestas nunca se intercalen.</td></tr>
+              <tr><td>Pruebas con dobles</td><td><code>Dio</code> y <code>Random</code> falsos más reloj congelado: 38 tests en el host, sin red.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- TAB 3: TEST EVIDENCE -->
       <div class="subtab-content" id="tab-p3-evidence">
         <div class="evidence-grid">
 
@@ -790,7 +1121,7 @@
         </div>
       </div>
 
-      <!-- TAB 3: FILE CODE EXPLORER -->
+      <!-- TAB 4: FILE CODE EXPLORER -->
       <div class="subtab-content" id="tab-p3-files">
         <p style="font-size: 0.85rem; color: var(--text-body); margin-bottom: 1rem;">
           Haz clic en cualquier archivo para inspeccionar su código fuente:
@@ -807,23 +1138,59 @@
         </div>
       </div>
 
-      <!-- TAB 4: OBJECTIVES & LESSONS -->
+      <!-- TAB 5: OBJECTIVES, LEARNINGS & CONCLUSIONS -->
       <div class="subtab-content" id="tab-p3-objectives">
-        <h3 style="font-size: 1.1rem; color: var(--cyan); margin-bottom: 0.5rem;">Objetivo Alcanzado:</h3>
-        <p style="font-size: 0.9rem; color: var(--text-body); margin-bottom: 1.5rem;">
-          Consumir un servicio web externo en Flutter aplicando arquitectura por capas, inyección de
-          dependencias y manejo de errores tipado, con cobertura de pruebas y documentación visual.
-        </p>
 
-        <h3 style="font-size: 1.1rem; color: var(--purple); margin-bottom: 0.5rem;">Conceptos Clave Aprendidos:</h3>
-        <ul style="font-size: 0.9rem; color: var(--text-body); padding-left: 1.25rem; display: flex; flex-direction: column; gap: 0.4rem;">
-          <li><b>Arquitectura por capas:</b> <code>domain</code> sin dependencias de Flutter, <code>infrastructure</code> con el DTO y <code>presentation</code> con el estado.</li>
-          <li><b>Inyección de dependencias:</b> <code>Dio</code>, <code>Random</code> y el reloj se inyectan; por eso las 38 pruebas corren sin red.</li>
-          <li><b>Errores tipados:</b> todo <code>DioException</code> se traduce a un único <code>YesNoException</code> con mensaje en español.</li>
-          <li><b>ChangeNotifier + provider:</b> el estado del chat vive en <code>ChatProvider</code>, no en la UI.</li>
-          <li><b>Cola de respuestas:</b> un <code>Future</code> encadenado evita que dos respuestas se intercalen.</li>
-          <li><b>Documentación como evidencia:</b> los 4 diagramas Archify se generaron verificando referencias contra el código real.</li>
-        </ul>
+        <div class="block">
+          <h3 class="block-title cyan">🎯 Objetivo de la práctica</h3>
+          <p class="block-text">
+            Construir una aplicación móvil con Flutter que consuma un servicio web externo
+            manipulando la capa de datos, aplicando <b>arquitectura por capas</b>,
+            <b>inyección de dependencias</b> y <b>manejo de errores tipado</b>, y acompañándola
+            con una batería de pruebas automatizadas y diagramas de arquitectura documentados.
+          </p>
+        </div>
+
+        <div class="block">
+          <h3 class="block-title green">✅ Objetivos específicos cumplidos</h3>
+          <ul class="block-list">
+            <li>Separar la lógica en capas claras: <code>domain</code>, <code>infrastructure</code>, <code>presentation</code> y <code>config</code>.</li>
+            <li>Desacoplar la lógica de negocio de Flutter mediante la <b>entidad</b> <code>Message</code>.</li>
+            <li>Manejar errores de red con la <b>excepción propia</b> <code>YesNoException</code> en lugar de excepciones crudas.</li>
+            <li>Hacer la lógica testeable inyectando <code>Dio</code>, <code>Random</code> y el reloj por el constructor.</li>
+            <li>Cubrir la lógica con <b>38 pruebas</b> unitarias, de modelo y de widgets, más 2 de integración.</li>
+          </ul>
+        </div>
+
+        <div class="block">
+          <h3 class="block-title purple">🧠 Cosas aprendidas</h3>
+          <div class="learn-list">
+            <div class="learn-item"><span class="learn-num">1</span><div><b>Dart moderno:</b> las expresiones <code>switch</code> y el <i>pattern matching</i> (<code>on DioException catch</code>) permiten un manejo de errores exhaustivo sin <code>if/else</code> anidados.</div></div>
+            <div class="learn-item"><span class="learn-num">2</span><div><b>Null safety obliga a decidir:</b> <code>String? imageUrl</code> y <code>DateTime? sentAt</code> hacen explícito qué se hace cuando no hay dato, que es lo que evita los <code>null</code> en la UI.</div></div>
+            <div class="learn-item"><span class="learn-num">3</span><div><b>StatelessWidget no significa sin estado:</b> el estado puede vivir en un provider externo; el widget solo se redibuja con <code>context.watch</code>.</div></div>
+            <div class="learn-item"><span class="learn-num">4</span><div><b><code>notifyListeners()</code> y <code>dispose()</code> van juntos:</b> hay que liberar el <code>ScrollController</code> a mano para no dejar fugas de memoria.</div></div>
+            <div class="learn-item"><span class="learn-num">5</span><div><b>Las capas existen para poder testear:</b> como <code>domain</code> no importa nada de Flutter, <code>Message</code> se prueba sin levantar un solo widget.</div></div>
+            <div class="learn-item"><span class="learn-num">6</span><div><b>Inyectar el reloj hace deterministas las pruebas:</b> si la hora saliera de un <code>DateTime.now()</code> interno, cada test sería intermitente.</div></div>
+            <div class="learn-item"><span class="learn-num">7</span><div><b>Un error de red no es un error de negocio:</b> envolver <code>DioException</code> en <code>YesNoException</code> mantiene el cliente HTTP fuera de la capa de presentación.</div></div>
+            <div class="learn-item"><span class="learn-num">8</span><div><b>Validar el JSON en el modelo:</b> <code>YesNoModel.fromJsonMap</code> lanza <code>FormatException</code> si <code>answer</code> no es texto, en vez de fallar más lejos sin contexto.</div></div>
+            <div class="learn-item"><span class="learn-num">9</span><div><b>La condición de carrera era real:</b> dos preguntas seguidas sí intercalaban las respuestas; la cola de <code>Future</code> en <code>herReply()</code> lo resolvió de raíz.</div></div>
+            <div class="learn-item"><span class="learn-num">10</span><div><b><code>flutter test</code> y <code>integration_test</code> son cosas distintas:</b> las primeras corren en el host con dobles; las de integración usan la app real y necesitan emulador.</div></div>
+            <div class="learn-item"><span class="learn-num">11</span><div><b><code>flutter analyze</code> es parte del entregable:</b> un proyecto sin lints es un proyecto documentado por el analizador.</div></div>
+            <div class="learn-item"><span class="learn-num">12</span><div><b>Un diagrama que no viene del código miente:</b> los 4 diagramas Archify se generaron verificando referencias contra los archivos reales.</div></div>
+          </div>
+        </div>
+
+        <div class="block">
+          <h3 class="block-title amber">📌 Conclusiones</h3>
+          <ul class="block-list">
+            <li>La <b>inyección de dependencias</b> fue lo que hizo posible testear: sin <code>Dio</code>, <code>Random</code> y reloj inyectables, las pruebas dependerían de red y de tiempo real.</li>
+            <li>Traducir los <code>DioException</code> a un único <code>YesNoException</code> evitó que la capa de presentación conociera el cliente HTTP.</li>
+            <li>La <b>cola con <code>Future</code></b> evitó una condición de carrera real: dos preguntas seguidas ya no intercalan sus respuestas.</li>
+            <li>Separar la entidad <code>Message</code> del DTO <code>YesNoModel</code> permitió probar el dominio sin levantar Flutter.</li>
+            <li>La evidencia ejecutable (<code>analyze</code> + 38 pruebas) y los diagramas complementan la memoria del proyecto: documentan lo que el código <b>efectivamente</b> hace.</li>
+          </ul>
+        </div>
+
       </div>
 
     </section>

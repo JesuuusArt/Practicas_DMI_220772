@@ -22,7 +22,7 @@
 |:---:|:---|:---|:---:|:---:|
 | 1. | Metodología de Evaluación de la Materia | Transcribir en libreta y comprender la metodología y fechas de evaluación de la asignatura | 5 | 🟢 Concluida |
 | 2. | Mi Primer Aplicación Móvil con Flutter | Codificar la app móvil en el framework de Flutter manejando Stateless y Stateful Widgets | 25 | 🟢 Concluida |
-| 3. | Yes No Maybe App | App de chat en Flutter que consulta la API yesno.wtf con arquitectura por capas, inyección de dependencias, 38 pruebas y 4 diagramas Archify | 0 | 🟢 Concluida |
+| 3. | Yes No Maybe App | App de chat en Flutter que consulta la API yesno.wtf con arquitectura por capas, inyección de dependencias, 38 pruebas y 4 diagramas Archify | 30 | 🟢 Concluida |
 
 ---
 
@@ -51,10 +51,10 @@
   <br />
 
   #### 🔗 Enlaces a Diagramas Interactivos:
-  - 🏗️ [Arquitectura por capas](Practica03/yes_no_app/Docs/Architecture/yes_no_app_architecture.html)
-  - 🔄 [Secuencia de una respuesta](Practica03/yes_no_app/Docs/Architecture/yes_no_app_sequence.html)
-  - 🔁 [Ciclo de vida de un mensaje](Practica03/yes_no_app/Docs/Architecture/yes_no_app_lifecycle.html)
-  - 🧪 [Estrategia de pruebas](Practica03/yes_no_app/Docs/Architecture/yes_no_app_tests.html)
+  - 🏗️ [Arquitectura por capas](Practica03/yes_no_app/Docs/Architecture/yes_no_app_architecture.visual-check.1440x900.dark.png)
+  - 🔄 [Secuencia de una respuesta](Practica03/yes_no_app/Docs/Architecture/yes_no_app_sequence.visual-check.1440x900.dark.png)
+  - 🔁 [Ciclo de vida de un mensaje](Practica03/yes_no_app/Docs/Architecture/yes_no_app_lifecycle.visual-check.1440x900.dark.png)
+  - 🧪 [Estrategia de pruebas](Practica03/yes_no_app/Docs/Architecture/yes_no_app_tests.visual-check.1440x900.dark.png)
   - 🌐 [Versión en GitHub Pages](https://jesuuusart.github.io/Practicas_DMI_220772/Practica03/yes_no_app/Docs/Architecture/yes_no_app_architecture.html)
 
   #### 🖼️ Previsualización del Diagrama de Arquitectura:
