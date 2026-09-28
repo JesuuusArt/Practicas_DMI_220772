@@ -2,227 +2,273 @@
   "schema_version": 1,
   "diagram_type": "architecture",
   "meta": {
-    "title": "Arquitectura de hello_world_app",
+    "title": "Arquitectura · hello_world_app (contador)",
     "output": "hello_world_app_architecture.html",
     "quality_profile": "showcase",
+    "animation": "trace",
     "repository": {
-      "url": "https://github.com/JesuuusArt/Practicas_DMI_220772.git",
+      "url": "https://github.com/JesuuusArt/Practicas_DMI_220772",
       "provider": "github",
-      "link_mode": "web",
-      "revision": "0abb0b085ce4be65881c97d0747a96ecc2c40002"
+      "link_mode": "local-only",
+      "revision": "b5abbcfe0e3cd0973a744d2020449cc0e267ab43"
     },
     "views": [
       {
-        "id": "estructura",
-        "label": "Estructura del proyecto",
-        "focus": ["repo", "flutter_project", "pubspec", "lib_entry", "counter_screens", "assets", "tests", "platforms"],
-        "note": "Mapa del encarpetado principal y los archivos que sostienen la app Flutter."
+        "id": "camino-principal",
+        "label": "Camino principal",
+        "focus": ["flutterSdk", "entrypoint", "screen", "state", "uiBuild"],
+        "note": "Del arranque de Flutter al ultimo rebuild que dispara un setState."
       },
       {
-        "id": "flujo_app",
-        "label": "Flujo de la app",
-        "focus": ["flutter_runtime", "lib_entry", "counter_screens", "state_logic", "dependencies"],
-        "note": "Desde el runtime de Flutter hasta la pantalla activa y su estado local."
+        "id": "tema-y-tipografia",
+        "label": "Tema y tipografia",
+        "focus": ["entrypoint", "theme", "googleFonts"],
+        "note": "ThemeData con colorSchemeSeed y la fuente Rock Salt que aporta google_fonts."
       },
       {
-        "id": "salidas",
-        "label": "Build y plataformas",
-        "focus": ["flutter_project", "platforms", "build_output", "tests"],
-        "note": "Targets nativos, web, carpeta build y pruebas automatizadas."
+        "id": "estado-y-colores",
+        "label": "Estado, colores y pruebas",
+        "focus": ["tests", "entrypoint", "screen", "state", "palette", "customButton"],
+        "note": "Como el estado local alimenta el texto, los tres colores y los tres botones."
       }
     ]
   },
   "components": [
     {
-      "id": "repo",
-      "type": "cloud",
-      "label": "Practicas_DMI_220772",
-      "sublabel": "Repositorio de practicas",
-      "pos": [30, 350],
-      "size": [150, 68],
-      "sources": [{ "path": "README.md", "line": 1, "label": "README raiz" }]
-    },
-    {
-      "id": "flutter_project",
-      "type": "backend",
-      "label": "hello_world_app/",
-      "sublabel": "Proyecto Flutter",
-      "pos": [210, 350],
-      "size": [145, 68],
-      "sources": [{ "path": "hello_world_app/README.md", "label": "README app" }]
-    },
-    {
-      "id": "pubspec",
-      "type": "database",
-      "label": "pubspec.yaml",
-      "sublabel": "SDK, paquetes y Material",
-      "pos": [380, 150],
-      "size": [145, 68],
-      "sources": [{ "path": "hello_world_app/pubspec.yaml", "line": 1, "label": "Manifiesto" }]
-    },
-    {
-      "id": "flutter_runtime",
+      "id": "flutterSdk",
       "type": "external",
       "label": "Flutter SDK",
       "sublabel": "Dart ^3.13.2",
-      "pos": [390, 350],
-      "size": [145, 68],
-      "sources": [{ "path": "hello_world_app/pubspec.yaml", "line": 18, "label": "environment" }]
-    },
-    {
-      "id": "dependencies",
-      "type": "external",
-      "label": "Paquetes UI",
-      "sublabel": "google_fonts, cupertino_icons",
-      "pos": [560, 150],
-      "size": [160, 74],
-      "sources": [{ "path": "hello_world_app/pubspec.yaml", "line": 30, "label": "dependencies" }]
-    },
-    {
-      "id": "lib_entry",
-      "type": "frontend",
-      "label": "lib/main.dart",
-      "sublabel": "MaterialApp y tema",
-      "pos": [570, 350],
-      "size": [145, 68],
-      "sources": [{ "path": "hello_world_app/lib/main.dart", "line": 1, "label": "Entrada" }]
-    },
-    {
-      "id": "counter_screens",
-      "type": "frontend",
-      "label": "screens/counter/",
-      "sublabel": "Pantallas contador",
-      "pos": [740, 350],
-      "size": [175, 74],
+      "pos": [60, 40],
+      "size": [180, 56],
       "sources": [
-        { "path": "hello_world_app/lib/presentation/screens/counter/counter_functions_screen.dart", "line": 1, "label": "Pantalla activa" },
-        { "path": "hello_world_app/lib/presentation/screens/counter/counter_screen.dart", "line": 1, "label": "Pantalla base" }
+        { "path": "Practica02/hello_world_app/pubspec.yaml", "line": 22, "label": "environment" }
       ]
     },
     {
-      "id": "state_logic",
-      "type": "backend",
-      "label": "Estado local",
-      "sublabel": "setState, contador y colores",
-      "pos": [940, 350],
-      "size": [155, 68],
-      "sources": [{ "path": "hello_world_app/lib/presentation/screens/counter/counter_functions_screen.dart", "line": 11, "label": "State" }]
+      "id": "entrypoint",
+      "type": "frontend",
+      "label": "lib/main.dart",
+      "sublabel": "main() + MyApp",
+      "pos": [60, 188],
+      "size": [180, 64],
+      "sources": [
+        { "path": "Practica02/hello_world_app/lib/main.dart", "line": 9, "label": "main" },
+        { "path": "Practica02/hello_world_app/lib/main.dart", "line": 13, "label": "MyApp" }
+      ]
     },
     {
-      "id": "assets",
-      "type": "database",
-      "label": "img/",
-      "sublabel": "positiva, neutral, negativa",
-      "pos": [740, 565],
-      "size": [150, 68],
-      "sources": [{ "path": "hello_world_app/img/positiva.png", "label": "Imagenes" }]
+      "id": "screen",
+      "type": "frontend",
+      "label": "CounterFunctionsScreen",
+      "sublabel": "StatefulWidget activo",
+      "pos": [410, 188],
+      "size": [180, 72],
+      "sources": [
+        { "path": "Practica02/hello_world_app/lib/presentation/screens/counter/counter_functions_screen.dart", "line": 5, "label": "CounterFunctionsScreen" }
+      ]
+    },
+    {
+      "id": "state",
+      "type": "backend",
+      "label": "State",
+      "sublabel": "clickCounter + setState",
+      "pos": [760, 188],
+      "size": [180, 64],
+      "sources": [
+        { "path": "Practica02/hello_world_app/lib/presentation/screens/counter/counter_functions_screen.dart", "line": 12, "label": "State" },
+        { "path": "Practica02/hello_world_app/lib/presentation/screens/counter/counter_functions_screen.dart", "line": 14, "label": "clickCounter" }
+      ]
+    },
+    {
+      "id": "uiBuild",
+      "type": "frontend",
+      "label": "build()",
+      "sublabel": "Scaffold + AppBar + FAB",
+      "pos": [1110, 188],
+      "size": [180, 64],
+      "sources": [
+        { "path": "Practica02/hello_world_app/lib/presentation/screens/counter/counter_functions_screen.dart", "line": 27, "label": "build" }
+      ]
+    },
+    {
+      "id": "theme",
+      "type": "backend",
+      "label": "ThemeData",
+      "sublabel": "colorSchemeSeed magenta",
+      "pos": [410, 40],
+      "size": [180, 56],
+      "sources": [
+        { "path": "Practica02/hello_world_app/lib/main.dart", "line": 20, "label": "ThemeData" }
+      ]
+    },
+    {
+      "id": "googleFonts",
+      "type": "external",
+      "label": "google_fonts",
+      "sublabel": "^7.0.0 · Rock Salt",
+      "pos": [760, 40],
+      "size": [180, 56],
+      "sources": [
+        { "path": "Practica02/hello_world_app/pubspec.yaml", "line": 37, "label": "dependencia" }
+      ]
     },
     {
       "id": "tests",
       "type": "security",
-      "label": "test/",
-      "sublabel": "Widget smoke test",
-      "pos": [570, 565],
-      "size": [145, 68],
-      "sources": [{ "path": "hello_world_app/test/widget_test.dart", "line": 8, "label": "Prueba" }]
+      "label": "widget_test.dart",
+      "sublabel": "smoke test",
+      "pos": [60, 336],
+      "size": [180, 64],
+      "sources": [
+        { "path": "Practica02/hello_world_app/test/widget_test.dart", "line": 14, "label": "testWidgets" }
+      ]
     },
     {
-      "id": "platforms",
-      "type": "cloud",
-      "label": "Targets",
-      "sublabel": "6 plataformas",
-      "pos": [740, 150],
-      "size": [180, 68],
-      "sources": [{ "path": "hello_world_app/android/app/src/main/kotlin/com/example/hello_world_app/MainActivity.kt", "label": "Android runner" }]
+      "id": "palette",
+      "type": "database",
+      "label": "3 constantes",
+      "sublabel": "zero / positive / negative",
+      "pos": [410, 336],
+      "size": [180, 64],
+      "sources": [
+        { "path": "Practica02/hello_world_app/lib/main.dart", "line": 5, "label": "colores" }
+      ]
     },
     {
-      "id": "build_output",
-      "type": "messagebus",
-      "label": "build/",
-      "sublabel": "Salida generada",
-      "pos": [950, 150],
-      "size": [150, 68],
-      "sources": [{ "path": "hello_world_app/.gitignore", "line": 1, "label": "Ignorados" }]
+      "id": "customButton",
+      "type": "frontend",
+      "label": "CustomButton",
+      "sublabel": "StatelessWidget -> FAB",
+      "pos": [1110, 484],
+      "size": [180, 64],
+      "sources": [
+        { "path": "Practica02/hello_world_app/lib/presentation/screens/counter/counter_functions_screen.dart", "line": 99, "label": "CustomButton" }
+      ]
     }
   ],
   "connections": [
     {
-      "id": "repo-to-app",
-      "from": "repo",
-      "to": "flutter_project",
-      "label": "contiene",
+      "id": "sdk-to-entry",
+      "from": "flutterSdk",
+      "to": "entrypoint",
+      "label": "runApp(MyApp)",
       "variant": "emphasis",
-      "labelDy": 58
+      "fromSide": "bottom",
+      "toSide": "top",
+      "labelDy": 24
     },
     {
-      "id": "app-to-pubspec",
-      "from": "flutter_project",
-      "to": "pubspec"
-    },
-    {
-      "id": "app-to-runtime",
-      "from": "flutter_project",
-      "to": "flutter_runtime",
+      "id": "entry-to-screen",
+      "from": "entrypoint",
+      "to": "screen",
+      "label": "home: CounterFunctionsScreen",
       "variant": "emphasis"
     },
     {
-      "id": "pubspec-to-deps",
-      "from": "pubspec",
-      "to": "dependencies"
+      "id": "screen-to-state",
+      "from": "screen",
+      "to": "state",
+      "label": "createState()",
+      "variant": "emphasis"
     },
     {
-      "id": "runtime-to-main",
-      "from": "flutter_runtime",
-      "to": "lib_entry",
-      "label": "runApp(MyApp)",
-      "variant": "emphasis",
-      "labelDy": 58
+      "id": "state-to-build",
+      "from": "state",
+      "to": "uiBuild",
+      "label": "setState() -> build()",
+      "variant": "emphasis"
     },
     {
-      "id": "deps-to-main",
-      "from": "dependencies",
-      "to": "lib_entry",
-      "fromSide": "bottom",
-      "toSide": "top"
-    },
-    {
-      "id": "main-to-screens",
-      "from": "lib_entry",
-      "to": "counter_screens",
-      "label": "home: CounterFunctionsScreen",
-      "variant": "emphasis",
-      "labelDy": 74
-    },
-    {
-      "id": "screens-to-state",
-      "from": "counter_screens",
-      "to": "state_logic",
-      "label": "actualiza contador",
-      "variant": "emphasis",
-      "labelDy": 74
-    },
-    {
-      "id": "assets-to-ui",
-      "from": "assets",
-      "to": "counter_screens",
+      "id": "entry-to-theme",
+      "from": "entrypoint",
+      "to": "theme",
+      "label": "ThemeData",
       "variant": "dashed",
       "fromSide": "top",
       "toSide": "bottom"
     },
     {
-      "id": "tests-to-main",
+      "id": "theme-to-fonts",
+      "from": "theme",
+      "to": "googleFonts",
+      "label": "GoogleFonts.rockSalt",
+      "variant": "dashed"
+    },
+    {
+      "id": "tests-to-entry",
       "from": "tests",
-      "to": "lib_entry",
+      "to": "entrypoint",
+      "label": "pumpWidget(MyApp)",
       "variant": "security",
       "fromSide": "top",
       "toSide": "bottom"
     },
     {
-      "id": "platforms-to-build",
-      "from": "platforms",
-      "to": "build_output",
-      "label": "compila",
-      "labelDy": 52
+      "id": "screen-to-palette",
+      "from": "screen",
+      "to": "palette",
+      "label": "import main.dart",
+      "fromSide": "bottom",
+      "toSide": "top",
+      "labelDy": 24
+    },
+    {
+      "id": "build-to-button",
+      "from": "uiBuild",
+      "to": "customButton",
+      "label": "3 FAB en Column",
+      "variant": "dashed",
+      "fromSide": "bottom",
+      "toSide": "top",
+      "labelDy": 24
+    }
+  ],
+  "cards": [
+    {
+      "dot": "cyan",
+      "title": "Punto de entrada",
+      "items": [
+        "main() unicamente llama runApp(MyApp)",
+        "MyApp es un StatelessWidget: no guarda estado",
+        "home apunta a CounterFunctionsScreen"
+      ]
+    },
+    {
+      "dot": "emerald",
+      "title": "Estado local",
+      "items": [
+        "Es el unico StatefulWidget con estado de la app",
+        "clickCounter vive en el State, no en el widget",
+        "Los tres botones solo cambian un int"
+      ]
+    },
+    {
+      "dot": "violet",
+      "title": "Tema y tipografia",
+      "items": [
+        "colorSchemeSeed magenta ARGB(255,208,33,243)",
+        "displayLarge con GoogleFonts.rockSalt a 160 pt",
+        "La pantalla vuelve a llamar a GoogleFonts.rockSalt"
+      ]
+    },
+    {
+      "dot": "amber",
+      "title": "Colores del contador",
+      "items": [
+        "_getCounterColor: 0 es azul, mayor que 0 verde, menor rojo",
+        "Las constantes viven en main.dart, no en la pantalla",
+        "Click usa plural solo cuando el valor supera 1"
+      ]
+    },
+    {
+      "dot": "rose",
+      "title": "Hallazgos del analisis",
+      "items": [
+        "counter_screen.dart nunca se importa: es codigo muerto",
+        "cupertino_icons esta declarado en pubspec sin usarse",
+        "El smoke test pulsa Icons.add y la app usa Icons.plus_one"
+      ]
     }
   ]
 }
