@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:yes_no_app/domain/entities/message.dart';
+import 'package:yes_no_app/presentation/widgets/shared/message_time_label.dart';
 
 class HerMessageBubble extends StatelessWidget {
   final Message message;
@@ -15,14 +16,21 @@ class HerMessageBubble extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Container(
+          key: bubbleKey,
           decoration: BoxDecoration(
               color: colors.secondary, borderRadius: BorderRadius.circular(20)),
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-            child: Text(
-              message.text,
-              style: const TextStyle(color: Colors.white),
-            ),
+          padding: bubblePadding,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(
+                message.text,
+                style: const TextStyle(color: Colors.white),
+              ),
+              const SizedBox(height: 4),
+              MessageTimeLabel(sentAt: message.sentAt),
+            ],
           ),
         ),
         const SizedBox(height: 5),

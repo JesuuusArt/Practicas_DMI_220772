@@ -41,9 +41,12 @@ class YesNoModel {
         _ => 'Tal vez',
       };
 
-  Message toMessageEntity() => Message(
+  /// [sentAt] permite fijar la hora en los tests; por defecto es el
+  /// momento en que se crea el mensaje.
+  Message toMessageEntity({DateTime? sentAt}) => Message(
         text: displayText,
         fromWho: FromWho.hers,
         imageUrl: image.isEmpty ? null : image,
+        sentAt: sentAt ?? DateTime.now(),
       );
 }

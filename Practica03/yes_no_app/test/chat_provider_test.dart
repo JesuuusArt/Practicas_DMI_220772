@@ -12,6 +12,14 @@ class _FakeGetYesNoAnswer extends GetYesNoAnswer {
   Future<Message> getAnswer() async => _build();
 }
 
+/// Reloj fijo: 28/09/2026 09:36, la hora que ve el usuario en su laptop.
+final _clock = DateTime(2026, 9, 28, 9, 36);
+
+ChatProvider _providerWith(Message Function() build) => ChatProvider(
+      getYesNoAnswer: _FakeGetYesNoAnswer(build),
+      now: () => _clock,
+    );
+
 Future<void> _waitFor(ChatProvider provider, int length) async {
   for (var i = 0; i < 100; i++) {
     if (provider.messageList.length >= length) return;
@@ -21,10 +29,8 @@ Future<void> _waitFor(ChatProvider provider, int length) async {
 
 void main() {
   test('ignora mensajes vacios o con solo espacios', () async {
-    final provider = ChatProvider(
-      getYesNoAnswer: _FakeGetYesNoAnswer(
-        () => Message(text: 'No', fromWho: FromWho.hers),
-      ),
+    final provider = _providerWith(
+      () => Message(text: 'No', fromWho: FromWho.hers, sentAt: _clock),
     );
 
     await provider.sendMessage('');
@@ -35,12 +41,10 @@ void main() {
 
   test('no pide respuesta si el mensaje no termina en "?"', () async {
     var called = false;
-    final provider = ChatProvider(
-      getYesNoAnswer: _FakeGetYesNoAnswer(() {
-        called = true;
-        return Message(text: 'No', fromWho: FromWho.hers);
-      }),
-    );
+    final provider = _providerWith(() {
+      called = true;
+      return Message(text: 'No', fromWho: FromWho.hers, sentAt: _clock);
+    });
 
     await provider.sendMessage('Hola amor');
     await Future<void>.delayed(const Duration(milliseconds: 50));
@@ -50,10 +54,8 @@ void main() {
   });
 
   test('agrega la respuesta cuando la pregunta termina en "?"', () async {
-    final provider = ChatProvider(
-      getYesNoAnswer: _FakeGetYesNoAnswer(
-        () => Message(text: 'Sí', fromWho: FromWho.hers),
-      ),
+    final provider = _providerWith(
+      () => Message(text: 'Sí', fromWho: FromWho.hers, sentAt: _clock),
     );
 
     await provider.sendMessage('Como estas?');
@@ -66,10 +68,8 @@ void main() {
   });
 
   test('muestra el error en el chat si la API falla', () async {
-    final provider = ChatProvider(
-      getYesNoAnswer: _FakeGetYesNoAnswer(
-        () => throw const YesNoException('No hay conexion a internet.'),
-      ),
+    final provider = _providerWith(
+      () => throw const YesNoException('No hay conexion a internet.'),
     );
 
     await provider.sendMessage('Estas ahi?');
@@ -81,10 +81,8 @@ void main() {
   });
 
   test('las respuestas no se intercalan entre si', () async {
-    final provider = ChatProvider(
-      getYesNoAnswer: _FakeGetYesNoAnswer(
-        () => Message(text: 'No', fromWho: FromWho.hers),
-      ),
+    final provider = _providerWith(
+      () => Message(text: 'No', fromWho: FromWho.hers, sentAt: _clock),
     );
 
     await provider.sendMessage('Primera?');
@@ -96,5 +94,54 @@ void main() {
     expect(provider.messageList[3].text, 'Segunda?');
     expect(provider.messageList[4].fromWho, FromWho.hers);
     expect(provider.messageList[5].fromWho, FromWho.hers);
+  });
+
+  group('hora de envio', () {
+    test('el mensaje que mando el usuario queda con la hora actual', () async {
+      final provider = _providerWith(
+        () => Message(text: 'No', fromWho: FromWho.hers, sentAt: _clock),
+      );
+
+      await provider.sendMessage('Vamos al gym?');
+
+      expect(provider.messageList.last.sentAt, _clock);
+    });
+
+    test('la respuesta de la API tambien queda con la hora actual',
+        () async {
+      final provider = _providerWith(
+        () => Message(
+          text: 'Sí',
+          fromWho: FromWho.hers,
+          sentAt: DateTime(1990),
+        ),
+      );
+
+      await provider.sendMessage('Vamos al gym?');
+      await _waitFor(provider, 4);
+
+      expect(provider.messageList.last.sentAt, _clock);
+    });
+
+    test('tambien estampa la hora cuando la API falla', () async {
+      final provider = _providerWith(
+        () => throw const YesNoException('No hay conexion a internet.'),
+      );
+
+      await provider.sendMessage('Estas ahi?');
+      await _waitFor(provider, 4);
+
+      expect(provider.messageList.last.sentAt, _clock);
+    });
+
+    test('los mensajes de ejemplo ya traen hora', () {
+      final provider = _providerWith(
+        () => Message(text: 'No', fromWho: FromWho.hers, sentAt: _clock),
+      );
+
+      expect(provider.messageList, hasLength(2));
+      expect(provider.messageList.first.sentAt, isA<DateTime>());
+      expect(provider.messageList.last.sentAt, isA<DateTime>());
+    });
   });
 }
