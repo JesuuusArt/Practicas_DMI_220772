@@ -1,0 +1,96 @@
+{
+  "schema_version": 1,
+  "diagram_type": "sequence",
+  "meta": {
+    "title": "De la pregunta a la respuesta Â· yes_no_app",
+    "output": "yes_no_app_sequence.html",
+    "viewBox": [1080, 552],
+    "column_fit": "spread",
+    "animation": "trace",
+    "quality_profile": "showcase",
+    "views": [
+      {
+        "id": "del-tecleo-a-la-api",
+        "label": "Del tecleo a la API",
+        "focus": ["user", "field", "provider", "getter", "api"],
+        "note": "Lo que ocurre entre que se pulsa enviar y se sale una peticion HTTP."
+      },
+      {
+        "id": "la-cola-de-respuestas",
+        "label": "La cola de respuestas",
+        "focus": ["provider", "getter", "api"],
+        "note": "herReply() encadena las respuestas para que nunca se intercalen."
+      },
+      {
+        "id": "del-json-a-la-burbuja",
+        "label": "Del JSON a la burbuja",
+        "focus": ["api", "model", "state", "provider", "field"],
+        "note": "Como el JSON crudo se convierte en un mensaje que se pinta."
+      }
+    ]
+  },
+  "participants": [
+    { "id": "user", "type": "external", "label": "Bb farias", "sublabel": "quien pregunta" },
+    { "id": "field", "type": "frontend", "label": "MessageFieldBox", "sublabel": "campo de texto" },
+    { "id": "provider", "type": "backend", "label": "ChatProvider", "sublabel": "messageList + cola" },
+    { "id": "state", "type": "database", "label": "messageList", "sublabel": "List<Message>" },
+    { "id": "getter", "type": "backend", "label": "GetYesNoAnswer", "sublabel": "Dio + pickAnswer" },
+    { "id": "api", "type": "external", "label": "yesno.wtf", "sublabel": "GET /api?force=" },
+    { "id": "model", "type": "backend", "label": "YesNoModel", "sublabel": "traduce a Message" }
+  ],
+  "segments": [
+    { "from": 150, "to": 247, "label": "1 · Entrada y guardado" },
+    { "from": 252, "to": 371, "label": "2 · Sorteo y peticion HTTP" },
+    { "from": 376, "to": 483, "label": "3 · Traduccion y repintado" }
+  ],
+  "messages": [
+    { "id": "type-question", "from": "user", "to": "field", "y": 165, "label": "escribe 'Vamos al gym?'", "variant": "default" },
+    { "id": "send-message", "from": "field", "to": "provider", "y": 193, "label": "sendMessage(texto)", "variant": "emphasis", "note": "El provider decide si esa pregunta merece respuesta." },
+    { "id": "append-mine", "from": "provider", "to": "state", "y": 233, "label": "add Message(me, _now())", "variant": "default" },
+    { "id": "queue-reply", "from": "provider", "to": "getter", "y": 261, "label": "herReply() en la cola", "variant": "emphasis" },
+    { "id": "http-get", "from": "getter", "to": "api", "y": 289, "label": "GET /api?force=yes", "variant": "emphasis", "note": "pickAnswer() ya sorteo 40/40/20 y force= solo pide su gif." },
+    { "id": "http-200", "from": "api", "to": "getter", "y": 329, "label": "200 {answer, gif}", "variant": "return" },
+    { "id": "parse", "from": "getter", "to": "model", "y": 357, "label": "fromJsonMap(data)", "variant": "default" },
+    { "id": "to-entity", "from": "model", "to": "state", "y": 385, "label": "toMessageEntity() Si / No / Tal vez", "variant": "emphasis" },
+    { "id": "append-reply", "from": "provider", "to": "state", "y": 413, "label": "add reply.copyWith(sentAt)", "variant": "return" },
+    { "id": "notify", "from": "provider", "to": "field", "y": 441, "label": "notifyListeners()", "variant": "return" },
+    { "id": "error-path", "from": "getter", "to": "provider", "y": 469, "label": "YesNoException ya traducida", "variant": "dashed", "note": "Si falla la red, el mensaje de error entra por el mismo camino." }
+  ],
+  "activations": [
+    { "participant": "field", "from": 193, "to": 455, "type": "frontend" },
+    { "participant": "provider", "from": 193, "to": 483, "type": "backend" },
+    { "participant": "state", "from": 233, "to": 427, "type": "database" },
+    { "participant": "getter", "from": 261, "to": 483, "type": "backend" },
+    { "participant": "api", "from": 289, "to": 343, "type": "external" },
+    { "participant": "model", "from": 357, "to": 399, "type": "backend" }
+  ],
+  "cards": [
+    {
+      "dot": "emerald",
+      "title": "Regla de la pregunta",
+      "items": [
+        "trim() descarta el texto vacio",
+        "Solo responde si el texto termina en '?'",
+        "unawaited() evita que la UI se bloquee"
+      ]
+    },
+    {
+      "dot": "cyan",
+      "title": "Sorteo y contrato",
+      "items": [
+        "pickAnswer() reparte 40% yes / 40% no / 20% maybe",
+        "?force= hace que texto y gif coincidan",
+        "DioException se traduce a YesNoException"
+      ]
+    },
+    {
+      "dot": "amber",
+      "title": "Un reloj y un scroll",
+      "items": [
+        "_now() es inyectable: los tests fijan la hora",
+        "El provider estampa la hora de todo el chat",
+        "moveScrollToBottom(): 100 ms + 300 ms"
+      ]
+    }
+  ]
+}
