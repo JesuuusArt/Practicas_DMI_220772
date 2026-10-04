@@ -1,0 +1,403 @@
+{
+    "schema_version":  1,
+    "diagram_type":  "architecture",
+    "meta":  {
+                 "title":  "Arquitectura por capas · yes_no_app",
+                 "output":  "yes_no_app_architecture.html",
+                 "quality_profile":  "showcase",
+                 "animation":  "trace",
+                 "repository":  {
+                                    "url":  "https://github.com/JesuuusArt/Practicas_DMI_220772",
+                                    "provider":  "github",
+                                    "link_mode":  "local-only",
+                                    "revision":  "d3cac3bd91b94fbbf82286295c184fa06aa7ca28"
+                                },
+                 "views":  [
+                               {
+                                   "id":  "recorrido-de-una-pregunta",
+                                   "label":  "Recorrido de una pregunta",
+                                   "focus":  [
+                                                 "fieldBox",
+                                                 "provider",
+                                                 "getYesNo",
+                                                 "api",
+                                                 "yesNoModel",
+                                                 "messageEnt",
+                                                 "bubbles"
+                                             ],
+                                   "note":  "Del campo de texto a la respuesta de la API y de vuelta a la burbuja."
+                               },
+                               {
+                                   "id":  "capas-del-proyecto",
+                                   "label":  "Capas del proyecto",
+                                   "focus":  [
+                                                 "theme",
+                                                 "getYesNo",
+                                                 "yesNoModel",
+                                                 "messageEnt",
+                                                 "mainApp",
+                                                 "provider",
+                                                 "chatScreen"
+                                             ],
+                                   "note":  "Configuracion, datos y presentacion aisladas por directorio."
+                               },
+                               {
+                                   "id":  "reloj-y-estado",
+                                   "label":  "Reloj y estado del chat",
+                                   "focus":  [
+                                                 "timeFmt",
+                                                 "messageEnt",
+                                                 "provider",
+                                                 "bubbles"
+                                             ],
+                                   "note":  "Un solo reloj inyectado estampa la hora de todos los mensajes."
+                               }
+                           ]
+             },
+    "components":  [
+                       {
+                           "id":  "theme",
+                           "type":  "frontend",
+                           "label":  "AppTheme",
+                           "sublabel":  "colorSchemeSeed + Material 3",
+                           "tag":  "lib/config/theme",
+                           "pos":  [
+                                       60,
+                                       40
+                                   ],
+                           "size":  [
+                                        210,
+                                        56
+                                    ],
+                           "sources":  [
+                                           {
+                                               "path":  "Practica03/yes_no_app/lib/config/theme/app_theme.dart",
+                                               "line":  15,
+                                               "label":  "AppTheme"
+                                           }
+                                       ]
+                       },
+                       {
+                           "id":  "mainApp",
+                           "type":  "frontend",
+                           "label":  "MyApp",
+                           "sublabel":  "runApp + MultiProvider",
+                           "tag":  "lib/main.dart",
+                           "pos":  [
+                                       400,
+                                       40
+                                   ],
+                           "size":  [
+                                        210,
+                                        56
+                                    ],
+                           "sources":  [
+                                           {
+                                               "path":  "Practica03/yes_no_app/lib/main.dart",
+                                               "line":  10,
+                                               "label":  "MyApp"
+                                           }
+                                       ]
+                       },
+                       {
+                           "id":  "bubbles",
+                           "type":  "frontend",
+                           "label":  "Burbujas de chat",
+                           "sublabel":  "My · Her + GIF y hora",
+                           "tag":  "lib/presentation/widgets",
+                           "pos":  [
+                                       740,
+                                       40
+                                   ],
+                           "size":  [
+                                        214,
+                                        58
+                                    ],
+                           "sources":  [
+                                           {
+                                               "path":  "Practica03/yes_no_app/lib/presentation/widgets/chat/her_message_bubble.dart",
+                                               "line":  5,
+                                               "label":  "HerMessageBubble"
+                                           }
+                                       ]
+                       },
+                       {
+                           "id":  "timeFmt",
+                           "type":  "backend",
+                           "label":  "formatTimeOfDay",
+                           "sublabel":  "9:37 a.m.",
+                           "tag":  "lib/config/helpers",
+                           "pos":  [
+                                       1100,
+                                       40
+                                   ],
+                           "size":  [
+                                        190,
+                                        56
+                                    ],
+                           "sources":  [
+                                           {
+                                               "path":  "Practica03/yes_no_app/lib/config/helpers/format_time_of_day.dart",
+                                               "line":  5,
+                                               "label":  "formatTimeOfDay"
+                                           }
+                                       ]
+                       },
+                       {
+                           "id":  "fieldBox",
+                           "type":  "frontend",
+                           "label":  "MessageFieldBox",
+                           "sublabel":  "campo de escritura",
+                           "tag":  "lib/presentation/widgets",
+                           "pos":  [
+                                       60,
+                                       188
+                                   ],
+                           "size":  [
+                                        210,
+                                        56
+                                    ],
+                           "sources":  [
+                                           {
+                                               "path":  "Practica03/yes_no_app/lib/presentation/widgets/shared/message_field_box.dart",
+                                               "line":  3,
+                                               "label":  "MessageFieldBox"
+                                           }
+                                       ]
+                       },
+                       {
+                           "id":  "provider",
+                           "type":  "backend",
+                           "label":  "ChatProvider",
+                           "sublabel":  "ChangeNotifier",
+                           "tag":  "messageList en memoria",
+                           "pos":  [
+                                       400,
+                                       188
+                                   ],
+                           "size":  [
+                                        210,
+                                        62
+                                    ],
+                           "sources":  [
+                                           {
+                                               "path":  "Practica03/yes_no_app/lib/presentation/providers/chat_provider.dart",
+                                               "line":  7,
+                                               "label":  "ChatProvider"
+                                           }
+                                       ]
+                       },
+                       {
+                           "id":  "chatScreen",
+                           "type":  "frontend",
+                           "label":  "ChatScreen",
+                           "sublabel":  "_ChatView · context.watch",
+                           "tag":  "lib/presentation/screens",
+                           "pos":  [
+                                       740,
+                                       188
+                                   ],
+                           "size":  [
+                                        214,
+                                        58
+                                    ],
+                           "sources":  [
+                                           {
+                                               "path":  "Practica03/yes_no_app/lib/presentation/screens/chat/chat_screen.dart",
+                                               "line":  10,
+                                               "label":  "ChatScreen"
+                                           }
+                                       ]
+                       },
+                       {
+                           "id":  "getYesNo",
+                           "type":  "backend",
+                           "label":  "GetYesNoAnswer",
+                           "sublabel":  "Dio + pesos 40/40/20",
+                           "tag":  "lib/config/helpers",
+                           "pos":  [
+                                       400,
+                                       336
+                                   ],
+                           "size":  [
+                                        210,
+                                        62
+                                    ],
+                           "sources":  [
+                                           {
+                                               "path":  "Practica03/yes_no_app/lib/config/helpers/get_yes_no_answer.dart",
+                                               "line":  32,
+                                               "label":  "GetYesNoAnswer"
+                                           }
+                                       ]
+                       },
+                       {
+                           "id":  "messageEnt",
+                           "type":  "database",
+                           "label":  "Message",
+                           "sublabel":  "text · FromWho · sentAt",
+                           "tag":  "lib/domain/entities",
+                           "pos":  [
+                                       740,
+                                       336
+                                   ],
+                           "size":  [
+                                        214,
+                                        58
+                                    ],
+                           "sources":  [
+                                           {
+                                               "path":  "Practica03/yes_no_app/lib/domain/entities/message.dart",
+                                               "line":  3,
+                                               "label":  "Message"
+                                           }
+                                       ]
+                       },
+                       {
+                           "id":  "api",
+                           "type":  "external",
+                           "label":  "yesno.wtf",
+                           "sublabel":  "API publica de respuestas",
+                           "tag":  "HTTPS 443",
+                           "pos":  [
+                                       405,
+                                       484
+                                   ],
+                           "size":  [
+                                        200,
+                                        58
+                                    ]
+                       },
+                       {
+                           "id":  "yesNoModel",
+                           "type":  "backend",
+                           "label":  "YesNoModel",
+                           "sublabel":  "mapea JSON y traduce a texto",
+                           "tag":  "lib/infrastructure/models",
+                           "pos":  [
+                                       740,
+                                       484
+                                   ],
+                           "size":  [
+                                        214,
+                                        58
+                                    ],
+                           "sources":  [
+                                           {
+                                               "path":  "Practica03/yes_no_app/lib/infrastructure/models/yes_no_model.dart",
+                                               "line":  3,
+                                               "label":  "YesNoModel"
+                                           }
+                                       ]
+                       }
+                   ],
+    "connections":  [
+                        {
+                            "id":  "theme-app",
+                            "from":  "theme",
+                            "to":  "mainApp",
+                            "label":  "AppTheme(0).theme()"
+                        },
+                        {
+                            "id":  "inject-provider",
+                            "from":  "mainApp",
+                            "to":  "provider",
+                            "label":  "ChangeNotifierProvider",
+                            "labelAt":  [
+                                            505,
+                                            110
+                                        ]
+                        },
+                        {
+                            "id":  "send-message",
+                            "from":  "fieldBox",
+                            "to":  "provider",
+                            "label":  "sendMessage(texto)"
+                        },
+                        {
+                            "id":  "notify-rebuild",
+                            "from":  "provider",
+                            "to":  "chatScreen",
+                            "label":  "notifyListeners()"
+                        },
+                        {
+                            "id":  "listview-bubbles",
+                            "from":  "chatScreen",
+                            "to":  "bubbles",
+                            "label":  "ListView.builder"
+                        },
+                        {
+                            "id":  "time-label",
+                            "from":  "timeFmt",
+                            "to":  "bubbles",
+                            "label":  "MessageTimeLabel"
+                        },
+                        {
+                            "id":  "provider-get",
+                            "from":  "provider",
+                            "to":  "getYesNo",
+                            "label":  "herReply()",
+                            "labelAt":  [
+                                            505,
+                                            293
+                                        ]
+                        },
+                        {
+                            "id":  "get-parse",
+                            "from":  "getYesNo",
+                            "to":  "yesNoModel",
+                            "label":  "fromJsonMap()"
+                        },
+                        {
+                            "id":  "get-api",
+                            "from":  "getYesNo",
+                            "to":  "api",
+                            "label":  "GET /api?force=",
+                            "labelAt":  [
+                                            505,
+                                            441
+                                        ]
+                        },
+                        {
+                            "id":  "model-entity",
+                            "from":  "yesNoModel",
+                            "to":  "messageEnt",
+                            "label":  "toMessageEntity()"
+                        },
+                        {
+                            "id":  "entity-list",
+                            "from":  "messageEnt",
+                            "to":  "provider",
+                            "label":  "messageList"
+                        }
+                    ],
+    "cards":  [
+                  {
+                      "dot":  "emerald",
+                      "title":  "Recorrido de una pregunta",
+                      "items":  [
+                                    "MessageFieldBox dispara sendMessage() y solo pide respuesta si el texto termina en \u0027?\u0027",
+                                    "GetYesNoAnswer sortea 40/40/20 y usa \u0027?force=\u0027 para que el texto y el GIF coincidan",
+                                    "YesNoModel traduce yes/no/maybe a Si / No / Tal vez y devuelve una entidad Message"
+                                ]
+                  },
+                  {
+                      "dot":  "cyan",
+                      "title":  "Capas del proyecto",
+                      "items":  [
+                                    "Presentacion: main.dart, ChatScreen, ChatProvider y los widgets de burbuja y campo",
+                                    "Dominio: Message con FromWho y sentAt, sin depender de Flutter ni de la API",
+                                    "Infraestructura: YesNoModel es el unico que conoce el JSON de yesno.wtf"
+                                ]
+                  },
+                  {
+                      "dot":  "amber",
+                      "title":  "Estado y reloj",
+                      "items":  [
+                                    "ChatProvider es el unico ChangeNotifier y concentra el messageList del chat",
+                                    "El reloj es inyectable (now: () =\u003e DateTime) para poder fijar la hora en los tests",
+                                    "formatTimeOfDay aplica el formato de WhatsApp: 9:37 a.m. y 2:05 p.m."
+                                ]
+                  }
+              ]
+}
