@@ -271,7 +271,31 @@ También se incluye `tool/start_emulator.ps1` para levantar el AVD y abrir
 
 ---
 
-## 10. Referencias
+## 10. Evidencias de la aplicación
+
+Capturas tomadas ejecutando la app en el emulador Pixel:
+
+<p align="center">
+  <img src="assets/images/1.png" alt="Chat principal con mensajes enviados" width="240" />
+  <img src="assets/images/2.png" alt="Respuesta de la API como video/gif" width="240" />
+  <img src="assets/images/3.png" alt="Conversación con respuestas" width="240" />
+</p>
+
+<p align="center">
+  <img src="assets/images/4.png" alt="Intercambio de mensajes en el chat" width="240" />
+  <img src="assets/images/5.png" alt="Respuestas en formato animado" width="240" />
+  <img src="assets/images/6.png" alt="Más respuestas de la API" width="240" />
+</p>
+
+<p align="center">
+  <img src="assets/images/7.png" alt="Conversación con varias preguntas" width="240" />
+  <img src="assets/images/8.png" alt="Respuestas animadas en el chat" width="240" />
+  <img src="assets/images/9.png" alt="Chat completo" width="240" />
+</p>
+
+---
+
+## 11. Referencias
 
 - [yesno.wtf](https://yesno.wtf) — API pública usada.
 - [Documentación de Flutter](https://docs.flutter.dev/) y [Dio](https://pub.dev/packages/dio).
