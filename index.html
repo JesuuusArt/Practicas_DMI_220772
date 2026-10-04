@@ -1,0 +1,1492 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Prácticas DMI — Jesus Alejandro Artiaga Morales (220772)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-main: #0b0f19;
+      --bg-card: rgba(18, 24, 39, 0.85);
+      --bg-card-hover: rgba(30, 41, 59, 0.95);
+      --border-color: rgba(255, 255, 255, 0.1);
+      --text-title: #f8fafc;
+      --text-body: #94a3b8;
+      --text-muted: #64748b;
+      --cyan: #06b6d4;
+      --purple: #a855f7;
+      --green: #10b981;
+      --amber: #f59e0b;
+      --red: #ef4444;
+      --code-bg: #070a12;
+      --shadow: 0 10px 30px rgba(0,0,0,0.5);
+    }
+
+    [data-theme="light"] {
+      --bg-main: #f8fafc;
+      --bg-card: #ffffff;
+      --bg-card-hover: #f1f5f9;
+      --border-color: rgba(0, 0, 0, 0.12);
+      --text-title: #0f172a;
+      --text-body: #334155;
+      --text-muted: #64748b;
+      --code-bg: #1e293b;
+      --shadow: 0 10px 25px rgba(0,0,0,0.08);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--bg-main);
+      color: var(--text-title);
+      line-height: 1.6;
+      transition: background-color 0.3s ease, color 0.3s ease;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Modern Glassmorphic Header Bar */
+    header {
+      background: var(--bg-card);
+      border-bottom: 1px solid var(--border-color);
+      padding: 1rem 2rem;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(14px);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+    }
+
+    .brand-group {
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+    }
+
+    /* Profile Avatar me.jpg with glowing ring */
+    .profile-avatar-wrapper {
+      position: relative;
+      width: 46px;
+      height: 46px;
+    }
+
+    .profile-avatar {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid var(--cyan);
+      box-shadow: 0 0 15px rgba(6, 182, 212, 0.4);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .profile-avatar:hover {
+      transform: scale(1.08);
+      box-shadow: 0 0 22px rgba(6, 182, 212, 0.6);
+    }
+
+    .status-dot {
+      position: absolute;
+      bottom: 2px;
+      right: 2px;
+      width: 11px;
+      height: 11px;
+      background: var(--green);
+      border: 2px solid var(--bg-main);
+      border-radius: 50%;
+    }
+
+    .brand-info h1 {
+      font-size: 1.15rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .brand-info p {
+      font-size: 0.775rem;
+      color: var(--text-body);
+    }
+
+    /* Pretty Pill Theme Switcher */
+    .theme-switch-container {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      background: rgba(125, 125, 125, 0.12);
+      border: 1px solid var(--border-color);
+      padding: 4px;
+      border-radius: 30px;
+      cursor: pointer;
+      user-select: none;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .theme-switch-container:hover {
+      border-color: var(--cyan);
+      box-shadow: 0 0 15px rgba(6, 182, 212, 0.2);
+    }
+
+    .theme-switch-pill {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.35rem 0.85rem;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+
+    .theme-switch-pill.active-dark {
+      background: linear-gradient(135deg, #1e1b4b, #312e81);
+      color: #a5b4fc;
+      box-shadow: 0 2px 10px rgba(99, 102, 241, 0.4);
+    }
+
+    .theme-switch-pill.active-light {
+      background: linear-gradient(135deg, #fef3c7, #fde047);
+      color: #78350f;
+      box-shadow: 0 2px 10px rgba(245, 158, 11, 0.4);
+    }
+
+    /* Main Container */
+    main {
+      max-width: 1280px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 2rem 1.5rem;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 2.5rem;
+    }
+
+    /* Student Bio Card */
+    .bio-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 1.75rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.5rem;
+      box-shadow: var(--shadow);
+    }
+
+    .bio-item {
+      display: flex;
+      flex-direction: column;
+      gap: 0.2rem;
+    }
+
+    .bio-item .label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      color: var(--cyan);
+      letter-spacing: 0.05em;
+    }
+
+    .bio-item .value {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--text-title);
+    }
+
+    /* Section Headers */
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
+
+    .section-title {
+      font-size: 1.3rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    /* Practices Grid Table Cards */
+    .practices-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 1.25rem;
+    }
+
+    .practice-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 14px;
+      padding: 1.5rem;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      position: relative;
+    }
+
+    .practice-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--cyan);
+      box-shadow: 0 12px 35px rgba(6, 182, 212, 0.15);
+      background: var(--bg-card-hover);
+    }
+
+    .practice-card.active {
+      border-color: var(--cyan);
+      box-shadow: 0 0 20px rgba(6, 182, 212, 0.3);
+    }
+
+    .card-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 0.75rem;
+    }
+
+    .badge-no {
+      font-family: 'Fira Code', monospace;
+      font-weight: 700;
+      font-size: 0.8rem;
+      background: rgba(6, 182, 212, 0.15);
+      color: var(--cyan);
+      padding: 0.2rem 0.6rem;
+      border-radius: 6px;
+    }
+
+    .badge-status {
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 0.2rem 0.6rem;
+      border-radius: 6px;
+    }
+
+    .status-done { background: rgba(16, 185, 129, 0.15); color: var(--green); }
+
+    .p-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+
+    .p-desc {
+      font-size: 0.85rem;
+      color: var(--text-body);
+      margin-bottom: 1rem;
+    }
+
+    .p-meta {
+      font-size: 0.775rem;
+      color: var(--text-muted);
+      display: flex;
+      gap: 1rem;
+    }
+
+    /* Tab Explorer View for Selected Practice */
+    .detail-container {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 2rem;
+      box-shadow: var(--shadow);
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    .subnav-tabs {
+      display: flex;
+      gap: 0.5rem;
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 0.75rem;
+      overflow-x: auto;
+    }
+
+    .subtab-btn {
+      background: transparent;
+      border: none;
+      color: var(--text-body);
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      font-size: 0.875rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .subtab-btn.active {
+      background: var(--cyan);
+      color: #0f172a;
+      box-shadow: 0 4px 15px rgba(6, 182, 212, 0.3);
+    }
+
+    .subtab-content { display: none; }
+    .subtab-content.active { display: block; animation: fadeIn 0.3s ease; }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Architecture Iframe & Screenshots Grid */
+    .arch-iframe-wrapper {
+      width: 100%;
+      height: 650px;
+      border-radius: 12px;
+      border: 1px solid var(--border-color);
+      overflow: hidden;
+      box-shadow: inset 0 0 20px rgba(0,0,0,0.5);
+    }
+
+    iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    .evidence-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .evidence-card {
+      background: var(--code-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .evidence-card img {
+      width: 100%;
+      border-radius: 8px;
+      border: 1px solid var(--border-color);
+      object-fit: cover;
+    }
+
+    .evidence-card h4 {
+      font-size: 0.9rem;
+      color: var(--cyan);
+    }
+
+    .evidence-card p {
+      font-size: 0.8rem;
+      color: var(--text-body);
+    }
+
+    /* Repository File Explorer */
+    .file-explorer {
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      gap: 1.5rem;
+      min-height: 450px;
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .file-tree {
+      background: var(--code-bg);
+      border-right: 1px solid var(--border-color);
+      padding: 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+      font-family: 'Fira Code', monospace;
+      font-size: 0.8rem;
+    }
+
+    .file-tree-item {
+      padding: 0.4rem 0.75rem;
+      border-radius: 6px;
+      cursor: pointer;
+      color: var(--text-body);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: all 0.15s ease;
+    }
+
+    .file-tree-item:hover, .file-tree-item.active {
+      background: rgba(6, 182, 212, 0.15);
+      color: var(--cyan);
+    }
+
+    .code-viewer {
+      background: #060911;
+      padding: 1.25rem;
+      font-family: 'Fira Code', monospace;
+      font-size: 0.785rem;
+      color: #e2e8f0;
+      overflow: auto;
+      white-space: pre;
+    }
+
+    /* Generic sub-block used inside subtab contents */
+    code {
+      font-family: 'Fira Code', monospace;
+      font-size: 0.88em;
+      background: rgba(6, 182, 212, 0.1);
+      color: var(--cyan);
+      padding: 0.1rem 0.35rem;
+      border-radius: 4px;
+    }
+
+    .block {
+      margin-bottom: 1.75rem;
+    }
+    .block:last-child { margin-bottom: 0; }
+
+    .block-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .block-title.cyan { color: var(--cyan); }
+    .block-title.purple { color: var(--purple); }
+    .block-title.green { color: var(--green); }
+    .block-title.amber { color: var(--amber); }
+
+    .block-text {
+      font-size: 0.9rem;
+      color: var(--text-body);
+    }
+
+    .block-list {
+      font-size: 0.9rem;
+      color: var(--text-body);
+      padding-left: 1.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    .block-list b { color: var(--text-title); }
+
+    /* Technology cards */
+    .tech-group + .tech-group { margin-top: 1.75rem; }
+
+    .tech-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1rem;
+    }
+
+    .tech-card {
+      background: var(--code-bg);
+      border: 1px solid var(--border-color);
+      border-left: 3px solid var(--cyan);
+      border-radius: 10px;
+      padding: 0.9rem 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+      transition: all 0.2s ease;
+    }
+    .tech-card:hover {
+      border-color: var(--cyan);
+      border-left-color: var(--cyan);
+      transform: translateX(3px);
+    }
+    .tech-card.purple { border-left-color: var(--purple); }
+    .tech-card.green  { border-left-color: var(--green); }
+    .tech-card.amber  { border-left-color: var(--amber); }
+
+    .tech-top {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 0.5rem;
+    }
+    .tech-name {
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: var(--text-title);
+    }
+    .tech-ver {
+      font-family: 'Fira Code', monospace;
+      font-size: 0.7rem;
+      color: var(--cyan);
+      background: rgba(6, 182, 212, 0.12);
+      padding: 0.1rem 0.45rem;
+      border-radius: 5px;
+      white-space: nowrap;
+    }
+    .tech-desc {
+      font-size: 0.8rem;
+      color: var(--text-body);
+    }
+
+    /* Learning list with numbered badges */
+    .learn-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+    .learn-item {
+      display: flex;
+      gap: 0.75rem;
+      align-items: flex-start;
+      background: var(--bg-card-hover);
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      padding: 0.75rem 0.9rem;
+      font-size: 0.85rem;
+      color: var(--text-body);
+    }
+    .learn-num {
+      flex: 0 0 24px;
+      height: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      background: rgba(168, 85, 247, 0.18);
+      color: var(--purple);
+      font-family: 'Fira Code', monospace;
+      font-size: 0.72rem;
+      font-weight: 700;
+    }
+    .learn-item b { color: var(--text-title); }
+
+    /* Tech chips for the practice card */
+    .chip-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-top: 0.85rem;
+    }
+    .chip {
+      font-family: 'Fira Code', monospace;
+      font-size: 0.7rem;
+      font-weight: 600;
+      padding: 0.2rem 0.55rem;
+      border-radius: 6px;
+      background: rgba(6, 182, 212, 0.12);
+      color: var(--cyan);
+      border: 1px solid rgba(6, 182, 212, 0.25);
+    }
+    .chip.purple {
+      background: rgba(168, 85, 247, 0.12);
+      color: var(--purple);
+      border-color: rgba(168, 85, 247, 0.25);
+    }
+    .chip.green {
+      background: rgba(16, 185, 129, 0.12);
+      color: var(--green);
+      border-color: rgba(16, 185, 129, 0.25);
+    }
+    .chip.amber {
+      background: rgba(245, 158, 11, 0.12);
+      color: var(--amber);
+      border-color: rgba(245, 158, 11, 0.25);
+    }
+
+    /* Small definition table */
+    .mini-table {
+      width: 100%;
+      font-size: 0.82rem;
+      color: var(--text-body);
+      border-collapse: collapse;
+      margin-top: 0.5rem;
+    }
+    .mini-table th {
+      text-align: left;
+      color: var(--text-muted);
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 0.35rem 0.5rem 0.35rem 0;
+      border-bottom: 1px solid var(--border-color);
+    }
+    .mini-table td {
+      padding: 0.4rem 0.5rem 0.4rem 0;
+      border-bottom: 1px solid var(--border-color);
+      vertical-align: top;
+    }
+    .mini-table tr:last-child td { border-bottom: none; }
+    .mini-table td:first-child { color: var(--text-title); font-weight: 600; white-space: nowrap; }
+
+    footer {
+      border-top: 1px solid var(--border-color);
+      padding: 1.5rem 2rem;
+      text-align: center;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      background: var(--bg-card);
+      margin-top: auto;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <div class="brand-group">
+      <div class="profile-avatar-wrapper">
+        <img src="me.jpg" alt="Foto Jesus Artiaga" class="profile-avatar">
+        <div class="status-dot"></div>
+      </div>
+      <div class="brand-info">
+        <h1>Desarrollo Móvil Integral (DMI) — Portafolio</h1>
+        <p>Ingeniería en Desarrollo y Gestión de Software | UTXJ</p>
+      </div>
+    </div>
+
+    <!-- Pretty Theme Switcher Button -->
+    <div class="theme-switch-container" id="themeSwitcher" onclick="toggleTheme()">
+      <div class="theme-switch-pill active-dark" id="darkPill">🌙 Oscuro</div>
+      <div class="theme-switch-pill" id="lightPill">☀️ Claro</div>
+    </div>
+  </header>
+
+  <main>
+    
+    <!-- Student Information Summary Card -->
+    <section class="bio-card">
+      <div class="bio-item">
+        <span class="label">Estudiante</span>
+        <span class="value">Jesus Alejandro Artiaga Morales</span>
+      </div>
+      <div class="bio-item">
+        <span class="label">Matrícula</span>
+        <span class="value">220772 (10° A)</span>
+      </div>
+      <div class="bio-item">
+        <span class="label">Docente</span>
+        <span class="value">M.T.I. Marco A. Ramírez Hernández</span>
+      </div>
+      <div class="bio-item">
+        <span class="label">Periodo Lectivo</span>
+        <span class="value">Septiembre - Diciembre 2026</span>
+      </div>
+    </section>
+
+    <!-- Practices List Section -->
+    <section>
+      <div class="section-header">
+        <h2 class="section-title">📋 Prácticas de la Asignatura</h2>
+      </div>
+
+      <div class="practices-grid">
+        
+        <!-- Práctica 1 -->
+        <div class="practice-card" id="card-p1" onclick="selectPractice(1)">
+          <div class="card-top">
+            <span class="badge-no">Práctica 01</span>
+            <span class="badge-status status-done">🟢 Concluida</span>
+          </div>
+          <div class="p-title">Metodología de Evaluación de la Materia</div>
+          <div class="p-desc">Comprensión de criterios de evaluación, fechas de entrega y reglas de la asignatura.</div>
+          <div class="p-meta">
+            <span>⚡ Potenciador: 5%</span>
+            <span>📍 Teórica</span>
+          </div>
+        </div>
+
+        <!-- Práctica 2 -->
+        <div class="practice-card" id="card-p2" onclick="selectPractice(2)">
+          <div class="card-top">
+            <span class="badge-no">Práctica 02</span>
+            <span class="badge-status status-done">🟢 Concluida</span>
+          </div>
+          <div class="p-title">Mi Primer Aplicación Móvil con Flutter</div>
+          <div class="p-desc">Contador funcional interactivo con Stateless/Stateful Widgets, botones flotantes y colores dinámicos.</div>
+          <div class="p-meta">
+            <span>⚡ Potenciador: 25%</span>
+            <span>📱 Flutter App</span>
+          </div>
+        </div>
+
+        <!-- Práctica 3 -->
+        <div class="practice-card" id="card-p3" onclick="selectPractice(3)">
+          <div class="card-top">
+            <span class="badge-no">Práctica 03</span>
+            <span class="badge-status status-done">🟢 Concluida</span>
+          </div>
+          <div class="p-title">Yes No Maybe App</div>
+          <div class="p-desc">Chat en Flutter que consulta la API <code>yesno.wtf</code> con arquitectura por capas, inyección de dependencias, 38 pruebas y 4 diagramas Archify.</div>
+          <div class="chip-row">
+            <span class="chip">Flutter 3.47.2</span>
+            <span class="chip">Dart 3.13.2</span>
+            <span class="chip purple">provider ^6.1.5+1</span>
+            <span class="chip purple">dio ^5.11.1</span>
+            <span class="chip green">38 pruebas</span>
+            <span class="chip amber">Material 3</span>
+          </div>
+          <div class="p-meta">
+            <span>⚡ Potenciador: 0%</span>
+            <span>💬 Flutter + API REST</span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Interactive Explorer Container for Práctica 01 -->
+    <section class="detail-container" id="detail-p1" style="display: none;">
+
+      <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 1rem;">
+        <div>
+          <span style="font-family: 'Fira Code', monospace; color: var(--cyan); font-weight:600; font-size: 0.85rem;">PRÁCTICA 01 — DETALLES Y EVIDENCIA</span>
+          <h2 style="font-size: 1.4rem; font-weight: 700; margin-top: 0.25rem;">Metodología de Evaluación de la Materia</h2>
+        </div>
+      </div>
+
+      <div class="subnav-tabs">
+        <button class="subtab-btn active" data-tab="tab-p1-objectives" onclick="switchSubtab(this)">🎯 Objetivos y Conclusiones</button>
+        <button class="subtab-btn" data-tab="tab-p1-evidence" onclick="switchSubtab(this)">📋 Evidencia</button>
+      </div>
+
+      <!-- TAB 1: OBJECTIVES & LESSONS -->
+      <div class="subtab-content active" id="tab-p1-objectives">
+        <h3 style="font-size: 1.1rem; color: var(--cyan); margin-bottom: 0.5rem;">Objetivo Alcanzado:</h3>
+        <p style="font-size: 0.9rem; color: var(--text-body); margin-bottom: 1.5rem;">
+          Transcribir en libreta la metodología de evaluación de la asignatura y comprender los criterios de
+          calificación, las fechas de entrega y las reglas de participation, para saber qué se entrega y cuándo.
+        </p>
+
+        <h3 style="font-size: 1.1rem; color: var(--purple); margin-bottom: 0.5rem;">Conceptos Clave Aprendidos:</h3>
+        <ul style="font-size: 0.9rem; color: var(--text-body); padding-left: 1.25rem; display: flex; flex-direction: column; gap: 0.4rem;">
+          <li><b>Criterios de evaluación:</b> la nota se compone por unidades y actividades, no por un único parcial.</li>
+          <li><b>Potenciadores:</b> cada práctica declara un porcentaje que suma al promedio de la unidad.</li>
+          <li><b>Fechas límite:</b> cumplir el calendario es parte de la calificación, no solo del contenido.</li>
+          <li><b>Reglas de participación:</b> asistencia, disposición y entregas a tiempo.</li>
+        </ul>
+      </div>
+
+      <!-- TAB 2: EVIDENCE -->
+      <div class="subtab-content" id="tab-p1-evidence">
+        <div class="evidence-grid">
+          <div class="evidence-card">
+            <h4>Evidencia física</h4>
+            <p>La evidencia de esta práctica es la <b>transcripción en libreta</b> de la metodología de evaluación
+            impartida por el docente. Al no ser una entrega digital, no hay archivos versionables en este repositorio.</p>
+          </div>
+          <div class="evidence-card">
+            <h4>Alcance de esta práctica</h4>
+            <p>Es una práctica <b>teórica</b>: no genera código, diagramas Archify ni pruebas automáticas.
+            Su valor es establecer el marco de evaluación bajo el que se entregar las Prácticas 2 y 3.</p>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- Interactive Explorer Container for Práctica 02 -->
+    <section class="detail-container" id="detail-p2">
+      
+      <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 1rem;">
+        <div>
+          <span style="font-family: 'Fira Code', monospace; color: var(--cyan); font-weight:600; font-size: 0.85rem;">PRÁCTICA 02 — DETALLES Y EVIDENCIA</span>
+          <h2 style="font-size: 1.4rem; font-weight: 700; margin-top: 0.25rem;">Mi Primer Aplicación Móvil con Flutter (Contador Funcional)</h2>
+        </div>
+        <div>
+          <a href="Practica02/hello_world_app/README.md" style="color: var(--cyan); text-decoration: none; font-weight: 600; font-size: 0.85rem;">📄 Ver README del Proyecto ➔</a>
+        </div>
+      </div>
+
+      <!-- Navigation Tabs for Practice Details -->
+      <div class="subnav-tabs">
+        <button class="subtab-btn active" data-tab="tab-p2-archify" onclick="switchSubtab(this)">🏗️ Diagramas Archify</button>
+        <button class="subtab-btn" data-tab="tab-p2-evidence" onclick="switchSubtab(this)">🖼️ Evidencia y Capturas</button>
+        <button class="subtab-btn" data-tab="tab-p2-files" onclick="switchSubtab(this)">📁 Visor de Código de Archivos</button>
+        <button class="subtab-btn" data-tab="tab-p2-objectives" onclick="switchSubtab(this)">🎯 Objetivos y Conclusiones</button>
+      </div>
+
+      <!-- TAB 1: ARCHIFY DIAGRAMS INTERACTIVE IFRAME -->
+      <div class="subtab-content active" id="tab-p2-archify">
+        <p style="font-size: 0.875rem; color: var(--text-body); margin-bottom: 1rem;">
+          A continuación se presenta el diagramador interactivo en tiempo real en formato <b>Archify</b> generado para la arquitectura del módulo <code>hello_world_app</code>.
+        </p>
+        <div class="arch-iframe-wrapper">
+          <iframe src="Practica02/hello_world_app/Docs/Architecture/hello_world_app_architecture.html" title="Diagrama Archify"></iframe>
+        </div>
+      </div>
+
+      <!-- TAB 2: EVIDENCE SCREENSHOTS -->
+      <div class="subtab-content" id="tab-p2-evidence">
+        <div class="evidence-grid">
+          
+          <div class="evidence-card">
+            <h4>1. Estado Cero / Neutral (0)</h4>
+            <img src="Practica02/hello_world_app/img/neutral(0).png" alt="Contador Neutral">
+            <p>El valor del contador inicia en 0 y se renderiza con el color azul dinámico <code>counterZeroColor</code>.</p>
+          </div>
+
+          <div class="evidence-card">
+            <h4>2. Estado Positivo (>0)</h4>
+            <img src="Practica02/hello_world_app/img/positiva.png" alt="Contador Positivo">
+            <p>Al presionar el botón <code>+1</code>, el contador aumenta y cambia automáticamente a verde <code>counterPositiveColor</code>.</p>
+          </div>
+
+          <div class="evidence-card">
+            <h4>3. Estado Negativo (<0)</h4>
+            <img src="Practica02/hello_world_app/img/negativa.png" alt="Contador Negativo">
+            <p>Al presionar el botón <code>-1</code>, el valor es menor a 0 y cambia a rojo <code>counterNegativeColor</code>.</p>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- TAB 3: FILE CODE EXPLORER -->
+      <div class="subtab-content" id="tab-p2-files">
+        <p style="font-size: 0.85rem; color: var(--text-body); margin-bottom: 1rem;">
+          Haz clic en cualquier archivo del proyecto para inspeccionar su código fuente directo:
+        </p>
+        
+        <div class="file-explorer">
+          <div class="file-tree">
+            <div class="file-tree-item active" data-file="main" onclick="showFileCode(this)">📄 lib/main.dart</div>
+            <div class="file-tree-item" data-file="counter" onclick="showFileCode(this)">📱 counter_functions_screen.dart</div>
+            <div class="file-tree-item" data-file="pubspec" onclick="showFileCode(this)">⚙️ pubspec.yaml</div>
+            <div class="file-tree-item" data-file="readme" onclick="showFileCode(this)">📜 README.md</div>
+          </div>
+          <div class="code-viewer">Selecciona un archivo...</div>
+        </div>
+      </div>
+
+      <!-- TAB 4: OBJECTIVES & LESSONS -->
+      <div class="subtab-content" id="tab-p2-objectives">
+        <h3 style="font-size: 1.1rem; color: var(--cyan); margin-bottom: 0.5rem;">Objetivo Alcanzado:</h3>
+        <p style="font-size: 0.9rem; color: var(--text-body); margin-bottom: 1.5rem;">
+          Aprender la estructura de proyectos móviles en Flutter, implementación de widgets Stateless/Stateful, control de flujo con <code>setState()</code> y evaluación funcional de temas de color.
+        </p>
+
+        <h3 style="font-size: 1.1rem; color: var(--purple); margin-bottom: 0.5rem;">Conceptos Clave Aprendidos:</h3>
+        <ul style="font-size: 0.9rem; color: var(--text-body); padding-left: 1.25rem; display: flex; flex-direction: column; gap: 0.4rem;">
+          <li><b>StatefulWidget:</b> Permite modificar el estado interno y re-renderizar componentes dinámicos.</li>
+          <li><b>CustomButton:</b> Extracción y encapsulamiento de componentes reusables de UI.</li>
+          <li><b>GoogleFonts:</b> Integración de recursos tipográficos externos en Flutter.</li>
+          <li><b>Hot Reload & Compilation:</b> Flujo de desarrollo ágil en Flutter SDK.</li>
+        </ul>
+      </div>
+
+    </section>
+
+    <!-- Interactive Explorer Container for Práctica 03 -->
+    <section class="detail-container" id="detail-p3" style="display: none;">
+
+      <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 1rem;">
+        <div>
+          <span style="font-family: 'Fira Code', monospace; color: var(--cyan); font-weight:600; font-size: 0.85rem;">PRÁCTICA 03 — DETALLES Y EVIDENCIA</span>
+          <h2 style="font-size: 1.4rem; font-weight: 700; margin-top: 0.25rem;">Yes No Maybe App (Chat con la API yesno.wtf)</h2>
+        </div>
+        <div>
+          <a href="Practica03/yes_no_app/README.md" style="color: var(--cyan); text-decoration: none; font-weight: 600; font-size: 0.85rem;">📄 Ver README del Proyecto ➔</a>
+        </div>
+      </div>
+
+      <div class="subnav-tabs">
+        <button class="subtab-btn active" data-tab="tab-p3-archify" onclick="switchSubtab(this)">🏗️ Diagramas Archify</button>
+        <button class="subtab-btn" data-tab="tab-p3-tech" onclick="switchSubtab(this)">🧰 Tecnologías</button>
+        <button class="subtab-btn" data-tab="tab-p3-evidence" onclick="switchSubtab(this)">🧪 Evidencia de Pruebas</button>
+        <button class="subtab-btn" data-tab="tab-p3-files" onclick="switchSubtab(this)">📁 Visor de Código de Archivos</button>
+        <button class="subtab-btn" data-tab="tab-p3-objectives" onclick="switchSubtab(this)">🎯 Objetivos y Conclusiones</button>
+      </div>
+
+      <!-- TAB 1: ARCHIFY DIAGRAMS -->
+      <div class="subtab-content active" id="tab-p3-archify">
+        <p style="font-size: 0.875rem; color: var(--text-body); margin-bottom: 1rem;">
+          Cuatro diagramas <b>Archify</b> generados a partir del código real del proyecto
+          (<code>main.dart</code>, <code>chat_provider.dart</code>, <code>get_yes_no_answer.dart</code>,
+          <code>yes_no_model.dart</code> y las 5 pruebas unitarias). Son interactivos, tienen modo
+          claro/oscuro y se pueden exportar.
+        </p>
+
+        <div class="subnav-tabs" style="border-bottom: 1px solid var(--border-color); margin-bottom: 1rem;">
+          <button class="subtab-btn diagram-btn active" data-frame="frame-arch" onclick="showDiagram(this)">🏛️ Arquitectura</button>
+          <button class="subtab-btn diagram-btn" data-frame="frame-seq" onclick="showDiagram(this)">🔄 Secuencia</button>
+          <button class="subtab-btn diagram-btn" data-frame="frame-life" onclick="showDiagram(this)">🔁 Ciclo de vida</button>
+          <button class="subtab-btn diagram-btn" data-frame="frame-tests" onclick="showDiagram(this)">🧪 Estrategia de pruebas</button>
+        </div>
+
+        <div class="arch-iframe-wrapper" style="height: 700px;">
+          <iframe class="diagram-frame" id="frame-arch" src="Practica03/yes_no_app/Docs/Architecture/yes_no_app_architecture.html" title="Diagrama de arquitectura por capas"></iframe>
+          <iframe class="diagram-frame" id="frame-seq" src="Practica03/yes_no_app/Docs/Architecture/yes_no_app_sequence.html" title="Diagrama de secuencia de una respuesta" style="display: none;"></iframe>
+          <iframe class="diagram-frame" id="frame-life" src="Practica03/yes_no_app/Docs/Architecture/yes_no_app_lifecycle.html" title="Diagrama de ciclo de vida de un mensaje" style="display: none;"></iframe>
+          <iframe class="diagram-frame" id="frame-tests" src="Practica03/yes_no_app/Docs/Architecture/yes_no_app_tests.html" title="Diagrama de estrategia de pruebas" style="display: none;"></iframe>
+        </div>
+
+        <div class="evidence-grid" style="margin-top: 1.5rem;">
+          <div class="evidence-card">
+            <h4>🏛️ Arquitectura por capas</h4>
+            <img src="Practica03/yes_no_app/Docs/Architecture/yes_no_app_architecture.visual-check.2048x1320.dark.png" alt="Diagrama de arquitectura por capas">
+            <p>Dependencias hacia dentro: <code>presentation → infrastructure → domain</code>. 11 componentes y 11 conexiones con 10 referencias de evidencia en el código.</p>
+          </div>
+          <div class="evidence-card">
+            <h4>🔄 Secuencia de una respuesta</h4>
+            <img src="Practica03/yes_no_app/Docs/Architecture/yes_no_app_sequence.visual-check.2048x1320.dark.png" alt="Diagrama de secuencia">
+            <p>7 participantes y 11 mensajes: campo → provider → cola → <code>pickAnswer()</code> → <code>yesno.wtf</code> → modelo → burbuja.</p>
+          </div>
+          <div class="evidence-card">
+            <h4>🔁 Ciclo de vida de un mensaje</h4>
+            <img src="Practica03/yes_no_app/Docs/Architecture/yes_no_app_lifecycle.visual-check.2048x1320.dark.png" alt="Diagrama de ciclo de vida">
+            <p>8 estados (<code>idle</code> → <code>done</code>, <code>failed</code>) con 8 transiciones, incluidas las ramas de error y silencio por ausencia de <code>?</code>.</p>
+          </div>
+          <div class="evidence-card">
+            <h4>🧪 Estrategia de pruebas</h4>
+            <img src="Practica03/yes_no_app/Docs/Architecture/yes_no_app_tests.visual-check.2048x1320.dark.png" alt="Diagrama de estrategia de pruebas">
+            <p>Del <code>flutter analyze</code> a los 38 tests: qué se inyecta (<code>Dio</code>, <code>Random</code>, reloj) y qué queda fuera de <code>flutter test</code>.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB 2: TECHNOLOGIES -->
+      <div class="subtab-content" id="tab-p3-tech">
+        <p style="font-size: 0.875rem; color: var(--text-body); margin-bottom: 1.5rem;">
+          Stack completo empleado en <code>yes_no_app</code>, tomado de <code>pubspec.yaml</code>
+          y de la cadena de herramientas del entorno de desarrollo.
+        </p>
+
+        <div class="tech-group">
+          <h3 class="block-title cyan">🧱 Lenguajes y frameworks</h3>
+          <div class="tech-grid">
+            <div class="tech-card">
+              <div class="tech-top">
+                <span class="tech-name">Flutter</span>
+                <span class="tech-ver">3.47.2 stable</span>
+              </div>
+              <p class="tech-desc">Framework de interfaz multiplataforma y base del tema <b>Material 3</b> con <code>colorSchemeSeed</code>.</p>
+            </div>
+            <div class="tech-card">
+              <div class="tech-top">
+                <span class="tech-name">Dart</span>
+                <span class="tech-ver">3.13.2</span>
+              </div>
+              <p class="tech-desc">Lenguaje de la app con <b>null safety</b>, expresiones <code>switch</code>, <code>enum</code> y <code>copyWith</code>.</p>
+            </div>
+            <div class="tech-card">
+              <div class="tech-top">
+                <span class="tech-name">yesno.wtf</span>
+                <span class="tech-ver">API REST</span>
+              </div>
+              <p class="tech-desc">Servicio público consultado en <code>GET /api?force=yes|no|maybe</code>; devuelve el texto y el GIF.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="tech-group">
+          <h3 class="block-title purple">📦 Paquetes de <code>pubspec.yaml</code></h3>
+          <div class="tech-grid">
+            <div class="tech-card purple">
+              <div class="tech-top">
+                <span class="tech-name">provider</span>
+                <span class="tech-ver">^6.1.5+1</span>
+              </div>
+              <p class="tech-desc"><code>ChangeNotifier</code> + <code>ChangeNotifierProvider</code>: el estado del chat vive fuera de los widgets.</p>
+            </div>
+            <div class="tech-card purple">
+              <div class="tech-top">
+                <span class="tech-name">dio</span>
+                <span class="tech-ver">^5.11.1</span>
+              </div>
+              <p class="tech-desc">Cliente HTTP con timeouts de 10 s y <code>DioException</code> tipadas por causa, para poder distinguirlas.</p>
+            </div>
+            <div class="tech-card purple">
+              <div class="tech-top">
+                <span class="tech-name">flutter_lints</span>
+                <span class="tech-ver">^6.0.0</span>
+              </div>
+              <p class="tech-desc">Reglas activadas en <code>analysis_options.yaml</code>; por eso <code>flutter analyze</code> termina sin incidencias.</p>
+            </div>
+            <div class="tech-card purple">
+              <div class="tech-top">
+                <span class="tech-name">flutter_launcher_icons</span>
+                <span class="tech-ver">^0.14.4</span>
+              </div>
+              <p class="tech-desc">Genera el icono de la app en todas las densidades desde <code>assets/images/me.jpg</code>.</p>
+            </div>
+            <div class="tech-card purple">
+              <div class="tech-top">
+                <span class="tech-name">cupertino_icons</span>
+                <span class="tech-ver">^1.0.8</span>
+              </div>
+              <p class="tech-desc">Set de iconos con estilo iOS usado en los componentes de la interfaz.</p>
+            </div>
+            <div class="tech-card purple">
+              <div class="tech-top">
+                <span class="tech-name">integration_test</span>
+                <span class="tech-ver">sdk: flutter</span>
+              </div>
+              <p class="tech-desc">Las 2 pruebas end-to-end que necesitan un emulador o dispositivo real.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="tech-group">
+          <h3 class="block-title green">🛠️ Herramientas</h3>
+          <div class="tech-grid">
+            <div class="tech-card green">
+              <div class="tech-top">
+                <span class="tech-name">Android SDK + Emulador</span>
+                <span class="tech-ver">AVD Pixel_10</span>
+              </div>
+              <p class="tech-desc">Ejecuta la app en un dispositivo virtual de 1080×2424 y sirve para las pruebas de integración.</p>
+            </div>
+            <div class="tech-card green">
+              <div class="tech-top">
+                <span class="tech-name">Archify</span>
+                <span class="tech-ver">4 diagramas</span>
+              </div>
+              <p class="tech-desc">Genera los diagramas de arquitectura, secuencia, ciclo de vida y estrategia de pruebas en HTML exportable.</p>
+            </div>
+            <div class="tech-card green">
+              <div class="tech-top">
+                <span class="tech-name">VS Code / Android Studio</span>
+                <span class="tech-ver">edición y depuración</span>
+              </div>
+              <p class="tech-desc">Entorno de trabajo con hot reload, breakpoints y el inspector de widgets de Flutter.</p>
+            </div>
+            <div class="tech-card green">
+              <div class="tech-top">
+                <span class="tech-name">Git + GitHub Pages</span>
+                <span class="tech-ver">versionado</span>
+              </div>
+              <p class="tech-desc">Control de versiones del código y publicación de este portafolio y de los diagramas interactivos.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="tech-group">
+          <h3 class="block-title amber">🏛️ Conceptos y patrones aplicados</h3>
+          <table class="mini-table">
+            <thead>
+              <tr><th>Concepto</th><th>Dónde se aplica en el código</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Arquitectura por capas</td><td><code>domain</code> → <code>infrastructure</code> → <code>presentation</code> → <code>config</code>, con la dependencia siempre hacia dentro.</td></tr>
+              <tr><td>Inyección de dependencias</td><td>Por constructor entran <code>Dio</code>, <code>Random</code>, <code>AnswerWeights</code> y el reloj en <code>ChatProvider</code>.</td></tr>
+              <tr><td>Gestión de estado declarativa</td><td><code>ChangeNotifier</code> + <code>context.watch&lt;ChatProvider&gt;()</code> redibuja la lista con cada <code>notifyListeners()</code>.</td></tr>
+              <tr><td>Composición sobre herencia</td><td><code>MyApp</code> arma el <code>MultiProvider</code>; las pantallas solo consumen estado, no lo crean.</td></tr>
+              <tr><td>Errores tipados</td><td>Todo <code>DioException</code> y <code>FormatException</code> sale de la capa de datos como <code>YesNoException</code>.</td></tr>
+              <tr><td>Serialización de peticiones</td><td>Cadena de <code>Future</code> en <code>herReply()</code> para que dos respuestas nunca se intercalen.</td></tr>
+              <tr><td>Pruebas con dobles</td><td><code>Dio</code> y <code>Random</code> falsos más reloj congelado: 38 tests en el host, sin red.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- TAB 3: TEST EVIDENCE -->
+      <div class="subtab-content" id="tab-p3-evidence">
+        <div class="evidence-grid">
+
+          <div class="evidence-card">
+            <h4>flutter analyze — sin incidencias</h4>
+            <p>El análisis estático no reporta ni un solo <code>issue</code> en <code>lib/</code> ni en <code>test/</code>.</p>
+          </div>
+
+          <div class="evidence-card">
+            <h4>flutter test — 38 / 38</h4>
+            <p>Las 38 pruebas unitarias y de widgets pasan en el host, sin red y sin esperas reales.</p>
+            <table style="width:100%; font-size:0.8rem; color: var(--text-body); border-collapse: collapse;">
+              <tr style="border-bottom:1px solid var(--border-color);"><td style="padding:0.3rem 0;"><code>yes_no_model_test</code></td><td align="right">10</td></tr>
+              <tr style="border-bottom:1px solid var(--border-color);"><td style="padding:0.3rem 0;"><code>answer_weights_test</code></td><td align="right">9</td></tr>
+              <tr style="border-bottom:1px solid var(--border-color);"><td style="padding:0.3rem 0;"><code>chat_provider_test</code></td><td align="right">9</td></tr>
+              <tr style="border-bottom:1px solid var(--border-color);"><td style="padding:0.3rem 0;"><code>format_time_of_day_test</code></td><td align="right">5</td></tr>
+              <tr><td style="padding:0.3rem 0;"><code>widget_test</code></td><td align="right">5</td></tr>
+            </table>
+          </div>
+
+          <div class="evidence-card">
+            <h4>Fuera de <code>flutter test</code></h4>
+            <p><code>integration_test/chat_flow_test.dart</code> contiene <b>2 pruebas</b> que necesitan un dispositivo o emulador real, por lo que no las cuenta el <code>flutter test</code> del host.</p>
+          </div>
+
+          <div class="evidence-card">
+            <h4>📄 Evidencia completa</h4>
+            <p>La salida íntegra de <code>flutter analyze</code> y <code>flutter test --reporter expanded</code> está en:</p>
+            <a href="Practica03/yes_no_app/Docs/Testing/test_results.txt" style="color: var(--cyan); font-weight:600; font-size:0.85rem;">Docs/Testing/test_results.txt ➔</a>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- TAB 4: FILE CODE EXPLORER -->
+      <div class="subtab-content" id="tab-p3-files">
+        <p style="font-size: 0.85rem; color: var(--text-body); margin-bottom: 1rem;">
+          Haz clic en cualquier archivo para inspeccionar su código fuente:
+        </p>
+
+        <div class="file-explorer">
+          <div class="file-tree">
+            <div class="file-tree-item active" data-file="p3provider" onclick="showFileCode(this)">🧠 chat_provider.dart</div>
+            <div class="file-tree-item" data-file="p3api" onclick="showFileCode(this)">🌐 get_yes_no_answer.dart</div>
+            <div class="file-tree-item" data-file="p3model" onclick="showFileCode(this)">🗄️ yes_no_model.dart</div>
+            <div class="file-tree-item" data-file="p3main" onclick="showFileCode(this)">📄 main.dart</div>
+          </div>
+          <div class="code-viewer">Selecciona un archivo...</div>
+        </div>
+      </div>
+
+      <!-- TAB 5: OBJECTIVES, LEARNINGS & CONCLUSIONS -->
+      <div class="subtab-content" id="tab-p3-objectives">
+
+        <div class="block">
+          <h3 class="block-title cyan">🎯 Objetivo de la práctica</h3>
+          <p class="block-text">
+            Construir una aplicación móvil con Flutter que consuma un servicio web externo
+            manipulando la capa de datos, aplicando <b>arquitectura por capas</b>,
+            <b>inyección de dependencias</b> y <b>manejo de errores tipado</b>, y acompañándola
+            con una batería de pruebas automatizadas y diagramas de arquitectura documentados.
+          </p>
+        </div>
+
+        <div class="block">
+          <h3 class="block-title green">✅ Objetivos específicos cumplidos</h3>
+          <ul class="block-list">
+            <li>Separar la lógica en capas claras: <code>domain</code>, <code>infrastructure</code>, <code>presentation</code> y <code>config</code>.</li>
+            <li>Desacoplar la lógica de negocio de Flutter mediante la <b>entidad</b> <code>Message</code>.</li>
+            <li>Manejar errores de red con la <b>excepción propia</b> <code>YesNoException</code> en lugar de excepciones crudas.</li>
+            <li>Hacer la lógica testeable inyectando <code>Dio</code>, <code>Random</code> y el reloj por el constructor.</li>
+            <li>Cubrir la lógica con <b>38 pruebas</b> unitarias, de modelo y de widgets, más 2 de integración.</li>
+          </ul>
+        </div>
+
+        <div class="block">
+          <h3 class="block-title purple">🧠 Cosas aprendidas</h3>
+          <div class="learn-list">
+            <div class="learn-item"><span class="learn-num">1</span><div><b>Dart moderno:</b> las expresiones <code>switch</code> y el <i>pattern matching</i> (<code>on DioException catch</code>) permiten un manejo de errores exhaustivo sin <code>if/else</code> anidados.</div></div>
+            <div class="learn-item"><span class="learn-num">2</span><div><b>Null safety obliga a decidir:</b> <code>String? imageUrl</code> y <code>DateTime? sentAt</code> hacen explícito qué se hace cuando no hay dato, que es lo que evita los <code>null</code> en la UI.</div></div>
+            <div class="learn-item"><span class="learn-num">3</span><div><b>StatelessWidget no significa sin estado:</b> el estado puede vivir en un provider externo; el widget solo se redibuja con <code>context.watch</code>.</div></div>
+            <div class="learn-item"><span class="learn-num">4</span><div><b><code>notifyListeners()</code> y <code>dispose()</code> van juntos:</b> hay que liberar el <code>ScrollController</code> a mano para no dejar fugas de memoria.</div></div>
+            <div class="learn-item"><span class="learn-num">5</span><div><b>Las capas existen para poder testear:</b> como <code>domain</code> no importa nada de Flutter, <code>Message</code> se prueba sin levantar un solo widget.</div></div>
+            <div class="learn-item"><span class="learn-num">6</span><div><b>Inyectar el reloj hace deterministas las pruebas:</b> si la hora saliera de un <code>DateTime.now()</code> interno, cada test sería intermitente.</div></div>
+            <div class="learn-item"><span class="learn-num">7</span><div><b>Un error de red no es un error de negocio:</b> envolver <code>DioException</code> en <code>YesNoException</code> mantiene el cliente HTTP fuera de la capa de presentación.</div></div>
+            <div class="learn-item"><span class="learn-num">8</span><div><b>Validar el JSON en el modelo:</b> <code>YesNoModel.fromJsonMap</code> lanza <code>FormatException</code> si <code>answer</code> no es texto, en vez de fallar más lejos sin contexto.</div></div>
+            <div class="learn-item"><span class="learn-num">9</span><div><b>La condición de carrera era real:</b> dos preguntas seguidas sí intercalaban las respuestas; la cola de <code>Future</code> en <code>herReply()</code> lo resolvió de raíz.</div></div>
+            <div class="learn-item"><span class="learn-num">10</span><div><b><code>flutter test</code> y <code>integration_test</code> son cosas distintas:</b> las primeras corren en el host con dobles; las de integración usan la app real y necesitan emulador.</div></div>
+            <div class="learn-item"><span class="learn-num">11</span><div><b><code>flutter analyze</code> es parte del entregable:</b> un proyecto sin lints es un proyecto documentado por el analizador.</div></div>
+            <div class="learn-item"><span class="learn-num">12</span><div><b>Un diagrama que no viene del código miente:</b> los 4 diagramas Archify se generaron verificando referencias contra los archivos reales.</div></div>
+          </div>
+        </div>
+
+        <div class="block">
+          <h3 class="block-title amber">📌 Conclusiones</h3>
+          <ul class="block-list">
+            <li>La <b>inyección de dependencias</b> fue lo que hizo posible testear: sin <code>Dio</code>, <code>Random</code> y reloj inyectables, las pruebas dependerían de red y de tiempo real.</li>
+            <li>Traducir los <code>DioException</code> a un único <code>YesNoException</code> evitó que la capa de presentación conociera el cliente HTTP.</li>
+            <li>La <b>cola con <code>Future</code></b> evitó una condición de carrera real: dos preguntas seguidas ya no intercalan sus respuestas.</li>
+            <li>Separar la entidad <code>Message</code> del DTO <code>YesNoModel</code> permitió probar el dominio sin levantar Flutter.</li>
+            <li>La evidencia ejecutable (<code>analyze</code> + 38 pruebas) y los diagramas complementan la memoria del proyecto: documentan lo que el código <b>efectivamente</b> hace.</li>
+          </ul>
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+  <footer>
+    Desarrollo Móvil Integral (DMI) — Universidad Tecnológica de Xicotepec de Juárez © 2026
+  </footer>
+
+  <script>
+    // Pretty Theme Toggle Logic
+    const htmlEl = document.documentElement;
+    const darkPill = document.getElementById('darkPill');
+    const lightPill = document.getElementById('lightPill');
+
+    function toggleTheme() {
+      const current = htmlEl.getAttribute('data-theme');
+      if (current === 'dark') {
+        htmlEl.setAttribute('data-theme', 'light');
+        darkPill.className = 'theme-switch-pill';
+        lightPill.className = 'theme-switch-pill active-light';
+      } else {
+        htmlEl.setAttribute('data-theme', 'dark');
+        darkPill.className = 'theme-switch-pill active-dark';
+        lightPill.className = 'theme-switch-pill';
+      }
+    }
+
+    // Practice Switcher: cada práctica tiene su propio detail-container
+    const practiceDetail = { 1: 'detail-p1', 2: 'detail-p2', 3: 'detail-p3' };
+
+    function selectPractice(n) {
+      document.querySelectorAll('.practice-card').forEach(c => c.classList.remove('active'));
+      const card = document.getElementById('card-p' + n);
+      if (card) card.classList.add('active');
+
+      document.querySelectorAll('.detail-container').forEach(d => (d.style.display = 'none'));
+      const detail = document.getElementById(practiceDetail[n]);
+      if (detail) detail.style.display = 'flex';
+    }
+
+    // Subtab Switcher (con alcance: solo afecta al detail-container del botón)
+    function switchSubtab(btn) {
+      const scope = btn.closest('.detail-container');
+      scope.querySelectorAll('.subtab-btn').forEach(b => b.classList.remove('active'));
+      scope.querySelectorAll('.subtab-content').forEach(c => c.classList.remove('active'));
+      btn.classList.add('active');
+      scope.querySelector('#' + btn.dataset.tab).classList.add('active');
+    }
+
+    // Archify Diagram Switcher (4 diagramas de la Práctica 03)
+    function showDiagram(btn) {
+      const scope = btn.closest('.detail-container');
+      scope.querySelectorAll('.diagram-btn').forEach(b => b.classList.remove('active'));
+      scope.querySelectorAll('.diagram-frame').forEach(f => (f.style.display = 'none'));
+      btn.classList.add('active');
+      scope.querySelector('#' + btn.dataset.frame).style.display = 'block';
+    }
+
+    // Code Database Snippets for File Viewer
+    const codeFiles = {
+      main: `import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:hello_world_app/presentation/screens/counter/counter_functions_screen.dart';
+
+const Color counterZeroColor = Color.fromARGB(255, 7, 164, 255);
+const Color counterPositiveColor = Colors.green;
+const Color counterNegativeColor = Colors.red;
+
+void main() {
+  runApp(MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        colorSchemeSeed: const Color.fromARGB(255, 208, 33, 243),
+      ),
+      home: const CounterFunctionsScreen(),
+    );
+  }
+}`,
+      counter: `class CounterFunctionsScreen extends StatefulWidget {
+  const CounterFunctionsScreen({super.key});
+
+  @override
+  State<CounterFunctionsScreen> createState() => _CounterFunctionsScreenState();
+}
+
+class _CounterFunctionsScreenState extends State<CounterFunctionsScreen> {
+  int clickCounter = 0;
+
+  Color _getCounterColor(int value) {
+    if (value == 0) return counterZeroColor;
+    if (value > 0) return counterPositiveColor;
+    return counterNegativeColor;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text('Counter Functions')),
+      body: Center(
+        child: Text('$clickCounter', style: GoogleFonts.rockSalt(color: _getCounterColor(clickCounter))),
+      ),
+      floatingActionButton: Column(
+        children: [
+          CustomButton(icon: Icons.plus_one, onPressed: () => setState(() => clickCounter++)),
+          CustomButton(icon: Icons.remove, onPressed: () => setState(() => clickCounter--)),
+          CustomButton(icon: Icons.refresh_outlined, onPressed: () => setState(() => clickCounter = 0)),
+        ],
+      )
+    );
+  }
+}`,
+      pubspec: `name: hello_world_app
+description: "A new Flutter project."
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.13.2
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.8
+  google_fonts: ^7.0.0`,
+      readme: `# Práctica de Desarrollo Móvil Integral - Contador Funcional
+- **Nombre:** Jesus Alejandro Artiaga Morales
+- **Matrícula:** 220772
+- **Materia:** Desarrollo Móvil Integral (DMI)`,
+
+      p3provider: `// lib/presentation/providers/chat_provider.dart
+class ChatProvider extends ChangeNotifier {
+  ChatProvider({
+    GetYesNoAnswer? getYesNoAnswer,
+    DateTime Function()? now,
+  })  : getYesNoAnswer = getYesNoAnswer ?? GetYesNoAnswer(),
+        _now = now ?? DateTime.now;
+
+  final GetYesNoAnswer getYesNoAnswer;
+
+  /// Reloj inyectable para poder fijar la hora de envio en los tests.
+  final DateTime Function() _now;
+
+  /// Las respuestas se encadenan para que nunca se intercalen entre si.
+  Future<void> _replyQueue = Future<void>.value();
+
+  final List<Message> messageList = [
+    Message(text: 'Hola Bb farias!', fromWho: FromWho.me, sentAt: DateTime.now()),
+    Message(text: 'Vamos al gym?', fromWho: FromWho.me, sentAt: DateTime.now()),
+  ];
+
+  Future<void> sendMessage(String text) async {
+    final trimmed = text.trim();
+    if (trimmed.isEmpty) return;
+
+    messageList.add(Message(
+      text: trimmed,
+      fromWho: FromWho.me,
+      sentAt: _now(),
+    ));
+    notifyListeners();
+    await moveScrollToBottom();
+
+    if (trimmed.endsWith('?')) {
+      unawaited(herReply());
+    }
+  }
+
+  Future<void> herReply() {
+    _replyQueue = _replyQueue.then((_) => _fetchAndAppendReply());
+    return _replyQueue;
+  }
+}`,
+
+      p3api: `// lib/config/helpers/get_yes_no_answer.dart
+/// La API no decide el resultado: eso lo hace [pickAnswer].
+/// Solo se usa \`?force=\` para pedir ESA respuesta y traerte su imagen,
+/// de modo que el texto y el gif siempre coinciden.
+Future<Message> getAnswer() async {
+  final wanted = pickAnswer();
+
+  try {
+    final response = await _dio.get<Map<String, dynamic>>(
+      '/api',
+      queryParameters: {'force': wanted},
+    );
+
+    final data = response.data;
+    if (data == null) {
+      throw const YesNoException('Bb farias no recibio respuesta.');
+    }
+
+    return YesNoModel.fromJsonMap(data).toMessageEntity();
+  } on YesNoException {
+    rethrow;
+  } on DioException catch (e) {
+    throw YesNoException(_describeDioError(e));
+  } on FormatException catch (e) {
+    throw YesNoException('La respuesta tiene un formato inesperado.');
+  } catch (e) {
+    throw YesNoException('Ocurrio un error inesperado al responder: $e');
+  }
+}
+
+/// Sortea la respuesta respetando los porcentajes de [weights].
+String pickAnswer() {
+  final roll = _random.nextInt(weights.total);
+
+  if (roll < weights.yes) return 'yes';
+  if (roll < weights.yes + weights.no) return 'no';
+  return 'maybe';
+}`,
+
+      p3model: `// lib/infrastructure/models/yes_no_model.dart
+/// Lanza [FormatException] si el mapa no cumple el contrato de la API.
+factory YesNoModel.fromJsonMap(Map<String, dynamic> json) {
+  final answer = json['answer'];
+  final forced = json['forced'];
+  final image = json['image'];
+
+  if (answer is! String || answer.trim().isEmpty) {
+    throw const FormatException('El campo "answer" debe ser un texto no vacio.');
+  }
+
+  return YesNoModel(
+    answer: answer.trim().toLowerCase(),
+    forced: forced is bool ? forced : false,
+    image: image is String ? image.trim() : '',
+  );
+}
+
+/// Traduce la respuesta de la API al texto que ve el usuario.
+String get displayText => switch (answer) {
+      'yes' => 'Si',
+      'no' => 'No',
+      _ => 'Tal vez',
+    };
+
+/// [sentAt] permite fijar la hora en los tests.
+Message toMessageEntity({DateTime? sentAt}) => Message(
+      text: displayText,
+      fromWho: FromWho.hers,
+      imageUrl: image.isEmpty ? null : image,
+      sentAt: sentAt ?? DateTime.now(),
+    );`,
+
+      p3main: `// lib/main.dart
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import 'package:yes_no_app/config/theme/app_theme.dart';
+import 'package:yes_no_app/presentation/providers/chat_provider.dart';
+import 'package:yes_no_app/presentation/screens/chat/chat_screen.dart';
+
+void main() => runApp(const MyApp());
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => ChatProvider())
+      ],
+      child: MaterialApp(
+        title: 'Yes No App',
+        debugShowCheckedModeBanner: false,
+        theme: AppTheme(selectedColor: 0).theme(),
+        home: const ChatScreen()
+      ),
+    );
+  }
+}`
+    };
+
+    function showFileCode(item) {
+      const scope = item.closest('.file-explorer');
+      scope.querySelectorAll('.file-tree-item').forEach(i => i.classList.remove('active'));
+      scope.querySelectorAll('.code-viewer').forEach(c => (c.innerText = 'Selecciona un archivo...'));
+      item.classList.add('active');
+      scope.querySelector('.code-viewer').innerText = codeFiles[item.dataset.file] || '// Archivo no cargado';
+    }
+
+    // Initialize: Práctica 02 visible y su primer archivo cargado
+    selectPractice(2);
+    document.querySelector('#detail-p2 .file-tree-item').click();
+  </script>
+</body>
+</html>
