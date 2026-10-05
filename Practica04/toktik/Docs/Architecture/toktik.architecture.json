@@ -1,0 +1,345 @@
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": {
+    "title": "Arquitectura por capas — toktik",
+    "output": "toktik_architecture.html",
+    "quality_profile": "showcase",
+    "animation": "trace",
+    "repository": {
+      "url": "https://github.com/JesuuusArt/Practicas_DMI_220772",
+      "provider": "github",
+      "link_mode": "local-only",
+      "revision": "40ae484d7bd7307f190de10f66f009b921ea1f16"
+    }
+  },
+  "components": [
+    {
+      "id": "theme",
+      "type": "frontend",
+      "label": "Temas por temporada",
+      "sublabel": "app / halloween / christmas",
+      "tag": "lib/config/theme",
+      "pos": [
+        60,
+        40
+      ],
+      "size": [
+        210,
+        56
+      ],
+      "sources": [
+        {
+          "path": "Practica04/toktik/lib/config/theme/app_theme.dart",
+          "line": 5,
+          "label": "AppTheme"
+        }
+      ]
+    },
+    {
+      "id": "mainApp",
+      "type": "frontend",
+      "label": "MyApp",
+      "sublabel": "runApp + MultiProvider",
+      "tag": "lib/main.dart",
+      "pos": [
+        400,
+        40
+      ],
+      "size": [
+        210,
+        56
+      ],
+      "sources": [
+        {
+          "path": "Practica04/toktik/lib/main.dart",
+          "line": 9,
+          "label": "MyApp"
+        }
+      ]
+    },
+    {
+      "id": "feed",
+      "type": "frontend",
+      "label": "VideoScrollableView",
+      "sublabel": "scroll vertical de videos",
+      "tag": "lib/presentation/widgets/shared",
+      "pos": [
+        740,
+        40
+      ],
+      "size": [
+        214,
+        58
+      ],
+      "sources": [
+        {
+          "path": "Practica04/toktik/lib/presentation/widgets/shared/video_scrollable_view.dart",
+          "line": 7,
+          "label": "VideoScrollableView"
+        }
+      ]
+    },
+    {
+      "id": "humanFormats",
+      "type": "backend",
+      "label": "HumanFormats",
+      "sublabel": "formato compacto (23.2K)",
+      "tag": "lib/config/helpers",
+      "pos": [
+        1100,
+        40
+      ],
+      "size": [
+        190,
+        56
+      ],
+      "sources": [
+        {
+          "path": "Practica04/toktik/lib/config/helpers/human_formats.dart",
+          "line": 3,
+          "label": "HumanFormats"
+        }
+      ]
+    },
+    {
+      "id": "data",
+      "type": "database",
+      "label": "videoPosts locales",
+      "sublabel": "18 videos locales (videos/1-18)",
+      "tag": "lib/shared/data",
+      "pos": [
+        60,
+        188
+      ],
+      "size": [
+        210,
+        56
+      ],
+      "sources": [
+        {
+          "path": "Practica04/toktik/lib/shared/data/local_video_post.dart",
+          "line": 1,
+          "label": "videoPosts"
+        }
+      ]
+    },
+    {
+      "id": "provider",
+      "type": "backend",
+      "label": "DiscoverProvider",
+      "sublabel": "videos + initialLoading",
+      "tag": "lib/presentation/providers",
+      "pos": [
+        400,
+        188
+      ],
+      "size": [
+        210,
+        62
+      ],
+      "sources": [
+        {
+          "path": "Practica04/toktik/lib/presentation/providers/discover_provider.dart",
+          "line": 9,
+          "label": "DiscoverProvider"
+        }
+      ]
+    },
+    {
+      "id": "discoverScreen",
+      "type": "frontend",
+      "label": "DiscoverScreen",
+      "sublabel": "scaffold + loading inicial",
+      "tag": "lib/presentation/screens",
+      "pos": [
+        740,
+        188
+      ],
+      "size": [
+        214,
+        58
+      ],
+      "sources": [
+        {
+          "path": "Practica04/toktik/lib/presentation/screens/discover/discover_screen.dart",
+          "line": 6,
+          "label": "DiscoverScreen"
+        }
+      ]
+    },
+    {
+      "id": "videoButtons",
+      "type": "frontend",
+      "label": "VideoButtons",
+      "sublabel": "likes / vistas / compartir",
+      "tag": "lib/presentation/widgets",
+      "pos": [
+        400,
+        336
+      ],
+      "size": [
+        210,
+        62
+      ],
+      "sources": [
+        {
+          "path": "Practica04/toktik/lib/presentation/widgets/shared/video_buttons.dart",
+          "line": 7,
+          "label": "VideoButtons"
+        }
+      ]
+    },
+    {
+      "id": "entity",
+      "type": "backend",
+      "label": "VideoPost",
+      "sublabel": "caption, videoUrl, likes, views",
+      "tag": "lib/domain/entities",
+      "pos": [
+        740,
+        336
+      ],
+      "size": [
+        214,
+        58
+      ],
+      "sources": [
+        {
+          "path": "Practica04/toktik/lib/domain/entities/video_post.dart",
+          "line": 1,
+          "label": "VideoPost"
+        }
+      ]
+    },
+    {
+      "id": "model",
+      "type": "backend",
+      "label": "LocalVideoModel",
+      "sublabel": "fromJson + toVideoPostEntity",
+      "tag": "lib/infrastructure/models",
+      "pos": [
+        740,
+        484
+      ],
+      "size": [
+        214,
+        58
+      ],
+      "sources": [
+        {
+          "path": "Practica04/toktik/lib/infrastructure/models/local_video_model.dart",
+          "line": 3,
+          "label": "LocalVideoModel"
+        }
+      ]
+    },
+    {
+      "id": "dataSource",
+      "type": "database",
+      "label": "Códecá local / data",
+      "sublabel": "18 videos locales",
+      "tag": "assets/videos",
+      "pos": [
+        60,
+        484
+      ],
+      "size": [
+        200,
+        58
+      ],
+      "sources": [
+        {
+          "path": "Practica04/toktik/lib/shared/data/local_video_post.dart",
+          "line": 1,
+          "label": "videos 1-18"
+        }
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "id": "theme-app",
+      "from": "theme",
+      "to": "mainApp",
+      "label": "AppTheme/HalloweenTheme/ChristmasTheme",
+      "labelAt": [
+        335,
+        110
+      ]
+    },
+    {
+      "id": "inject-provider",
+      "from": "mainApp",
+      "to": "provider",
+      "label": "ChangeNotifierProvider",
+      "labelAt": [
+        505,
+        110
+      ]
+    },
+    {
+      "id": "notify-rebuild",
+      "from": "provider",
+      "to": "discoverScreen",
+      "label": "notifyListeners()"
+    },
+    {
+      "id": "screen-feed",
+      "from": "discoverScreen",
+      "to": "feed",
+      "label": "VideoScrollableView"
+    },
+    {
+      "id": "provider-data",
+      "from": "provider",
+      "to": "data",
+      "label": "filtra views >= likes",
+      "labelAt": [
+        376,
+        264
+      ]
+    },
+    {
+      "id": "provider-model",
+      "from": "provider",
+      "to": "videoButtons",
+      "label": "videos",
+      "labelAt": [
+        505,
+        293
+      ]
+    },
+    {
+      "id": "model-entity",
+      "from": "model",
+      "to": "entity",
+      "label": "toVideoPostEntity()"
+    },
+    {
+      "id": "entity-list",
+      "from": "entity",
+      "to": "provider",
+      "label": "datos de video"
+    },
+    {
+      "id": "data-model",
+      "from": "data",
+      "to": "provider",
+      "label": "local videoPosts",
+      "labelAt": [
+        294,
+        258
+      ]
+    },
+    {
+      "id": "data-source",
+      "from": "data",
+      "to": "dataSource",
+      "label": "assets/videos/1-18.mp4",
+      "fromSide": "bottom",
+      "toSide": "top"
+    }
+  ],
+  "cards": []
+}

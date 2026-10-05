@@ -23,6 +23,7 @@
 | 1. | Metodología de Evaluación de la Materia | Transcribir en libreta y comprender la metodología y fechas de evaluación de la asignatura | 5 | 🟢 Concluida |
 | 2. | [Mi Primer Aplicación Móvil con Flutter](/Practica02/hello_world_app) | Codificar la app móvil en el framework de Flutter manejando Stateless y Stateful Widgets | 25 | 🟢 Concluida |
 | 3. | [Yes No Maybe App](/Practica03/yes_no_app) | App de chat en Flutter que consulta la API yesno.wtf con arquitectura por capas, inyección de dependencias, 38 pruebas y 4 diagramas Archify | 30 | 🟢 Concluida |
+| 4. | [TokTik](/Practica04/toktik) | App de videos estilo TikTok con scroll vertical, provider, temas por temporada e iconos personalizados | 30 | 🟢 Concluida |
 
 ---
 
@@ -30,6 +31,7 @@
 
 - **[📱 hello_world_app](Practica02/hello_world_app/)** — Contador Funcional en Flutter ([📄 Documentación completa](Practica02/hello_world_app/README.md))
 - **[💬 yes_no_app](Practica03/yes_no_app/)** — Yes No Maybe App en Flutter ([📄 Documentación completa](Practica03/yes_no_app/README.md))
+- **[💬 toktik](Practica04/toktik/)** — App de videos estilo TikTok en Flutter ([📖 Documentación completa](Practica04/toktik/README.md))
 
 <details>
   <summary><b>🌐 Ver Diagramas de Arquitectura Archify (Haz clic para desplegar)</b></summary>
