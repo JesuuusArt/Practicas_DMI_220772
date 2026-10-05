@@ -47,7 +47,65 @@ List<Map<String, dynamic>> videoPosts = [
     'likes': 342,
     'views': 3332,
   },
-
-
+  {
+    'name': 'Mira esta vista del oceano',
+    'videoUrl': 'assets/videos/9.mp4',
+    'likes': 1203,
+    'views': 5200,
+  },
+  {
+    'name': 'Trailer de Sintel, peliculon',
+    'videoUrl': 'assets/videos/10.mp4',
+    'likes': 891,
+    'views': 4100,
+  },
+  {
+    'name': 'El trailer del conejo gigante',
+    'videoUrl': 'assets/videos/11.mp4',
+    'likes': 2340,
+    'views': 9200,
+  },
+  {
+    'name': 'El perro haciendo acrobacias',
+    'videoUrl': 'assets/videos/12.mp4',
+    'likes': 560,
+    'views': 2400,
+  },
+  {
+    'name': 'Montañas desde el dron',
+    'videoUrl': 'assets/videos/13.mp4',
+    'likes': 32000,
+    'views': 150000,
+  },
+  {
+    'name': 'Video de muestra de prueba',
+    'videoUrl': 'assets/videos/14.mp4',
+    'likes': 12,
+    'views': 87,
+  },
+  {
+    'name': 'Vista desde la luna azul',
+    'videoUrl': 'assets/videos/15.mp4',
+    'likes': 5400,
+    'views': 25000,
+  },
+  {
+    'name': 'Vista desde la luna azul en HD',
+    'videoUrl': 'assets/videos/16.mp4',
+    'likes': 6700,
+    'views': 33700,
+  },
+  {
+    'name': 'Flor floreciendo a camara lenta',
+    'videoUrl': 'assets/videos/17.mp4',
+    'likes': 420,
+    'views': 1100,
+  },
+  {
+    'name': 'Viernes, buen día',
+    'videoUrl': 'assets/videos/18.mp4',
+    'likes': 89,
+    'views': 230,
+  },
 ];
 

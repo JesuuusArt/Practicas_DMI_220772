@@ -19,9 +19,10 @@ class DiscoverProvider extends ChangeNotifier {
 
     // await Future.delayed( const Duration(seconds: 2) );
 
-    final List<VideoPost> newVideos = videoPosts.map(
-      ( video ) => LocalVideoModel.fromJson(video).toVideoPostEntity()
-    ).toList();
+    final List<VideoPost> newVideos = videoPosts
+        .where( ( video ) => ( video['views'] as int? ?? 0 ) >= ( video['likes'] as int? ?? 0 ) )
+        .map( ( video ) => LocalVideoModel.fromJson(video).toVideoPostEntity() )
+        .toList();
 
     videos.addAll( newVideos );
     initialLoading = false;
