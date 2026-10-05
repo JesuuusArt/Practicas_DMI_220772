@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 
-class AppTheme {
+class ChristmasTheme {
 
   ThemeData getTheme() => ThemeData(
     useMaterial3: true,
     brightness: Brightness.dark,
-    fontFamily: 'Poppins',
-    scaffoldBackgroundColor: const Color(0xFF121212),
+    fontFamily: 'MountainsOfChristmas',
+    scaffoldBackgroundColor: const Color(0xFF0C3317),
     colorScheme: ColorScheme.fromSeed(
-      seedColor: const Color(0xFF8E3CC3),
+      seedColor: const Color(0xFFC41E3A),
       brightness: Brightness.dark,
     ),
   );
