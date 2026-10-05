@@ -1,0 +1,99 @@
+List<Map<String, dynamic>> videoPosts = [
+  {
+    'name': 'Subiendo escaleras automáticas',
+    'videoUrl': 'assets/videos/1.mp4',
+    'likes': 23230,
+    'views': 1523,
+  },
+  {
+    'name': 'Planta apreciada por peatones',
+    'videoUrl': 'assets/videos/2.mp4',
+    'likes': 24230,
+    'views': 1343,
+  },
+  {
+    'name': 'Que borroso veo todo!',
+    'videoUrl': 'assets/videos/3.mp4',
+    'likes': 21564320,
+    'views': 123563,
+  },
+  {
+    'name': '¿Esto es trigo? que interesante',
+    'videoUrl': 'assets/videos/4.mp4',
+    'likes': 320,
+    'views': 2300,
+  },
+  {
+    'name': 'El COVID no me afecta',
+    'videoUrl': 'assets/videos/5.mp4',
+    'likes': 3230,
+    'views': 31030,
+  },
+  {
+    'name': 'No quiero ir a trabajar hoy señor Stark',
+    'videoUrl': 'assets/videos/6.mp4',
+    'likes': 10,
+    'views': 330,
+  },
+  {
+    'name': '¿Ya llegamos a la India?... umm si',
+    'videoUrl': 'assets/videos/8.mp4',
+    'likes': 342,
+    'views': 3332,
+  },
+  {
+    'name': 'Mira esta vista del oceano',
+    'videoUrl': 'assets/videos/9.mp4',
+    'likes': 1203,
+    'views': 5200,
+  },
+  {
+    'name': 'Trailer de Sintel, peliculon',
+    'videoUrl': 'assets/videos/10.mp4',
+    'likes': 891,
+    'views': 4100,
+  },
+  {
+    'name': 'El trailer del conejo gigante',
+    'videoUrl': 'assets/videos/11.mp4',
+    'likes': 2340,
+    'views': 9200,
+  },
+  {
+    'name': 'El perro haciendo acrobacias',
+    'videoUrl': 'assets/videos/12.mp4',
+    'likes': 560,
+    'views': 2400,
+  },
+  {
+    'name': 'Montañas desde el dron',
+    'videoUrl': 'assets/videos/13.mp4',
+    'likes': 32000,
+    'views': 150000,
+  },
+  {
+    'name': 'Video de muestra de prueba',
+    'videoUrl': 'assets/videos/14.mp4',
+    'likes': 12,
+    'views': 87,
+  },
+  {
+    'name': 'Vista desde la luna azul en HD',
+    'videoUrl': 'assets/videos/16.mp4',
+    'likes': 6700,
+    'views': 33700,
+  },
+  {
+    'name': 'Flor floreciendo a camara lenta',
+    'videoUrl': 'assets/videos/17.mp4',
+    'likes': 420,
+    'views': 1100,
+  },
+  {
+    'name': 'Viernes, buen día',
+    'videoUrl': 'assets/videos/18.mp4',
+    'likes': 89,
+    'views': 230,
+  },
+];
+
