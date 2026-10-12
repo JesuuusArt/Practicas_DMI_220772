@@ -1,0 +1,395 @@
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": {
+    "title": "Clean Architecture con Repositorio y Múltiples DataSources — toktik",
+    "output": "toktik_clean_architecture.html",
+    "quality_profile": "showcase",
+    "animation": "trace",
+    "repository": {
+      "url": "https://github.com/JesuuusArt/Practicas_DMI_220772",
+      "provider": "github",
+      "link_mode": "local-only",
+      "revision": "40ae484d7bd7307f190de10f66f009b921ea1f16"
+    }
+  },
+  "components": [
+    {
+      "id": "discoverScreen",
+      "type": "frontend",
+      "label": "DiscoverScreen",
+      "sublabel": "For You / Discover / Favorites",
+      "tag": "lib/presentation/screens",
+      "pos": [60, 50],
+      "size": [220, 60],
+      "sources": [
+        {
+          "path": "Practica04/toktik/lib/presentation/screens/discover/discover_screen.dart",
+          "line": 15,
+          "label": "DiscoverScreen"
+        }
+      ]
+    },
+    {
+      "id": "discoverProvider",
+      "type": "backend",
+      "label": "DiscoverProvider",
+      "sublabel": "Gestor de Estado + Likes Persistentes",
+      "tag": "lib/presentation/providers",
+      "pos": [340, 50],
+      "size": [220, 60],
+      "sources": [
+        {
+          "path": "Practica04/toktik/lib/presentation/providers/discover_provider.dart",
+          "line": 14,
+          "label": "DiscoverProvider"
+        }
+      ]
+    },
+    {
+      "id": "themeProvider",
+      "type": "backend",
+      "label": "ThemeProvider",
+      "sublabel": "Temas / Audios / Iconos de Temporada",
+      "tag": "lib/presentation/providers",
+      "pos": [620, 50],
+      "size": [220, 60],
+      "sources": [
+        {
+          "path": "Practica04/toktik/lib/presentation/providers/theme_provider.dart",
+          "line": 10,
+          "label": "ThemeProvider"
+        }
+      ]
+    },
+    {
+      "id": "videoPlayers",
+      "type": "frontend",
+      "label": "Widgets de Reproducción",
+      "sublabel": "FullScreenPlayer / YouTube / Dailymotion",
+      "tag": "lib/presentation/widgets/video",
+      "pos": [900, 50],
+      "size": [240, 60],
+      "sources": [
+        {
+          "path": "Practica04/toktik/lib/presentation/widgets/video/fullscreen_player.dart",
+          "line": 11,
+          "label": "FullScreenPlayer"
+        }
+      ]
+    },
+    {
+      "id": "sharedPrefs",
+      "type": "database",
+      "label": "SharedPreferences",
+      "sublabel": "Persistencia Local (Likes, Mute, Tema)",
+      "tag": "shared_preferences",
+      "pos": [60, 175],
+      "size": [220, 64],
+      "sources": [
+        {
+          "path": "Practica04/toktik/lib/presentation/providers/discover_provider.dart",
+          "line": 50,
+          "label": "SharedPreferences"
+        }
+      ]
+    },
+    {
+      "id": "repoInterface",
+      "type": "backend",
+      "label": "VideoPostRepository",
+      "sublabel": "[Interface] Trending & Favorites",
+      "tag": "lib/domain/repositories",
+      "pos": [340, 175],
+      "size": [220, 64],
+      "sources": [
+        {
+          "path": "Practica04/toktik/lib/domain/repositories/video_posts_repository.dart",
+          "line": 3,
+          "label": "VideoPostRepository"
+        }
+      ]
+    },
+    {
+      "id": "datasourceInterface",
+      "type": "backend",
+      "label": "VideoPostDatasource",
+      "sublabel": "[Interface] Contrato abstracto DataSources",
+      "tag": "lib/domain/datasources",
+      "pos": [620, 175],
+      "size": [220, 64],
+      "sources": [
+        {
+          "path": "Practica04/toktik/lib/domain/datasources/video_posts_datasource.dart",
+          "line": 3,
+          "label": "VideoPostDatasource"
+        }
+      ]
+    },
+    {
+      "id": "entityVideo",
+      "type": "backend",
+      "label": "Entidad: VideoPost",
+      "sublabel": "caption, videoUrl, youtubeId, likes, views",
+      "tag": "lib/domain/entities",
+      "pos": [900, 175],
+      "size": [240, 64],
+      "sources": [
+        {
+          "path": "Practica04/toktik/lib/domain/entities/video_post.dart",
+          "line": 3,
+          "label": "VideoPost"
+        }
+      ]
+    },
+    {
+      "id": "repoImpl",
+      "type": "backend",
+      "label": "VideoPostsRepositoryImpl",
+      "sublabel": "Implementación del Repositorio",
+      "tag": "lib/infrastructure/repositories",
+      "pos": [340, 300],
+      "size": [220, 64],
+      "sources": [
+        {
+          "path": "Practica04/toktik/lib/infrastructure/repositories/video_posts_repository_impl.dart",
+          "line": 4,
+          "label": "VideoPostsRepositoryImpl"
+        }
+      ]
+    },
+    {
+      "id": "dsLocal",
+      "type": "backend",
+      "label": "LocalVideoDatasource",
+      "sublabel": "Assets locales de videos",
+      "tag": "lib/infrastructure/datasources",
+      "pos": [60, 410],
+      "size": [220, 60],
+      "sources": [
+        {
+          "path": "Practica04/toktik/lib/infrastructure/datasources/local_video_datasource_impl.dart",
+          "line": 6,
+          "label": "LocalVideoDatasource"
+        }
+      ]
+    },
+    {
+      "id": "dsYoutube",
+      "type": "backend",
+      "label": "YoutubeVideoDatasource",
+      "sublabel": "YouTube Data API v3",
+      "tag": "lib/infrastructure/datasources",
+      "pos": [340, 410],
+      "size": [220, 60],
+      "sources": [
+        {
+          "path": "Practica04/toktik/lib/infrastructure/datasources/youtube_video_datasource_impl.dart",
+          "line": 7,
+          "label": "YoutubeVideoDatasource"
+        }
+      ]
+    },
+    {
+      "id": "dsPixabay",
+      "type": "backend",
+      "label": "PixabayVideoDatasource",
+      "sublabel": "Pixabay Videos REST API",
+      "tag": "lib/infrastructure/datasources",
+      "pos": [620, 410],
+      "size": [220, 60],
+      "sources": [
+        {
+          "path": "Practica04/toktik/lib/infrastructure/datasources/pixabay_video_datasource_impl.dart",
+          "line": 7,
+          "label": "PixabayVideoDatasource"
+        }
+      ]
+    },
+    {
+      "id": "dsDailymotion",
+      "type": "backend",
+      "label": "DailymotionVideoDatasource",
+      "sublabel": "Dailymotion Public API",
+      "tag": "lib/infrastructure/datasources",
+      "pos": [900, 410],
+      "size": [240, 60],
+      "sources": [
+        {
+          "path": "Practica04/toktik/lib/infrastructure/datasources/dailymotion_video_datasource_impl.dart",
+          "line": 7,
+          "label": "DailymotionVideoDatasource"
+        }
+      ]
+    },
+    {
+      "id": "apiLocal",
+      "type": "database",
+      "label": "Assets MP4",
+      "sublabel": "18 videos en assets/videos/",
+      "tag": "assets/videos",
+      "pos": [60, 540],
+      "size": [220, 56],
+      "sources": [
+        {
+          "path": "Practica04/toktik/lib/shared/data/local_video_post.dart",
+          "line": 1,
+          "label": "videos locales"
+        }
+      ]
+    },
+    {
+      "id": "apiYoutube",
+      "type": "database",
+      "label": "Google YouTube API",
+      "sublabel": "Endpoint search?type=video",
+      "tag": "googleapis.com",
+      "pos": [340, 540],
+      "size": [220, 56],
+      "sources": [
+        {
+          "path": "Practica04/toktik/lib/config/api_keys.dart",
+          "line": 2,
+          "label": "youtubeApiKey"
+        }
+      ]
+    },
+    {
+      "id": "apiPixabay",
+      "type": "database",
+      "label": "Pixabay API REST",
+      "sublabel": "Endpoint api/videos/?key=...",
+      "tag": "pixabay.com/api/videos",
+      "pos": [620, 540],
+      "size": [220, 56],
+      "sources": [
+        {
+          "path": "Practica04/toktik/lib/config/api_keys.dart",
+          "line": 3,
+          "label": "pixabayApiKey"
+        }
+      ]
+    },
+    {
+      "id": "apiDailymotion",
+      "type": "database",
+      "label": "Dailymotion API",
+      "sublabel": "Endpoint api.dailymotion.com/videos",
+      "tag": "api.dailymotion.com",
+      "pos": [900, 540],
+      "size": [240, 56],
+      "sources": [
+        {
+          "path": "Practica04/toktik/lib/infrastructure/datasources/dailymotion_video_datasource_impl.dart",
+          "line": 12,
+          "label": "dailymotion API"
+        }
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "id": "screen-provider",
+      "from": "discoverScreen",
+      "to": "discoverProvider",
+      "label": "watch() / read()"
+    },
+    {
+      "id": "screen-theme",
+      "from": "discoverScreen",
+      "to": "themeProvider",
+      "label": "temas & audios"
+    },
+    {
+      "id": "provider-players",
+      "from": "discoverProvider",
+      "to": "videoPlayers",
+      "label": "reproducción & mute"
+    },
+    {
+      "id": "provider-prefs",
+      "from": "discoverProvider",
+      "to": "sharedPrefs",
+      "label": "likes & mute persistentes"
+    },
+    {
+      "id": "theme-prefs",
+      "from": "themeProvider",
+      "to": "sharedPrefs",
+      "label": "temporada persistente"
+    },
+    {
+      "id": "provider-repo",
+      "from": "discoverProvider",
+      "to": "repoInterface",
+      "label": "consume contrato VideoPostRepository"
+    },
+    {
+      "id": "repoimpl-repointerface",
+      "from": "repoImpl",
+      "to": "repoInterface",
+      "label": "implements VideoPostRepository"
+    },
+    {
+      "id": "repoimpl-datasource",
+      "from": "repoImpl",
+      "to": "datasourceInterface",
+      "label": "delega en VideoPostDatasource"
+    },
+    {
+      "id": "dslocal-dsinterface",
+      "from": "dsLocal",
+      "to": "datasourceInterface",
+      "label": "implements VideoPostDatasource"
+    },
+    {
+      "id": "dsyoutube-dsinterface",
+      "from": "dsYoutube",
+      "to": "datasourceInterface",
+      "label": "implements VideoPostDatasource"
+    },
+    {
+      "id": "dspixabay-dsinterface",
+      "from": "dsPixabay",
+      "to": "datasourceInterface",
+      "label": "implements VideoPostDatasource"
+    },
+    {
+      "id": "dsdailymotion-dsinterface",
+      "from": "dsDailymotion",
+      "to": "datasourceInterface",
+      "label": "implements VideoPostDatasource"
+    },
+    {
+      "id": "datasource-entity",
+      "from": "datasourceInterface",
+      "to": "entityVideo",
+      "label": "retorna List<VideoPost>"
+    },
+    {
+      "id": "dslocal-apilocal",
+      "from": "dsLocal",
+      "to": "apiLocal",
+      "label": "carga assets .mp4"
+    },
+    {
+      "id": "dsyoutube-apiyoutube",
+      "from": "dsYoutube",
+      "to": "apiYoutube",
+      "label": "HTTP REST Shorts"
+    },
+    {
+      "id": "dspixabay-apipixabay",
+      "from": "dsPixabay",
+      "to": "apiPixabay",
+      "label": "HTTP REST Pixabay"
+    },
+    {
+      "id": "dsdailymotion-apidailymotion",
+      "from": "dsDailymotion",
+      "to": "apiDailymotion",
+      "label": "HTTP REST Dailymotion"
+    }
+  ],
+  "cards": []
+}

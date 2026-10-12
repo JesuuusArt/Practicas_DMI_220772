@@ -1,13 +1,10 @@
-# Práctica 04 — TokTik
+# Práctica 04: TokTik — Aplicación de Reproducción de Videos Verticales
 
-> App de videos de estilo **TikTok** con scroll vertical y reproducción continua, construida con Flutter.
-> Incluye **selector automático de tema por fecha** (principal, Halloween y Navidad) y cambio de icono según la temporada.
-
-- **Estudiante:** Jesus Alejandro Artiaga Morales
-- **Matrícula:** 220772 (10º A)
-- **Materia:** Desarrollo Móvil Integral (DMI)
-- **Docente:** M.T.I. Marco A. Rentería Hernández
-- **Periodo:** Septiembre — Diciembre 2026
+> **Materia:** Desarrollo Móvil Integral (DMI) — (30 Firmas)  
+> **Estudiante:** Jesus Alejandro Artiaga Morales  
+> **Matrícula:** 220772 (10º A)  
+> **Docente:** M.T.I. Marco A. Rentería Hernández  
+> **Periodo:** Septiembre — Diciembre 2026  
 
 ---
 
@@ -20,97 +17,203 @@
 
 ---
 
-## 1. Objetivo de la práctica
+## 1. Descripción de la Práctica
 
-Construir una aplicación móvil con Flutter que reproduzca la experiencia de un feed de video corto
-estilo TikTok, aplicando la capa de datos, provider para estado, manejo de videos con `video_player`,
-y una funcionalidad extra de **temas por temporada** con cambio de fuente, paleta e icono, más un
-**filtro de videos** por vistas vs likes.
+Aplicación móvil desarrollada en Flutter que simula la experiencia de la red social **TikTok** con reproducción continua de videos en desplazamiento vertical. El proyecto está construido bajo los principios de **Clean Architecture**, incorporando:
 
-### Objetivos específicos
-
-1. Listar videos destacados de forma local sincronizada con assets.
-2. Implementar scroll vertical tipo TikTok con videos a pantalla completa.
-3. Reproducir cada video con el paquete `video_player` y sus dependencias.
-4. Filtrar y ocultar los videos que tengan menos vistas que likes.
-5. Implementar un tema por temporada (principal, Halloween y Navidad) con fuentes personalizadas
-   usando Poppins, Creepster y Mountains of Christmas.
-6. Cambiar automáticamente el tema y el icono de la app según la fecha del dispositivo.
-7. Documentar el proyecto con diagramas de arquitectura interactivos (Archify) y evidencias.
+- **Widgets Stateless y Stateful**
+- **Gestores de Estado:** Providers (`provider`)
+- **Manejo de Assets:** Videos, audios, iconos y tipografías personalizadas
+- **Paquetes externos:** `video_player`, `youtube_player_flutter`, `webview_flutter`, `audioplayers`, `shared_preferences`, etc.
+- **GestureDetector:** Para reproducir/pausar, dar like, silenciar y expandir descripciones.
+- **Posicionamiento de Widgets y Stacks:** Superposición de controles, degradados (`LinearGradient`) y animaciones.
+- **Mappers y Aserciones:** Transformación segura de modelos a entidades de dominio con `assert`.
+- **Loops y Filtros:** Animaciones cíclicas de temporadas y filtrado dinámico de videos (`views > likes`).
 
 ---
 
-## 2. Tecnologías utilizadas
+## 2. Funcionalidades Específicas Implementadas
 
-| Tecnología | Versión | Para qué se usa |
-|:---|:---|:---|
-| **Flutter** | `3.47.2` (stable) | Framework de interfaz multiplataforma. |
-| **Dart** | `3.13.2` (stable) | Lenguaje de programación. |
-| **provider** | `^6.1.5+1` | Manejo de estado con ChangeNotifier. |
-| **video_player** | `^2.10.0` | Reproducción de videos a pantalla completa. |
-| **animate_do** | `^4.0.0` | Animaciones de los botones de interacción. |
-| **intl** | `^0.20.2` | Formato compacto de likes / vistas (23.2K). |
-| **Archify** | Skill local | Generación de diagramas interactivos con modo claro y oscuro. |
+### 🎃 🎄 💖 🟣 A. Temas Visuales y Auditivos por Temporada
+- **4 Temporadas completas:**
+  - **Halloween:** Fuente *Creepster*, paleta naranja/negra, audio ambiental `halloween.mp3`, icono `halloween.png` y animación de calabazas/murciélagos.
+  - **Navidad:** Fuente *Mountains of Christmas*, paleta roja/verde, audio navideño `navidad.mp3`, icono `navidad.png` y copos de nieve cayendo.
+  - **San Valentín (Valentine's Day):** Fuente *Dancing Script*, paleta rosa/rojo pasión, audio romántico `valentines.mp3`, icono `valentines.png` y lluvia de corazones neón.
+  - **Normal:** Fuente *Poppins*, paleta púrpura oscuro y audio original.
+- **Carga automática por fecha:** Detecta el mes actual del dispositivo (Octubre = Halloween, Diciembre = Navidad, Febrero = San Valentín).
+- **Mecanismo de prueba interactivo:** Menú accesible desde la barra superior para forzar cualquier temporada en tiempo de ejecución, persistido en **Local Storage** (`SharedPreferences`).
 
----
+### 📱 B. Secciones Discover / For You / Favorites (Desplazamiento Lateral)
+- **Navegación horizontal fluida (`TabBarView`):**
+  1. **Para ti (For You):** Videos destacados locales y recomendaciones.
+  2. **Descubrir (Discover):** Exploración de videos remotos con chips de filtro por API:
+     - *Todos*
+     - *YouTube Shorts*
+     - *Pixabay Videos*
+     - *Dailymotion*
+  3. **Favoritos (Favorites):** Feed dinámico que muestra exclusivamente los videos marcados con corazón.
 
-## 3. Diagramas de arquitectura (Archify)
+### 🔇 C. Muteado y Activación de Sonido
+- Botón interactivo de volumen en la columna derecha de la interfaz.
+- Sincronizado en tiempo real con los reproductores (`VideoPlayerController`, `YoutubePlayerController` y `DailymotionPlayer`).
+- Estado de silencio persistido en `SharedPreferences`.
 
-🌐 [Ver el diagrama dinámico en GitHub Pages](https://jesuuusart.github.io/Practicas_DMI_220772/Practica04/toktik/Docs/Architecture/toktik_architecture.html)
+### ❤️ D. Persistencia de "Me Gusta" (Local Storage)
+- Al marcar el corazón, incrementa en 1 los likes y actualiza el estado `liked`.
+- Al desmarcarlo, resta 1 like.
+- Los datos persisten parcialmente en el dispositivo mediante `SharedPreferences`, sobreviviendo al reinicio de la aplicación.
 
-<a href="https://jesuuusart.github.io/Practicas_DMI_220772/Practica04/toktik/Docs/Architecture/toktik_architecture.html">
-  <img src="Docs/Architecture/toktik_architecture.visual-check.2048x1320.dark.png"
-       alt="Diagrama de arquitectura por capas de toktik (oscuro)" width="410" />
-  <img src="Docs/Architecture/toktik_architecture.visual-check.2048x1320.light.png"
-       alt="Diagrama de arquitectura por capas de toktik (claro)" width="410" />
-</a>
+### 📜 E. Descripción Extensa con (... más) y Desplazamiento Vertical
+- Si la descripción del video excede el límite de caracteres o 2 líneas, muestra automáticamente el indicador interactivo `... más`.
+- Al pulsar `... más`, la descripción se expande en un contenedor con **desplazamiento vertical** (`SingleChildScrollView` con scrollbar visible), permitiendo leer captions largos sin desbordar la pantalla.
+- Se puede contraer de nuevo con `menos`.
 
----
-
-## 4. Evidencias de la aplicación
-
-### Tema principal
-
-<p align="center">
-  <img src="assets/pruebas/screenCargaPrincipal.png" alt="screenCargaPrincipal.png" width="260" />
-  <img src="assets/pruebas/cargaVideoPrincipal.png" alt="cargaVideoPrincipal.png" width="260" />
-  <img src="assets/pruebas/videoPrincipal.png" alt="videoPrincipal.png" width="260" />
-  <img src="assets/pruebas/videoPrincipal2.png" alt="videoPrincipal2.png" width="260" />
-</p>
-
-### Tema Halloween
-
-<p align="center">
-  <img src="assets/pruebas/screenCargaHalloween.png" alt="screenCargaHalloween.png" width="260" />
-  <img src="assets/pruebas/cargaVideoHalloween.png" alt="cargaVideoHalloween.png" width="260" />
-  <img src="assets/pruebas/videoHalloween.png" alt="videoHalloween.png" width="260" />
-  <img src="assets/pruebas/videoHalloween2.png" alt="videoHalloween2.png" width="260" />
-</p>
-
-### Tema Navidad
-
-<p align="center">
-  <img src="assets/pruebas/screenCargaNavidad.png" alt="screenCargaNavidad.png" width="260" />
-  <img src="assets/pruebas/cargaVideoNavidad.png" alt="cargaVideoNavidad.png" width="260" />
-  <img src="assets/pruebas/videoNavidad.png" alt="videoNavidad.png" width="260" />
-  <img src="assets/pruebas/videoNavidad2.png" alt="videoNavidad2.png" width="260" />
-</p>
-
+### 🌐 F. Consumo de 3 DataSources / APIs Remotas Diferentes
+Arquitectura multicapa desacoplada consumiendo:
+1. **YouTube Data API v3** (`YoutubeVideoDatasource`)
+2. **Pixabay Videos API** (`PixabayVideoDatasource`)
+3. **Dailymotion REST API** (`DailymotionVideoDatasource`)
+4. **Local Assets DataSource** (`LocalVideoDatasource`)
 
 ---
 
-## 5. Cómo ejecutarlo
+## 3. Diagramas de Arquitectura (Archify)
 
-### Requisitos previos
+📄 *Para la documentación técnica extendida, consulta: [DIAGRAMAS_ARQUITECTURA.md](Docs/Architecture/DIAGRAMAS_ARQUITECTURA.md).*
 
-- **Flutter SDK** `3.47.2` o superior (`flutter --version` para verificarlo).
-- **Android SDK** o un emulador ya creado.
-- Utilidad de render: el tema aplica solo en dispositivo/emulador Android o Web.
+> 🌐 **Visores Dinámicos en Vivo en GitHub Pages:**
+> - 🏛️ [**Diagrama 1: Provider Local** — Ver interactivo en GitHub Pages](https://jesuuusart.github.io/Practicas_DMI_220772/Practica04/toktik/Docs/Architecture/toktik_architecture.html)
+> - 🏗️ [**Diagrama 2: Clean Architecture con Repositorio y 3 APIs** — Ver interactivo en GitHub Pages](https://jesuuusart.github.io/Practicas_DMI_220772/Practica04/toktik/Docs/Architecture/toktik_clean_architecture.html)
 
-### Comandos
+### Diagrama 1: Arquitectura con Provider Local
+
+<div align="center">
+  <a href="https://jesuuusart.github.io/Practicas_DMI_220772/Practica04/toktik/Docs/Architecture/toktik_architecture.html" title="Haz clic para abrir el Diagrama 1 interactivo en GitHub Pages">
+    <img src="Docs/Architecture/toktik_architecture.visual-check.2048x1320.dark.png" alt="Diagrama 1: Provider Local (Oscuro)" width="48%" />
+    <img src="Docs/Architecture/toktik_architecture.visual-check.2048x1320.light.png" alt="Diagrama 1: Provider Local (Claro)" width="48%" />
+  </a>
+  <p><em>👆 Haz clic en cualquiera de las imágenes para interactuar con el Diagrama 1 en GitHub Pages</em></p>
+</div>
+
+Muestra el flujo directo inicial donde la interfaz de usuario consume los datos a través del Provider conectado directamente al almacenamiento y assets locales:
+
+```mermaid
+graph TD
+    subgraph UI ["Capa de Presentación (UI)"]
+        A["DiscoverScreen"] --> B["VideoScrollableView"]
+        B --> C["FullScreenPlayer"]
+        B --> D["VideoButtons"]
+        B --> E["VideoCaption (... más)"]
+    end
+
+    subgraph StateManagement ["Gestor de Estado"]
+        F["DiscoverProvider (ChangeNotifier)"]
+    end
+
+    subgraph LocalData ["Datos y Almacenamiento Local"]
+        G["videoPosts (local_video_post.dart)"]
+        H["LocalVideoModel (Mapper / JSON)"]
+        I["SharedPreferences (Likes & Muted)"]
+    end
+
+    A -.->|watch / read| F
+    D -.->|toggleLike / toggleMuted| F
+    F -->|Carga directa de datos| G
+    G -->|Mapea a entidad| H
+    F <-->|Persistencia directa| I
+```
+
+---
+
+### Diagrama 2: Arquitectura Clean Code con Repositorio y Múltiples DataSources
+
+<div align="center">
+  <a href="https://jesuuusart.github.io/Practicas_DMI_220772/Practica04/toktik/Docs/Architecture/toktik_clean_architecture.html" title="Haz clic para abrir el Diagrama 2 interactivo en GitHub Pages">
+    <img src="Docs/Architecture/toktik_clean_architecture.visual-check.2048x1320.dark.png" alt="Diagrama 2: Clean Architecture (Oscuro)" width="48%" />
+    <img src="Docs/Architecture/toktik_clean_architecture.visual-check.2048x1320.light.png" alt="Diagrama 2: Clean Architecture (Claro)" width="48%" />
+  </a>
+  <p><em>👆 Haz clic en cualquiera de las imágenes para interactuar con el Diagrama 2 en GitHub Pages</em></p>
+</div>
+
+Muestra el desacoplamiento mediante **Inversión de Dependencias**, donde la Presentación solo interactúa con contratos de Dominio, y la Infraestructura implementa los DataSources para **YouTube, Pixabay, Dailymotion y Local**:
+
+```mermaid
+graph TD
+    subgraph Presentation ["Capa de Presentación (lib/presentation)"]
+        UI_Screen["DiscoverScreen\n(For You / Discover / Favorites)"]
+        Prov_Discover["DiscoverProvider"]
+        Prov_Theme["ThemeProvider"]
+        UI_Players["Players:\n- FullScreenPlayer (MP4/Local/Pixabay)\n- YoutubeShortsPlayer\n- DailymotionPlayer"]
+    end
+
+    subgraph Domain ["Capa de Dominio (lib/domain)"]
+        Repo_Interface["<<interface>>\nVideoPostRepository\n+ getTrendingVideosByPage(page)\n+ getFavoriteVideosByUser(userId)"]
+        Datasource_Interface["<<interface>>\nVideoPostDatasource\n+ getTrendingVideosByPage(page)\n+ getFavoriteVideosByUser(userId)"]
+        Entity_Video["Entity: VideoPost\n(caption, videoUrl, youtubeId,\ndailymotionId, likes, views)"]
+    end
+
+    subgraph Infrastructure ["Capa de Infraestructura (lib/infrastructure)"]
+        Repo_Impl["VideoPostsRepositoryImpl"]
+        DS_Local["LocalVideoDatasource\n(Assets .mp4)"]
+        DS_YouTube["YoutubeVideoDatasource\n(Google YouTube Data API v3)"]
+        DS_Pixabay["PixabayVideoDatasource\n(Pixabay Videos API)"]
+        DS_Dailymotion["DailymotionVideoDatasource\n(Dailymotion Public API)"]
+    end
+
+    subgraph Storage ["Almacenamiento Local"]
+        Prefs["SharedPreferences\n(Likes persistentes, Mute, Temporada)"]
+    end
+
+    UI_Screen --> Prov_Discover
+    UI_Screen --> Prov_Theme
+    Prov_Discover --> UI_Players
+    Prov_Discover -->|Consume a través de| Repo_Interface
+    Prov_Discover <-->|Guarda Likes y Mute| Prefs
+    Prov_Theme <-->|Persistencia de Temporada| Prefs
+
+    Repo_Impl -.->|Implementa| Repo_Interface
+    Repo_Impl -->|Delega en| Datasource_Interface
+
+    DS_Local -.->|Implementa| Datasource_Interface
+    DS_YouTube -.->|Implementa| Datasource_Interface
+    DS_Pixabay -.->|Implementa| Datasource_Interface
+    DS_Dailymotion -.->|Implementa| Datasource_Interface
+
+    DS_Local -->|Retorna| Entity_Video
+    DS_YouTube -->|Retorna| Entity_Video
+    DS_Pixabay -->|Retorna| Entity_Video
+    DS_Dailymotion -->|Retorna| Entity_Video
+```
+
+---
+
+## 4. Tecnologías y Paquetes Utilizados
+
+| Paquete / Tecnología | Versión | Propósito en el Proyecto |
+| :--- | :---: | :--- |
+| **Flutter** | `3.47.2` | Framework base para desarrollo multiplataforma. |
+| **Dart** | `3.13.2` | Lenguaje de programación orientado a objetos. |
+| **provider** | `^6.1.5+1` | Inyección de dependencias y reactividad (`DiscoverProvider`, `ThemeProvider`). |
+| **video_player** | `^2.10.0` | Reproducción a pantalla completa de videos MP4 locales y de Pixabay. |
+| **youtube_player_flutter** | `^9.1.1` | Reproducción nativa embebida de videos de YouTube Shorts. |
+| **webview_flutter** | `^4.14.1` | Renderizado interactivo del reproductor de Dailymotion. |
+| **audioplayers** | `^6.8.1` | Reproducción de sonidos ambientales y transiciones por temporada. |
+| **shared_preferences** | `^2.3.3` | Persistencia en Local Storage de likes, mute y tema seleccionado. |
+| **animate_do** | `^4.0.0` | Micro-animaciones para el botón de me gusta y transiciones. |
+| **intl** | `^0.20.2` | Formato legible compacto para números de likes y vistas (ej. 24.5K). |
+| **http** | `^1.6.0` | Peticiones HTTP a las APIs de YouTube, Pixabay y Dailymotion. |
+
+---
+
+## 5. Instrucciones de Ejecución
 
 ```bash
+# 1. Obtener dependencias
 flutter pub get
-flutter analyze      # solo el warning heredado de fullscreen_player
-flutter run          # en un emulador o dispositivo
+
+# 2. Verificar análisis estático de código
+flutter analyze
+
+# 3. Ejecutar la aplicación en emulador o dispositivo
+flutter run
 ```

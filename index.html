@@ -1246,24 +1246,40 @@
 
       <div class="subtab-content active" id="tab-p4-archify">
         <p style="font-size: 0.875rem; color: var(--text-body); margin-bottom: 1rem;">
-          Diagrama <b>Archify</b> generado a partir del código real del proyecto (<code>main.dart</code> y la carpeta <code>lib/</code>).
-          Es interactivo, tiene modo claro/oscuro y se puede exportar.
+          Dos diagramas <b>Archify</b> generados a partir del código real del proyecto (<code>main.dart</code>, capa <code>lib/domain</code>, <code>lib/infrastructure</code>, <code>lib/presentation</code> y las 3 APIs remotas).
+          Son interactivos, tienen modo claro/oscuro y se pueden exportar.
         </p>
 
+        <div class="subnav-tabs" style="border-bottom: 1px solid var(--border-color); margin-bottom: 1rem;">
+          <button class="subtab-btn diagram-btn active" data-frame="frame-p4-arch1" onclick="showDiagram(this)">🏛️ Diagrama 1: Provider Local</button>
+          <button class="subtab-btn diagram-btn" data-frame="frame-p4-arch2" onclick="showDiagram(this)">🏗️ Diagrama 2: Clean Architecture con Repositorio y 3 APIs</button>
+        </div>
+
         <div class="arch-iframe-wrapper" style="height: 700px;">
-          <iframe class="diagram-frame" id="frame-p4-arch" src="Practica04/toktik/Docs/Architecture/toktik_architecture.html" title="Diagrama de arquitectura por capas de toktik"></iframe>
+          <iframe class="diagram-frame" id="frame-p4-arch1" src="Practica04/toktik/Docs/Architecture/toktik_architecture.html" title="Diagrama 1: Arquitectura con Provider Local"></iframe>
+          <iframe class="diagram-frame" id="frame-p4-arch2" src="Practica04/toktik/Docs/Architecture/toktik_clean_architecture.html" title="Diagrama 2: Clean Architecture con Repositorio y 3 APIs" style="display: none;"></iframe>
         </div>
 
         <div class="evidence-grid" style="margin-top: 1.5rem;">
           <div class="evidence-card">
-            <h4>🏗️ Arquitectura por capas</h4>
-            <img src="Practica04/toktik/Docs/Architecture/toktik_architecture.visual-check.2048x1320.dark.png" alt="Diagrama de arquitectura por capas de toktik">
-            <p>11 componentes y 11 conexiones del proyecto <code>toktik</code>.</p>
+            <h4>🏛️ Diagrama 1: Provider Local (oscuro)</h4>
+            <img src="Practica04/toktik/Docs/Architecture/toktik_architecture.visual-check.2048x1320.dark.png" alt="Diagrama 1: Provider Local (oscuro)">
+            <p>11 componentes y 11 conexiones: Provider directo a assets locales.</p>
           </div>
           <div class="evidence-card">
-            <h4>🏗️ Arquitectura por capas (claro)</h4>
-            <img src="Practica04/toktik/Docs/Architecture/toktik_architecture.visual-check.2048x1320.light.png" alt="Diagrama arquitectura por capas (claro)">
-            <p>Mismo diagrama en modo claro.</p>
+            <h4>🏛️ Diagrama 1: Provider Local (claro)</h4>
+            <img src="Practica04/toktik/Docs/Architecture/toktik_architecture.visual-check.2048x1320.light.png" alt="Diagrama 1: Provider Local (claro)">
+            <p>Mismo diagrama 1 en modo claro.</p>
+          </div>
+          <div class="evidence-card">
+            <h4>🏗️ Diagrama 2: Clean Architecture (oscuro)</h4>
+            <img src="Practica04/toktik/Docs/Architecture/toktik_clean_architecture.visual-check.2048x1320.dark.png" alt="Diagrama 2: Clean Architecture (oscuro)">
+            <p>17 componentes: Dominio, Repositorio, 3 APIs remotas (YouTube, Pixabay, Dailymotion), Local y Storage.</p>
+          </div>
+          <div class="evidence-card">
+            <h4>🏗️ Diagrama 2: Clean Architecture (claro)</h4>
+            <img src="Practica04/toktik/Docs/Architecture/toktik_clean_architecture.visual-check.2048x1320.light.png" alt="Diagrama 2: Clean Architecture (claro)">
+            <p>Mismo diagrama 2 en modo claro.</p>
           </div>
         </div>
       </div>

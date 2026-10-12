@@ -64,3 +64,18 @@
   |---|---|
   | ![Dark](Practica03/yes_no_app/Docs/Architecture/yes_no_app_architecture.visual-check.2048x1320.dark.png) | ![Light](Practica03/yes_no_app/Docs/Architecture/yes_no_app_architecture.visual-check.2048x1320.light.png) |
 </details>
+
+<details>
+  <summary><b>🎬 TokTik — 2 Diagramas Archify (Haz clic para desplegar)</b></summary>
+  <br />
+
+  #### 🔗 Enlaces a Diagramas Interactivos en GitHub Pages:
+  - 🏛️ [Diagrama 1: Provider Local (Interactivo)](https://jesuuusart.github.io/Practicas_DMI_220772/Practica04/toktik/Docs/Architecture/toktik_architecture.html)
+  - 🏗️ [Diagrama 2: Clean Architecture con Repositorio y 3 APIs (Interactivo)](https://jesuuusart.github.io/Practicas_DMI_220772/Practica04/toktik/Docs/Architecture/toktik_clean_architecture.html)
+  - 🌐 [Sitio Web Portafolio GitHub Pages](https://jesuuusart.github.io/Practicas_DMI_220772/)
+
+  #### 🖼️ Previsualización de los Diagramas de Arquitectura:
+  | Diagrama 1: Provider Local (Oscuro) | Diagrama 2: Clean Architecture (Oscuro) |
+  |---|---|
+  | [![Diagrama 1](Practica04/toktik/Docs/Architecture/toktik_architecture.visual-check.2048x1320.dark.png)](https://jesuuusart.github.io/Practicas_DMI_220772/Practica04/toktik/Docs/Architecture/toktik_architecture.html) | [![Diagrama 2](Practica04/toktik/Docs/Architecture/toktik_clean_architecture.visual-check.2048x1320.dark.png)](https://jesuuusart.github.io/Practicas_DMI_220772/Practica04/toktik/Docs/Architecture/toktik_clean_architecture.html) |
+</details>
