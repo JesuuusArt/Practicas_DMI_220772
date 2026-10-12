@@ -1,4 +1,4 @@
-﻿name: toktik
+name: toktik
 description: "A new Flutter project."
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
@@ -38,6 +38,12 @@ dependencies:
   video_player: ^2.10.0
   animate_do: ^4.0.0
   intl: ^0.20.2
+  shared_preferences: ^2.3.3
+  youtube_player_flutter: ^9.1.1
+  http: ^1.6.0
+  audioplayers: ^6.8.1
+  webview_flutter: ^4.14.1
+  webview_flutter_android: ^4.14.1
 
 dev_dependencies:
   flutter_test:
@@ -66,6 +72,7 @@ flutter:
     - assets/videos/
     - assets/fonts/
     - assets/icons/
+    - assets/sounds/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images
@@ -83,6 +90,9 @@ flutter:
     - family: MountainsOfChristmas
       fonts:
         - asset: assets/fonts/MountainsofChristmas-Regular.ttf
+    - family: DancingScript
+      fonts:
+        - asset: assets/fonts/DancingScript-Regular.ttf
 
   # To add custom fonts to your application, add a fonts section here,
   # in this "flutter" section. Each entry in this list should have a
