@@ -23,7 +23,7 @@
 | 1. | Metodología de Evaluación de la Materia | Transcribir en libreta y comprender la metodología y fechas de evaluación de la asignatura | 5 | 🟢 Concluida |
 | 2. | [Mi Primer Aplicación Móvil con Flutter](/Practica02/hello_world_app) | Codificar la app móvil en el framework de Flutter manejando Stateless y Stateful Widgets | 25 | 🟢 Concluida |
 | 3. | [Yes No Maybe App](/Practica03/yes_no_app) | App de chat en Flutter que consulta la API yesno.wtf con arquitectura por capas, inyección de dependencias, 38 pruebas y 4 diagramas Archify | 30 | 🟢 Concluida |
-| 4. | [TokTik](/Practica04/toktik) | App de videos estilo TikTok con scroll vertical, provider, temas por temporada e iconos personalizados | 30 | 🟢 Concluida |
+| 4. | [TokTik](/Practica04/toktik) | App de videos estilo TikTok con scroll vertical, Clean Architecture, 4 temas por temporada, 3 DataSources remotos e iconos personalizados | 30 | 🟢 Concluida |
 
 ---
 
@@ -31,10 +31,10 @@
 
 - **[📱 hello_world_app](Practica02/hello_world_app/)** — Contador Funcional en Flutter ([📄 Documentación completa](Practica02/hello_world_app/README.md))
 - **[💬 yes_no_app](Practica03/yes_no_app/)** — Yes No Maybe App en Flutter ([📄 Documentación completa](Practica03/yes_no_app/README.md))
-- **[💬 toktik](Practica04/toktik/)** — App de videos estilo TikTok en Flutter ([📖 Documentación completa](Practica04/toktik/README.md))
+- **[🎬 toktik](Practica04/toktik/)** — App de videos estilo TikTok en Flutter ([📖 Documentación completa](Practica04/toktik/README.md))
 
 <details>
-  <summary><b>🌐 Ver Diagramas de Arquitectura Archify (Haz clic para desplegar)</b></summary>
+  <summary><b>📱 Hello World App — Diagrama Archify (Haz clic para desplegar)</b></summary>
   <br />
 
   #### 🔗 Enlaces a Diagramas Interactivos:
@@ -74,7 +74,7 @@
   - 🏗️ [Diagrama 2: Clean Architecture con Repositorio y 3 APIs (Interactivo)](https://jesuuusart.github.io/Practicas_DMI_220772/Practica04/toktik/Docs/Architecture/toktik_clean_architecture.html)
   - 🌐 [Sitio Web Portafolio GitHub Pages](https://jesuuusart.github.io/Practicas_DMI_220772/)
 
-  #### 🖼️ Previsualización de los Diagramas de Arquitectura:
+  #### 🖼️ Previsualización de los Diagramas de Arquitectura (Clic para interactuar en GitHub Pages):
   | Diagrama 1: Provider Local (Oscuro) | Diagrama 2: Clean Architecture (Oscuro) |
   |---|---|
   | [![Diagrama 1](Practica04/toktik/Docs/Architecture/toktik_architecture.visual-check.2048x1320.dark.png)](https://jesuuusart.github.io/Practicas_DMI_220772/Practica04/toktik/Docs/Architecture/toktik_architecture.html) | [![Diagrama 2](Practica04/toktik/Docs/Architecture/toktik_clean_architecture.visual-check.2048x1320.dark.png)](https://jesuuusart.github.io/Practicas_DMI_220772/Practica04/toktik/Docs/Architecture/toktik_clean_architecture.html) |
