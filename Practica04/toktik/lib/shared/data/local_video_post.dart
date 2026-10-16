@@ -1,0 +1,105 @@
+List<Map<String, dynamic>> videoPosts = [
+  {
+    'name': 'Subiendo escaleras automáticas en el centro comercial mientras grabo un video estilo TikTok para mi clase de Desarrollo Móvil Integral (DMI 10A) con reproducción vertical continua #fyp #viral #dmi #toktik',
+    'videoUrl': 'assets/videos/1.mp4',
+    'likes': 500,
+    'views': 1523,
+  },
+  {
+    'name': 'Planta apreciada por peatones',
+    'videoUrl': 'assets/videos/2.mp4',
+    'likes': 24230,
+    'views': 1343,
+  },
+  {
+    'name': 'Que borroso veo todo!',
+    'videoUrl': 'assets/videos/3.mp4',
+    'likes': 21564320,
+    'views': 123563,
+  },
+  {
+    'name': '¿Esto es trigo? que interesante encontrar este campo abierto en medio del atardecer con un viento fresco que mueve todas las espigas doradas de manera impresionante #naturaleza #campo #trigo #paz #sunset',
+    'videoUrl': 'assets/videos/4.mp4',
+    'likes': 320,
+    'views': 2300,
+  },
+  {
+    'name': 'El COVID no me afecta porque me quedo en casa programando en Flutter con Clean Architecture, Providers, DataSources y temas por temporada para entregar mi práctica de 30 firmas perfecta #flutter #code #developer #mobile',
+    'videoUrl': 'assets/videos/5.mp4',
+    'likes': 3230,
+    'views': 31030,
+  },
+  {
+    'name': 'No quiero ir a trabajar hoy señor Stark, prefiero quedarme probando la reproducción vertical de videos, los likes en local storage y los temas de Halloween y Navidad #marvel #toktik #humor #ironman',
+    'videoUrl': 'assets/videos/6.mp4',
+    'likes': 10,
+    'views': 330,
+  },
+  {
+    'name': '¿Ya llegamos a la India?... umm si, este viaje fue una aventura completa cruzando ciudades y conociendo gente increíble en cada rincón del trayecto #travel #india #explore #adventure',
+    'videoUrl': 'assets/videos/8.mp4',
+    'likes': 342,
+    'views': 3332,
+  },
+  {
+    'name': 'JAJAJAJAJ',
+    'videoUrl': 'assets/videos/t1.MP4',
+    'likes': 120,
+    'views': 450,
+  },
+  {
+    'name': 'borracho mimido',
+    'videoUrl': 'assets/videos/t2.MP4',
+    'likes': 180,
+    'views': 900,
+  },
+  {
+    'name': 'Auron? JAJAJA',
+    'videoUrl': 'assets/videos/t3.MP4',
+    'likes': 200,
+    'views': 1200,
+  },
+  {
+    'name': 'funk rico con camionetas ricas',
+    'videoUrl': 'assets/videos/t4.MP4',
+    'likes': 300,
+    'views': 2100,
+  },
+  {
+    'name': 'Victambo DIOS',
+    'videoUrl': 'assets/videos/t5.MP4',
+    'likes': 150,
+    'views': 800,
+  },
+  {
+    'name': 'Buenos dias',
+    'videoUrl': 'assets/videos/t6.MP4',
+    'likes': 90,
+    'views': 350,
+  },
+  {
+    'name': 'Pobre gaturra',
+    'videoUrl': 'assets/videos/t7.MP4',
+    'likes': 400,
+    'views': 3200,
+  },
+  {
+    'name': 'ajaaa',
+    'videoUrl': 'assets/videos/t8.MP4',
+    'likes': 60,
+    'views': 200,
+  },
+  {
+    'name': 'Q buen junk',
+    'videoUrl': 'assets/videos/t9.MP4',
+    'likes': 250,
+    'views': 1100,
+  },
+  {
+    'name': 'El mas PEGAOOOO',
+    'videoUrl': 'assets/videos/t10.MP4',
+    'likes': 500,
+    'views': 5000,
+  },
+];
+
