@@ -10,7 +10,7 @@
       "url": "https://github.com/JesuuusArt/Practicas_DMI_220772",
       "provider": "github",
       "link_mode": "local-only",
-      "revision": "40ae484d7bd7307f190de10f66f009b921ea1f16"
+      "revision": "181872883bac5d1b4f1b4ae900f73ec6e94ae64b"
     }
   },
   "components": [
@@ -20,8 +20,8 @@
       "label": "DiscoverScreen",
       "sublabel": "For You / Discover / Favorites",
       "tag": "lib/presentation/screens",
-      "pos": [60, 50],
-      "size": [220, 60],
+      "pos": [60, 550],
+      "size": [200, 64],
       "sources": [
         {
           "path": "Practica04/toktik/lib/presentation/screens/discover/discover_screen.dart",
@@ -34,10 +34,10 @@
       "id": "discoverProvider",
       "type": "backend",
       "label": "DiscoverProvider",
-      "sublabel": "Gestor de Estado + Likes Persistentes",
+      "sublabel": "Estado + Likes Persistidos",
       "tag": "lib/presentation/providers",
-      "pos": [340, 50],
-      "size": [220, 60],
+      "pos": [400, 425],
+      "size": [200, 64],
       "sources": [
         {
           "path": "Practica04/toktik/lib/presentation/providers/discover_provider.dart",
@@ -50,10 +50,10 @@
       "id": "themeProvider",
       "type": "backend",
       "label": "ThemeProvider",
-      "sublabel": "Temas / Audios / Iconos de Temporada",
+      "sublabel": "Temas / Audios / Temporada",
       "tag": "lib/presentation/providers",
-      "pos": [620, 50],
-      "size": [220, 60],
+      "pos": [400, 675],
+      "size": [200, 64],
       "sources": [
         {
           "path": "Practica04/toktik/lib/presentation/providers/theme_provider.dart",
@@ -68,8 +68,8 @@
       "label": "Widgets de Reproducción",
       "sublabel": "FullScreenPlayer / Vimeo / YouTube",
       "tag": "lib/presentation/widgets/video",
-      "pos": [900, 50],
-      "size": [240, 60],
+      "pos": [740, 425],
+      "size": [200, 64],
       "sources": [
         {
           "path": "Practica04/toktik/lib/presentation/widgets/video/fullscreen_player.dart",
@@ -79,29 +79,13 @@
       ]
     },
     {
-      "id": "sharedPrefs",
-      "type": "database",
-      "label": "SharedPreferences",
-      "sublabel": "Persistencia Local (Likes, Mute, Tema)",
-      "tag": "shared_preferences",
-      "pos": [60, 175],
-      "size": [220, 64],
-      "sources": [
-        {
-          "path": "Practica04/toktik/lib/presentation/providers/discover_provider.dart",
-          "line": 59,
-          "label": "SharedPreferences"
-        }
-      ]
-    },
-    {
       "id": "repoInterface",
       "type": "backend",
       "label": "VideoPostRepository",
       "sublabel": "[Interface] Trending & Favorites",
       "tag": "lib/domain/repositories",
-      "pos": [340, 175],
-      "size": [220, 64],
+      "pos": [740, 550],
+      "size": [200, 64],
       "sources": [
         {
           "path": "Practica04/toktik/lib/domain/repositories/video_posts_repository.dart",
@@ -111,34 +95,18 @@
       ]
     },
     {
-      "id": "datasourceInterface",
-      "type": "backend",
-      "label": "VideoPostDatasource",
-      "sublabel": "[Interface] Contrato abstracto DataSources",
-      "tag": "lib/domain/datasources",
-      "pos": [620, 175],
-      "size": [220, 64],
+      "id": "sharedPrefs",
+      "type": "database",
+      "label": "SharedPreferences",
+      "sublabel": "Likes / Mute / Tema",
+      "tag": "shared_preferences",
+      "pos": [740, 675],
+      "size": [200, 64],
       "sources": [
         {
-          "path": "Practica04/toktik/lib/domain/datasources/video_posts_datasource.dart",
-          "line": 3,
-          "label": "VideoPostDatasource"
-        }
-      ]
-    },
-    {
-      "id": "entityVideo",
-      "type": "backend",
-      "label": "Entidad: VideoPost",
-      "sublabel": "caption, videoUrl, youtubeId, vimeoId, likes, views",
-      "tag": "lib/domain/entities",
-      "pos": [900, 175],
-      "size": [240, 64],
-      "sources": [
-        {
-          "path": "Practica04/toktik/lib/domain/entities/video_post.dart",
-          "line": 1,
-          "label": "VideoPost"
+          "path": "Practica04/toktik/lib/presentation/providers/discover_provider.dart",
+          "line": 59,
+          "label": "SharedPreferences"
         }
       ]
     },
@@ -148,8 +116,8 @@
       "label": "VideoPostsRepositoryImpl",
       "sublabel": "Implementación del Repositorio",
       "tag": "lib/infrastructure/repositories",
-      "pos": [340, 300],
-      "size": [220, 64],
+      "pos": [1080, 550],
+      "size": [200, 64],
       "sources": [
         {
           "path": "Practica04/toktik/lib/infrastructure/repositories/video_posts_repository_impl.dart",
@@ -159,13 +127,45 @@
       ]
     },
     {
+      "id": "entityVideo",
+      "type": "backend",
+      "label": "Entidad: VideoPost",
+      "sublabel": "caption, videoUrl, youtubeId,\nvimeoId, likes, views",
+      "tag": "lib/domain/entities",
+      "pos": [1420, 425],
+      "size": [200, 64],
+      "sources": [
+        {
+          "path": "Practica04/toktik/lib/domain/entities/video_post.dart",
+          "line": 1,
+          "label": "VideoPost"
+        }
+      ]
+    },
+    {
+      "id": "datasourceInterface",
+      "type": "backend",
+      "label": "VideoPostDatasource",
+      "sublabel": "[Interface] Contrato DataSources",
+      "tag": "lib/domain/datasources",
+      "pos": [1420, 550],
+      "size": [200, 64],
+      "sources": [
+        {
+          "path": "Practica04/toktik/lib/domain/datasources/video_posts_datasource.dart",
+          "line": 3,
+          "label": "VideoPostDatasource"
+        }
+      ]
+    },
+    {
       "id": "dsLocal",
       "type": "backend",
       "label": "LocalVideoDatasource",
-      "sublabel": "Assets locales de videos",
+      "sublabel": "Assets locales de video",
       "tag": "lib/infrastructure/datasources",
-      "pos": [60, 410],
-      "size": [220, 60],
+      "pos": [1760, 175],
+      "size": [200, 64],
       "sources": [
         {
           "path": "Practica04/toktik/lib/infrastructure/datasources/local_video_datasource_impl.dart",
@@ -175,61 +175,13 @@
       ]
     },
     {
-      "id": "dsYoutube",
-      "type": "backend",
-      "label": "YoutubeVideoDatasource",
-      "sublabel": "YouTube Data API v3",
-      "tag": "lib/infrastructure/datasources",
-      "pos": [340, 410],
-      "size": [220, 60],
-      "sources": [
-        {
-          "path": "Practica04/toktik/lib/infrastructure/datasources/youtube_video_datasource_impl.dart",
-          "line": 7,
-          "label": "YoutubeVideoDatasource"
-        }
-      ]
-    },
-    {
-      "id": "dsPixabay",
-      "type": "backend",
-      "label": "PixabayVideoDatasource",
-      "sublabel": "Pixabay Videos REST API",
-      "tag": "lib/infrastructure/datasources",
-      "pos": [620, 410],
-      "size": [220, 60],
-      "sources": [
-        {
-          "path": "Practica04/toktik/lib/infrastructure/datasources/pixabay_video_datasource_impl.dart",
-          "line": 7,
-          "label": "PixabayVideoDatasource"
-        }
-      ]
-    },
-    {
-      "id": "dsVimeo",
-      "type": "backend",
-      "label": "VimeoVideoDatasource",
-      "sublabel": "Vimeo API v3 (Token)",
-      "tag": "lib/infrastructure/datasources",
-      "pos": [900, 410],
-      "size": [240, 60],
-      "sources": [
-        {
-          "path": "Practica04/toktik/lib/infrastructure/datasources/vimeo_video_datasource_impl.dart",
-          "line": 15,
-          "label": "VimeoVideoDatasource"
-        }
-      ]
-    },
-    {
       "id": "apiLocal",
       "type": "database",
       "label": "Assets MP4",
-      "sublabel": "18 videos en assets/videos/",
+      "sublabel": "assets/videos/",
       "tag": "assets/videos",
-      "pos": [60, 540],
-      "size": [220, 56],
+      "pos": [1760, 300],
+      "size": [200, 56],
       "sources": [
         {
           "path": "Practica04/toktik/lib/shared/data/local_video_post.dart",
@@ -239,13 +191,29 @@
       ]
     },
     {
+      "id": "dsYoutube",
+      "type": "backend",
+      "label": "YoutubeVideoDatasource",
+      "sublabel": "YouTube Data API v3",
+      "tag": "lib/infrastructure/datasources",
+      "pos": [1760, 425],
+      "size": [200, 64],
+      "sources": [
+        {
+          "path": "Practica04/toktik/lib/infrastructure/datasources/youtube_video_datasource_impl.dart",
+          "line": 7,
+          "label": "YoutubeVideoDatasource"
+        }
+      ]
+    },
+    {
       "id": "apiYoutube",
       "type": "database",
       "label": "Google YouTube API",
-      "sublabel": "Endpoint search?type=video",
+      "sublabel": "search?type=video",
       "tag": "googleapis.com",
-      "pos": [340, 540],
-      "size": [220, 56],
+      "pos": [1760, 550],
+      "size": [200, 56],
       "sources": [
         {
           "path": "Practica04/toktik/lib/config/api_keys.dart",
@@ -255,13 +223,29 @@
       ]
     },
     {
+      "id": "dsPixabay",
+      "type": "backend",
+      "label": "PixabayVideoDatasource",
+      "sublabel": "Pixabay Videos REST API",
+      "tag": "lib/infrastructure/datasources",
+      "pos": [1760, 675],
+      "size": [200, 64],
+      "sources": [
+        {
+          "path": "Practica04/toktik/lib/infrastructure/datasources/pixabay_video_datasource_impl.dart",
+          "line": 7,
+          "label": "PixabayVideoDatasource"
+        }
+      ]
+    },
+    {
       "id": "apiPixabay",
       "type": "database",
       "label": "Pixabay API REST",
-      "sublabel": "Endpoint api/videos/?key=...",
+      "sublabel": "api/videos/?key=...",
       "tag": "pixabay.com/api/videos",
-      "pos": [620, 540],
-      "size": [220, 56],
+      "pos": [1760, 800],
+      "size": [200, 56],
       "sources": [
         {
           "path": "Practica04/toktik/lib/config/api_keys.dart",
@@ -271,13 +255,29 @@
       ]
     },
     {
+      "id": "dsVimeo",
+      "type": "backend",
+      "label": "VimeoVideoDatasource",
+      "sublabel": "Vimeo API v3 (Token)",
+      "tag": "lib/infrastructure/datasources",
+      "pos": [1760, 925],
+      "size": [200, 64],
+      "sources": [
+        {
+          "path": "Practica04/toktik/lib/infrastructure/datasources/vimeo_video_datasource_impl.dart",
+          "line": 15,
+          "label": "VimeoVideoDatasource"
+        }
+      ]
+    },
+    {
       "id": "apiVimeo",
       "type": "database",
       "label": "Vimeo API v3",
-      "sublabel": "Endpoint api.vimeo.com/videos",
+      "sublabel": "api.vimeo.com/videos",
       "tag": "api.vimeo.com",
-      "pos": [900, 540],
-      "size": [240, 56],
+      "pos": [1760, 1050],
+      "size": [200, 56],
       "sources": [
         {
           "path": "Practica04/toktik/lib/config/api_keys.dart",
@@ -304,91 +304,91 @@
       "id": "provider-players",
       "from": "discoverProvider",
       "to": "videoPlayers",
-      "label": "reproducción & mute"
+      "label": "video & mute"
     },
     {
       "id": "provider-prefs",
       "from": "discoverProvider",
       "to": "sharedPrefs",
-      "label": "likes & mute persistentes"
+      "label": "likes & mute"
     },
     {
       "id": "theme-prefs",
       "from": "themeProvider",
       "to": "sharedPrefs",
-      "label": "temporada persistente"
+      "label": "temporada"
     },
     {
       "id": "provider-repo",
       "from": "discoverProvider",
       "to": "repoInterface",
-      "label": "consume contrato VideoPostRepository"
+      "label": "consume contrato"
     },
     {
       "id": "repoimpl-repointerface",
       "from": "repoImpl",
       "to": "repoInterface",
-      "label": "implements VideoPostRepository"
+      "label": "implements"
     },
     {
       "id": "repoimpl-datasource",
       "from": "repoImpl",
       "to": "datasourceInterface",
-      "label": "delega en VideoPostDatasource"
+      "label": "delega"
     },
     {
       "id": "dslocal-dsinterface",
       "from": "dsLocal",
       "to": "datasourceInterface",
-      "label": "implements VideoPostDatasource"
+      "label": "implements"
     },
     {
       "id": "dsyoutube-dsinterface",
       "from": "dsYoutube",
       "to": "datasourceInterface",
-      "label": "implements VideoPostDatasource"
+      "label": "implements"
     },
     {
       "id": "dspixabay-dsinterface",
       "from": "dsPixabay",
       "to": "datasourceInterface",
-      "label": "implements VideoPostDatasource"
+      "label": "implements"
     },
     {
       "id": "dsvimeo-dsinterface",
       "from": "dsVimeo",
       "to": "datasourceInterface",
-      "label": "implements VideoPostDatasource"
+      "label": "implements"
     },
     {
       "id": "datasource-entity",
       "from": "datasourceInterface",
       "to": "entityVideo",
-      "label": "retorna List<VideoPost>"
+      "label": "retorna"
     },
     {
       "id": "dslocal-apilocal",
       "from": "dsLocal",
       "to": "apiLocal",
-      "label": "carga assets .mp4"
+      "label": "assets .mp4"
     },
     {
       "id": "dsyoutube-apiyoutube",
       "from": "dsYoutube",
       "to": "apiYoutube",
-      "label": "HTTP REST Shorts"
+      "label": "REST Videos"
     },
     {
       "id": "dspixabay-apipixabay",
       "from": "dsPixabay",
       "to": "apiPixabay",
-      "label": "HTTP REST Pixabay"
+      "label": "REST Pixabay"
     },
     {
       "id": "dsvimeo-apivimeo",
       "from": "dsVimeo",
       "to": "apiVimeo",
-      "label": "HTTP REST + Token"
+      "label": "REST + Token"
     }
   ],
   "cards": []
