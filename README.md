@@ -10,6 +10,7 @@
   **Periodo:** Septiembre - Diciembre 2026  
 
   [![Portafolio GitHub Pages](https://img.shields.io/badge/🌐%20Portafolio%20en%20Vivo-GitHub%20Pages-06b6d4?style=for-the-badge&logo=github)](https://jesuuusart.github.io/Practicas_DMI_220772/)
+  [![Appetize.io](https://img.shields.io/badge/📱%20Probar%20TokTik-Appetize.io-FF4081?style=for-the-badge&logo=android)](https://appetize.io/app/b_akk4ouahozbruc6pqrlrr3aaqy)
 
   🔗 **[https://jesuuusart.github.io/Practicas_DMI_220772/](https://jesuuusart.github.io/Practicas_DMI_220772/)**
 </div>
@@ -24,6 +25,7 @@
 | 2. | [Mi Primer Aplicación Móvil con Flutter](/Practica02/hello_world_app) | Codificar la app móvil en el framework de Flutter manejando Stateless y Stateful Widgets | 25 | 🟢 Concluida |
 | 3. | [Yes No Maybe App](/Practica03/yes_no_app) | App de chat en Flutter que consulta la API yesno.wtf con arquitectura por capas, inyección de dependencias, 38 pruebas y 4 diagramas Archify | 30 | 🟢 Concluida |
 | 4. | [TokTik](/Practica04/toktik) | App de videos estilo TikTok con scroll vertical, Clean Architecture, 4 temas por temporada, 3 DataSources remotos e iconos personalizados | 30 | 🟢 Concluida |
+| 5. | [Publicación de la App en Appetize.io](https://appetize.io/app/b_akk4ouahozbruc6pqrlrr3aaqy) | Compilación release y validación de ejecución virtual de TokTik en la nube vía Appetize | 10 | 🟢 Concluida |
 
 ---
 
@@ -32,6 +34,7 @@
 - **[📱 hello_world_app](Practica02/hello_world_app/)** — Contador Funcional en Flutter ([📄 Documentación completa](Practica02/hello_world_app/README.md))
 - **[💬 yes_no_app](Practica03/yes_no_app/)** — Yes No Maybe App en Flutter ([📄 Documentación completa](Practica03/yes_no_app/README.md))
 - **[🎬 toktik](Practica04/toktik/)** — App de videos estilo TikTok en Flutter ([📖 Documentación completa](Practica04/toktik/README.md))
+- **[☁️ Publicación en Appetize.io](https://appetize.io/app/b_akk4ouahozbruc6pqrlrr3aaqy)** — Ejecución de TokTik en emulador Android en la nube (10 Firmas)
 
 <details>
   <summary><b>📱 Hello World App — Diagrama Archify (Haz clic para desplegar)</b></summary>
@@ -78,4 +81,25 @@
   | Diagrama 1: Provider Local (Oscuro) | Diagrama 2: Clean Architecture (Oscuro) |
   |---|---|
   | [![Diagrama 1](Practica04/toktik/Docs/Architecture/toktik_architecture.visual-check.2048x1320.dark.png)](https://jesuuusart.github.io/Practicas_DMI_220772/Practica04/toktik/Docs/Architecture/toktik_architecture.html) | [![Diagrama 2](Practica04/toktik/Docs/Architecture/toktik_clean_architecture.visual-check.2048x1320.dark.png)](https://jesuuusart.github.io/Practicas_DMI_220772/Practica04/toktik/Docs/Architecture/toktik_clean_architecture.html) |
+</details>
+
+<details>
+  <summary><b>☁️ Publicación de TokTik en Appetize.io — Ejecución en la Nube (Haz clic para desplegar)</b></summary>
+  <br />
+
+  #### 🔗 Acceso Directo al Emulador en la Nube:
+  - 📱 **Enlace directo a Appetize.io:** [https://appetize.io/app/b_akk4ouahozbruc6pqrlrr3aaqy](https://appetize.io/app/b_akk4ouahozbruc6pqrlrr3aaqy)
+  - 🌐 [Sitio Web Portafolio GitHub Pages](https://jesuuusart.github.io/Practicas_DMI_220772/)
+  - 📖 [Documentación de TokTik (Práctica 04)](Practica04/toktik/README.md)
+
+  #### ⚙️ Ficha Técnica de la Publicación:
+  - **Plataforma:** [Appetize.io](https://appetize.io/)
+  - **Dispositivo virtual:** Android Emulator en streaming interactivo WebRTC/HTML5
+  - **Paquete compilado:** `app-release.apk` (Release Build optimizado con Flutter)
+  - **Peso del APK:** ~135.4 MB
+  - **Funcionalidades validadas en la nube:**
+    - Desplazamiento vertical continuo de videos tipo TikTok (`PageView.builder`).
+    - Selector interactivo de temas estacionales (Halloween, Navidad, San Valentín, Normal).
+    - Desplazamiento horizontal entre pestañas (*Para ti*, *Descubrir* con APIs y *Favoritos*).
+    - Reproducción de video, audio de temporada en segundo plano, mute/unmute y likes reactivos.
 </details>

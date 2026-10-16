@@ -11,11 +11,12 @@
 <div align="center">
 
 [![Portafolio GitHub Pages](https://img.shields.io/badge/🌐%20Portafolio%20en%20Vivo-GitHub%20Pages-06b6d4?style=for-the-badge&logo=github)](https://jesuuusart.github.io/Practicas_DMI_220772/)
+[![Appetize.io](https://img.shields.io/badge/📱%20Probar%20en-Appetize.io-FF4081?style=for-the-badge&logo=android)](https://appetize.io/app/b_akk4ouahozbruc6pqrlrr3aaqy)
 [![Flutter](https://img.shields.io/badge/Flutter-3.47.2-02569B?style=for-the-badge&logo=flutter)](https://flutter.dev)
 [![Dart](https://img.shields.io/badge/Dart-3.13.2-0175C2?style=for-the-badge&logo=dart)](https://dart.dev)
 [![Clean Architecture](https://img.shields.io/badge/Architecture-CLEAN%20Code-10b981?style=for-the-badge)](Docs/Architecture/DIAGRAMAS_ARQUITECTURA.md)
 
-🔗 **[https://jesuuusart.github.io/Practicas_DMI_220772/](https://jesuuusart.github.io/Practicas_DMI_220772/)**
+📱 **[Probar TokTik en Vivo en Appetize.io](https://appetize.io/app/b_akk4ouahozbruc6pqrlrr3aaqy)** | 🌐 **[Portafolio Web GitHub Pages](https://jesuuusart.github.io/Practicas_DMI_220772/)**
 
 </div>
 
@@ -360,3 +361,19 @@ flutter analyze
 # 4. Ejecutar en tu dispositivo o emulador
 flutter run
 ```
+
+---
+
+## 8. Ejecución Virtual y Pruebas en la Nube (Appetize.io)
+
+La aplicación móvil ha sido compilada en modo Release (`app-release.apk`) y desplegada en **Appetize.io** para permitir la ejecución, prueba y validación interactiva directamente desde el navegador web sin necesidad de instalarla físicamente en un teléfono:
+
+- 📱 **Enlace Directo de Ejecución en Línea:** [https://appetize.io/app/b_akk4ouahozbruc6pqrlrr3aaqy](https://appetize.io/app/b_akk4ouahozbruc6pqrlrr3aaqy)
+- ⚙️ **Archivo Compilado:** `app-release.apk` (135.4 MB, Release build optimizado)
+- 🌐 **Entorno de Ejecución:** Emulador Android virtual vía streaming interactivo WebRTC/HTML5.
+- 🧪 **Funcionalidades Verificables en Appetize.io:**
+  1. **Scroll vertical continuo:** Desplazamiento fluido entre videos tipo TikTok con `PageView.builder`.
+  2. **Temas estacionales dinámicos:** Cambio reactivo de temas (Halloween, Navidad, San Valentín, Normal) pulsando el badge superior o el icono de temporada.
+  3. **Navegación horizontal entre pestañas:** *Para ti*, *Descubrir* (con integración de APIs remotas) y *Favoritos*.
+  4. **Interacciones multimedia:** Reproducción de video, audio ambiental de temporada en segundo plano, mute/unmute y gestión de likes reactivos.
+
