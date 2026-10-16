@@ -1,0 +1,395 @@
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": {
+    "title": "Clean Architecture con Repositorio y Múltiples DataSources — toktik",
+    "output": "toktik_clean_architecture.html",
+    "quality_profile": "showcase",
+    "animation": "trace",
+    "repository": {
+      "url": "https://github.com/JesuuusArt/Practicas_DMI_220772",
+      "provider": "github",
+      "link_mode": "local-only",
+      "revision": "181872883bac5d1b4f1b4ae900f73ec6e94ae64b"
+    }
+  },
+  "components": [
+    {
+      "id": "discoverScreen",
+      "type": "frontend",
+      "label": "DiscoverScreen",
+      "sublabel": "For You / Discover / Favorites",
+      "tag": "lib/presentation/screens",
+      "pos": [60, 550],
+      "size": [200, 64],
+      "sources": [
+        {
+          "path": "Practica04/toktik/lib/presentation/screens/discover/discover_screen.dart",
+          "line": 9,
+          "label": "DiscoverScreen"
+        }
+      ]
+    },
+    {
+      "id": "discoverProvider",
+      "type": "backend",
+      "label": "DiscoverProvider",
+      "sublabel": "Estado + Likes Persistidos",
+      "tag": "lib/presentation/providers",
+      "pos": [400, 425],
+      "size": [200, 64],
+      "sources": [
+        {
+          "path": "Practica04/toktik/lib/presentation/providers/discover_provider.dart",
+          "line": 13,
+          "label": "DiscoverProvider"
+        }
+      ]
+    },
+    {
+      "id": "themeProvider",
+      "type": "backend",
+      "label": "ThemeProvider",
+      "sublabel": "Temas / Audios / Temporada",
+      "tag": "lib/presentation/providers",
+      "pos": [400, 675],
+      "size": [200, 64],
+      "sources": [
+        {
+          "path": "Practica04/toktik/lib/presentation/providers/theme_provider.dart",
+          "line": 9,
+          "label": "ThemeProvider"
+        }
+      ]
+    },
+    {
+      "id": "videoPlayers",
+      "type": "frontend",
+      "label": "Widgets de Reproducción",
+      "sublabel": "FullScreenPlayer / Vimeo / YouTube",
+      "tag": "lib/presentation/widgets/video",
+      "pos": [740, 425],
+      "size": [200, 64],
+      "sources": [
+        {
+          "path": "Practica04/toktik/lib/presentation/widgets/video/fullscreen_player.dart",
+          "line": 9,
+          "label": "FullScreenPlayer"
+        }
+      ]
+    },
+    {
+      "id": "repoInterface",
+      "type": "backend",
+      "label": "VideoPostRepository",
+      "sublabel": "[Interface] Trending & Favorites",
+      "tag": "lib/domain/repositories",
+      "pos": [740, 550],
+      "size": [200, 64],
+      "sources": [
+        {
+          "path": "Practica04/toktik/lib/domain/repositories/video_posts_repository.dart",
+          "line": 3,
+          "label": "VideoPostRepository"
+        }
+      ]
+    },
+    {
+      "id": "sharedPrefs",
+      "type": "database",
+      "label": "SharedPreferences",
+      "sublabel": "Likes / Mute / Tema",
+      "tag": "shared_preferences",
+      "pos": [740, 675],
+      "size": [200, 64],
+      "sources": [
+        {
+          "path": "Practica04/toktik/lib/presentation/providers/discover_provider.dart",
+          "line": 59,
+          "label": "SharedPreferences"
+        }
+      ]
+    },
+    {
+      "id": "repoImpl",
+      "type": "backend",
+      "label": "VideoPostsRepositoryImpl",
+      "sublabel": "Implementación del Repositorio",
+      "tag": "lib/infrastructure/repositories",
+      "pos": [1080, 550],
+      "size": [200, 64],
+      "sources": [
+        {
+          "path": "Practica04/toktik/lib/infrastructure/repositories/video_posts_repository_impl.dart",
+          "line": 5,
+          "label": "VideoPostsRepositoryImpl"
+        }
+      ]
+    },
+    {
+      "id": "entityVideo",
+      "type": "backend",
+      "label": "Entidad: VideoPost",
+      "sublabel": "caption, videoUrl, youtubeId,\nvimeoId, likes, views",
+      "tag": "lib/domain/entities",
+      "pos": [1420, 425],
+      "size": [200, 64],
+      "sources": [
+        {
+          "path": "Practica04/toktik/lib/domain/entities/video_post.dart",
+          "line": 1,
+          "label": "VideoPost"
+        }
+      ]
+    },
+    {
+      "id": "datasourceInterface",
+      "type": "backend",
+      "label": "VideoPostDatasource",
+      "sublabel": "[Interface] Contrato DataSources",
+      "tag": "lib/domain/datasources",
+      "pos": [1420, 550],
+      "size": [200, 64],
+      "sources": [
+        {
+          "path": "Practica04/toktik/lib/domain/datasources/video_posts_datasource.dart",
+          "line": 3,
+          "label": "VideoPostDatasource"
+        }
+      ]
+    },
+    {
+      "id": "dsLocal",
+      "type": "backend",
+      "label": "LocalVideoDatasource",
+      "sublabel": "Assets locales de video",
+      "tag": "lib/infrastructure/datasources",
+      "pos": [1760, 175],
+      "size": [200, 64],
+      "sources": [
+        {
+          "path": "Practica04/toktik/lib/infrastructure/datasources/local_video_datasource_impl.dart",
+          "line": 6,
+          "label": "LocalVideoDatasource"
+        }
+      ]
+    },
+    {
+      "id": "apiLocal",
+      "type": "database",
+      "label": "Assets MP4",
+      "sublabel": "assets/videos/",
+      "tag": "assets/videos",
+      "pos": [1760, 300],
+      "size": [200, 56],
+      "sources": [
+        {
+          "path": "Practica04/toktik/lib/shared/data/local_video_post.dart",
+          "line": 1,
+          "label": "videos locales"
+        }
+      ]
+    },
+    {
+      "id": "dsYoutube",
+      "type": "backend",
+      "label": "YoutubeVideoDatasource",
+      "sublabel": "YouTube Data API v3",
+      "tag": "lib/infrastructure/datasources",
+      "pos": [1760, 425],
+      "size": [200, 64],
+      "sources": [
+        {
+          "path": "Practica04/toktik/lib/infrastructure/datasources/youtube_video_datasource_impl.dart",
+          "line": 7,
+          "label": "YoutubeVideoDatasource"
+        }
+      ]
+    },
+    {
+      "id": "apiYoutube",
+      "type": "database",
+      "label": "Google YouTube API",
+      "sublabel": "search?type=video",
+      "tag": "googleapis.com",
+      "pos": [1760, 550],
+      "size": [200, 56],
+      "sources": [
+        {
+          "path": "Practica04/toktik/lib/config/api_keys.dart",
+          "line": 2,
+          "label": "youtubeApiKey"
+        }
+      ]
+    },
+    {
+      "id": "dsPixabay",
+      "type": "backend",
+      "label": "PixabayVideoDatasource",
+      "sublabel": "Pixabay Videos REST API",
+      "tag": "lib/infrastructure/datasources",
+      "pos": [1760, 675],
+      "size": [200, 64],
+      "sources": [
+        {
+          "path": "Practica04/toktik/lib/infrastructure/datasources/pixabay_video_datasource_impl.dart",
+          "line": 7,
+          "label": "PixabayVideoDatasource"
+        }
+      ]
+    },
+    {
+      "id": "apiPixabay",
+      "type": "database",
+      "label": "Pixabay API REST",
+      "sublabel": "api/videos/?key=...",
+      "tag": "pixabay.com/api/videos",
+      "pos": [1760, 800],
+      "size": [200, 56],
+      "sources": [
+        {
+          "path": "Practica04/toktik/lib/config/api_keys.dart",
+          "line": 4,
+          "label": "pixabayApiKey"
+        }
+      ]
+    },
+    {
+      "id": "dsVimeo",
+      "type": "backend",
+      "label": "VimeoVideoDatasource",
+      "sublabel": "Vimeo API v3 (Token)",
+      "tag": "lib/infrastructure/datasources",
+      "pos": [1760, 925],
+      "size": [200, 64],
+      "sources": [
+        {
+          "path": "Practica04/toktik/lib/infrastructure/datasources/vimeo_video_datasource_impl.dart",
+          "line": 15,
+          "label": "VimeoVideoDatasource"
+        }
+      ]
+    },
+    {
+      "id": "apiVimeo",
+      "type": "database",
+      "label": "Vimeo API v3",
+      "sublabel": "api.vimeo.com/videos",
+      "tag": "api.vimeo.com",
+      "pos": [1760, 1050],
+      "size": [200, 56],
+      "sources": [
+        {
+          "path": "Practica04/toktik/lib/config/api_keys.dart",
+          "line": 7,
+          "label": "vimeoToken"
+        }
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "id": "screen-provider",
+      "from": "discoverScreen",
+      "to": "discoverProvider",
+      "label": "watch() / read()"
+    },
+    {
+      "id": "screen-theme",
+      "from": "discoverScreen",
+      "to": "themeProvider",
+      "label": "temas & audios"
+    },
+    {
+      "id": "provider-players",
+      "from": "discoverProvider",
+      "to": "videoPlayers",
+      "label": "video & mute"
+    },
+    {
+      "id": "provider-prefs",
+      "from": "discoverProvider",
+      "to": "sharedPrefs",
+      "label": "likes & mute"
+    },
+    {
+      "id": "theme-prefs",
+      "from": "themeProvider",
+      "to": "sharedPrefs",
+      "label": "temporada"
+    },
+    {
+      "id": "provider-repo",
+      "from": "discoverProvider",
+      "to": "repoInterface",
+      "label": "consume contrato"
+    },
+    {
+      "id": "repoimpl-repointerface",
+      "from": "repoImpl",
+      "to": "repoInterface",
+      "label": "implements"
+    },
+    {
+      "id": "repoimpl-datasource",
+      "from": "repoImpl",
+      "to": "datasourceInterface",
+      "label": "delega"
+    },
+    {
+      "id": "dslocal-dsinterface",
+      "from": "dsLocal",
+      "to": "datasourceInterface",
+      "label": "implements"
+    },
+    {
+      "id": "dsyoutube-dsinterface",
+      "from": "dsYoutube",
+      "to": "datasourceInterface",
+      "label": "implements"
+    },
+    {
+      "id": "dspixabay-dsinterface",
+      "from": "dsPixabay",
+      "to": "datasourceInterface",
+      "label": "implements"
+    },
+    {
+      "id": "dsvimeo-dsinterface",
+      "from": "dsVimeo",
+      "to": "datasourceInterface",
+      "label": "implements"
+    },
+    {
+      "id": "datasource-entity",
+      "from": "datasourceInterface",
+      "to": "entityVideo",
+      "label": "retorna"
+    },
+    {
+      "id": "dslocal-apilocal",
+      "from": "dsLocal",
+      "to": "apiLocal",
+      "label": "assets .mp4"
+    },
+    {
+      "id": "dsyoutube-apiyoutube",
+      "from": "dsYoutube",
+      "to": "apiYoutube",
+      "label": "REST Videos"
+    },
+    {
+      "id": "dspixabay-apipixabay",
+      "from": "dsPixabay",
+      "to": "apiPixabay",
+      "label": "REST Pixabay"
+    },
+    {
+      "id": "dsvimeo-apivimeo",
+      "from": "dsVimeo",
+      "to": "apiVimeo",
+      "label": "REST + Token"
+    }
+  ],
+  "cards": []
+}

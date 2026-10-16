@@ -723,6 +723,8 @@
             <span class="badge-no">Práctica 03</span>
             <span class="badge-status status-done">🟢 Concluida</span>
           </div>
+
+
           <div class="p-title">Yes No Maybe App</div>
           <div class="p-desc">Chat en Flutter que consulta la API <code>yesno.wtf</code> con arquitectura por capas, inyección de dependencias, 38 pruebas y 4 diagramas Archify.</div>
           <div class="chip-row">
@@ -734,10 +736,34 @@
             <span class="chip amber">Material 3</span>
           </div>
           <div class="p-meta">
-            <span>⚡ Potenciador: 0%</span>
+            <span>⚡ Potenciador: 30%</span>
             <span>💬 Flutter + API REST</span>
           </div>
         </div>
+        <!-- Práctica 4 -->
+        <div class="practice-card" id="card-p4" onclick="selectPractice(4)">
+          <div class="card-top">
+            <span class="badge-no">Práctica 04</span>
+            <span class="badge-status status-done">✅ Concluida</span>
+          </div>
+          <div class="p-title">TokTik</div>
+          <div class="p-desc">App de videos estilo TikTok con scroll vertical, tema automático por fecha (principal, Halloween, Navidad) e icono según temporada.</div>
+          <div class="chip-row">
+            <span class="chip">Flutter 3.47.2</span>
+            <span class="chip">Dart 3.13.2</span>
+            <span class="chip purple">provider ^6.1.5+1</span>
+            <span class="chip purple">video_player ^2.10.0</span>
+            <span class="chip green">18 videos locales</span>
+            <span class="chip amber">Material 3</span>
+          </div>
+          <div class="p-meta">
+            <span>📈 Potenciador: 30%</span>
+            <span>📱 Flutter App</span>
+          </div>
+
+        </div>
+
+
 
       </div>
     </section>
@@ -1195,7 +1221,193 @@
 
     </section>
 
-  </main>
+  
+    <!-- Interactive Explorer Container for Práctica 04 -->
+    <section class="detail-container" id="detail-p4" style="display: none;">
+      <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 1rem;">
+        <div>
+          <span style="font-family: 'Fira Code', monospace; color: var(--cyan); font-weight:600; font-size: 0.85rem;">PRÁCTICA 04 — DETALLES Y EVIDENCIA</span>
+          <h2 style="font-size: 1.4rem; font-weight: 700; margin-top: 0.25rem;">TokTik (Videos estilo TikTok)</h2>
+        </div>
+
+
+        <div>
+          <a href="Practica04/toktik/README.md" style="color: var(--cyan); text-decoration: none; font-weight: 600; font-size: 0.85rem;">📄 Ver README del Proyecto ↗</a>
+        </div>
+      </div>
+
+      <div class="subnav-tabs">
+        <button class="subtab-btn active" data-tab="tab-p4-archify" onclick="switchSubtab(this)">🌐 Diagramas Archify</button>
+        <button class="subtab-btn" data-tab="tab-p4-evidence" onclick="switchSubtab(this)">📷 Evidencias de la app</button>
+        <button class="subtab-btn" data-tab="tab-p4-tech" onclick="switchSubtab(this)">💻 Tecnologías</button>
+        <button class="subtab-btn" data-tab="tab-p4-files" onclick="switchSubtab(this)">📄 Visor de Código</button>
+        <button class="subtab-btn" data-tab="tab-p4-objectives" onclick="switchSubtab(this)">🎯 Objetivos y Conclusiones</button>
+      </div>
+
+      <div class="subtab-content active" id="tab-p4-archify">
+        <p style="font-size: 0.875rem; color: var(--text-body); margin-bottom: 1rem;">
+          Dos diagramas <b>Archify</b> generados a partir del código real del proyecto (<code>main.dart</code>, capa <code>lib/domain</code>, <code>lib/infrastructure</code>, <code>lib/presentation</code> y las 3 APIs remotas).
+          Son interactivos, tienen modo claro/oscuro y se pueden exportar.
+        </p>
+
+        <div class="subnav-tabs" style="border-bottom: 1px solid var(--border-color); margin-bottom: 1rem;">
+          <button class="subtab-btn diagram-btn active" data-frame="frame-p4-arch1" onclick="showDiagram(this)">🏛️ Diagrama 1: Provider Local</button>
+          <button class="subtab-btn diagram-btn" data-frame="frame-p4-arch2" onclick="showDiagram(this)">🏗️ Diagrama 2: Clean Architecture con Repositorio y 3 APIs</button>
+        </div>
+
+        <div class="arch-iframe-wrapper" style="height: 700px;">
+          <iframe class="diagram-frame" id="frame-p4-arch1" src="Practica04/toktik/Docs/Architecture/toktik_architecture.html" title="Diagrama 1: Arquitectura con Provider Local"></iframe>
+          <iframe class="diagram-frame" id="frame-p4-arch2" src="Practica04/toktik/Docs/Architecture/toktik_clean_architecture.html" title="Diagrama 2: Clean Architecture con Repositorio y 3 APIs" style="display: none;"></iframe>
+        </div>
+
+        <div class="evidence-grid" style="margin-top: 1.5rem;">
+          <div class="evidence-card">
+            <h4>🏛️ Diagrama 1: Provider Local (oscuro)</h4>
+            <img src="Practica04/toktik/Docs/Architecture/toktik_architecture.visual-check.2048x1320.dark.png" alt="Diagrama 1: Provider Local (oscuro)">
+            <p>11 componentes y 11 conexiones: Provider directo a assets locales.</p>
+          </div>
+          <div class="evidence-card">
+            <h4>🏛️ Diagrama 1: Provider Local (claro)</h4>
+            <img src="Practica04/toktik/Docs/Architecture/toktik_architecture.visual-check.2048x1320.light.png" alt="Diagrama 1: Provider Local (claro)">
+            <p>Mismo diagrama 1 en modo claro.</p>
+          </div>
+          <div class="evidence-card">
+            <h4>🏗️ Diagrama 2: Clean Architecture (oscuro)</h4>
+            <img src="Practica04/toktik/Docs/Architecture/toktik_clean_architecture.visual-check.2048x1320.dark.png" alt="Diagrama 2: Clean Architecture (oscuro)">
+            <p>17 componentes: Dominio, Repositorio, 3 APIs remotas (YouTube, Pixabay, Dailymotion), Local y Storage.</p>
+          </div>
+          <div class="evidence-card">
+            <h4>🏗️ Diagrama 2: Clean Architecture (claro)</h4>
+            <img src="Practica04/toktik/Docs/Architecture/toktik_clean_architecture.visual-check.2048x1320.light.png" alt="Diagrama 2: Clean Architecture (claro)">
+            <p>Mismo diagrama 2 en modo claro.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="subtab-content" id="tab-p4-evidence">
+        <h3 style="margin-top: 0;">🟣 Tema Principal (Normal)</h3>
+        <p style="font-size: 0.875rem; color: var(--text-body); margin-bottom: 1rem;">
+          Tipografía <code>Poppins</code>, paleta púrpura, partículas dinámicas y persistencia en Local Storage.
+        </p>
+        <div class="evidence-grid">
+          <figure class="evidence-card"><img src="Practica04/toktik/assets/pruebas/pantallaCargaPrincipal.jpeg" alt="Carga principal"/><figcaption>Splash Screen - Icono Principal</figcaption></figure>
+          <figure class="evidence-card"><img src="Practica04/toktik/assets/pruebas/principal_1_local_sin_like.jpeg" alt="Local sin like"/><figcaption>1. Video local (Sin me gusta)</figcaption></figure>
+          <figure class="evidence-card"><img src="Practica04/toktik/assets/pruebas/principal_2_local_con_like.jpeg" alt="Local con like"/><figcaption>2. Mismo video (+1 Me gusta)</figcaption></figure>
+          <figure class="evidence-card"><img src="Practica04/toktik/assets/pruebas/principal_3_personalizado_like.jpeg" alt="Video propio"/><figcaption>3. Video local propio agregado</figcaption></figure>
+          <figure class="evidence-card"><img src="Practica04/toktik/assets/pruebas/principal_4_api_like.jpeg" alt="API con like"/><figcaption>4. Video API remota (Con like)</figcaption></figure>
+          <figure class="evidence-card"><img src="Practica04/toktik/assets/pruebas/principal_5_favoritos.jpeg" alt="Favoritos"/><figcaption>5. Sección Favoritos (Video API)</figcaption></figure>
+        </div>
+
+        <h3>🎃 Tema Halloween</h3>
+        <p style="font-size: 0.875rem; color: var(--text-body); margin-bottom: 1rem;">
+          Tipografía <code>Creepster</code>, paleta calabaza (#FF7518), audio <code>halloween.mp3</code> y animación temática.
+        </p>
+        <div class="evidence-grid">
+          <figure class="evidence-card"><img src="Practica04/toktik/assets/pruebas/pantallaCargaHalloween.jpeg" alt="Carga Halloween"/><figcaption>Splash Screen - Icono Calabaza</figcaption></figure>
+          <figure class="evidence-card"><img src="Practica04/toktik/assets/pruebas/halloween_1_local_sin_like.jpeg" alt="Halloween sin like"/><figcaption>1. Video local (Sin me gusta)</figcaption></figure>
+          <figure class="evidence-card"><img src="Practica04/toktik/assets/pruebas/halloween_2_local_con_like.jpeg" alt="Halloween con like"/><figcaption>2. Mismo video (+1 Me gusta)</figcaption></figure>
+          <figure class="evidence-card"><img src="Practica04/toktik/assets/pruebas/halloween_3_personalizado_like.jpeg" alt="Halloween video propio"/><figcaption>3. Video local propio agregado</figcaption></figure>
+          <figure class="evidence-card"><img src="Practica04/toktik/assets/pruebas/halloween_4_api_like.jpeg" alt="Halloween API like"/><figcaption>4. Video API remota (Con like)</figcaption></figure>
+          <figure class="evidence-card"><img src="Practica04/toktik/assets/pruebas/halloween_5_favoritos.jpeg" alt="Halloween favoritos"/><figcaption>5. Sección Favoritos (Video API)</figcaption></figure>
+        </div>
+
+        <h3>🎄 Tema Navidad</h3>
+        <p style="font-size: 0.875rem; color: var(--text-body); margin-bottom: 1rem;">
+          Tipografía <code>Mountains of Christmas</code>, paleta verde/rojo (#2ECC71), audio <code>navidad.mp3</code> y nieve cayendo.
+        </p>
+        <div class="evidence-grid">
+          <figure class="evidence-card"><img src="Practica04/toktik/assets/pruebas/pantallaCargaNavidad.jpeg" alt="Carga Navidad"/><figcaption>Splash Screen - Icono Navideño</figcaption></figure>
+          <figure class="evidence-card"><img src="Practica04/toktik/assets/pruebas/navidad_1_local_sin_like.jpeg" alt="Navidad sin like"/><figcaption>1. Video local (Sin me gusta)</figcaption></figure>
+          <figure class="evidence-card"><img src="Practica04/toktik/assets/pruebas/navidad_2_local_con_like.jpeg" alt="Navidad con like"/><figcaption>2. Mismo video (+1 Me gusta)</figcaption></figure>
+          <figure class="evidence-card"><img src="Practica04/toktik/assets/pruebas/navidad_3_personalizado_like.jpeg" alt="Navidad video propio"/><figcaption>3. Video local propio agregado</figcaption></figure>
+          <figure class="evidence-card"><img src="Practica04/toktik/assets/pruebas/navidad_4_api_like.jpeg" alt="Navidad API like"/><figcaption>4. Video API remota (Con like)</figcaption></figure>
+          <figure class="evidence-card"><img src="Practica04/toktik/assets/pruebas/navidad_5_favoritos.jpeg" alt="Navidad favoritos"/><figcaption>5. Sección Favoritos (Video API)</figcaption></figure>
+        </div>
+
+        <h3>💖 Tema San Valentín (Valentine's Day)</h3>
+        <p style="font-size: 0.875rem; color: var(--text-body); margin-bottom: 1rem;">
+          Tipografía <code>Dancing Script</code>, paleta rosa (#FF2E63), audio <code>valentines.mp3</code> y lluvia de corazones.
+        </p>
+        <div class="evidence-grid">
+          <figure class="evidence-card"><img src="Practica04/toktik/assets/pruebas/pantallaCargaValentine.jpeg" alt="Carga San Valentín"/><figcaption>Splash Screen - Icono San Valentín</figcaption></figure>
+          <figure class="evidence-card"><img src="Practica04/toktik/assets/pruebas/valentines_1_local_sin_like.jpg" alt="San Valentín sin like"/><figcaption>1. Video local (Sin me gusta)</figcaption></figure>
+          <figure class="evidence-card"><img src="Practica04/toktik/assets/pruebas/valentines_2_local_con_like.jpg" alt="San Valentín con like"/><figcaption>2. Mismo video (+1 Me gusta)</figcaption></figure>
+          <figure class="evidence-card"><img src="Practica04/toktik/assets/pruebas/valentines_3_personalizado_like.jpg" alt="San Valentín video propio"/><figcaption>3. Video local propio agregado</figcaption></figure>
+          <figure class="evidence-card"><img src="Practica04/toktik/assets/pruebas/valentines_4_api_like.jpg" alt="San Valentín API like"/><figcaption>4. Video API remota (Con like)</figcaption></figure>
+          <figure class="evidence-card"><img src="Practica04/toktik/assets/pruebas/valentines_5_favoritos.jpg" alt="San Valentín favoritos"/><figcaption>5. Sección Favoritos (Video API)</figcaption></figure>
+        </div>
+      </div>
+          <!-- TAB: TECHNOLOGIES -->
+      <div class="subtab-content" id="tab-p4-tech">
+        <p style="font-size: 0.875rem; color: var(--text-body); margin-bottom: 1.5rem;">
+          Stack completo empleado en <code>toktik</code>, tomado de <code>pubspec.yaml</code>.
+        </p>
+        <div class="tech-group">
+          <h3 class="block-title cyan">📱 Lenguajes y frameworks</h3>
+          <div class="tech-grid">
+            <div class="tech-card"><div class="tech-top"><span class="tech-name">Flutter</span><span class="tech-ver">3.47.2 stable</span></div><p class="tech-desc">Framework de interfaz multiplataforma con Material 3.</p></div>
+            <div class="tech-card"><div class="tech-top"><span class="tech-name">Dart</span><span class="tech-ver">3.13.2</span></div><p class="tech-desc">Lenguaje con null safety y null-aware operators.</p></div>
+          </div>
+        </div>
+        <div class="tech-group">
+          <h3 class="block-title purple">📦 Paquetes</h3>
+          <div class="tech-grid">
+            <div class="tech-card"><div class="tech-top"><span class="tech-name">provider</span><span class="tech-ver">^6.1.5+1</span></div><p class="tech-desc">Manejo de estado con ChangeNotifier y MultiProvider.</p></div>
+            <div class="tech-card"><div class="tech-top"><span class="tech-name">video_player</span><span class="tech-ver">^2.10.0</span></div><p class="tech-desc">Reproducción de video a pantalla completa.</p></div>
+            <div class="tech-card"><div class="tech-top"><span class="tech-name">animate_do</span><span class="tech-ver">^4.0.0</span></div><p class="tech-desc">Animaciones de los botones de interacción.</p></div>
+            <div class="tech-card"><div class="tech-top"><span class="tech-name">intl</span><span class="tech-ver">^0.20.2</span></div><p class="tech-desc">Formato compacto de likes/vistas (23.2K).</p></div>
+          </div>
+        </div>
+        <div class="tech-group">
+          <h3 class="block-title amber">🎙️ Extras</h3>
+          <div class="tech-grid">
+            <div class="tech-card"><div class="tech-top"><span class="tech-name">Poppins</span><span class="tech-ver">principal</span></div><p class="tech-desc">Fuente del tema principal.</p></div>
+            <div class="tech-card"><div class="tech-top"><span class="tech-name">Creepster</span><span class="tech-ver">halloween</span></div><p class="tech-desc">Fuente del tema Halloween.</p></div>
+            <div class="tech-card"><div class="tech-top"><span class="tech-name">Mountains of Christmas</span><span class="tech-ver">navidad</span></div><p class="tech-desc">Fuente del tema Navidad.</p></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB: FILE CODE EXPLORER -->
+      <div class="subtab-content" id="tab-p4-files">
+        <p style="font-size: 0.85rem; color: var(--text-body); margin-bottom: 1rem;">
+          Haz clic en cualquier archivo para inspeccionar su código fuente:
+        </p>
+        <div class="file-explorer">
+          <div class="file-tree">
+            <div class="file-tree-item active" data-file="p4main" onclick="showFileCode(this)">📄 main.dart</div>
+            <div class="file-tree-item" data-file="p4provider" onclick="showFileCode(this)">📄 discover_provider.dart</div>
+            <div class="file-tree-item" data-file="p4theme" onclick="showFileCode(this)">📄 app_theme.dart</div>
+            <div class="file-tree-item" data-file="p4model" onclick="showFileCode(this)">📄 local_video_model.dart</div>
+          </div>
+          <div class="code-viewer">Selecciona un archivo...</div>
+        </div>
+      </div>
+
+      <!-- TAB: OBJECTIVES & CONCLUSIONS -->
+      <div class="subtab-content" id="tab-p4-objectives">
+        <h3 style="font-size: 1.1rem; color: var(--cyan); margin-bottom: 0.5rem;">Objetivo Alcanzado:</h3>
+        <p style="font-size: 0.9rem; color: var(--text-body); margin-bottom: 1.5rem;">
+          Construir un app de videos estilo TikTok en Flutter con scroll vertical, tema por temporada
+          automático y filtrado de videos según likes/vistas.
+        </p>
+        <h3 style="font-size: 1.1rem; color: var(--purple); margin-bottom: 0.5rem;">Cosas aprendidas:</h3>
+        <ul style="font-size: 0.9rem; color: var(--text-body); padding-left: 1.25rem; display: flex; flex-direction: column; gap: 0.4rem;">
+          <li>El tema por temporada se controla desde un solo selector en <code>main.dart</code>: manual o por fecha.</li>
+          <li>Los iconos del launcher se sustituyen por solución combinando Android, iOS y Web.</li>
+          <li>El filtro <b>vistas &ge; likes</b> evita mostrar videos con mala interacción.</li>
+          <li>El diagrama Archify se generó referenciando los archivos reales del proyecto.</li>
+        </ul>
+        <h3 style="font-size: 1.1rem; color: var(--amber); margin-bottom: 0.5rem;">Conclusiones:</h3>
+        <ul>
+          <li>Cambiar de tema (fuente + paleta) con temas separados funciona bien y no rompe el layout.</li>
+          <li>Un solo <code>SeasonSelector</code> por fecha basta para automatizars simplemente sin plugins.</li>
+        </ul>
+      </div>
+
+</section>
+
+</main>
 
   <footer>
     Desarrollo Móvil Integral (DMI) — Universidad Tecnológica de Xicotepec de Juárez © 2026
@@ -1221,7 +1433,7 @@
     }
 
     // Practice Switcher: cada práctica tiene su propio detail-container
-    const practiceDetail = { 1: 'detail-p1', 2: 'detail-p2', 3: 'detail-p3' };
+    const practiceDetail = { 1: 'detail-p1', 2: 'detail-p2', 3: 'detail-p3', 4: 'detail-p4' };
 
     function selectPractice(n) {
       document.querySelectorAll('.practice-card').forEach(c => c.classList.remove('active'));
@@ -1473,7 +1685,148 @@ class MyApp extends StatelessWidget {
       ),
     );
   }
-}`
+}`,
+      p4main: `// Practica04/toktik/lib/main.dart
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:toktik/config/theme/app_theme.dart';
+import 'package:toktik/config/theme/halloween_theme.dart';
+import 'package:toktik/config/theme/christmas_theme.dart';
+import 'package:toktik/presentation/providers/discover_provider.dart';
+import 'package:toktik/presentation/screens/discover/discover_screen.dart';
+
+// Tema manual: pon 'principal', 'halloween' o 'navidad' para forzarlo,
+// o déjalo en null para que use el tema automático según la fecha.
+const String manualSeason = 'principal';
+
+String autoSeason() {
+  final now = DateTime.now();
+  if (now.month == 10) return 'halloween'; // Octubre
+  if (now.month == 12) return 'navidad';   // Diciembre
+  return 'principal';
+}
+
+final seasonTheme = switch (manualSeason ?? autoSeason()) {
+  'halloween' => HalloweenTheme().getTheme(),
+  'navidad' => ChristmasTheme().getTheme(),
+  _ => AppTheme().getTheme(),
+};
+
+void main() => runApp(const MyApp());
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider( 
+          lazy: false,
+          create: (_) => DiscoverProvider()..loadNextPage() 
+        ),
+      ],
+      child: MaterialApp(
+        title: 'TokTik',
+        debugShowCheckedModeBanner: false,
+        theme: seasonTheme,
+        home: const DiscoverScreen()
+      ),
+    );
+  }
+}`,
+
+      p4provider: `// Practica04/toktik/lib/presentation/providers/discover_provider.dart
+import 'package:flutter/material.dart';
+import 'package:toktik/domain/entities/video_post.dart';
+import 'package:toktik/infrastructure/models/local_video_model.dart';
+
+import 'package:toktik/shared/data/local_video_post.dart';
+
+
+
+class DiscoverProvider extends ChangeNotifier {
+
+  // TODO: Repository, DataSource
+
+  bool initialLoading = true;
+  List<VideoPost> videos = [];
+
+  DiscoverProvider();
+
+  Future<void> loadNextPage() async {
+
+    // await Future.delayed( const Duration(seconds: 2) );
+
+    final List<VideoPost> newVideos = videoPosts
+        .where( ( video ) => ( video['views'] as int? ?? 0 ) >= ( video['likes'] as int? ?? 0 ) )
+        .map( ( video ) => LocalVideoModel.fromJson(video).toVideoPostEntity() )
+        .toList();
+
+    videos.addAll( newVideos );
+    initialLoading = false;
+    notifyListeners();
+  }
+
+
+}
+`,
+
+      p4theme: `// Practica04/toktik/lib/config/theme/app_theme.dart
+import 'package:flutter/material.dart';
+
+class AppTheme {
+
+  ThemeData getTheme() => ThemeData(
+    useMaterial3: true,
+    brightness: Brightness.dark,
+    fontFamily: 'Poppins',
+    scaffoldBackgroundColor: const Color(0xFF121212),
+    colorScheme: ColorScheme.fromSeed(
+      seedColor: const Color(0xFF8E3CC3),
+      brightness: Brightness.dark,
+    ),
+  );
+
+}
+`,
+
+      p4model: `// Practica04/toktik/lib/infrastructure/models/local_video_model.dart
+import 'package:toktik/domain/entities/video_post.dart';
+
+class LocalVideoModel {
+
+  final String name;
+  final String videoUrl;
+  final int likes;
+  final int views;
+
+  LocalVideoModel({
+    required this.name,
+    required this.videoUrl,
+    required this.likes,
+    required this.views,
+  });
+
+  factory LocalVideoModel.fromJson( Map<String, dynamic> json ) {
+    return LocalVideoModel(
+      name: json['name'] as String? ?? '',
+      videoUrl: json['videoUrl'] as String? ?? '',
+      likes: json['likes'] as int? ?? 0,
+      views: json['views'] as int? ?? 0,
+    );
+  }
+
+  VideoPost toVideoPostEntity() => VideoPost(
+        caption: name,
+        videoUrl: videoUrl,
+        likes: likes,
+        views: views,
+      );
+}
+`,
+
+
     };
 
     function showFileCode(item) {
