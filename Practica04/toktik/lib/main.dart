@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:toktik/infrastructure/datasources/dailymotion_video_datasource_impl.dart';
+import 'package:toktik/infrastructure/datasources/coverr_video_datasource_impl.dart';
 import 'package:toktik/infrastructure/datasources/local_video_datasource_impl.dart';
 import 'package:toktik/infrastructure/datasources/pixabay_video_datasource_impl.dart';
 import 'package:toktik/infrastructure/datasources/youtube_video_datasource_impl.dart';
@@ -28,8 +28,8 @@ class MyApp extends StatelessWidget {
     final pixabayRepository = VideoPostsRepositoryImpl(
       videosDatasource: PixabayVideoDatasource()
     );
-    final dailymotionRepository = VideoPostsRepositoryImpl(
-      videosDatasource: DailymotionVideoDatasource()
+    final coverrRepository = VideoPostsRepositoryImpl(
+      videosDatasource: CoverrVideoDatasource()
     );
 
     return MultiProvider(
@@ -43,7 +43,7 @@ class MyApp extends StatelessWidget {
             forYouRepository: forYouRepository,
             youtubeRepository: youtubeRepository,
             pixabayRepository: pixabayRepository,
-            dailymotionRepository: dailymotionRepository,
+            coverrRepository: coverrRepository,
           )..loadNextPage(),
         ),
       ],

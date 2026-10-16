@@ -239,7 +239,7 @@ class _DiscoverTabState extends State<_DiscoverTab> {
     final List<VideoPost> filteredVideos = switch (_selectedFilter) {
       'YouTube' => widget.provider.youtubeVideos,
       'Pixabay' => widget.provider.pixabayVideos,
-      'Dailymotion' => widget.provider.dailymotionVideos,
+      'Coverr' => widget.provider.coverrVideos,
       _ => widget.provider.discoverVideos,
     };
 
@@ -280,11 +280,11 @@ class _DiscoverTabState extends State<_DiscoverTab> {
                 ),
                 const SizedBox(width: 6),
                 _FilterChip(
-                  label: 'Dailymotion (${widget.provider.dailymotionVideos.length})',
+                  label: 'Coverr (${widget.provider.coverrVideos.length})',
                   icon: Icons.ondemand_video,
-                  iconColor: Colors.blueAccent,
-                  selected: _selectedFilter == 'Dailymotion',
-                  onTap: () => setState(() => _selectedFilter = 'Dailymotion'),
+                  iconColor: Colors.lightBlueAccent,
+                  selected: _selectedFilter == 'Coverr',
+                  onTap: () => setState(() => _selectedFilter = 'Coverr'),
                 ),
               ],
             ),

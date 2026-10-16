@@ -15,13 +15,13 @@ class DiscoverProvider extends ChangeNotifier {
   final VideoPostRepository forYouRepository;
   final VideoPostRepository? youtubeRepository;
   final VideoPostRepository? pixabayRepository;
-  final VideoPostRepository? dailymotionRepository;
+  final VideoPostRepository? coverrRepository;
 
   bool initialLoading = true;
   List<VideoPost> forYouVideos = [];
   List<VideoPost> youtubeVideos = [];
   List<VideoPost> pixabayVideos = [];
-  List<VideoPost> dailymotionVideos = [];
+  List<VideoPost> coverrVideos = [];
   List<VideoPost> discoverVideos = [];
 
   List<VideoPost> get localVideos => forYouVideos;
@@ -36,10 +36,10 @@ class DiscoverProvider extends ChangeNotifier {
     required this.forYouRepository,
     this.youtubeRepository,
     this.pixabayRepository,
-    this.dailymotionRepository,
+    this.coverrRepository,
   });
 
-  String _keyOf(VideoPost v) => v.youtubeId ?? v.dailymotionId ?? v.videoUrl ?? '';
+  String _keyOf(VideoPost v) => v.youtubeId ?? v.videoUrl ?? '';
 
   List<VideoPost> get favoriteVideos {
     final all = [...forYouVideos, ...discoverVideos];
@@ -63,16 +63,16 @@ class DiscoverProvider extends ChangeNotifier {
       forYouRepository.getTrendingVideosByPage(1).catchError((_) => <VideoPost>[]),
       youtubeRepository?.getTrendingVideosByPage(1).catchError((_) => <VideoPost>[]) ?? Future.value(<VideoPost>[]),
       pixabayRepository?.getTrendingVideosByPage(1).catchError((_) => <VideoPost>[]) ?? Future.value(<VideoPost>[]),
-      dailymotionRepository?.getTrendingVideosByPage(1).catchError((_) => <VideoPost>[]) ?? Future.value(<VideoPost>[]),
+      coverrRepository?.getTrendingVideosByPage(1).catchError((_) => <VideoPost>[]) ?? Future.value(<VideoPost>[]),
     ]);
 
     forYouVideos = results[0];
     youtubeVideos = results[1];
     pixabayVideos = results[2];
-    dailymotionVideos = results[3];
+    coverrVideos = results[3];
 
-    // Discover integra las 3 APIs remotas (YouTube, Pixabay, Dailymotion)
-    discoverVideos = [...youtubeVideos, ...pixabayVideos, ...dailymotionVideos];
+    // Discover integra las 3 APIs remotas (YouTube, Pixabay, Coverr)
+    discoverVideos = [...youtubeVideos, ...pixabayVideos, ...coverrVideos];
 
     final allVideos = [...forYouVideos, ...discoverVideos];
 

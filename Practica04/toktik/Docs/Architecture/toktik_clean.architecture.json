@@ -66,7 +66,7 @@
       "id": "videoPlayers",
       "type": "frontend",
       "label": "Widgets de Reproducción",
-      "sublabel": "FullScreenPlayer / YouTube / Dailymotion",
+      "sublabel": "FullScreenPlayer / YouTube / Coverr",
       "tag": "lib/presentation/widgets/video",
       "pos": [900, 50],
       "size": [240, 60],
@@ -207,18 +207,18 @@
       ]
     },
     {
-      "id": "dsDailymotion",
+      "id": "dsCoverr",
       "type": "backend",
-      "label": "DailymotionVideoDatasource",
-      "sublabel": "Dailymotion Public API",
+      "label": "CoverrVideoDatasource",
+      "sublabel": "Coverr Videos API (API Key)",
       "tag": "lib/infrastructure/datasources",
       "pos": [900, 410],
       "size": [240, 60],
       "sources": [
         {
-          "path": "Practica04/toktik/lib/infrastructure/datasources/dailymotion_video_datasource_impl.dart",
+          "path": "Practica04/toktik/lib/infrastructure/datasources/coverr_video_datasource_impl.dart",
           "line": 7,
-          "label": "DailymotionVideoDatasource"
+          "label": "CoverrVideoDatasource"
         }
       ]
     },
@@ -271,18 +271,18 @@
       ]
     },
     {
-      "id": "apiDailymotion",
+      "id": "apiCoverr",
       "type": "database",
-      "label": "Dailymotion API",
-      "sublabel": "Endpoint api.dailymotion.com/videos",
-      "tag": "api.dailymotion.com",
+      "label": "Coverr Videos API",
+      "sublabel": "Endpoint api.coverr.co/videos",
+      "tag": "api.coverr.co",
       "pos": [900, 540],
       "size": [240, 56],
       "sources": [
         {
-          "path": "Practica04/toktik/lib/infrastructure/datasources/dailymotion_video_datasource_impl.dart",
-          "line": 12,
-          "label": "dailymotion API"
+          "path": "Practica04/toktik/lib/config/api_keys.dart",
+          "line": 5,
+          "label": "coverrApiKey"
         }
       ]
     }
@@ -355,8 +355,8 @@
       "label": "implements VideoPostDatasource"
     },
     {
-      "id": "dsdailymotion-dsinterface",
-      "from": "dsDailymotion",
+      "id": "dscoverr-dsinterface",
+      "from": "dsCoverr",
       "to": "datasourceInterface",
       "label": "implements VideoPostDatasource"
     },
@@ -385,10 +385,10 @@
       "label": "HTTP REST Pixabay"
     },
     {
-      "id": "dsdailymotion-apidailymotion",
-      "from": "dsDailymotion",
-      "to": "apiDailymotion",
-      "label": "HTTP REST Dailymotion"
+      "id": "dscoverr-apicoverr",
+      "from": "dsCoverr",
+      "to": "apiCoverr",
+      "label": "HTTP REST + API Key"
     }
   ],
   "cards": []
