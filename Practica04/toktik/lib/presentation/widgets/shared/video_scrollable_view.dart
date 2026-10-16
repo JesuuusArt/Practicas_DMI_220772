@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:toktik/domain/entities/video_post.dart';
 import 'package:toktik/presentation/widgets/shared/video_buttons.dart';
 import 'package:toktik/presentation/widgets/video/fullscreen_player.dart';
+import 'package:toktik/presentation/widgets/video/vimeo_player.dart';
 import 'package:toktik/presentation/widgets/video/youtube_shorts_player.dart';
 
 
@@ -51,7 +52,9 @@ class _VideoScrollableViewState extends State<VideoScrollableView> {
               child: Center(
                 child: videoPost.isYoutube
                     ? YoutubeShortsPlayer(video: videoPost, isActive: isActive)
-                    : FullScreenPlayer(video: videoPost, isActive: isActive),
+                    : videoPost.isVimeo
+                        ? VimeoPlayer(video: videoPost, isActive: isActive)
+                        : FullScreenPlayer(video: videoPost, isActive: isActive),
               ),
             ),
 

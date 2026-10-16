@@ -239,7 +239,7 @@ class _DiscoverTabState extends State<_DiscoverTab> {
     final List<VideoPost> filteredVideos = switch (_selectedFilter) {
       'YouTube' => widget.provider.youtubeVideos,
       'Pixabay' => widget.provider.pixabayVideos,
-      'Coverr' => widget.provider.coverrVideos,
+      'Vimeo' => widget.provider.vimeoVideos,
       _ => widget.provider.discoverVideos,
     };
 
@@ -280,11 +280,11 @@ class _DiscoverTabState extends State<_DiscoverTab> {
                 ),
                 const SizedBox(width: 6),
                 _FilterChip(
-                  label: 'Coverr (${widget.provider.coverrVideos.length})',
+                  label: 'Vimeo (${widget.provider.vimeoVideos.length})',
                   icon: Icons.ondemand_video,
                   iconColor: Colors.lightBlueAccent,
-                  selected: _selectedFilter == 'Coverr',
-                  onTap: () => setState(() => _selectedFilter = 'Coverr'),
+                  selected: _selectedFilter == 'Vimeo',
+                  onTap: () => setState(() => _selectedFilter = 'Vimeo'),
                 ),
               ],
             ),

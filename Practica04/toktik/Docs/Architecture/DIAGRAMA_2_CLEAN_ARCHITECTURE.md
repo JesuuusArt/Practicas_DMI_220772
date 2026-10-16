@@ -21,13 +21,13 @@ graph TD
         UI_Screen["DiscoverScreen\n(For You / Discover / Favorites)"]
         Prov_Discover["DiscoverProvider"]
         Prov_Theme["ThemeProvider"]
-        UI_Players["Players:\n- FullScreenPlayer (MP4/Local/Pixabay/Coverr)\n- YoutubeShortsPlayer"]
+        UI_Players["Players:\n- FullScreenPlayer (MP4/Local/Pixabay)\n- VimeoPlayer (embed + Player.js)\n- YoutubeShortsPlayer"]
     end
 
     subgraph Domain ["Capa de Dominio (lib/domain)"]
         Repo_Interface["<<interface>>\nVideoPostRepository\n+ getTrendingVideosByPage(page)\n+ getFavoriteVideosByUser(userId)"]
         Datasource_Interface["<<interface>>\nVideoPostDatasource\n+ getTrendingVideosByPage(page)\n+ getFavoriteVideosByUser(userId)"]
-        Entity_Video["Entity: VideoPost\n(caption, videoUrl, youtubeId,\nlikes, views)"]
+        Entity_Video["Entity: VideoPost\n(caption, videoUrl, youtubeId,\nvimeoId, likes, views)"]
     end
 
     subgraph Infrastructure ["Capa de Infraestructura (lib/infrastructure)"]
@@ -35,7 +35,7 @@ graph TD
         DS_Local["LocalVideoDatasource\n(Assets .mp4)"]
         DS_YouTube["YoutubeVideoDatasource\n(Google YouTube Data API v3)"]
         DS_Pixabay["PixabayVideoDatasource\n(Pixabay Videos API)"]
-        DS_Coverr["CoverrVideoDatasource\n(Coverr Videos API + API Key)"]
+        DS_Vimeo["VimeoVideoDatasource\n(Vimeo API v3 + Token)"]
     end
 
     subgraph Storage ["Almacenamiento Local"]
@@ -57,16 +57,16 @@ graph TD
     DS_Local -.->|Implementa| Datasource_Interface
     DS_YouTube -.->|Implementa| Datasource_Interface
     DS_Pixabay -.->|Implementa| Datasource_Interface
-    DS_Coverr -.->|Implementa| Datasource_Interface
+    DS_Vimeo -.->|Implementa| Datasource_Interface
 
     DS_Local -->|Retorna| Entity_Video
     DS_YouTube -->|Retorna| Entity_Video
     DS_Pixabay -->|Retorna| Entity_Video
-    DS_Coverr -->|Retorna| Entity_Video
+    DS_Vimeo -->|Retorna| Entity_Video
 ```
 
 ### Características del Diagrama 2:
 - **Inversión de dependencias:** La capa de presentación y el Provider solo conocen las interfaces abstractas de la capa de dominio (`VideoPostRepository` y `VideoPostDatasource`).
-- **Múltiples DataSources simultáneos:** Se integran 3 APIs remotas diferentes (**YouTube**, **Pixabay**, **Coverr**) más la fuente **Local de Assets**, todas cumpliendo el mismo contrato.
+- **Múltiples DataSources simultáneos:** Se integran 3 APIs remotas diferentes (**YouTube**, **Pixabay**, **Vimeo**) más la fuente **Local de Assets**, todas cumpliendo el mismo contrato.
 - **Escalabilidad:** Agregar un nuevo proveedor de video (por ejemplo Vimeo o TikTok API) solo requiere crear una clase que implemente `VideoPostDatasource`, sin tocar la interfaz ni el estado.
 - **Separación de responsabilidades:** Cada componente tiene una única función bien definida, facilitando pruebas unitarias y mantenimiento.

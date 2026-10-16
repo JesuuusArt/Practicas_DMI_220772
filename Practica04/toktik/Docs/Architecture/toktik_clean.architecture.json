@@ -25,7 +25,7 @@
       "sources": [
         {
           "path": "Practica04/toktik/lib/presentation/screens/discover/discover_screen.dart",
-          "line": 15,
+          "line": 9,
           "label": "DiscoverScreen"
         }
       ]
@@ -41,7 +41,7 @@
       "sources": [
         {
           "path": "Practica04/toktik/lib/presentation/providers/discover_provider.dart",
-          "line": 14,
+          "line": 13,
           "label": "DiscoverProvider"
         }
       ]
@@ -57,7 +57,7 @@
       "sources": [
         {
           "path": "Practica04/toktik/lib/presentation/providers/theme_provider.dart",
-          "line": 10,
+          "line": 9,
           "label": "ThemeProvider"
         }
       ]
@@ -66,14 +66,14 @@
       "id": "videoPlayers",
       "type": "frontend",
       "label": "Widgets de Reproducción",
-      "sublabel": "FullScreenPlayer / YouTube / Coverr",
+      "sublabel": "FullScreenPlayer / Vimeo / YouTube",
       "tag": "lib/presentation/widgets/video",
       "pos": [900, 50],
       "size": [240, 60],
       "sources": [
         {
           "path": "Practica04/toktik/lib/presentation/widgets/video/fullscreen_player.dart",
-          "line": 11,
+          "line": 9,
           "label": "FullScreenPlayer"
         }
       ]
@@ -89,7 +89,7 @@
       "sources": [
         {
           "path": "Practica04/toktik/lib/presentation/providers/discover_provider.dart",
-          "line": 50,
+          "line": 59,
           "label": "SharedPreferences"
         }
       ]
@@ -130,14 +130,14 @@
       "id": "entityVideo",
       "type": "backend",
       "label": "Entidad: VideoPost",
-      "sublabel": "caption, videoUrl, youtubeId, likes, views",
+      "sublabel": "caption, videoUrl, youtubeId, vimeoId, likes, views",
       "tag": "lib/domain/entities",
       "pos": [900, 175],
       "size": [240, 64],
       "sources": [
         {
           "path": "Practica04/toktik/lib/domain/entities/video_post.dart",
-          "line": 3,
+          "line": 1,
           "label": "VideoPost"
         }
       ]
@@ -153,7 +153,7 @@
       "sources": [
         {
           "path": "Practica04/toktik/lib/infrastructure/repositories/video_posts_repository_impl.dart",
-          "line": 4,
+          "line": 5,
           "label": "VideoPostsRepositoryImpl"
         }
       ]
@@ -207,18 +207,18 @@
       ]
     },
     {
-      "id": "dsCoverr",
+      "id": "dsVimeo",
       "type": "backend",
-      "label": "CoverrVideoDatasource",
-      "sublabel": "Coverr Videos API (API Key)",
+      "label": "VimeoVideoDatasource",
+      "sublabel": "Vimeo API v3 (Token)",
       "tag": "lib/infrastructure/datasources",
       "pos": [900, 410],
       "size": [240, 60],
       "sources": [
         {
-          "path": "Practica04/toktik/lib/infrastructure/datasources/coverr_video_datasource_impl.dart",
-          "line": 7,
-          "label": "CoverrVideoDatasource"
+          "path": "Practica04/toktik/lib/infrastructure/datasources/vimeo_video_datasource_impl.dart",
+          "line": 15,
+          "label": "VimeoVideoDatasource"
         }
       ]
     },
@@ -265,24 +265,24 @@
       "sources": [
         {
           "path": "Practica04/toktik/lib/config/api_keys.dart",
-          "line": 3,
+          "line": 4,
           "label": "pixabayApiKey"
         }
       ]
     },
     {
-      "id": "apiCoverr",
+      "id": "apiVimeo",
       "type": "database",
-      "label": "Coverr Videos API",
-      "sublabel": "Endpoint api.coverr.co/videos",
-      "tag": "api.coverr.co",
+      "label": "Vimeo API v3",
+      "sublabel": "Endpoint api.vimeo.com/videos",
+      "tag": "api.vimeo.com",
       "pos": [900, 540],
       "size": [240, 56],
       "sources": [
         {
           "path": "Practica04/toktik/lib/config/api_keys.dart",
-          "line": 5,
-          "label": "coverrApiKey"
+          "line": 7,
+          "label": "vimeoToken"
         }
       ]
     }
@@ -355,8 +355,8 @@
       "label": "implements VideoPostDatasource"
     },
     {
-      "id": "dscoverr-dsinterface",
-      "from": "dsCoverr",
+      "id": "dsvimeo-dsinterface",
+      "from": "dsVimeo",
       "to": "datasourceInterface",
       "label": "implements VideoPostDatasource"
     },
@@ -385,10 +385,10 @@
       "label": "HTTP REST Pixabay"
     },
     {
-      "id": "dscoverr-apicoverr",
-      "from": "dsCoverr",
-      "to": "apiCoverr",
-      "label": "HTTP REST + API Key"
+      "id": "dsvimeo-apivimeo",
+      "from": "dsVimeo",
+      "to": "apiVimeo",
+      "label": "HTTP REST + Token"
     }
   ],
   "cards": []

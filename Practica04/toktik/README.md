@@ -25,7 +25,7 @@ Aplicación móvil desarrollada en Flutter que simula la experiencia de la red s
 - **Gestores de Estado:** Providers (`provider`)
 - **Manejo de Assets:** Videos, audios, iconos y tipografías personalizadas
 - **Paquetes externos:** `video_player`, `youtube_player_flutter`, `audioplayers`, `shared_preferences`, etc.
-- **Consumo de APIs con Key:** YouTube Data API v3, Pixabay Videos API y Coverr Videos API (autenticación por `Bearer`).
+- **Consumo de APIs con Key:** YouTube Data API v3, Pixabay Videos API y Vimeo API v3 (autenticación por `Bearer` con Personal Access Token).
 - **GestureDetector:** Para reproducir/pausar, dar like, silenciar y expandir descripciones.
 - **Posicionamiento de Widgets y Stacks:** Superposición de controles, degradados (`LinearGradient`) y animaciones.
 - **Mappers y Aserciones:** Transformación segura de modelos a entidades de dominio con `assert`.
@@ -51,20 +51,21 @@ Aplicación móvil desarrollada en Flutter que simula la experiencia de la red s
      - *Todos*
      - *YouTube Shorts*
      - *Pixabay Videos*
-     - *Coverr (stock HD/4K, con preferencia por videos verticales)*
+     - *Vimeo (con likes y vistas reales de la API)*
   3. **Favoritos (Favorites):** Feed dinámico que muestra exclusivamente los videos marcados con corazón.
 
 ### 🔇 C. Muteado y Activación de Sonido
 - Botón interactivo de volumen en la columna derecha de la interfaz.
-- Sincronizado en tiempo real con los reproductores (`VideoPlayerController` y `YoutubePlayerController`).
-- Al usar MP4 directos (Coverr, Pixabay y assets locales) el volumen cambia **al instante**, sin recargar el video.
+- Sincronizado en tiempo real con los reproductores (`VideoPlayerController`, `YoutubePlayerController` y el reproductor de Vimeo por `Player.js`).
+- Con Vimeo se usa la **Player.js API** (`setMuted`), por lo que el volumen cambia **en vivo**, sin recargar el video.
+- En los MP4 directos (Pixabay y assets locales) el cambio de volumen también es instantáneo.
 - Estado de silencio persistido en `SharedPreferences`.
 
 ### ❤️ D. Persistencia de "Me Gusta" (Local Storage)
 - Al marcar el corazón, incrementa en 1 los likes y actualiza el estado `liked`.
 - Al desmarcarlo, resta 1 like.
 - Los datos persisten parcialmente en el dispositivo mediante `SharedPreferences`, sobreviviendo al reinicio de la aplicación.
-- Nota: la API de Coverr no expone "me gusta", por lo que su datasource genera una cifra **determinista** (misma para el mismo video) a partir del `id`, la cual queda persistida en Local Storage desde la primera carga.
+- La API de Vimeo expone métricas **reales**: `metadata.connections.likes.total` (me gusta) y `stats.plays` (vistas), que se cargan desde la primera consulta y luego se persisten en Local Storage.
 
 ### 📜 E. Descripción Extensa con (... más) y Desplazamiento Vertical
 - Si la descripción del video excede el límite de caracteres o 2 líneas, muestra automáticamente el indicador interactivo `... más`.
@@ -75,7 +76,7 @@ Aplicación móvil desarrollada en Flutter que simula la experiencia de la red s
 Arquitectura multicapa desacoplada consumiendo:
 1. **YouTube Data API v3** (`YoutubeVideoDatasource`)
 2. **Pixabay Videos API** (`PixabayVideoDatasource`)
-3. **Coverr Videos API** (`CoverrVideoDatasource`, autenticada con API Key vía `Authorization: Bearer`)
+3. **Vimeo API v3** (`VimeoVideoDatasource`, autenticada con Personal Access Token vía `Authorization: Bearer`)
 4. **Local Assets DataSource** (`LocalVideoDatasource`)
 
 ---
@@ -138,7 +139,7 @@ graph TD
   <p><em>👆 Haz clic en cualquiera de las imágenes para interactuar con el Diagrama 2 en GitHub Pages</em></p>
 </div>
 
-Muestra el desacoplamiento mediante **Inversión de Dependencias**, donde la Presentación solo interactúa con contratos de Dominio, y la Infraestructura implementa los DataSources para **YouTube, Pixabay, Coverr y Local**:
+Muestra el desacoplamiento mediante **Inversión de Dependencias**, donde la Presentación solo interactúa con contratos de Dominio, y la Infraestructura implementa los DataSources para **YouTube, Pixabay, Vimeo y Local**:
 
 ```mermaid
 graph TD
@@ -146,13 +147,13 @@ graph TD
         UI_Screen["DiscoverScreen\n(For You / Discover / Favorites)"]
         Prov_Discover["DiscoverProvider"]
         Prov_Theme["ThemeProvider"]
-        UI_Players["Players:\n- FullScreenPlayer (MP4/Local/Pixabay/Coverr)\n- YoutubeShortsPlayer"]
+        UI_Players["Players:\n- FullScreenPlayer (MP4/Local/Pixabay)\n- VimeoPlayer (embed + Player.js)\n- YoutubeShortsPlayer"]
     end
 
     subgraph Domain ["Capa de Dominio (lib/domain)"]
         Repo_Interface["<<interface>>\nVideoPostRepository\n+ getTrendingVideosByPage(page)\n+ getFavoriteVideosByUser(userId)"]
         Datasource_Interface["<<interface>>\nVideoPostDatasource\n+ getTrendingVideosByPage(page)\n+ getFavoriteVideosByUser(userId)"]
-        Entity_Video["Entity: VideoPost\n(caption, videoUrl, youtubeId,\nlikes, views)"]
+        Entity_Video["Entity: VideoPost\n(caption, videoUrl, youtubeId,\nvimeoId, likes, views)"]
     end
 
     subgraph Infrastructure ["Capa de Infraestructura (lib/infrastructure)"]
@@ -160,7 +161,7 @@ graph TD
         DS_Local["LocalVideoDatasource\n(Assets .mp4)"]
         DS_YouTube["YoutubeVideoDatasource\n(Google YouTube Data API v3)"]
         DS_Pixabay["PixabayVideoDatasource\n(Pixabay Videos API)"]
-        DS_Coverr["CoverrVideoDatasource\n(Coverr Videos API + API Key)"]
+        DS_Vimeo["VimeoVideoDatasource\n(Vimeo API v3 + Token)"]
     end
 
     subgraph Storage ["Almacenamiento Local"]
@@ -180,12 +181,12 @@ graph TD
     DS_Local -.->|Implementa| Datasource_Interface
     DS_YouTube -.->|Implementa| Datasource_Interface
     DS_Pixabay -.->|Implementa| Datasource_Interface
-    DS_Coverr -.->|Implementa| Datasource_Interface
+    DS_Vimeo -.->|Implementa| Datasource_Interface
 
     DS_Local -->|Retorna| Entity_Video
     DS_YouTube -->|Retorna| Entity_Video
     DS_Pixabay -->|Retorna| Entity_Video
-    DS_Coverr -->|Retorna| Entity_Video
+    DS_Vimeo -->|Retorna| Entity_Video
 ```
 
 ---
@@ -197,14 +198,15 @@ graph TD
 | **Flutter** | `3.47.2` | Framework base para desarrollo multiplataforma. |
 | **Dart** | `3.13.2` | Lenguaje de programación orientado a objetos. |
 | **provider** | `^6.1.5+1` | Inyección de dependencias y reactividad (`DiscoverProvider`, `ThemeProvider`). |
-| **video_player** | `^2.10.0` | Reproducción a pantalla completa de videos MP4 locales, de Pixabay y de Coverr. |
+| **video_player** | `^2.10.0` | Reproducción a pantalla completa de videos MP4 locales y de Pixabay. |
 | **youtube_player_flutter** | `^9.1.1` | Reproducción nativa embebida de videos de YouTube Shorts. |
 | **audioplayers** | `^6.8.1` | Reproducción de sonidos ambientales y transiciones por temporada. |
 | **shared_preferences** | `^2.3.3` | Persistencia en Local Storage de likes, mute y tema seleccionado. |
 | **animate_do** | `^4.0.0` | Micro-animaciones para el botón de me gusta y transiciones. |
 | **intl** | `^0.20.2` | Formato legible compacto para números de likes y vistas (ej. 24.5K). |
-| **http** | `^1.6.0` | Peticiones HTTP a las APIs de YouTube, Pixabay y Coverr. |
-| **Coverr Videos API** | `v1` | API de stock (HD/4K) autenticada con API Key; devuelve MP4 firmados y el flag `is_vertical`. |
+| **http** | `^1.6.0` | Peticiones HTTP a las APIs de YouTube, Pixabay y Vimeo. |
+| **webview_flutter** | `^4.14.1` | Reproductor embebido de Vimeo (embed controlado con `Player.js`). |
+| **Vimeo API v3** | `v3.4` | API autenticada con Personal Access Token; expone `likes`, `plays`, `name` y `description` reales. |
 
 ---
 
