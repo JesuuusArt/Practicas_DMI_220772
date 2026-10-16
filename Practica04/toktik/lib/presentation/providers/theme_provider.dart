@@ -10,7 +10,7 @@ class ThemeProvider extends ChangeNotifier {
 
   static const String _prefKey = 'selected_season_override';
 
-  String _currentSeason = 'principal';
+  String _currentSeason = 'navidad';
   String _mode = 'auto';
   final AudioPlayer _audioPlayer = AudioPlayer();
 
@@ -32,7 +32,7 @@ class ThemeProvider extends ChangeNotifier {
 
   Future<void> _loadSeason() async {
     final prefs = await SharedPreferences.getInstance();
-    final savedMode = prefs.getString(_prefKey) ?? 'auto';
+    final savedMode = prefs.getString(_prefKey) ?? 'navidad';
     _mode = savedMode;
     _currentSeason = (_mode == 'auto') ? getAutoSeason() : _mode;
     _playSeasonSound(_currentSeason);
