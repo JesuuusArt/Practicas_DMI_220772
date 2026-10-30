@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:widgets_app/config/theme/app_theme.dart';
 import 'package:widgets_app/presentation/providers/theme_provider.dart';
 
 
@@ -53,14 +52,14 @@ class _ThemeChangerView extends ConsumerWidget {
         final Color color = colors[index];
 
         return RadioListTile(
-          title: Text('Este color', style:  TextStyle( color: color )),
-          subtitle: Text('${ color.value }'),
+          title: Text('Este color', style: TextStyle(color: color)),
+          subtitle: Text('${color.toARGB32()}'),
           activeColor: color,
           value: index, 
           groupValue: selectedColor, 
           onChanged: (value) {
             // ref.read(selectedColorProvider.notifier).state = index;
-            ref.watch( themeNotifierProvider.notifier )
+            ref.read( themeNotifierProvider.notifier )
               .changeColorIndex(index);
           },
         );
