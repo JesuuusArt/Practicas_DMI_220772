@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="generator" content="archify 2.17.0">
+  <title>Arquitectura Específica de Pantallas y Estados — Widgets App (Archify)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-canvas: #0b0f19;
+      --bg-panel: rgba(15, 23, 42, 0.9);
+      --border-color: rgba(255, 255, 255, 0.12);
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --cyan: #06b6d4;
+      --purple: #a855f7;
+      --green: #10b981;
+      --amber: #f59e0b;
+      --node-frontend: #1e293b;
+      --node-backend: #2e1065;
+      --node-db: #064e3b;
+      --line-color: #38bdf8;
+    }
+
+    [data-theme="light"] {
+      --bg-canvas: #f8fafc;
+      --bg-panel: rgba(255, 255, 255, 0.95);
+      --border-color: rgba(0, 0, 0, 0.12);
+      --text-main: #0f172a;
+      --text-muted: #64748b;
+      --node-frontend: #e2e8f0;
+      --node-backend: #f3e8ff;
+      --node-db: #dcfce7;
+      --line-color: #0284c7;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--bg-canvas);
+      color: var(--text-main);
+      overflow: hidden;
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      background: var(--bg-panel);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-color);
+      padding: 0.85rem 1.75rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 50;
+    }
+
+    .title-group h1 {
+      font-size: 1.15rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .badge {
+      font-size: 0.75rem;
+      font-family: 'Fira Code', monospace;
+      padding: 0.2rem 0.5rem;
+      border-radius: 6px;
+      background: rgba(168, 85, 247, 0.15);
+      color: var(--purple);
+      border: 1px solid rgba(168, 85, 247, 0.3);
+    }
+
+    .controls {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .btn {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      padding: 0.45rem 0.9rem;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 0.85rem;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: all 0.2s ease;
+    }
+
+    .btn:hover {
+      background: var(--purple);
+      color: #fff;
+      border-color: var(--purple);
+    }
+
+    .canvas-container {
+      flex: 1;
+      position: relative;
+      cursor: grab;
+      overflow: hidden;
+      background-image: radial-gradient(var(--border-color) 1px, transparent 1px);
+      background-size: 24px 24px;
+    }
+
+    .canvas-container:active { cursor: grabbing; }
+
+    #svg-canvas {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      transform-origin: 0 0;
+    }
+
+    /* Node Styles */
+    .arch-node {
+      cursor: pointer;
+      transition: transform 0.2s ease, filter 0.2s ease;
+    }
+
+    .arch-node:hover {
+      filter: drop-shadow(0 0 12px rgba(168, 85, 247, 0.6));
+    }
+
+    .arch-node rect {
+      rx: 10px;
+      ry: 10px;
+      stroke-width: 1.8px;
+    }
+
+    .arch-node.frontend rect {
+      fill: var(--node-frontend);
+      stroke: var(--cyan);
+    }
+
+    .arch-node.backend rect {
+      fill: var(--node-backend);
+      stroke: var(--purple);
+    }
+
+    .arch-node.database rect {
+      fill: var(--node-db);
+      stroke: var(--green);
+    }
+
+    .node-title {
+      font-weight: 700;
+      font-size: 13px;
+      fill: var(--text-main);
+    }
+
+    .node-sub {
+      font-size: 10.5px;
+      fill: var(--text-muted);
+    }
+
+    .node-tag {
+      font-family: 'Fira Code', monospace;
+      font-size: 9.5px;
+      fill: var(--purple);
+    }
+
+    /* Connections */
+    .connection-line {
+      fill: none;
+      stroke: var(--line-color);
+      stroke-width: 1.8px;
+      stroke-dasharray: 5, 5;
+      animation: dash 25s linear infinite;
+    }
+
+    @keyframes dash {
+      to { stroke-dashoffset: -1000; }
+    }
+
+    /* Inspector */
+    .inspector-panel {
+      position: absolute;
+      bottom: 20px;
+      right: 20px;
+      width: 350px;
+      background: var(--bg-panel);
+      backdrop-filter: blur(14px);
+      border: 1px solid var(--border-color);
+      border-radius: 14px;
+      padding: 1.25rem;
+      box-shadow: 0 16px 36px rgba(0,0,0,0.5);
+      z-index: 60;
+      display: none;
+      animation: slideUp 0.25s ease forwards;
+    }
+
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .inspector-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 0.75rem;
+    }
+
+    .inspector-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+    }
+
+    .close-btn {
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      cursor: pointer;
+      font-size: 1.2rem;
+    }
+
+    .inspector-desc {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-bottom: 0.75rem;
+    }
+
+    .source-box {
+      background: rgba(0,0,0,0.25);
+      border: 1px solid var(--border-color);
+      padding: 0.6rem;
+      border-radius: 8px;
+      font-family: 'Fira Code', monospace;
+      font-size: 0.8rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="title-group">
+      <h1>🏗️ Arquitectura Específica: Pantallas, Rutas y Estados — Widgets App</h1>
+      <span class="badge">OpenCode Archify 2.17</span>
+    </div>
+    <div class="controls">
+      <button class="btn" onclick="zoomIn()">🔍+ Acercar</button>
+      <button class="btn" onclick="zoomOut()">🔍- Alejar</button>
+      <button class="btn" onclick="resetView()">🔄 Restablecer</button>
+      <button class="btn" onclick="toggleTheme()">🌓 Tema</button>
+      <a href="widgets_app_specific.architecture.json" target="_blank" class="btn">📄 JSON</a>
+    </div>
+  </header>
+
+  <div class="canvas-container" id="container">
+    <svg id="svg-canvas" viewBox="0 0 1550 720">
+      <defs>
+        <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+          <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#38bdf8" />
+        </marker>
+      </defs>
+
+      <!-- Connections Lines -->
+      <g id="connections-group">
+        <path class="connection-line" marker-end="url(#arrow)" d="M 230 250 L 330 180" />
+        <path class="connection-line" marker-end="url(#arrow)" d="M 230 270 L 330 330" />
+        <path class="connection-line" marker-end="url(#arrow)" d="M 540 180 L 640 240" />
+        <path class="connection-line" marker-end="url(#arrow)" d="M 540 330 L 640 270" />
+
+        <!-- Router to Screens -->
+        <path class="connection-line" marker-end="url(#arrow)" d="M 850 230 L 980 65" />
+        <path class="connection-line" marker-end="url(#arrow)" d="M 850 240 L 980 135" />
+        <path class="connection-line" marker-end="url(#arrow)" d="M 850 250 L 980 205" />
+        <path class="connection-line" marker-end="url(#arrow)" d="M 850 260 L 980 275" />
+        <path class="connection-line" marker-end="url(#arrow)" d="M 850 270 L 980 345" />
+        <path class="connection-line" marker-end="url(#arrow)" d="M 850 280 L 980 415" />
+        <path class="connection-line" marker-end="url(#arrow)" d="M 850 290 L 980 485" />
+        <path class="connection-line" marker-end="url(#arrow)" d="M 850 300 L 980 555" />
+        <path class="connection-line" marker-end="url(#arrow)" d="M 850 310 L 980 625" />
+        <path class="connection-line" marker-end="url(#arrow)" d="M 850 320 L 980 695" />
+
+        <!-- Screens to Providers -->
+        <path class="connection-line" marker-end="url(#arrow)" d="M 1200 65 L 1290 65" />
+        <path class="connection-line" marker-end="url(#arrow)" d="M 1200 135 L 1290 135" />
+      </g>
+
+      <!-- Nodes Group -->
+      <g id="nodes-group">
+        <!-- Central Menu -->
+        <g class="arch-node database" onclick="inspectNode('appMenuItems', 'Lista centralizada de objetos MenuItem que define título, subtítulo, ruta e ícono para todas las pantallas.', 'lib/config/menu/menu_items.dart', 19)" transform="translate(30, 230)">
+          <rect width="200" height="70" />
+          <text x="14" y="28" class="node-title">appMenuItems</text>
+          <text x="14" y="44" class="node-sub">Catálogo de 10 Rutas</text>
+          <text x="14" y="58" class="node-tag">Single Source of Truth</text>
+        </g>
+
+        <!-- HomeScreen -->
+        <g class="arch-node frontend" onclick="inspectNode('HomeScreen', 'Pantalla principal de catálogo con Scaffold, AppBar y ListView.builder que renderiza cada _CustomListTile.', 'lib/presentation/screen/home/home_screen.dart', 9)" transform="translate(330, 150)">
+          <rect width="210" height="60" />
+          <text x="14" y="26" class="node-title">HomeScreen</text>
+          <text x="14" y="44" class="node-sub">ListView.builder + ListTile</text>
+        </g>
+
+        <!-- SideMenu -->
+        <g class="arch-node frontend" onclick="inspectNode('SideMenu (Drawer)', 'NavigationDrawer con opciones agrupadas (Main, Divider, More options) y manejo de notch para iPhone.', 'lib/presentation/widgets/side_menu.dart', 5)" transform="translate(330, 300)">
+          <rect width="210" height="60" />
+          <text x="14" y="26" class="node-title">SideMenu</text>
+          <text x="14" y="44" class="node-sub">NavigationDrawer Agrupado</text>
+        </g>
+
+        <!-- GoRouter -->
+        <g class="arch-node frontend" onclick="inspectNode('GoRouter (appRouter)', 'Mapeo centralizado de GoRoute que enlaza las 11 rutas de la aplicación a sus correspondientes builders.', 'lib/config/router/app_router.dart', 5)" transform="translate(640, 220)">
+          <rect width="210" height="70" />
+          <text x="14" y="28" class="node-title">appRouter</text>
+          <text x="14" y="46" class="node-sub">11 Rutas GoRoute</text>
+          <text x="14" y="60" class="node-tag">context.push / pop</text>
+        </g>
+
+        <!-- 10 Screens -->
+        <g class="arch-node frontend" onclick="inspectNode('CounterScreen', 'Pantalla de contador que se actualiza reactivamente usando ref.watch(counterProvider) y ref.read(counterProvider.notifier).state++.', 'lib/presentation/screen/counter/counter_screen.dart', 7)" transform="translate(980, 40)">
+          <rect width="220" height="50" />
+          <text x="12" y="24" class="node-title">1. CounterScreen</text>
+          <text x="12" y="38" class="node-sub">/counter-river (Riverpod)</text>
+        </g>
+
+        <g class="arch-node frontend" onclick="inspectNode('ThemeChangerScreen', 'Selector dinámico de colores mediante RadioListTile y botón para alternar modo claro/oscuro en tiempo real.', 'lib/presentation/screen/theme_changer/theme_changer_screen.dart', 7)" transform="translate(980, 110)">
+          <rect width="220" height="50" />
+          <text x="12" y="24" class="node-title">2. ThemeChangerScreen</text>
+          <text x="12" y="38" class="node-sub">/theme-changer (ThemeNotifier)</text>
+        </g>
+
+        <g class="arch-node frontend" onclick="inspectNode('ButtonsScreen', 'Muestra todas las variantes de botones M3: ElevatedButton, FilledButton, OutlinedButton, TextButton, IconButton, FAB y CustomButton.', 'lib/presentation/screen/buttons/buttons_screen.dart', 4)" transform="translate(980, 180)">
+          <rect width="220" height="50" />
+          <text x="12" y="24" class="node-title">3. ButtonsScreen</text>
+          <text x="12" y="38" class="node-sub">/buttons (M3 Buttons + Custom)</text>
+        </g>
+
+        <g class="arch-node frontend" onclick="inspectNode('CardsScreen', 'Muestra 4 tipos de tarjetas: con elevación progresiva (0..5), con borde perimetral, con color de superficie y con imágenes remotas.', 'lib/presentation/screen/cards/cards_screen.dart', 16)" transform="translate(980, 250)">
+          <rect width="220" height="50" />
+          <text x="12" y="24" class="node-title">4. CardsScreen</text>
+          <text x="12" y="38" class="node-sub">/cards (4 Diseños de Tarjetas)</text>
+        </g>
+
+        <g class="arch-node frontend" onclick="inspectNode('ProgressScreen', 'Indicadores de progreso indeterminados y controlados mediante Stream.periodic y StreamBuilder tanto circular como lineal.', 'lib/presentation/screen/progress/progress_screen.dart', 3)" transform="translate(980, 320)">
+          <rect width="220" height="50" />
+          <text x="12" y="24" class="node-title">5. ProgressScreen</text>
+          <text x="12" y="38" class="node-sub">/progress (StreamBuilder)</text>
+        </g>
+
+        <g class="arch-node frontend" onclick="inspectNode('SnackbarScreen', 'Notificaciones al usuario con SnackBar flotante, showAboutDialog para licencias y AlertDialog de confirmación/cancelación.', 'lib/presentation/screen/snackbar/snackbar_screen.dart', 4)" transform="translate(980, 390)">
+          <rect width="220" height="50" />
+          <text x="12" y="24" class="node-title">6. SnackbarScreen</text>
+          <text x="12" y="38" class="node-sub">/snackbars (Diálogos y SnackBar)</text>
+        </g>
+
+        <g class="arch-node frontend" onclick="inspectNode('AnimatedScreen', 'Animaciones implícitas con AnimatedContainer, modificando color, radio y tamaño con valores aleatorios y Curves.elasticOut.', 'lib/presentation/screen/animated/animated_screen.dart', 4)" transform="translate(980, 460)">
+          <rect width="220" height="50" />
+          <text x="12" y="24" class="node-title">7. AnimatedScreen</text>
+          <text x="12" y="38" class="node-sub">/animated (AnimatedContainer)</text>
+        </g>
+
+        <g class="arch-node frontend" onclick="inspectNode('UiControlsScreen', 'Controles interactivos: SwitchListTile, ExpansionTile con RadioListTile para transporte, y CheckboxListTile para opciones múltiples.', 'lib/presentation/screen/ui_controls/ui_controls_screen.dart', 3)" transform="translate(980, 530)">
+          <rect width="220" height="50" />
+          <text x="12" y="24" class="node-title">8. UiControlsScreen</text>
+          <text x="12" y="38" class="node-sub">/ui-controls (Switch, Radios, Tiles)</text>
+        </g>
+
+        <g class="arch-node frontend" onclick="inspectNode('AppTutorialScreen', 'Tutorial introductorio de 3 diapositivas locales usando PageView, PageController y botón con animación FadeInRight (animate_do).', 'lib/presentation/screen/app_tutorial/app_tutorial_screen.dart', 31)" transform="translate(980, 600)">
+          <rect width="220" height="50" />
+          <text x="12" y="24" class="node-title">9. AppTutorialScreen</text>
+          <text x="12" y="38" class="node-sub">/tutorial (PageView + FadeInRight)</text>
+        </g>
+
+        <g class="arch-node frontend" onclick="inspectNode('InfiniteScrollScreen', 'Lista de imágenes infinitas con ScrollController, carga asíncrona progresiva, RefreshIndicator (Pull to Refresh) y FadeInImage.', 'lib/presentation/screen/infinite_scroll/infinite_scroll_screen.dart', 4)" transform="translate(980, 670)">
+          <rect width="220" height="50" />
+          <text x="12" y="24" class="node-title">10. InfiniteScrollScreen</text>
+          <text x="12" y="38" class="node-sub">/infinite (Pull to Refresh)</text>
+        </g>
+
+        <!-- Providers Column -->
+        <g class="arch-node backend" onclick="inspectNode('counterProvider', 'StateProvider de tipo int que almacena y emite reactivamente el conteo de clics en la aplicación.', 'lib/presentation/providers/counter_provider.dart', 3)" transform="translate(1290, 40)">
+          <rect width="210" height="50" />
+          <text x="12" y="24" class="node-title">counterProvider</text>
+          <text x="12" y="38" class="node-sub">StateProvider&lt;int&gt;</text>
+        </g>
+
+        <g class="arch-node backend" onclick="inspectNode('themeNotifierProvider', 'StateNotifierProvider que encapsula la clase ThemeNotifier para alternar isDarkmode y cambiar selectedColor en AppTheme.', 'lib/presentation/providers/theme_provider.dart', 15)" transform="translate(1290, 110)">
+          <rect width="210" height="50" />
+          <text x="12" y="24" class="node-title">themeNotifierProvider</text>
+          <text x="12" y="38" class="node-sub">StateNotifier&lt;AppTheme&gt;</text>
+        </g>
+      </g>
+    </svg>
+  </div>
+
+  <div class="inspector-panel" id="inspector">
+    <div class="inspector-header">
+      <div class="inspector-title" id="ins-title">Componente</div>
+      <button class="close-btn" onclick="closeInspector()">✕</button>
+    </div>
+    <div class="inspector-desc" id="ins-desc">Descripción detallada del componente y sus contratos.</div>
+    <div class="source-box" id="ins-source">Ubicación de archivo</div>
+  </div>
+
+  <script>
+    let scale = 1;
+    let pointX = 0, pointY = 0;
+    let startX = 0, startY = 0;
+    let isPanning = false;
+
+    const container = document.getElementById('container');
+    const svg = document.getElementById('svg-canvas');
+
+    function setTransform() {
+      svg.style.transform = `translate(${pointX}px, ${pointY}px) scale(${scale})`;
+    }
+
+    container.onmousedown = function (e) {
+      if (e.target.closest('.arch-node')) return;
+      isPanning = true;
+      startX = e.clientX - pointX;
+      startY = e.clientY - pointY;
+    };
+
+    window.onmousemove = function (e) {
+      if (!isPanning) return;
+      pointX = e.clientX - startX;
+      pointY = e.clientY - startY;
+      setTransform();
+    };
+
+    window.onmouseup = function () { isPanning = false; };
+
+    container.onwheel = function (e) {
+      e.preventDefault();
+      const xs = (e.clientX - pointX) / scale;
+      const ys = (e.clientY - pointY) / scale;
+      const delta = -e.deltaY;
+      (delta > 0) ? (scale *= 1.1) : (scale /= 1.1);
+      pointX = e.clientX - xs * scale;
+      pointY = e.clientY - ys * scale;
+      setTransform();
+    };
+
+    function zoomIn() { scale *= 1.2; setTransform(); }
+    function zoomOut() { scale /= 1.2; setTransform(); }
+    function resetView() { scale = 1; pointX = 0; pointY = 0; setTransform(); }
+
+    function toggleTheme() {
+      const html = document.documentElement;
+      const current = html.getAttribute('data-theme');
+      html.setAttribute('data-theme', current === 'dark' ? 'light' : 'dark');
+    }
+
+    function inspectNode(title, desc, file, line) {
+      document.getElementById('ins-title').innerText = title;
+      document.getElementById('ins-desc').innerText = desc;
+      document.getElementById('ins-source').innerText = `Ubicación: ${file}:${line}`;
+      document.getElementById('inspector').style.display = 'block';
+    }
+
+    function closeInspector() {
+      document.getElementById('inspector').style.display = 'none';
+    }
+  </script>
+</body>
+</html>

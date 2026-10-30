@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="generator" content="archify 2.17.0">
+  <title>Arquitectura General Tecnológica — Widgets App (Archify)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-canvas: #0b0f19;
+      --bg-panel: rgba(15, 23, 42, 0.9);
+      --border-color: rgba(255, 255, 255, 0.12);
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --cyan: #06b6d4;
+      --purple: #a855f7;
+      --green: #10b981;
+      --amber: #f59e0b;
+      --node-frontend: #1e293b;
+      --node-backend: #2e1065;
+      --node-db: #064e3b;
+      --line-color: #38bdf8;
+    }
+
+    [data-theme="light"] {
+      --bg-canvas: #f8fafc;
+      --bg-panel: rgba(255, 255, 255, 0.95);
+      --border-color: rgba(0, 0, 0, 0.12);
+      --text-main: #0f172a;
+      --text-muted: #64748b;
+      --node-frontend: #e2e8f0;
+      --node-backend: #f3e8ff;
+      --node-db: #dcfce7;
+      --line-color: #0284c7;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--bg-canvas);
+      color: var(--text-main);
+      overflow: hidden;
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      background: var(--bg-panel);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-color);
+      padding: 0.85rem 1.75rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 50;
+    }
+
+    .title-group h1 {
+      font-size: 1.15rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .badge {
+      font-size: 0.75rem;
+      font-family: 'Fira Code', monospace;
+      padding: 0.2rem 0.5rem;
+      border-radius: 6px;
+      background: rgba(6, 182, 212, 0.15);
+      color: var(--cyan);
+      border: 1px solid rgba(6, 182, 212, 0.3);
+    }
+
+    .controls {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .btn {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      padding: 0.45rem 0.9rem;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 0.85rem;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: all 0.2s ease;
+    }
+
+    .btn:hover {
+      background: var(--cyan);
+      color: #000;
+      border-color: var(--cyan);
+    }
+
+    .canvas-container {
+      flex: 1;
+      position: relative;
+      cursor: grab;
+      overflow: hidden;
+      background-image: radial-gradient(var(--border-color) 1px, transparent 1px);
+      background-size: 24px 24px;
+    }
+
+    .canvas-container:active { cursor: grabbing; }
+
+    #svg-canvas {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      transform-origin: 0 0;
+    }
+
+    /* Node Styles */
+    .arch-node {
+      cursor: pointer;
+      transition: transform 0.2s ease, filter 0.2s ease;
+    }
+
+    .arch-node:hover {
+      filter: drop-shadow(0 0 12px rgba(6, 182, 212, 0.6));
+    }
+
+    .arch-node rect {
+      rx: 12px;
+      ry: 12px;
+      stroke-width: 2px;
+    }
+
+    .arch-node.frontend rect {
+      fill: var(--node-frontend);
+      stroke: var(--cyan);
+    }
+
+    .arch-node.backend rect {
+      fill: var(--node-backend);
+      stroke: var(--purple);
+    }
+
+    .arch-node.database rect {
+      fill: var(--node-db);
+      stroke: var(--green);
+    }
+
+    .node-title {
+      font-weight: 700;
+      font-size: 14px;
+      fill: var(--text-main);
+    }
+
+    .node-sub {
+      font-size: 11px;
+      fill: var(--text-muted);
+    }
+
+    .node-tag {
+      font-family: 'Fira Code', monospace;
+      font-size: 10px;
+      fill: var(--cyan);
+    }
+
+    /* Connections */
+    .connection-line {
+      fill: none;
+      stroke: var(--line-color);
+      stroke-width: 2.2px;
+      stroke-dasharray: 6, 6;
+      animation: dash 20s linear infinite;
+    }
+
+    @keyframes dash {
+      to { stroke-dashoffset: -1000; }
+    }
+
+    .connection-label {
+      font-size: 10.5px;
+      fill: var(--text-muted);
+      font-family: 'Fira Code', monospace;
+      background: var(--bg-panel);
+    }
+
+    /* Details Drawer */
+    .inspector-panel {
+      position: absolute;
+      bottom: 20px;
+      right: 20px;
+      width: 340px;
+      background: var(--bg-panel);
+      backdrop-filter: blur(14px);
+      border: 1px solid var(--border-color);
+      border-radius: 14px;
+      padding: 1.25rem;
+      box-shadow: 0 16px 36px rgba(0,0,0,0.5);
+      z-index: 60;
+      display: none;
+      animation: slideUp 0.25s ease forwards;
+    }
+
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .inspector-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 0.75rem;
+    }
+
+    .inspector-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+    }
+
+    .close-btn {
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      cursor: pointer;
+      font-size: 1.2rem;
+    }
+
+    .inspector-desc {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-bottom: 0.75rem;
+    }
+
+    .source-box {
+      background: rgba(0,0,0,0.25);
+      border: 1px solid var(--border-color);
+      padding: 0.6rem;
+      border-radius: 8px;
+      font-family: 'Fira Code', monospace;
+      font-size: 0.8rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="title-group">
+      <h1>🏛️ Arquitectura General Tecnológica — Widgets App</h1>
+      <span class="badge">OpenCode Archify 2.17</span>
+    </div>
+    <div class="controls">
+      <button class="btn" onclick="zoomIn()">🔍+ Acercar</button>
+      <button class="btn" onclick="zoomOut()">🔍- Alejar</button>
+      <button class="btn" onclick="resetView()">🔄 Restablecer</button>
+      <button class="btn" onclick="toggleTheme()">🌓 Tema</button>
+      <a href="widgets_app_general.architecture.json" target="_blank" class="btn">📄 JSON</a>
+    </div>
+  </header>
+
+  <div class="canvas-container" id="container">
+    <svg id="svg-canvas" viewBox="0 0 1200 600">
+      <defs>
+        <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+          <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#38bdf8" />
+        </marker>
+      </defs>
+
+      <!-- Connections -->
+      <g id="connections-group">
+        <path class="connection-line" marker-end="url(#arrow)" d="M 540 56 L 540 100" />
+        <path class="connection-line" marker-end="url(#arrow)" d="M 320 132 L 420 132" />
+        <path class="connection-line" marker-end="url(#arrow)" d="M 660 132 L 760 132" />
+        <path class="connection-line" marker-end="url(#arrow)" d="M 540 164 L 540 260" />
+        <path class="connection-line" marker-end="url(#arrow)" d="M 420 292 L 320 292" />
+        <path class="connection-line" marker-end="url(#arrow)" d="M 875 164 L 875 260" />
+        <path class="connection-line" marker-end="url(#arrow)" d="M 760 292 L 660 292" />
+        <path class="connection-line" marker-end="url(#arrow)" d="M 540 324 L 540 420" />
+        <path class="connection-line" marker-end="url(#arrow)" d="M 760 310 Q 500 370 320 440" />
+        <path class="connection-line" marker-end="url(#arrow)" d="M 875 324 L 875 420" />
+      </g>
+
+      <!-- Nodes -->
+      <g id="nodes-group">
+        <!-- ProviderScope -->
+        <g class="arch-node backend" onclick="inspectNode('ProviderScope', 'Contenedor raíz inmutable de Riverpod donde se almacenan y resuelven todos los proveedores del árbol de widgets.', 'main.dart', 8)" transform="translate(420, 10)">
+          <rect width="240" height="50" />
+          <text x="18" y="26" class="node-title">ProviderScope</text>
+          <text x="18" y="40" class="node-sub">flutter_riverpod (Root Scope)</text>
+        </g>
+
+        <!-- Flutter Core -->
+        <g class="arch-node frontend" onclick="inspectNode('Flutter SDK', 'Framework base y Material Design 3 con soporte completo de temas, animaciones y compatibilidad multiplataforma.', 'pubspec.yaml', 31)" transform="translate(100, 105)">
+          <rect width="220" height="60" />
+          <text x="16" y="28" class="node-title">Flutter 3 SDK</text>
+          <text x="16" y="46" class="node-sub">Material Design 3 Engine</text>
+        </g>
+
+        <!-- MainApp -->
+        <g class="arch-node frontend" onclick="inspectNode('MainApp (ConsumerWidget)', 'Punto de entrada reactivo. Conecta MaterialApp.router con GoRouter y escucha dinámicamente themeNotifierProvider.', 'lib/main.dart', 15)" transform="translate(420, 105)">
+          <rect width="240" height="60" />
+          <text x="18" y="28" class="node-title">MainApp</text>
+          <text x="18" y="46" class="node-sub">MaterialApp.router + Consumer</text>
+        </g>
+
+        <!-- GoRouter -->
+        <g class="arch-node frontend" onclick="inspectNode('GoRouter Declarativo', 'Configuración declarativa de 11 rutas independientes organizadas con URLs semánticas, facilitando transiciones y context.push.', 'lib/config/router/app_router.dart', 5)" transform="translate(760, 105)">
+          <rect width="230" height="60" />
+          <text x="16" y="28" class="node-title">GoRouter</text>
+          <text x="16" y="46" class="node-sub">appRouter (11 Rutas Declarativas)</text>
+        </g>
+
+        <!-- AppTheme -->
+        <g class="arch-node frontend" onclick="inspectNode('AppTheme', 'Clase de configuración de Material Design 3 con ColorSchemeSeed, lista de 9 colores inmutables y alternancia de modo oscuro/claro.', 'lib/config/theme/app_theme.dart', 17)" transform="translate(100, 260)">
+          <rect width="220" height="64" />
+          <text x="16" y="28" class="node-title">AppTheme</text>
+          <text x="16" y="44" class="node-sub">colorSchemeSeed & DarkMode</text>
+          <text x="16" y="56" class="node-tag">useMaterial3: true</text>
+        </g>
+
+        <!-- Riverpod Providers -->
+        <g class="arch-node backend" onclick="inspectNode('Proveedores Riverpod', 'ThemeNotifier (StateNotifierProvider) administra el estado mutable del tema, complementado por counterProvider y colorListProvider.', 'lib/presentation/providers/theme_provider.dart', 8)" transform="translate(420, 260)">
+          <rect width="240" height="64" />
+          <text x="18" y="28" class="node-title">Riverpod Providers</text>
+          <text x="18" y="44" class="node-sub">ThemeNotifier & CounterProvider</text>
+          <text x="18" y="56" class="node-tag">StateNotifierProvider</text>
+        </g>
+
+        <!-- Screens Cluster -->
+        <g class="arch-node frontend" onclick="inspectNode('Catálogo de Pantallas', 'Conjunto de 10 pantallas interactivas de demostración que exploran la totalidad de componentes de Material Design 3.', 'lib/presentation/screen/screens.dart', 1)" transform="translate(760, 260)">
+          <rect width="230" height="64" />
+          <text x="16" y="28" class="node-title">Catálogo Screens</text>
+          <text x="16" y="44" class="node-sub">Buttons, Cards, Progress, etc.</text>
+          <text x="16" y="56" class="node-tag">10 Pantallas Modulares</text>
+        </g>
+
+        <!-- Assets -->
+        <g class="arch-node database" onclick="inspectNode('Recursos Gráficos Locales', 'Imágenes locales en formato PNG (1.png, 2.png, 3.png) para las diapositivas del tutorial y jar-loading.gif para carga asíncrona.', 'assets/images/', 63)" transform="translate(100, 420)">
+          <rect width="220" height="60" />
+          <text x="16" y="28" class="node-title">Assets Locales</text>
+          <text x="16" y="46" class="node-sub">1..3.png, jar-loading.gif</text>
+        </g>
+
+        <!-- AnimateDo -->
+        <g class="arch-node frontend" onclick="inspectNode('animate_do & Animaciones', 'Librería de animaciones compuestas para Flutter (FadeInRight, SpinPerfect) combinada con animaciones implícitas en AnimatedContainer.', 'pubspec.yaml', 39)" transform="translate(420, 420)">
+          <rect width="240" height="60" />
+          <text x="18" y="28" class="node-title">animate_do Engine</text>
+          <text x="18" y="46" class="node-sub">FadeInRight, SpinPerfect & Implícitas</text>
+        </g>
+
+        <!-- Picsum Remote -->
+        <g class="arch-node database" onclick="inspectNode('Picsum Photos API', 'Servicio web para obtener imágenes aleatorias y por id para las tarjetas ilustradas y el scroll infinito con Pull to Refresh.', 'https://picsum.photos', 130)" transform="translate(760, 420)">
+          <rect width="230" height="60" />
+          <text x="16" y="28" class="node-title">Picsum Remote API</text>
+          <text x="16" y="46" class="node-sub">FadeInImage + NetworkImage</text>
+        </g>
+      </g>
+    </svg>
+  </div>
+
+  <div class="inspector-panel" id="inspector">
+    <div class="inspector-header">
+      <div class="inspector-title" id="ins-title">Componente</div>
+      <button class="close-btn" onclick="closeInspector()">✕</button>
+    </div>
+    <div class="inspector-desc" id="ins-desc">Descripción del componente arquitectónico.</div>
+    <div class="source-box" id="ins-source">Archivo: lib/main.dart</div>
+  </div>
+
+  <script>
+    let scale = 1;
+    let pointX = 0, pointY = 0;
+    let startX = 0, startY = 0;
+    let isPanning = false;
+
+    const container = document.getElementById('container');
+    const svg = document.getElementById('svg-canvas');
+
+    function setTransform() {
+      svg.style.transform = `translate(${pointX}px, ${pointY}px) scale(${scale})`;
+    }
+
+    container.onmousedown = function (e) {
+      if (e.target.closest('.arch-node')) return;
+      isPanning = true;
+      startX = e.clientX - pointX;
+      startY = e.clientY - pointY;
+    };
+
+    window.onmousemove = function (e) {
+      if (!isPanning) return;
+      pointX = e.clientX - startX;
+      pointY = e.clientY - startY;
+      setTransform();
+    };
+
+    window.onmouseup = function () { isPanning = false; };
+
+    container.onwheel = function (e) {
+      e.preventDefault();
+      const xs = (e.clientX - pointX) / scale;
+      const ys = (e.clientY - pointY) / scale;
+      const delta = -e.deltaY;
+      (delta > 0) ? (scale *= 1.1) : (scale /= 1.1);
+      pointX = e.clientX - xs * scale;
+      pointY = e.clientY - ys * scale;
+      setTransform();
+    };
+
+    function zoomIn() { scale *= 1.2; setTransform(); }
+    function zoomOut() { scale /= 1.2; setTransform(); }
+    function resetView() { scale = 1; pointX = 0; pointY = 0; setTransform(); }
+
+    function toggleTheme() {
+      const html = document.documentElement;
+      const current = html.getAttribute('data-theme');
+      html.setAttribute('data-theme', current === 'dark' ? 'light' : 'dark');
+    }
+
+    function inspectNode(title, desc, file, line) {
+      document.getElementById('ins-title').innerText = title;
+      document.getElementById('ins-desc').innerText = desc;
+      document.getElementById('ins-source').innerText = `Ubicación: ${file}:${line}`;
+      document.getElementById('inspector').style.display = 'block';
+    }
+
+    function closeInspector() {
+      document.getElementById('inspector').style.display = 'none';
+    }
+  </script>
+</body>
+</html>

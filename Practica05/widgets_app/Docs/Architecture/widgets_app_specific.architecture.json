@@ -1,0 +1,373 @@
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": {
+    "title": "Arquitectura Específica de Pantallas, Rutas y Estados — Widgets App",
+    "output": "widgets_app_specific_architecture.html",
+    "quality_profile": "showcase",
+    "animation": "trace",
+    "repository": {
+      "url": "https://github.com/JesuuusArt/Practicas_DMI_220772",
+      "provider": "github",
+      "link_mode": "local-only",
+      "branch": "Practica05"
+    }
+  },
+  "components": [
+    {
+      "id": "menu_data",
+      "type": "database",
+      "label": "appMenuItems (MenuItem)",
+      "sublabel": "Estructura centralizada de 10 rutas",
+      "tag": "lib/config/menu",
+      "pos": [60, 200],
+      "size": [220, 64],
+      "sources": [
+        {
+          "path": "Practica05/widgets_app/lib/config/menu/menu_items.dart",
+          "line": 19,
+          "label": "appMenuItems"
+        }
+      ]
+    },
+    {
+      "id": "home_screen",
+      "type": "frontend",
+      "label": "HomeScreen",
+      "sublabel": "ListView.builder con _CustomListTile",
+      "tag": "lib/presentation/screen/home",
+      "pos": [360, 100],
+      "size": [220, 64],
+      "sources": [
+        {
+          "path": "Practica05/widgets_app/lib/presentation/screen/home/home_screen.dart",
+          "line": 9,
+          "label": "HomeScreen"
+        }
+      ]
+    },
+    {
+      "id": "side_menu",
+      "type": "frontend",
+      "label": "SideMenu (Drawer)",
+      "sublabel": "NavigationDrawer con opciones agrupadas",
+      "tag": "lib/presentation/widgets",
+      "pos": [360, 260],
+      "size": [220, 64],
+      "sources": [
+        {
+          "path": "Practica05/widgets_app/lib/presentation/widgets/side_menu.dart",
+          "line": 5,
+          "label": "SideMenu"
+        }
+      ]
+    },
+    {
+      "id": "app_router",
+      "type": "frontend",
+      "label": "GoRouter (appRouter)",
+      "sublabel": "Mapeo de rutas a Screens (/buttons, /cards, etc.)",
+      "tag": "lib/config/router",
+      "pos": [660, 180],
+      "size": [230, 64],
+      "sources": [
+        {
+          "path": "Practica05/widgets_app/lib/config/router/app_router.dart",
+          "line": 5,
+          "label": "appRouter"
+        }
+      ]
+    },
+    {
+      "id": "counter_provider",
+      "type": "backend",
+      "label": "counterProvider",
+      "sublabel": "StateProvider<int>",
+      "tag": "lib/presentation/providers",
+      "pos": [980, 40],
+      "size": [210, 56],
+      "sources": [
+        {
+          "path": "Practica05/widgets_app/lib/presentation/providers/counter_provider.dart",
+          "line": 3,
+          "label": "counterProvider"
+        }
+      ]
+    },
+    {
+      "id": "theme_notifier",
+      "type": "backend",
+      "label": "themeNotifierProvider",
+      "sublabel": "StateNotifierProvider<ThemeNotifier, AppTheme>",
+      "tag": "lib/presentation/providers",
+      "pos": [980, 120],
+      "size": [210, 64],
+      "sources": [
+        {
+          "path": "Practica05/widgets_app/lib/presentation/providers/theme_provider.dart",
+          "line": 15,
+          "label": "themeNotifierProvider"
+        }
+      ]
+    },
+    {
+      "id": "counter_screen",
+      "type": "frontend",
+      "label": "CounterScreen",
+      "sublabel": "ConsumerWidget (ref.watch / ref.read)",
+      "tag": "lib/presentation/screen/counter",
+      "pos": [1280, 40],
+      "size": [220, 56],
+      "sources": [
+        {
+          "path": "Practica05/widgets_app/lib/presentation/screen/counter/counter_screen.dart",
+          "line": 7,
+          "label": "CounterScreen"
+        }
+      ]
+    },
+    {
+      "id": "theme_changer_screen",
+      "type": "frontend",
+      "label": "ThemeChangerScreen",
+      "sublabel": "ConsumerWidget (RadioListTile)",
+      "tag": "lib/presentation/screen/theme_changer",
+      "pos": [1280, 120],
+      "size": [220, 64],
+      "sources": [
+        {
+          "path": "Practica05/widgets_app/lib/presentation/screen/theme_changer/theme_changer_screen.dart",
+          "line": 7,
+          "label": "ThemeChangerScreen"
+        }
+      ]
+    },
+    {
+      "id": "buttons_screen",
+      "type": "frontend",
+      "label": "ButtonsScreen",
+      "sublabel": "Variantes M3 + CustomButton InkWell",
+      "tag": "lib/presentation/screen/buttons",
+      "pos": [980, 220],
+      "size": [210, 56],
+      "sources": [
+        {
+          "path": "Practica05/widgets_app/lib/presentation/screen/buttons/buttons_screen.dart",
+          "line": 4,
+          "label": "ButtonsScreen"
+        }
+      ]
+    },
+    {
+      "id": "cards_screen",
+      "type": "frontend",
+      "label": "CardsScreen",
+      "sublabel": "4 tipos: elevación, borde, surface, imagen",
+      "tag": "lib/presentation/screen/cards",
+      "pos": [1280, 220],
+      "size": [220, 56],
+      "sources": [
+        {
+          "path": "Practica05/widgets_app/lib/presentation/screen/cards/cards_screen.dart",
+          "line": 16,
+          "label": "CardsScreen"
+        }
+      ]
+    },
+    {
+      "id": "progress_screen",
+      "type": "frontend",
+      "label": "ProgressScreen",
+      "sublabel": "Circular/Linear + Stream.periodic",
+      "tag": "lib/presentation/screen/progress",
+      "pos": [980, 300],
+      "size": [210, 56],
+      "sources": [
+        {
+          "path": "Practica05/widgets_app/lib/presentation/screen/progress/progress_screen.dart",
+          "line": 3,
+          "label": "ProgressScreen"
+        }
+      ]
+    },
+    {
+      "id": "snackbar_screen",
+      "type": "frontend",
+      "label": "SnackbarScreen",
+      "sublabel": "SnackBar, AlertDialog, showAboutDialog",
+      "tag": "lib/presentation/screen/snackbar",
+      "pos": [1280, 300],
+      "size": [220, 56],
+      "sources": [
+        {
+          "path": "Practica05/widgets_app/lib/presentation/screen/snackbar/snackbar_screen.dart",
+          "line": 4,
+          "label": "SnackbarScreen"
+        }
+      ]
+    },
+    {
+      "id": "animated_screen",
+      "type": "frontend",
+      "label": "AnimatedScreen",
+      "sublabel": "AnimatedContainer + Random properties",
+      "tag": "lib/presentation/screen/animated",
+      "pos": [980, 380],
+      "size": [210, 56],
+      "sources": [
+        {
+          "path": "Practica05/widgets_app/lib/presentation/screen/animated/animated_screen.dart",
+          "line": 4,
+          "label": "AnimatedScreen"
+        }
+      ]
+    },
+    {
+      "id": "ui_controls_screen",
+      "type": "frontend",
+      "label": "UiControlsScreen",
+      "sublabel": "Switch, Radio, Checkbox, ExpansionTile",
+      "tag": "lib/presentation/screen/ui_controls",
+      "pos": [1280, 380],
+      "size": [220, 56],
+      "sources": [
+        {
+          "path": "Practica05/widgets_app/lib/presentation/screen/ui_controls/ui_controls_screen.dart",
+          "line": 3,
+          "label": "UiControlsScreen"
+        }
+      ]
+    },
+    {
+      "id": "tutorial_screen",
+      "type": "frontend",
+      "label": "AppTutorialScreen",
+      "sublabel": "PageView + FadeInRight (animate_do)",
+      "tag": "lib/presentation/screen/app_tutorial",
+      "pos": [980, 460],
+      "size": [210, 56],
+      "sources": [
+        {
+          "path": "Practica05/widgets_app/lib/presentation/screen/app_tutorial/app_tutorial_screen.dart",
+          "line": 31,
+          "label": "AppTutorialScreen"
+        }
+      ]
+    },
+    {
+      "id": "infinite_screen",
+      "type": "frontend",
+      "label": "InfiniteScrollScreen",
+      "sublabel": "RefreshIndicator, ScrollController, FadeInImage",
+      "tag": "lib/presentation/screen/infinite_scroll",
+      "pos": [1280, 460],
+      "size": [220, 56],
+      "sources": [
+        {
+          "path": "Practica05/widgets_app/lib/presentation/screen/infinite_scroll/infinite_scroll_screen.dart",
+          "line": 4,
+          "label": "InfiniteScrollScreen"
+        }
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "id": "menu_home",
+      "from": "menu_data",
+      "to": "home_screen",
+      "label": "itera elementos"
+    },
+    {
+      "id": "menu_side",
+      "from": "menu_data",
+      "to": "side_menu",
+      "label": "sublist(0,3) & sublist(3)"
+    },
+    {
+      "id": "home_router",
+      "from": "home_screen",
+      "to": "app_router",
+      "label": "context.push(link)"
+    },
+    {
+      "id": "side_router",
+      "from": "side_menu",
+      "to": "app_router",
+      "label": "context.push(link)"
+    },
+    {
+      "id": "router_counter",
+      "from": "app_router",
+      "to": "counter_screen",
+      "label": "/counter-river"
+    },
+    {
+      "id": "router_theme",
+      "from": "app_router",
+      "to": "theme_changer_screen",
+      "label": "/theme-changer"
+    },
+    {
+      "id": "router_buttons",
+      "from": "app_router",
+      "to": "buttons_screen",
+      "label": "/buttons"
+    },
+    {
+      "id": "router_cards",
+      "from": "app_router",
+      "to": "cards_screen",
+      "label": "/cards"
+    },
+    {
+      "id": "router_progress",
+      "from": "app_router",
+      "to": "progress_screen",
+      "label": "/progress"
+    },
+    {
+      "id": "router_snackbar",
+      "from": "app_router",
+      "to": "snackbar_screen",
+      "label": "/snackbars"
+    },
+    {
+      "id": "router_animated",
+      "from": "app_router",
+      "to": "animated_screen",
+      "label": "/animated"
+    },
+    {
+      "id": "router_uicontrols",
+      "from": "app_router",
+      "to": "ui_controls_screen",
+      "label": "/ui-controls"
+    },
+    {
+      "id": "router_tutorial",
+      "from": "app_router",
+      "to": "tutorial_screen",
+      "label": "/tutorial"
+    },
+    {
+      "id": "router_infinite",
+      "from": "app_router",
+      "to": "infinite_screen",
+      "label": "/infinite"
+    },
+    {
+      "id": "counter_prov",
+      "from": "counter_screen",
+      "to": "counter_provider",
+      "label": "ref.watch() / ref.read().state++"
+    },
+    {
+      "id": "theme_prov",
+      "from": "theme_changer_screen",
+      "to": "theme_notifier",
+      "label": "toggleDarkmode() / changeColorIndex()"
+    }
+  ],
+  "cards": []
+}

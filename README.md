@@ -25,7 +25,8 @@
 | 2. | [Mi Primer Aplicación Móvil con Flutter](/Practica02/hello_world_app) | Codificar la app móvil en el framework de Flutter manejando Stateless y Stateful Widgets | 25 | 🟢 Concluida |
 | 3. | [Yes No Maybe App](/Practica03/yes_no_app) | App de chat en Flutter que consulta la API yesno.wtf con arquitectura por capas, inyección de dependencias, 38 pruebas y 4 diagramas Archify | 30 | 🟢 Concluida |
 | 4. | [TokTik](/Practica04/toktik) | App de videos estilo TikTok con scroll vertical, Clean Architecture, 4 temas por temporada, 3 DataSources remotos e iconos personalizados | 30 | 🟢 Concluida |
-| 5. | [Publicación de la App en Appetize.io](https://appetize.io/app/b_akk4ouahozbruc6pqrlrr3aaqy) | Compilación release y validación de ejecución virtual de TokTik en la nube vía Appetize | 10 | 🟢 Concluida |
+| 5. | [Widgets App](/Practica05/widgets_app) | Catálogo de componentes visuales e interactivos de Material Design 3 con GoRouter, Riverpod y AnimateDo | 40 | 🟢 Concluida |
+| 5.1 | [Publicación de TokTik en Appetize.io](https://appetize.io/app/b_akk4ouahozbruc6pqrlrr3aaqy) | Compilación release y validación de ejecución virtual de TokTik en la nube vía Appetize | 10 | 🟢 Concluida |
 
 ---
 
@@ -34,6 +35,7 @@
 - **[📱 hello_world_app](Practica02/hello_world_app/)** — Contador Funcional en Flutter ([📄 Documentación completa](Practica02/hello_world_app/README.md))
 - **[💬 yes_no_app](Practica03/yes_no_app/)** — Yes No Maybe App en Flutter ([📄 Documentación completa](Practica03/yes_no_app/README.md))
 - **[🎬 toktik](Practica04/toktik/)** — App de videos estilo TikTok en Flutter ([📖 Documentación completa](Practica04/toktik/README.md))
+- **[🧩 widgets_app](Practica05/widgets_app/)** — Catálogo de Material 3 con GoRouter y Riverpod ([📄 Documentación completa](Practica05/widgets_app/README.md))
 - **[☁️ Publicación en Appetize.io](https://appetize.io/app/b_akk4ouahozbruc6pqrlrr3aaqy)** — Ejecución de TokTik en emulador Android en la nube (10 Firmas)
 
 <details>
@@ -81,6 +83,23 @@
   | Diagrama 1: Provider Local (Oscuro) | Diagrama 2: Clean Architecture (Oscuro) |
   |---|---|
   | [![Diagrama 1](Practica04/toktik/Docs/Architecture/toktik_architecture.visual-check.2048x1320.dark.png)](https://jesuuusart.github.io/Practicas_DMI_220772/Practica04/toktik/Docs/Architecture/toktik_architecture.html) | [![Diagrama 2](Practica04/toktik/Docs/Architecture/toktik_clean_architecture.visual-check.2048x1320.dark.png)](https://jesuuusart.github.io/Practicas_DMI_220772/Practica04/toktik/Docs/Architecture/toktik_clean_architecture.html) |
+</details>
+
+<details>
+  <summary><b>🧩 Widgets App — 2 Diagramas Archify (Haz clic para desplegar)</b></summary>
+  <br />
+
+  #### 🔗 Enlaces a Diagramas Interactivos en GitHub Pages:
+  - 🏛️ [Diagrama 1: Arquitectura General Tecnológica (Interactivo)](https://jesuuusart.github.io/Practicas_DMI_220772/Practica05/widgets_app/Docs/Architecture/widgets_app_general_architecture.html)
+  - 🏗️ [Diagrama 2: Pantallas, Rutas y Estados Riverpod (Interactivo)](https://jesuuusart.github.io/Practicas_DMI_220772/Practica05/widgets_app/Docs/Architecture/widgets_app_specific_architecture.html)
+  - 📄 [Documentación Completa de Arquitectura](Practica05/widgets_app/Docs/Architecture/DIAGRAMAS_ARQUITECTURA.md)
+  - 📖 [Documentación de Widgets App (Práctica 05)](Practica05/widgets_app/README.md)
+  - 🌐 [Sitio Web Portafolio GitHub Pages](https://jesuuusart.github.io/Practicas_DMI_220772/)
+
+  #### 🖼️ Evidencia de Ejecución en Emulador:
+  <div align="center">
+    <img src="Practica05/widgets_app/Docs/Architecture/screenshot_emulator.png" alt="Widgets App en Emulador" width="260" />
+  </div>
 </details>
 
 <details>
