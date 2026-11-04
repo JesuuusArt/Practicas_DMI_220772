@@ -2,15 +2,24 @@
 
 Este documento presenta los **2 diagramas de arquitectura interactivos** diseñados para la aplicación **Widgets App**, cumpliendo con los estándares de **OpenCode Archify** y los lineamientos de la Práctica 05:
 
-> **🔗 Enlaces a los Diagramas Interactivos:**
-> 1. 🏛️ **Diagrama 1: Arquitectura General Tecnológica** — [Abrir widgets_app_general_architecture.html](widgets_app_general_architecture.html) | [Especificación JSON](widgets_app_general.architecture.json) | [Doc Individual](DIAGRAMA_1_ARQUITECTURA_GENERAL.md)
-> 2. 🏗️ **Diagrama 2: Arquitectura Específica de Pantallas, Rutas y Estados** — [Abrir widgets_app_specific_architecture.html](widgets_app_specific_architecture.html) | [Especificación JSON](widgets_app_specific.architecture.json) | [Doc Individual](DIAGRAMA_2_ARQUITECTURA_ESPECIFICA.md)
+> **🔗 Enlaces Directos a los Diagramas Interactivos en GitHub Pages:**
+> 1. 🏛️ **Diagrama 1: Arquitectura General Tecnológica** — [Ver interactivo en GitHub Pages ↗](https://jesuuusart.github.io/Practicas_DMI_220772/Practica05/widgets_app/Docs/Architecture/widgets_app_general_architecture.html) | [Archivo HTML](widgets_app_general_architecture.html) | [Especificación JSON](widgets_app_general.architecture.json) | [Doc Individual](DIAGRAMA_1_ARQUITECTURA_GENERAL.md)
+> 2. 🏗️ **Diagrama 2: Arquitectura Específica de Pantallas, Rutas y Estados** — [Ver interactivo en GitHub Pages ↗](https://jesuuusart.github.io/Practicas_DMI_220772/Practica05/widgets_app/Docs/Architecture/widgets_app_specific_architecture.html) | [Archivo HTML](widgets_app_specific_architecture.html) | [Especificación JSON](widgets_app_specific.architecture.json) | [Doc Individual](DIAGRAMA_2_ARQUITECTURA_ESPECIFICA.md)
 > 
-> 🌐 **Publicación en GitHub Pages:** [https://jesuuusart.github.io/Practicas_DMI_220772/](https://jesuuusart.github.io/Practicas_DMI_220772/)
+> 📱 **Ejecución en Appetize.io:** [https://appetize.io/app/b_bwtrb7oou2e5asilzdeknfzwi4](https://appetize.io/app/b_bwtrb7oou2e5asilzdeknfzwi4)
+> 🌐 **Portafolio en GitHub Pages:** [https://jesuuusart.github.io/Practicas_DMI_220772/](https://jesuuusart.github.io/Practicas_DMI_220772/)
 
 ---
 
 ## 1. Diagrama 1: Arquitectura General Tecnológica (Archify)
+
+<div align="center">
+  <a href="https://jesuuusart.github.io/Practicas_DMI_220772/Practica05/widgets_app/Docs/Architecture/widgets_app_general_architecture.html" title="Haz clic para abrir el Diagrama 1 interactivo en GitHub Pages">
+    <img src="widgets_app_general_architecture.visual-check.2048x1320.dark.png" alt="Diagrama 1: Arquitectura General (Oscuro)" width="49%" />
+    <img src="widgets_app_general_architecture.visual-check.2048x1320.light.png" alt="Diagrama 1: Arquitectura General (Claro)" width="49%" />
+  </a>
+  <p><em>👆 Haz clic en cualquiera de las imágenes para abrir el Diagrama 1 interactivo en GitHub Pages</em></p>
+</div>
 
 Representa las capas tecnológicas principales de la aplicación, el motor de navegación declarativa, el contenedor reactivo de estados con Riverpod, el sistema de diseño Material 3 y los recursos multimedia locales y remotos.
 
@@ -65,6 +74,14 @@ graph TD
 
 ## 2. Diagrama 2: Arquitectura Específica de Pantallas, Rutas y Estados (Archify)
 
+<div align="center">
+  <a href="https://jesuuusart.github.io/Practicas_DMI_220772/Practica05/widgets_app/Docs/Architecture/widgets_app_specific_architecture.html" title="Haz clic para abrir el Diagrama 2 interactivo en GitHub Pages">
+    <img src="widgets_app_specific_architecture.visual-check.2048x1320.dark.png" alt="Diagrama 2: Arquitectura Específica (Oscuro)" width="49%" />
+    <img src="widgets_app_specific_architecture.visual-check.2048x1320.light.png" alt="Diagrama 2: Arquitectura Específica (Claro)" width="49%" />
+  </a>
+  <p><em>👆 Haz clic en cualquiera de las imágenes para abrir el Diagrama 2 interactivo en GitHub Pages</em></p>
+</div>
+
 Detalla la estructura de datos centralizada de navegación, el menú lateral con opciones agrupadas, cada una de las 11 pantallas implementadas y sus interacciones con los proveedores de estado de Riverpod.
 
 ```mermaid
@@ -115,6 +132,7 @@ graph TD
     RouterDef --> S_Inf
 
     S_Count <-->|ref.watch / ref.read| P_Count
+    S_Count <-->|toggleDarkmode| P_Theme
     S_Theme <-->|ref.watch / ref.read| P_Theme
     S_Theme -->|ref.watch| P_Colors
 ```

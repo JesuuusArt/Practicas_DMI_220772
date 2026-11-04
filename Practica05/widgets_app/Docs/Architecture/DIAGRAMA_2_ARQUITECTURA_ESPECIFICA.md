@@ -1,9 +1,22 @@
 # Diagrama 2: Arquitectura Específica de Pantallas, Rutas y Estados — Widgets App
 
-## 🌐 Enlace Interactivo
-- 🔗 **Diagrama Interactivo (Archify):** [widgets_app_specific_architecture.html](widgets_app_specific_architecture.html)
+## 🌐 Enlaces Interactivos
+- 🔗 **Diagrama Interactivo en GitHub Pages:** [https://jesuuusart.github.io/Practicas_DMI_220772/Practica05/widgets_app/Docs/Architecture/widgets_app_specific_architecture.html](https://jesuuusart.github.io/Practicas_DMI_220772/Practica05/widgets_app/Docs/Architecture/widgets_app_specific_architecture.html)
+- 🔗 **Archivo HTML Local (Archify):** [widgets_app_specific_architecture.html](widgets_app_specific_architecture.html)
 - 📄 **Especificación JSON:** [widgets_app_specific.architecture.json](widgets_app_specific.architecture.json)
-- 🌐 **Visualización en GitHub Pages:** [https://jesuuusart.github.io/Practicas_DMI_220772/](https://jesuuusart.github.io/Practicas_DMI_220772/)
+- 📱 **Demostración en Appetize.io:** [https://appetize.io/app/b_bwtrb7oou2e5asilzdeknfzwi4](https://appetize.io/app/b_bwtrb7oou2e5asilzdeknfzwi4)
+- 🌐 **Portafolio en GitHub Pages:** [https://jesuuusart.github.io/Practicas_DMI_220772/](https://jesuuusart.github.io/Practicas_DMI_220772/)
+
+---
+
+## 🖼️ Previsualización Interactiva (Clic para abrir en GitHub Pages)
+
+<div align="center">
+  <a href="https://jesuuusart.github.io/Practicas_DMI_220772/Practica05/widgets_app/Docs/Architecture/widgets_app_specific_architecture.html" title="Haz clic para abrir el Diagrama 2 interactivo en GitHub Pages">
+    <img src="widgets_app_specific_architecture.visual-check.2048x1320.dark.png" alt="Diagrama 2: Arquitectura Específica (Oscuro)" width="49%" />
+    <img src="widgets_app_specific_architecture.visual-check.2048x1320.light.png" alt="Diagrama 2: Arquitectura Específica (Claro)" width="49%" />
+  </a>
+</div>
 
 ---
 
@@ -30,7 +43,8 @@ graph LR
     Router --> C10["10. InfiniteScrollScreen (/infinite)"]
 
     C1 <--> P1["counterProvider"]
-    C2 <--> P2["themeNotifierProvider"]
+    C1 <--> P2["themeNotifierProvider"]
+    C2 <--> P2
 ```
 
 ### Pantallas y Componentes Implementados:
