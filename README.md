@@ -13,6 +13,7 @@
   [![Appetize.io](https://img.shields.io/badge/📱%20Probar%20TokTik-Appetize.io-FF4081?style=for-the-badge&logo=android)](https://appetize.io/app/b_akk4ouahozbruc6pqrlrr3aaqy)
 
   🔗 **[https://jesuuusart.github.io/Practicas_DMI_220772/](https://jesuuusart.github.io/Practicas_DMI_220772/)**
+  📘 **[Manual de Instalación y Configuracion del Entorno de Desarrollo](Manual/MANUAL_MOVIL_INTEGRAL_220772.pdf)**
 </div>
 
 ---
@@ -26,6 +27,7 @@
 | 3. | [Yes No Maybe App](/Practica03/yes_no_app) | App de chat en Flutter que consulta la API yesno.wtf con arquitectura por capas, inyección de dependencias, 38 pruebas y 4 diagramas Archify | 30 | 🟢 Concluida |
 | 4. | [TokTik](/Practica04/toktik) | App de videos estilo TikTok con scroll vertical, Clean Architecture, 4 temas por temporada, 3 DataSources remotos e iconos personalizados | 30 | 🟢 Concluida |
 | 5. | [Publicación de la App en Appetize.io](https://appetize.io/app/b_akk4ouahozbruc6pqrlrr3aaqy) | Compilación release y validación de ejecución virtual de TokTik en la nube vía Appetize | 10 | 🟢 Concluida |
+| 6. | [Manual de Instalación y Configuración del Entorno de Desarrollo](Manual/MANUAL_MOVIL_INTEGRAL_220772.pdf) | Guía de instalación y configuración del entorno de desarrollo móvil | — | 🟢 Concluida |
 
 ---
 
