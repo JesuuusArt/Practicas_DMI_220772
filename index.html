@@ -763,13 +763,13 @@
 
         </div>
 
-        <!-- Práctica 5 -->
-        <div class="practice-card" id="card-p5" onclick="window.open('https://appetize.io/app/b_akk4ouahozbruc6pqrlrr3aaqy', '_blank')">
+        <!-- Práctica 4.1 -->
+        <div class="practice-card" id="card-p4b" onclick="window.open('https://appetize.io/app/b_akk4ouahozbruc6pqrlrr3aaqy', '_blank')">
           <div class="card-top">
-            <span class="badge-no">Práctica 05</span>
+            <span class="badge-no">Práctica 04.1</span>
             <span class="badge-status status-done">🟢 Concluida</span>
           </div>
-          <div class="p-title">Publicación en Appetize.io</div>
+          <div class="p-title">Publicación de TokTik en Appetize.io</div>
           <div class="p-desc">Compilación Release y ejecución virtual de TokTik en la nube vía Appetize sin instalación física.</div>
           <div class="chip-row">
             <span class="chip" style="background: rgba(255, 64, 129, 0.15); color: #ff4081; border-color: rgba(255, 64, 129, 0.3);">Appetize.io</span>
@@ -780,6 +780,29 @@
           <div class="p-meta">
             <span>⚡ Potenciador: 10% (10 Firmas)</span>
             <span>☁️ Ejecución Virtual</span>
+          </div>
+        </div>
+
+        <!-- Práctica 5 -->
+        <div class="practice-card" id="card-p5" onclick="selectPractice(5)">
+          <div class="card-top">
+            <span class="badge-no">Práctica 05</span>
+            <span class="badge-status status-done">🟢 Concluida</span>
+          </div>
+          <div class="p-title">Widgets App (Material Design 3)</div>
+          <div class="p-desc">Catálogo interactivo de componentes M3 con navegación declarativa GoRouter, gestión de estado y tema dinámico con Riverpod, animaciones, tutorial e infinite scroll.</div>
+          <div class="chip-row">
+            <span class="chip">Flutter 3.47.2</span>
+            <span class="chip">Dart 3.13.2</span>
+            <span class="chip purple">flutter_riverpod ^2.6.1</span>
+            <span class="chip purple">go_router ^18.0.2</span>
+            <span class="chip green">animate_do ^3.3.4</span>
+            <span class="chip amber">Material 3</span>
+            <span class="chip" style="background: rgba(255, 64, 129, 0.15); color: #ff4081; border-color: rgba(255, 64, 129, 0.3);">Appetize.io</span>
+          </div>
+          <div class="p-meta">
+            <span>⚡ Potenciador: 40% (40 Firmas)</span>
+            <span>🧩 11 Pantallas + 2 Archify</span>
           </div>
         </div>
 
@@ -1426,6 +1449,190 @@
 
 </section>
 
+    <!-- Interactive Explorer Container for Práctica 05 -->
+    <section class="detail-container" id="detail-p5" style="display: none;">
+      <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 1rem;">
+        <div>
+          <span style="font-family: 'Fira Code', monospace; color: var(--cyan); font-weight:600; font-size: 0.85rem;">PRÁCTICA 05 — DETALLES Y EVIDENCIA (40 FIRMAS)</span>
+          <h2 style="font-size: 1.4rem; font-weight: 700; margin-top: 0.25rem;">Widgets App — Catálogo de Material Design 3</h2>
+        </div>
+
+        <div style="display: flex; gap: 0.75rem; align-items: center; flex-wrap: wrap;">
+          <a href="https://appetize.io/app/b_bwtrb7oou2e5asilzdeknfzwi4" target="_blank" style="background: #ff4081; color: #fff; text-decoration: none; font-weight: 600; font-size: 0.85rem; padding: 0.4rem 0.9rem; border-radius: 8px; display: inline-flex; align-items: center; gap: 0.4rem; box-shadow: 0 4px 15px rgba(255, 64, 129, 0.4);">📱 Probar en Appetize.io ↗</a>
+          <a href="Practica05/widgets_app/README.md" style="color: var(--cyan); text-decoration: none; font-weight: 600; font-size: 0.85rem;">📄 Ver README del Proyecto ↗</a>
+        </div>
+      </div>
+
+      <div class="subnav-tabs">
+        <button class="subtab-btn active" data-tab="tab-p5-archify" onclick="switchSubtab(this)">🌐 Diagramas Archify</button>
+        <button class="subtab-btn" data-tab="tab-p5-evidence" onclick="switchSubtab(this)">📷 Evidencias de la app (16)</button>
+        <button class="subtab-btn" data-tab="tab-p5-tech" onclick="switchSubtab(this)">💻 Tecnologías</button>
+        <button class="subtab-btn" data-tab="tab-p5-files" onclick="switchSubtab(this)">📄 Visor de Código</button>
+        <button class="subtab-btn" data-tab="tab-p5-objectives" onclick="switchSubtab(this)">🎯 Objetivos y Conclusiones</button>
+      </div>
+
+      <!-- TAB 1: ARCHIFY DIAGRAMS -->
+      <div class="subtab-content active" id="tab-p5-archify">
+        <p style="font-size: 0.875rem; color: var(--text-body); margin-bottom: 1rem;">
+          Dos diagramas interactivos <b>Archify</b> elaborados a partir del código real de <code>widgets_app</code>:
+          <b>1) Arquitectura General Tecnológica</b> (Flutter 3, Material 3, GoRouter, Riverpod, AnimateDo y recursos) y
+          <b>2) Arquitectura Específica</b> (11 pantallas, rutas declarativas, menú agrupado y proveedores de estado).
+        </p>
+
+        <div class="subnav-tabs" style="border-bottom: 1px solid var(--border-color); margin-bottom: 1rem;">
+          <button class="subtab-btn diagram-btn active" data-frame="frame-p5-arch1" onclick="showDiagram(this)">🏛️ Diagrama 1: Arquitectura General Tecnológica</button>
+          <button class="subtab-btn diagram-btn" data-frame="frame-p5-arch2" onclick="showDiagram(this)">🏗️ Diagrama 2: Arquitectura Específica (Pantallas, Rutas y Riverpod)</button>
+        </div>
+
+        <div class="arch-iframe-wrapper" style="height: 700px;">
+          <iframe class="diagram-frame" id="frame-p5-arch1" src="Practica05/widgets_app/Docs/Architecture/widgets_app_general_architecture.html" title="Diagrama 1: Arquitectura General Tecnológica"></iframe>
+          <iframe class="diagram-frame" id="frame-p5-arch2" src="Practica05/widgets_app/Docs/Architecture/widgets_app_specific_architecture.html" title="Diagrama 2: Arquitectura Específica de Pantallas, Rutas y Estados" style="display: none;"></iframe>
+        </div>
+
+        <div class="evidence-grid" style="margin-top: 1.5rem;">
+          <div class="evidence-card">
+            <h4>🏛️ Diagrama 1: Arquitectura General (Oscuro)</h4>
+            <a href="Practica05/widgets_app/Docs/Architecture/widgets_app_general_architecture.html" target="_blank">
+              <img src="Practica05/widgets_app/Docs/Architecture/widgets_app_general_architecture.visual-check.2048x1320.dark.png" alt="Diagrama 1: Arquitectura General (Oscuro)">
+            </a>
+            <p>Capas tecnológicas principales: ProviderScope, MainApp, GoRouter, Riverpod, AppTheme, AnimateDo y Assets. (Clic para abrir interactivo)</p>
+          </div>
+          <div class="evidence-card">
+            <h4>🏛️ Diagrama 1: Arquitectura General (Claro)</h4>
+            <a href="Practica05/widgets_app/Docs/Architecture/widgets_app_general_architecture.html" target="_blank">
+              <img src="Practica05/widgets_app/Docs/Architecture/widgets_app_general_architecture.visual-check.2048x1320.light.png" alt="Diagrama 1: Arquitectura General (Claro)">
+            </a>
+            <p>Mismo diagrama general en modo claro.</p>
+          </div>
+          <div class="evidence-card">
+            <h4>🏗️ Diagrama 2: Arquitectura Específica (Oscuro)</h4>
+            <a href="Practica05/widgets_app/Docs/Architecture/widgets_app_specific_architecture.html" target="_blank">
+              <img src="Practica05/widgets_app/Docs/Architecture/widgets_app_specific_architecture.visual-check.2048x1320.dark.png" alt="Diagrama 2: Arquitectura Específica (Oscuro)">
+            </a>
+            <p>Detalle de appMenuItems, HomeScreen, SideMenu, las 11 rutas de GoRouter y su relación con los providers de Riverpod. (Clic para abrir interactivo)</p>
+          </div>
+          <div class="evidence-card">
+            <h4>🏗️ Diagrama 2: Arquitectura Específica (Claro)</h4>
+            <a href="Practica05/widgets_app/Docs/Architecture/widgets_app_specific_architecture.html" target="_blank">
+              <img src="Practica05/widgets_app/Docs/Architecture/widgets_app_specific_architecture.visual-check.2048x1320.light.png" alt="Diagrama 2: Arquitectura Específica (Claro)">
+            </a>
+            <p>Mismo diagrama específico en modo claro.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB 2: EVIDENCE SCREENSHOTS -->
+      <div class="subtab-content" id="tab-p5-evidence">
+        <h3 style="margin-top: 0;">🏠 Navegación Principal, Menú Lateral y Estado con Riverpod</h3>
+        <p style="font-size: 0.875rem; color: var(--text-body); margin-bottom: 1rem;">
+          Catálogo centralizado con <code>ListView.builder</code>, <code>NavigationDrawer</code> agrupado, contador reactivo con <code>StateProvider</code> y personalización dinámica de tema claro/oscuro y paleta de colores con <code>StateNotifierProvider</code>.
+        </p>
+        <div class="evidence-grid">
+          <figure class="evidence-card"><img src="Practica05/widgets_app/assets/pruebas/homeScreen.png" alt="HomeScreen"/><figcaption>1. HomeScreen — Catálogo de Material 3</figcaption></figure>
+          <figure class="evidence-card"><img src="Practica05/widgets_app/assets/pruebas/sideMenu.png" alt="SideMenu"/><figcaption>2. SideMenu — NavigationDrawer agrupado</figcaption></figure>
+          <figure class="evidence-card"><img src="Practica05/widgets_app/assets/pruebas/counterScreen.png" alt="CounterScreen"/><figcaption>3. CounterScreen — Contador Riverpod y switch de tema</figcaption></figure>
+          <figure class="evidence-card"><img src="Practica05/widgets_app/assets/pruebas/themeChanderScreenLight.png" alt="ThemeChanger Claro"/><figcaption>4. ThemeChangerScreen — Selección de color (Modo Claro)</figcaption></figure>
+          <figure class="evidence-card"><img src="Practica05/widgets_app/assets/pruebas/themeChanderScreenDark.png" alt="ThemeChanger Oscuro"/><figcaption>5. ThemeChangerScreen — Selección de color (Modo Oscuro)</figcaption></figure>
+        </div>
+
+        <h3 style="margin-top: 1.75rem;">🧩 Botones, Tarjetas, Indicadores de Progreso y Diálogos</h3>
+        <p style="font-size: 0.875rem; color: var(--text-body); margin-bottom: 1rem;">
+          Variantes de botones M3 y botón personalizado con <code>InkWell</code>, tarjetas con elevación/borde/relleno/imagen, progreso con <code>StreamBuilder</code>, <code>SnackBar</code> y <code>AlertDialog</code>.
+        </p>
+        <div class="evidence-grid">
+          <figure class="evidence-card"><img src="Practica05/widgets_app/assets/pruebas/buttonsScreen.png" alt="ButtonsScreen"/><figcaption>6. ButtonsScreen — Botones M3 + CustomButton</figcaption></figure>
+          <figure class="evidence-card"><img src="Practica05/widgets_app/assets/pruebas/cardsScreen.png" alt="CardsScreen"/><figcaption>7. CardsScreen — Elevaciones, bordes, rellenas e imagen</figcaption></figure>
+          <figure class="evidence-card"><img src="Practica05/widgets_app/assets/pruebas/progressScreen.png" alt="ProgressScreen"/><figcaption>8. ProgressScreen — Circular y Linear con Stream.periodic</figcaption></figure>
+          <figure class="evidence-card"><img src="Practica05/widgets_app/assets/pruebas/snackBar.png" alt="SnackBar"/><figcaption>9. SnackbarScreen — SnackBar con ScaffoldMessenger</figcaption></figure>
+          <figure class="evidence-card"><img src="Practica05/widgets_app/assets/pruebas/alertDialog.png" alt="AlertDialog"/><figcaption>10. SnackbarScreen — AlertDialog modal de confirmación</figcaption></figure>
+        </div>
+
+        <h3 style="margin-top: 1.75rem;">✨ Animaciones, UI Controls, Tutorial e Infinite Scroll</h3>
+        <p style="font-size: 0.875rem; color: var(--text-body); margin-bottom: 1rem;">
+          <code>AnimatedContainer</code> con valores aleatorios, controles de selección (Switch, Radio con <code>enum</code>, Checkbox y ExpansionTile), tutorial con <code>PageView</code> + <code>FadeInRight</code> e Infinite Scroll con <code>RefreshIndicator</code>.
+        </p>
+        <div class="evidence-grid">
+          <figure class="evidence-card"><img src="Practica05/widgets_app/assets/pruebas/animatedScreen.png" alt="AnimatedScreen"/><figcaption>11. AnimatedScreen — AnimatedContainer (Curves.elasticOut)</figcaption></figure>
+          <figure class="evidence-card"><img src="Practica05/widgets_app/assets/pruebas/uiControlsScreen.png" alt="UiControlsScreen"/><figcaption>12. UiControlsScreen — Switch, Expansion, Radio y Checkboxes</figcaption></figure>
+          <figure class="evidence-card"><img src="Practica05/widgets_app/assets/pruebas/appTutorialScreen1.png" alt="Tutorial Slide 1"/><figcaption>13. AppTutorialScreen — PageView con imágenes locales</figcaption></figure>
+          <figure class="evidence-card"><img src="Practica05/widgets_app/assets/pruebas/appTutorialScreen2.png" alt="Tutorial Slide Final"/><figcaption>14. AppTutorialScreen — Botón "Comenzar" con FadeInRight</figcaption></figure>
+          <figure class="evidence-card"><img src="Practica05/widgets_app/assets/pruebas/infiniteScrollScreen.png" alt="InfiniteScroll"/><figcaption>15. InfiniteScrollScreen — Carga progresiva con FadeInImage</figcaption></figure>
+          <figure class="evidence-card"><img src="Practica05/widgets_app/assets/pruebas/infiniteScrollScreenRecarga.png" alt="Pull to Refresh"/><figcaption>16. InfiniteScrollScreen — Pull to Refresh y SpinPerfect</figcaption></figure>
+        </div>
+      </div>
+
+      <!-- TAB 3: TECHNOLOGIES -->
+      <div class="subtab-content" id="tab-p5-tech">
+        <p style="font-size: 0.875rem; color: var(--text-body); margin-bottom: 1.5rem;">
+          Stack tecnológico empleado en <code>widgets_app</code> según <code>pubspec.yaml</code>.
+        </p>
+        <div class="tech-group">
+          <h3 class="block-title cyan">📱 Lenguajes, SDK y Diseño</h3>
+          <div class="tech-grid">
+            <div class="tech-card"><div class="tech-top"><span class="tech-name">Flutter</span><span class="tech-ver">3.47.2 stable</span></div><p class="tech-desc">Framework multiplataforma con soporte nativo para Material Design 3, tree-shaking de íconos y compilación AOT.</p></div>
+            <div class="tech-card"><div class="tech-top"><span class="tech-name">Dart</span><span class="tech-ver">^3.13.2</span></div><p class="tech-desc">Lenguaje tipado con null safety, enumeraciones, Streams asíncronos, colecciones inmutables y aserciones.</p></div>
+            <div class="tech-card green"><div class="tech-top"><span class="tech-name">Material Design 3</span><span class="tech-ver">useMaterial3: true</span></div><p class="tech-desc">Sistema de diseño con ColorSchemeSeed de 9 paletas, brillo claro/oscuro, NavigationDrawer y nuevas variantes de botones y tarjetas.</p></div>
+          </div>
+        </div>
+        <div class="tech-group">
+          <h3 class="block-title purple">📦 Paquetes Principales</h3>
+          <div class="tech-grid">
+            <div class="tech-card purple"><div class="tech-top"><span class="tech-name">flutter_riverpod</span><span class="tech-ver">^2.6.1</span></div><p class="tech-desc">Gestión de estado reactiva mediante ProviderScope, ConsumerWidget, StateProvider y StateNotifierProvider (ThemeNotifier).</p></div>
+            <div class="tech-card purple"><div class="tech-top"><span class="tech-name">go_router</span><span class="tech-ver">^18.0.2</span></div><p class="tech-desc">Enrutador declarativo con 11 rutas registradas, navegación por path/nombre con context.push() y context.pop().</p></div>
+            <div class="tech-card amber"><div class="tech-top"><span class="tech-name">animate_do</span><span class="tech-ver">^3.3.4</span></div><p class="tech-desc">Animaciones declarativas (FadeInRight en el tutorial introductorio, SpinPerfect y FadeIn en el scroll infinito).</p></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB 4: FILE CODE EXPLORER -->
+      <div class="subtab-content" id="tab-p5-files">
+        <p style="font-size: 0.85rem; color: var(--text-body); margin-bottom: 1rem;">
+          Haz clic en cualquier archivo de <code>Practica05/widgets_app</code> para inspeccionar su código fuente:
+        </p>
+        <div class="file-explorer">
+          <div class="file-tree">
+            <div class="file-tree-item active" data-file="p5main" onclick="showFileCode(this)">📄 main.dart</div>
+            <div class="file-tree-item" data-file="p5router" onclick="showFileCode(this)">📄 app_router.dart</div>
+            <div class="file-tree-item" data-file="p5theme" onclick="showFileCode(this)">📄 app_theme.dart</div>
+            <div class="file-tree-item" data-file="p5provider" onclick="showFileCode(this)">📄 theme_provider.dart</div>
+            <div class="file-tree-item" data-file="p5counter" onclick="showFileCode(this)">📄 counter_screen.dart</div>
+            <div class="file-tree-item" data-file="p5infinite" onclick="showFileCode(this)">📄 infinite_scroll_screen.dart</div>
+          </div>
+          <div class="code-viewer">Selecciona un archivo...</div>
+        </div>
+      </div>
+
+      <!-- TAB 5: OBJECTIVES & CONCLUSIONS -->
+      <div class="subtab-content" id="tab-p5-objectives">
+        <div class="block">
+          <h3 class="block-title cyan">🎯 Objetivo de la Práctica</h3>
+          <p class="block-text">
+            Diseñar y desarrollar una aplicación móvil multiplataforma mediante Flutter y Dart, implementando widgets de Material Design 3, navegación declarativa con GoRouter, administración del estado con Riverpod y animaciones interactivas, fortaleciendo las competencias en diseño de interfaces gráficas, modularización del código, documentación de arquitectura con Archify y distribución en Appetize.io.
+          </p>
+        </div>
+
+        <div class="block">
+          <h3 class="block-title purple">🧠 Aprendizajes Clave</h3>
+          <div class="learn-list">
+            <div class="learn-item"><span class="learn-num">1</span><div><b>Navegación declarativa con GoRouter:</b> centralizar las 11 rutas en <code>appRouter</code> y alimentar <code>HomeScreen</code> y <code>SideMenu</code> desde <code>appMenuItems</code> elimina rutas duplicadas.</div></div>
+            <div class="learn-item"><span class="learn-num">2</span><div><b>StateProvider vs StateNotifierProvider en Riverpod:</b> <code>StateProvider</code> es ideal para estados atómicos como el contador, mientras que <code>StateNotifierProvider</code> con una clase inmutable (<code>AppTheme.copyWith</code>) escala limpio para estados compuestos.</div></div>
+            <div class="learn-item"><span class="learn-num">3</span><div><b>Streams para UI reactiva:</b> combinar <code>Stream.periodic</code> con <code>takeWhile</code> y <code>StreamBuilder</code> permite controlar indicadores de progreso sin manejar <code>Timer</code> manuales.</div></div>
+            <div class="learn-item"><span class="learn-num">4</span><div><b>Ciclo de vida seguro en operaciones asíncronas:</b> verificar <code>isMounted</code> antes de llamar a <code>setState()</code> tras un <code>Future.delayed</code> evita excepciones si el usuario sale de la pantalla durante la carga.</div></div>
+            <div class="learn-item"><span class="learn-num">5</span><div><b>Controladores con <code>dispose()</code>:</b> liberar <code>PageController</code> y <code>ScrollController</code> en el método <code>dispose()</code> previene fugas de memoria en listas y carruseles.</div></div>
+          </div>
+        </div>
+
+        <div class="block">
+          <h3 class="block-title amber">📌 Conclusiones</h3>
+          <ul class="block-list">
+            <li>La arquitectura modular dividida en <code>config</code> y <code>presentation</code> permitió escalar a <b>11 pantallas demostrativas</b> manteniendo cada archivo enfocado en una única responsabilidad.</li>
+            <li>El uso de <b>Material Design 3</b> con <code>colorSchemeSeed</code> garantiza que todos los widgets (botones, tarjetas, switches, diálogos y drawers) adapten automáticamente sus colores y contraste tanto en modo claro como oscuro.</li>
+            <li>Los <b>2 diagramas Archify</b> (General y Específico) y el despliegue en <b>Appetize.io</b> permiten auditar tanto la estructura interna del software como su ejecución real desde cualquier navegador.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
 </main>
 
   <footer>
@@ -1452,7 +1659,7 @@
     }
 
     // Practice Switcher: cada práctica tiene su propio detail-container
-    const practiceDetail = { 1: 'detail-p1', 2: 'detail-p2', 3: 'detail-p3', 4: 'detail-p4' };
+    const practiceDetail = { 1: 'detail-p1', 2: 'detail-p2', 3: 'detail-p3', 4: 'detail-p4', 5: 'detail-p5' };
 
     function selectPractice(n) {
       document.querySelectorAll('.practice-card').forEach(c => c.classList.remove('active'));
@@ -1845,6 +2052,184 @@ class LocalVideoModel {
 }
 `,
 
+      p5main: `// Practica05/widgets_app/lib/main.dart
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:widgets_app/config/router/app_router.dart';
+import 'package:widgets_app/config/theme/app_theme.dart';
+import 'package:widgets_app/presentation/providers/theme_provider.dart';
+
+void main() {
+  runApp(
+    const ProviderScope(
+      child: MainApp(),
+    ),
+  );
+}
+
+class MainApp extends ConsumerWidget {
+  const MainApp({super.key});
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final AppTheme appTheme = ref.watch(themeNotifierProvider);
+
+    return MaterialApp.router(
+      title: 'Flutter Widgets',
+      routerConfig: appRouter,
+      debugShowCheckedModeBanner: false,
+      theme: appTheme.getTheme(),
+    );
+  }
+}`,
+
+      p5router: `// Practica05/widgets_app/lib/config/router/app_router.dart
+import 'package:go_router/go_router.dart';
+import 'package:widgets_app/presentation/screen/screens.dart';
+
+final appRouter = GoRouter(
+  initialLocation: '/',
+  routes: [
+    GoRoute(path: '/', name: HomeScreen.name, builder: (context, state) => const HomeScreen()),
+    GoRoute(path: '/buttons', name: ButtonsScreen.name, builder: (context, state) => const ButtonsScreen()),
+    GoRoute(path: '/cards', name: CardsScreen.name, builder: (context, state) => const CardsScreen()),
+    GoRoute(path: '/progress', name: ProgressScreen.name, builder: (context, state) => const ProgressScreen()),
+    GoRoute(path: '/snackbars', name: SnackbarScreen.name, builder: (context, state) => const SnackbarScreen()),
+    GoRoute(path: '/animated', name: AnimatedScreen.name, builder: (context, state) => const AnimatedScreen()),
+    GoRoute(path: '/ui-controls', name: UiControlsScreen.name, builder: (context, state) => const UiControlsScreen()),
+    GoRoute(path: '/tutorial', name: AppTutorialScreen.name, builder: (context, state) => const AppTutorialScreen()),
+    GoRoute(path: '/infinite', name: InfiniteScrollScreen.name, builder: (context, state) => const InfiniteScrollScreen()),
+    GoRoute(path: '/counter-river', name: CounterScreen.name, builder: (context, state) => const CounterScreen()),
+    GoRoute(path: '/theme-changer', name: ThemeChangerScreen.name, builder: (context, state) => const ThemeChangerScreen()),
+  ],
+);`,
+
+      p5theme: `// Practica05/widgets_app/lib/config/theme/app_theme.dart
+import 'package:flutter/material.dart';
+
+const colorList = <Color>[
+  Colors.blue, Colors.teal, Colors.green, Colors.red,
+  Colors.purple, Colors.deepPurple, Colors.orange, Colors.pink, Colors.pinkAccent,
+];
+
+class AppTheme {
+  final int selectedColor;
+  final bool isDarkmode;
+
+  AppTheme({
+    this.selectedColor = 0,
+    this.isDarkmode = false,
+  }) : assert(selectedColor >= 0, 'Selected color must be greater then 0'),
+       assert(selectedColor < colorList.length, 'Selected color must be less or equal than \${colorList.length - 1}');
+
+  ThemeData getTheme() => ThemeData(
+    useMaterial3: true,
+    brightness: isDarkmode ? Brightness.dark : Brightness.light,
+    colorSchemeSeed: colorList[selectedColor],
+    appBarTheme: const AppBarTheme(centerTitle: false),
+  );
+
+  AppTheme copyWith({int? selectedColor, bool? isDarkmode}) => AppTheme(
+    selectedColor: selectedColor ?? this.selectedColor,
+    isDarkmode: isDarkmode ?? this.isDarkmode,
+  );
+}`,
+
+      p5provider: `// Practica05/widgets_app/lib/presentation/providers/theme_provider.dart
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:widgets_app/config/theme/app_theme.dart';
+
+final colorListProvider = Provider((ref) => colorList);
+final isDarkmodeProvider = StateProvider((ref) => false);
+final selectedColorProvider = StateProvider((ref) => 0);
+
+final themeNotifierProvider = StateNotifierProvider<ThemeNotifier, AppTheme>(
+  (ref) => ThemeNotifier(),
+);
+
+class ThemeNotifier extends StateNotifier<AppTheme> {
+  ThemeNotifier() : super(AppTheme());
+
+  void toggleDarkmode() {
+    state = state.copyWith(isDarkmode: !state.isDarkmode);
+  }
+
+  void changeColorIndex(int colorIndex) {
+    state = state.copyWith(selectedColor: colorIndex);
+  }
+}`,
+
+      p5counter: `// Practica05/widgets_app/lib/presentation/screen/counter/counter_screen.dart
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:widgets_app/presentation/providers/counter_provider.dart';
+import 'package:widgets_app/presentation/providers/theme_provider.dart';
+
+class CounterScreen extends ConsumerWidget {
+  static const name = 'counter_screen';
+  const CounterScreen({super.key});
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final int clickCounter = ref.watch(counterProvider);
+    final bool isDarkmode = ref.watch(themeNotifierProvider).isDarkmode;
+
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Counter Screen'),
+        actions: [
+          IconButton(
+            icon: Icon(isDarkmode ? Icons.dark_mode_outlined : Icons.light_mode_outlined),
+            onPressed: () {
+              ref.read(themeNotifierProvider.notifier).toggleDarkmode();
+            },
+          )
+        ],
+      ),
+      body: Center(
+        child: Text('Valor: $clickCounter', style: Theme.of(context).textTheme.titleLarge),
+      ),
+      floatingActionButton: FloatingActionButton(
+        child: const Icon(Icons.add),
+        onPressed: () {
+          ref.read(counterProvider.notifier).state++;
+        },
+      ),
+    );
+  }
+}`,
+
+      p5infinite: `// Practica05/widgets_app/lib/presentation/screen/infinite_scroll/infinite_scroll_screen.dart
+Future loadNextPage() async {
+  if (isLoading) return;
+  isLoading = true;
+  setState(() {});
+
+  await Future.delayed(const Duration(seconds: 2));
+
+  addFiveImages();
+  isLoading = false;
+  if (!isMounted) return;
+
+  setState(() {});
+  moveScrollToBottom();
+}
+
+Future<void> onRefresh() async {
+  isLoading = true;
+  setState(() {});
+
+  await Future.delayed(const Duration(seconds: 3));
+  if (!isMounted) return;
+
+  isLoading = false;
+  final lastId = imagesIds.last;
+  imagesIds.clear();
+  imagesIds.add(lastId + 1);
+  addFiveImages();
+
+  setState(() {});
+}`
 
     };
 
@@ -1856,9 +2241,9 @@ class LocalVideoModel {
       scope.querySelector('.code-viewer').innerText = codeFiles[item.dataset.file] || '// Archivo no cargado';
     }
 
-    // Initialize: Práctica 02 visible y su primer archivo cargado
-    selectPractice(2);
-    document.querySelector('#detail-p2 .file-tree-item').click();
+    // Initialize: cargar el primer archivo de cada visor y mostrar Práctica 05
+    document.querySelectorAll('.file-explorer .file-tree-item.active').forEach(item => item.click());
+    selectPractice(5);
   </script>
 </body>
 </html>
