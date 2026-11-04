@@ -1,0 +1,241 @@
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": {
+    "title": "Arquitectura General Tecnológica — Widgets App (Material 3)",
+    "output": "widgets_app_general_architecture.html",
+    "quality_profile": "showcase",
+    "animation": "trace",
+    "repository": {
+      "url": "https://github.com/JesuuusArt/Practicas_DMI_220772",
+      "provider": "github",
+      "link_mode": "local-only",
+      "branch": "Practica05"
+    }
+  },
+  "components": [
+    {
+      "id": "flutter_core",
+      "type": "frontend",
+      "label": "Flutter 3 SDK",
+      "sublabel": "Material Design 3 & Widgets Framework",
+      "tag": "flutter.dev",
+      "pos": [100, 100],
+      "size": [220, 64],
+      "sources": [
+        {
+          "path": "Practica05/widgets_app/pubspec.yaml",
+          "line": 31,
+          "label": "sdk: flutter"
+        }
+      ]
+    },
+    {
+      "id": "main_app",
+      "type": "frontend",
+      "label": "MainApp (ConsumerWidget)",
+      "sublabel": "MaterialApp.router + Dynamic Theme",
+      "tag": "lib/main.dart",
+      "pos": [420, 100],
+      "size": [240, 64],
+      "sources": [
+        {
+          "path": "Practica05/widgets_app/lib/main.dart",
+          "line": 15,
+          "label": "MainApp"
+        }
+      ]
+    },
+    {
+      "id": "provider_scope",
+      "type": "backend",
+      "label": "ProviderScope",
+      "sublabel": "Contenedor Raíz de Estados Riverpod",
+      "tag": "flutter_riverpod",
+      "pos": [420, 0],
+      "size": [240, 56],
+      "sources": [
+        {
+          "path": "Practica05/widgets_app/lib/main.dart",
+          "line": 8,
+          "label": "runApp(ProviderScope)"
+        }
+      ]
+    },
+    {
+      "id": "go_router",
+      "type": "frontend",
+      "label": "GoRouter Declarativo",
+      "sublabel": "Sistema de 11 Rutas Declarativas",
+      "tag": "lib/config/router",
+      "pos": [760, 100],
+      "size": [230, 64],
+      "sources": [
+        {
+          "path": "Practica05/widgets_app/lib/config/router/app_router.dart",
+          "line": 5,
+          "label": "appRouter"
+        }
+      ]
+    },
+    {
+      "id": "theme_engine",
+      "type": "frontend",
+      "label": "AppTheme (Material 3)",
+      "sublabel": "ColorSchemeSeed & Dark/Light Mode",
+      "tag": "lib/config/theme",
+      "pos": [100, 260],
+      "size": [220, 64],
+      "sources": [
+        {
+          "path": "Practica05/widgets_app/lib/config/theme/app_theme.dart",
+          "line": 17,
+          "label": "AppTheme"
+        }
+      ]
+    },
+    {
+      "id": "riverpod_providers",
+      "type": "backend",
+      "label": "Proveedores Riverpod",
+      "sublabel": "ThemeNotifier & CounterProvider",
+      "tag": "lib/presentation/providers",
+      "pos": [420, 260],
+      "size": [240, 64],
+      "sources": [
+        {
+          "path": "Practica05/widgets_app/lib/presentation/providers/theme_provider.dart",
+          "line": 8,
+          "label": "themeNotifierProvider"
+        }
+      ]
+    },
+    {
+      "id": "ui_screens",
+      "type": "frontend",
+      "label": "Catálogo de Pantallas",
+      "sublabel": "10 Pantallas Demostrativas M3",
+      "tag": "lib/presentation/screen",
+      "pos": [760, 260],
+      "size": [230, 64],
+      "sources": [
+        {
+          "path": "Practica05/widgets_app/lib/presentation/screen/screens.dart",
+          "line": 1,
+          "label": "screens.dart"
+        }
+      ]
+    },
+    {
+      "id": "animations_engine",
+      "type": "frontend",
+      "label": "animate_do & Implícitas",
+      "sublabel": "FadeIn, FadeInRight, SpinPerfect & AnimatedContainer",
+      "tag": "animate_do",
+      "pos": [420, 420],
+      "size": [240, 64],
+      "sources": [
+        {
+          "path": "Practica05/widgets_app/lib/presentation/screen/app_tutorial/app_tutorial_screen.dart",
+          "line": 1,
+          "label": "animate_do"
+        }
+      ]
+    },
+    {
+      "id": "assets_engine",
+      "type": "database",
+      "label": "Recursos Gráficos Locales",
+      "sublabel": "Imágenes Tutorial (1..3.png) & jar-loading.gif",
+      "tag": "assets/images",
+      "pos": [100, 420],
+      "size": [220, 64],
+      "sources": [
+        {
+          "path": "Practica05/widgets_app/pubspec.yaml",
+          "line": 63,
+          "label": "assets/images/"
+        }
+      ]
+    },
+    {
+      "id": "remote_services",
+      "type": "database",
+      "label": "Servicios Remotos Picsum",
+      "sublabel": "Carga de Imágenes por ID y Dimensiones",
+      "tag": "picsum.photos",
+      "pos": [760, 420],
+      "size": [230, 64],
+      "sources": [
+        {
+          "path": "Practica05/widgets_app/lib/presentation/screen/infinite_scroll/infinite_scroll_screen.dart",
+          "line": 128,
+          "label": "picsum.photos"
+        }
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "id": "scope_main",
+      "from": "provider_scope",
+      "to": "main_app",
+      "label": "inyecta estado global"
+    },
+    {
+      "id": "flutter_main",
+      "from": "flutter_core",
+      "to": "main_app",
+      "label": "ejecuta ciclo de vida"
+    },
+    {
+      "id": "main_router",
+      "from": "main_app",
+      "to": "go_router",
+      "label": "routerConfig"
+    },
+    {
+      "id": "main_theme",
+      "from": "main_app",
+      "to": "riverpod_providers",
+      "label": "ref.watch(themeNotifierProvider)"
+    },
+    {
+      "id": "providers_theme",
+      "from": "riverpod_providers",
+      "to": "theme_engine",
+      "label": "genera ThemeData M3"
+    },
+    {
+      "id": "router_screens",
+      "from": "go_router",
+      "to": "ui_screens",
+      "label": "despacha rutas (/buttons, etc.)"
+    },
+    {
+      "id": "screens_providers",
+      "from": "ui_screens",
+      "to": "riverpod_providers",
+      "label": "ref.read() / ref.watch()"
+    },
+    {
+      "id": "screens_animations",
+      "from": "ui_screens",
+      "to": "animations_engine",
+      "label": "renderiza efectos y transiciones"
+    },
+    {
+      "id": "screens_assets",
+      "from": "ui_screens",
+      "to": "assets_engine",
+      "label": "AssetImage(1.png, jar-loading.gif)"
+    },
+    {
+      "id": "screens_picsum",
+      "from": "ui_screens",
+      "to": "remote_services",
+      "label": "FadeInImage(NetworkImage)"
+    }
+  ],
+  "cards": []
+}
